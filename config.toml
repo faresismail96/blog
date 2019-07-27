@@ -1,4 +1,4 @@
-baseURL = "https://example.com"
+baseURL = "https://faresismail96.github.io/"
 title   = "Learning Publicly"
 
 DefaultContentLanguage = "en"
@@ -42,7 +42,11 @@ disableHugoGeneratorInject = false
   category = ""
 
 [params]
- 
+
+  description = "Homepage and blog by Fares Ismail"
+  keywords = ""
+  images = [""]
+
   [params.logo]
     logoText     = "$ cd /home/"
     logoHomeLink = "/"
@@ -63,8 +67,13 @@ disableHugoGeneratorInject = false
 
 [languages]
   [languages.en]
-    subtitle  = "Hello"
+    title   = "Learning Publicly"
+    subtitle  = ""
     weight    = 1
+    
+    [languages.en.params.logo]
+      logoText = "$ cd /home/"
+      logoHomeLink = "/"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
@@ -72,9 +81,10 @@ disableHugoGeneratorInject = false
         name = "About"
         url = "/about"
 
-  [languages.fr]
-    subtitle  = "Bonjour :D"
-    weight    = 2
+      [[languages.en.menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts"
 
 [menu]
   [[menu.main]]
