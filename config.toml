@@ -1,1 +1,87 @@
-theme = "hello-friend"
+baseURL = "https://example.com"
+title   = "Learning Publicly"
+
+DefaultContentLanguage = "en"
+
+theme = "hello-friend-ng"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
+
+archetypeDir = "archetypes"
+contentDir   = "content"
+dataDir      = "data"
+layoutDir    = "layouts"
+publishDir   = "public"
+
+buildDrafts  = false
+buildFuture  = false
+buildExpored = false
+canonifyURLs = true
+
+enableRobotsTXT = true
+enableGitInfo   = false
+enableEmoji     = true
+enableMissingTranslationPlaceholders = false
+disableRSS     = true
+disableSitemap = false
+disable404     = false
+disableHugoGeneratorInject = false
+
+[permalinks]
+  posts = "/posts/:title/"
+
+[author]
+  name = "Fares Ismail"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+[taxonomies]
+  tag      = "tags"
+  category = ""
+
+[params]
+ 
+  [params.logo]
+    logoText     = "$ cd /home/"
+    logoHomeLink = "/"
+
+  # Social icons
+
+  [[params.social]]
+    name = "email"
+    url  = "mailto:fares.is.1996@gmail.com"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/faresismail96"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/fares-ismail-757291147/"
+
+[languages]
+  [languages.en]
+    subtitle  = "Hello"
+    weight    = 1
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about"
+
+  [languages.fr]
+    subtitle  = "Bonjour :D"
+    weight    = 2
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "about/"
+  [[menu.main]]
+    identifier = "posts"
+    name       = "Posts"
+    url        = "posts/"
