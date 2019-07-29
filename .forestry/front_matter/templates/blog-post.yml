@@ -8,5 +8,21 @@ fields:
 - type: datetime
   name: date
   label: date
+- name: author
+  type: select
+  default: Fares Ismail
+  config:
+    required: true
+    options:
+    - Fares Ismail
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Author
 pages:
+- content/posts/sealed-traits.md
+- content/posts/upcoming-projects.md
+- content/posts/for-comprehensions-demystified.md
 - content/posts/bits-and-pieces.md

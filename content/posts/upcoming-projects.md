@@ -1,6 +1,7 @@
 ---
 title: Upcoming Projects
 date: 2019-07-27T20:53:27.000+00:00
+author: Fares Ismail
 
 ---
 I've always been a fan of learning by doing...

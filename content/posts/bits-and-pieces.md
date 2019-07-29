@@ -1,4 +1,5 @@
 +++
+author = "Fares Ismail"
 date = "2019-07-28T21:12:00+00:00"
 title = "Bits and Pieces"
 
