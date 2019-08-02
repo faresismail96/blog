@@ -38,15 +38,7 @@ disableHugoGeneratorInject = false
 [blackfriday]
   hrefTargetBlank = true
 
-[taxonomies]
-  tag      = "tags"
-  category = ""
-
 [params]
-
-  description = "Homepage and blog by Fares Ismail"
-  keywords = ""
-  images = [""]
 
   [params.logo]
     logoText     = "$ cd /home/"

@@ -1,12 +1,9 @@
 +++
-
 author = "Fares Ismail"
 date = "2019-08-02T10:00:00+00:00"
 title = "Un-Apply in Scala"
 
 +++
-
-
 Unapply in Scala is the inverse of the apply... (queue no shit comments :p)
 
 So what does it do exactly? given a class Person:
@@ -17,9 +14,9 @@ case class Person(name: String, age: Int, hobbies: List[String])
 
 If we wanted to decompose the class person into a set of attributes:
 
- - name: String
- - age: Int
- - hobbies: List[String]
+* name: String
+* age: Int
+* hobbies: List\[String\]
 
 We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.
 
@@ -37,7 +34,7 @@ object Test {
 We notice that the return type is an option of a tuple of string, int and List of String.
 That means that after the unapply, we would have to extract the Tuple from the option and call `result._1` and so on to retrieve each individual value.
 
-clearly this is cumbersome and annoying to deal with. And clearly there is a better way :p 
+clearly this is cumbersome and annoying to deal with. And clearly there is a better way :p
 
 But for fun, let us check what this might look like:
 
@@ -55,9 +52,9 @@ Note: calling get like this can throw a `java.util.NoSuchElementException` we sh
 
 Not to mention that calling values inside tuples using the `_1` and so on can quickly become confusing.
 
+***
 
-Unapply and case classes
-------------------------
+## Unapply and case classes
 
 case classes automatically define both methods apply and unapply for us. this also allows us to easily do pattern matching on instances of case classes.
 
@@ -67,8 +64,9 @@ As we saw in previous examples, unapply can automatically be called on any case 
 val result: Option[(String, Int, List[String])] = Person.unapply(fares)
 ```
 
-Unapply in Pattern Matching
----------------------------
+***
+
+## Unapply in Pattern Matching
 
 Pattern matching automatically calls the unapply method, in order to check if the values inside match a specific case.
 
@@ -78,12 +76,11 @@ Pattern matching automatically calls the unapply method, in order to check if th
       if (age > 22) println(name) else println("Not Fares")
     case _ => println("Ummm") // Should not happen
   }
-
 ```
 
+***
 
-Unapply Simplified
-------------------
+## Unapply Simplified
 
 Going back to out Person case class and fares instance.
 
@@ -99,8 +96,8 @@ Going back to out Person case class and fares instance.
     fares
     23
     List(Hiking, Biking)
-
 ```
 
-  So we pass the val names we want in the case class Person and we assign it the value of the instance.
+So we pass the val names we want in the case class Person and we assign it the value of the instance.
 
+***
