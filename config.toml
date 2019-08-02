@@ -1,4 +1,4 @@
-baseURL = "https://faresismail96.github.io/"
+baseURL = "http://fares.codes/"
 title   = "Learning Publicly"
 
 DefaultContentLanguage = "en"
@@ -7,6 +7,7 @@ theme = "hello-friend-ng"
 
 PygmentsCodeFences = true
 PygmentsStyle = "monokai"
+PygmentsUseClassic = true
 
 archetypeDir = "archetypes"
 contentDir   = "content"
