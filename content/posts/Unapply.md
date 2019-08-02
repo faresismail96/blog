@@ -1,6 +1,6 @@
 +++
 author = "Fares Ismail"
-date = "2019-08-02T10:00:00+00:00"
+date = "2019-08-02T10:10:00+00:00"
 title = "Un-Apply in Scala"
 
 +++
