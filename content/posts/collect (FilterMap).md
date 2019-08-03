@@ -1,22 +1,10 @@
 +++
-date = "2019-08-03T08:20:00+00:00"
+author = "Fares Ismail"
+date = "2019-08-3T11:00:00+00:00"
 title = "Collect (FilterMap)"
-[author]
-0 = "F"
-1 = "a"
-10 = "i"
-11 = "l"
-2 = "r"
-3 = "e"
-4 = "s"
-5 = " "
-6 = "I"
-7 = "s"
-8 = "m"
-9 = "a"
-name = "Fares Ismail"
 
 +++
+
 Collect or FilterMap does exactly what is says. it filters a collection and then maps the values.
 
 collect takes a partial function as a parameter and returns a Traversable of the same type.
