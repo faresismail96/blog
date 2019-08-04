@@ -116,3 +116,13 @@ val res = SemigroupK[Option].combineK(None, None)
 // res = None
 
 ```
+
+Long story short, SemigroupK operates on Kind.
+
+Note: a syntactic sugar for  semigroupK.combine is <+>
+
+```scala
+curr <+> prev
+// this would result in the same thing as: 
+SemigroupK[Option].combineK(curr ,prev)
+```
