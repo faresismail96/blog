@@ -1,8 +1,7 @@
 +++
 author = "Fares Ismail"
-date = "2019-08-3T11:00:00+00:00"
-title = "Collect (FilterMap)"
-
+date = "2019-08-03T10:00:00+00:00"
+title = "Collect / FilterMap"
 +++
 
 Collect or FilterMap does exactly what is says. it filters a collection and then maps the values.

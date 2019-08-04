@@ -1,11 +1,7 @@
 +++
-
 author = "Fares Ismail"
-
-date = "2019-08-03T21:00:00+00:00"
-
+date = "2019-08-03T15:00:00+00:00"
 title = "SemigroupK and CombineK"
-
 +++
 
 Before we get into `SemigroupK`and `combineK` let us first quickly recap what a `semigroup` is.
@@ -92,7 +88,7 @@ If we did not use SemigroupK, our solution would have to look like this:
     case (None, None)    => None
   }
 
-````
+```
 
 Using SemigroupK the same code becomes:
 
@@ -106,6 +102,7 @@ Here are a few examples of returns with SemigroupK:
 
 
 ```scala
+
 val res = SemigroupK[Option].combineK(Some(2), None)
 // res = Some(2)
 
@@ -117,4 +114,5 @@ val res = SemigroupK[Option].combineK(Some(2), Some(3))
 
 val res = SemigroupK[Option].combineK(None, None)
 // res = None
+
 ```
