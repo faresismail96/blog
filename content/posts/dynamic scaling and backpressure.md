@@ -20,7 +20,8 @@ Spark allows us to adjust the allowance for increased traffic by scaling up the 
 to do so, you need to adjust the following settings:
     
     - `spark.streaming.dynamicAllocation.enabled: true`
-    - `spark.streaming.dynamicAllocation.minExecutors: x` where x is the # of min executors.
+    - `spark.streaming.dynamicAllocation.minExecutors: x` where x is 
+        the # of min executors.
 
 by default, spark scales up when the ratio between the ProcessingTime and the BatchTime is 0.9 and scales down when that ration is 0.3
 
@@ -32,18 +33,6 @@ Spark also has a param for that:
  
  _Note_: _Make sure the initial executors are always greater than the min Executors_
  
----
-
-<h3> Mapping between Kafka Partitions and Spark Workers </h3>
-
- The correlation between a kafka partition and a spark executor is one to n.
- that means that a single kafka partition can only be consumed by one executor and that one spark executor can consume multiple kafka partitions.
-
- This also means that it makes no sense to have `spark.dynamicAllocation.maxExecutors` bigger than the number of executors.
-
-
----
-
 
 Back Pressure
 --------------
@@ -58,7 +47,8 @@ If ProcessingTime exceeds IntervalTime for a while, it can cause resource exhaus
 Note: `spark.streaming.kafka.maxRatePerPartition` according to the documentation is: 
 
 ````
-the maximum rate (in messages per second) at which each Kafka partition will be read by this direct API
+the maximum rate (in messages per second) at which each Kafka 
+partition will be read by this direct API
 ````
 
 This param can prevent microbatches from being overwhelmed when there is a sudden surge in messages from Kafka Producers.
@@ -79,7 +69,9 @@ So if the input size is too high and spark streaming cannot process it in time, 
 a one line summary of backpressure taken from https://jaceklaskowski.gitbooks.io/spark-streaming/spark-streaming-backpressure.html
 
 ```
-Backpressure shifts the trouble of buffering input records to the sender so it keeps records until they could be processed by a streaming application.
+Backpressure shifts the trouble of buffering input records to the 
+sender so it keeps records until they could be processed 
+by a streaming application.
 ```
 
 ---
@@ -108,8 +100,10 @@ So here a list of conf I could gather from here and there:
 
  - `spark.streaming.backpressure.initialRate`:
 
-        The initial rate to start with. this only works on spark versions 2.4 and above. 
-        Otherwise, spark streaming will use the kafka max rate per partition as the initial rate.
+        The initial rate to start with. this only works 
+        on spark versions 2.4 and above. 
+        Otherwise, spark streaming will use the 
+        kafka max rate per partition as the initial rate.
 
  - `spark.streaming.kafka.maxRatePerPartition`:
 
@@ -129,7 +123,8 @@ Reminder, the below settings are for spark streaming DA and not Spark Dynamic Al
 
  - `spark.streaming.dynamicAllocation.scalingUpRatio`:
 
-        Scales up when the ratio between the ProcessingTime and the BatchTime is above x value.
+        Scales up when the ratio between the ProcessingTime and the 
+        BatchTime is above x value.
 
  - `spark.streaming.dynamicAllocation.scalingDownRatio`:
 
@@ -141,19 +136,25 @@ Reminder, the below settings are for spark streaming DA and not Spark Dynamic Al
 
  - `spark.streaming.dynamicAllocation.maxExecutors`:
 
-        The name of this conf is very misleading and it took me a while to figure it out...
-        The name might imply that this represents the maximum number of executors we can scale up to... but it is not.
-        The maximum number of executors we can reach is the `spark.cores.max` divided by the `spark.executor.core` setting.
+        The name of this conf is very misleading and it took me a 
+        while to figure it out...
+
+        The name might imply that this represents the maximum number 
+        of executors we can scale up to... but it is not.
+        The maximum number of executors we can reach is the `spark.cores.max` 
+        divided by the `spark.executor.core` setting.
         
-        This configuration, is the number of executors spark streaming will request from the cluster manager (mesos, yarn...)
+        This configuration, is the number of executors spark streaming 
+        will request from the cluster manager (mesos, yarn...)
         which is why we can see the following in the logs:
                 
                 "Capping the total amount of executors to X"
                 "Requested total X executors"
         
-        But dont take my word for it... let us quickly check the spark source code for verification:
+        But dont take my word for it... let us quickly check the spark 
+        source code for verification:
 
-```scala 
+```scala
  /** Request the specified number of executors over the currently active one */
   private def requestExecutors(numNewExecutors: Int): Unit = {
     require(numNewExecutors >= 1)
@@ -202,9 +203,16 @@ there are two things to know:
 `batch time`: this is a fixed amount in seconds. this represents the interval of time during which we will be processing data.
  from the spark structured streaming official doc:
 ```
-If the previous micro-batch completes within the interval, then the engine will wait until the interval is over before kicking off the next micro-batch.
+If the previous micro-batch completes within the interval, 
+then the engine will wait until the interval is over before 
+kicking off the next micro-batch.
 
-If the previous micro-batch takes longer than the interval to complete (i.e. if an interval boundary is missed), then the next micro-batch will start as soon as the previous one completes (i.e., it will not wait for the next interval boundary).
+
+If the previous micro-batch takes longer than the interval 
+to complete (i.e. if an interval boundary is missed), then the 
+next micro-batch will start as soon as the previous one completes 
+(i.e., it will not wait for the next interval boundary).
+
 
 If no new data is available, then no micro-batch will be kicked off.
 ```
@@ -219,15 +227,15 @@ The second scenario implies queued tasks.
 
 Let us look at some use cases:
 
-case| Processing Time | Batch Time    | Ratio
-:----|:---------------: |:-------------|:------:
-1| 2s              | 60s           | 0.033
-2| 10s             | 60s           | 0.166
-3| 20s             | 60s           | 0.333
-4| 30s             | 60s           | 0.5
-5| 45s             | 60s           | 0.75
-6| 60s             | 60s           | 1
-7| 80s             | 60s           | 1.33
+Case    |   Processing Time| Batch Time    | Ratio
+:----   |:---------------: |:--------------|:------:
+1       | 2s               | 60s           | 0.033
+2       | 10s              | 60s           | 0.166
+3       | 20s              | 60s           | 0.333
+4       | 30s              | 60s           | 0.5
+5       | 45s              | 60s           | 0.75
+6       | 60s              | 60s           | 1
+7       | 80s              | 60s           | 1.33
 
 Now assume our `ScalingUp` ratio is 0.9 and `ScalingDown` ratio is 0.3
 
@@ -235,10 +243,14 @@ what happens in each case?
 
  1. Case 1 and 2: **ratio <= ScalingDown** so spark will request to kill x executors. (x is calculated based on the maxExecutor or the algorithm shown above)
         
-        the reason behind this is because the processing time is significantly smaller than the batch time, so there is a lot of idle time and so we probably have more resources than we need.
+        the reason behind this is because the processing time is 
+        significantly smaller than the batch time, so there is a lot 
+        of idle time and so we probably have more resources than we need.
  2. Case 3, 4, 5: **ratio is neither smaller than ScalingDown nor bigger than ScalingUp**, so we do nothing.
 
  3. Case 6 and 7: **ratio >= ScalingUp** so spark will request additional executors based on the algorithm mentioned above.
 
-        The reason behind this is because the processing time is close to or bigger than the Batch time, so most likely additional resources are needed.
+        The reason behind this is because the processing time is 
+        close to or bigger than the Batch time, so most likely 
+        additional resources are needed.
 
