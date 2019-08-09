@@ -32,12 +32,12 @@ Spark also has a param for that:
  
 ---
 
-<h3> Mapping between Kafka Partitions and Spark Workers
+<h3> Mapping between Kafka Partitions and Spark Workers </h3>
 
-The correlation between a kafka partition and a spark executor is one to n.
-that means that a single kafka partition can only be consumed by one executor and that one spark executor can consume multiple kafka partitions.
+ The correlation between a kafka partition and a spark executor is one to n.
+ that means that a single kafka partition can only be consumed by one executor and that one spark executor can consume multiple kafka partitions.
 
-This also means that it makes no sense to have `spark.dynamicAllocation.maxExecutors` bigger than the number of executors.
+ This also means that it makes no sense to have `spark.dynamicAllocation.maxExecutors` bigger than the number of executors.
 
 
 ---
