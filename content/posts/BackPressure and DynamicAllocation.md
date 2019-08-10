@@ -1,72 +1,52 @@
 +++
 author = "Fares Ismail"
-date = "2019-08-05T19:00:00+00:00"
+date = "2019-08-10T09:00:00+00:00"
 title = "Dynamic Scaling and Backpressure"
 +++
 
-Taking a little break from scala to review essential must know settings in spark.
+Taking a little break from Scala to review some interesting features of spark streaming.
 
-This article has been updated to reflect a recently gained additional knowledge with both settings.
+This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
 
-An Important note before we begin, this article is aimed at spark streaming dynamic allocation and back pressure. 
-
-Dynamic Allocation
-------------------
-
-Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically match workload.
-
-Spark allows us to adjust the allowance for increased traffic by scaling up the number of executors up to a defined maximum. Similarly, spark allows us to scale down to a minimum.
-
-to do so, you need to adjust the following settings:
-    
-    - `spark.streaming.dynamicAllocation.enabled: true`
-    - `spark.streaming.dynamicAllocation.minExecutors: x` where x is 
-        the # of min executors.
-
-by default, spark scales up when the ratio between the ProcessingTime and the BatchTime is 0.9 and scales down when that ration is 0.3
-
-those can be changed using: `spark.streaming.dynamicAllocation.scalingUpRatio` and `spark.streaming.dynamicAllocation.scalingDownRatio`
-
-What about the number of executors we start with?
-Spark also has a param for that:
-`spark.dynamicAllocation.initialExecutors`.
- 
- _Note_: _Make sure the initial executors are always greater than the min Executors_
- 
-
-Back Pressure
---------------
-
-Back Pressure happens when a system is receiving data at a higher rate than it can process due to a short spike.
-
-This can lead to a bottleneck in the downstream and slow the entire stream down.
-
-If ProcessingTime exceeds IntervalTime for a while, it can cause resource exhaustion.
+An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
 
 
-Note: `spark.streaming.kafka.maxRatePerPartition` according to the documentation is: 
+<h2>Dynamic Allocation in Spark Streaming</h2>
 
-````
-the maximum rate (in messages per second) at which each Kafka 
-partition will be read by this direct API
-````
+Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.
 
-This param can prevent microbatches from being overwhelmed when there is a sudden surge in messages from Kafka Producers.
+Spark streaming can dynamically scale up or down the number of executors based on a few configurations.
 
-But this config only works with the API.
-if using receiver based kafka-spark integration, use `spark.streaming.receiver.maxRate`
+ 1. `spark.streaming.dynamicAllocation.enabled` 
 
+        This enables dynamic allocation with spark streaming. needs to be true.
 
-Backpressure allows the ingestion rate to be dynamically and automatically set using previous microbatch processing times.
+ 2. `spark.dynamicAllocation.initialExecutors`
 
-to enable backpressure, we need to set: `spark.streaming.backpressure.enabled` to true.
+        Initial number of executors to start with.
 
-what about the initialRate? for the initialRate we use `spark.streaming.kafka.maxRatePerPartition`, because of a bug where spark was using this config instead of the actual initial rate.
-as of April 2018 and for spark versions 2.4 and above, this was corrected. so you can use `spark.streaming.backpressure.initialRate`.
+ 3. `spark.streaming.dynamicAllocation.scalingUpRatio` and `spark.streaming.dynamicAllocation.scalingDownRatio`
 
-So if the input size is too high and spark streaming cannot process it in time, after the first batch is finished processing, spark will notice that the processing time is longer than the interval time and that is when backpressure will kick in, reducing the input rate.
+        The two configs specify when we would scale up or down the
+        number of executors based on processing time and interval time.
+        
+        Default values are set to 0.9 and 0.3
 
-a one line summary of backpressure taken from https://jaceklaskowski.gitbooks.io/spark-streaming/spark-streaming-backpressure.html
+<h2>Back Pressure</h2>
+
+Back Pressure is spark streamings ability to adjust the ingestion rate dynamically so that when a system is receiving data at a higher rate than it can process, we wouldnt have tasks queue up and slow down the stream.
+
+The ingestion rate is adjusted dynamically based on previous microbatch processing time.
+
+What about the initial ingestion rate? well this depends on the version of spark you are running.
+
+ - Prior to **Spark 2.4**: there was a bug that caused `spark.streaming.kafka.maxRatePerPartition` to be used as the initial rate AND the maximum rate per partition.
+
+  - As of **Spark 2.4**: We can use `spark.streaming.backpressure.initialRate` for the initial rate of ingestion. as maximum rate per partition can be set using: `spark.streaming.kafka.maxRatePerPartition`
+
+If the input events is too high and spark streaming cannot process it in time, after the first batch is completed, spark will notice that the batch processing time is longer than the interval time and that is when backpressure will kick in to reduce the input rate.
+
+A one sentence summary of backpressure (and an interesting article):
 
 ```
 Backpressure shifts the trouble of buffering input records to the 
@@ -79,31 +59,15 @@ by a streaming application.
 
 <h1> What about the practical side of things? </h1>
 
-This is where things get a little bit more complicated or hazy...
+This is where things might get a bit more complicated or hazy.
 
-The following is the result of what I could gather from my personal experience with spark streaming and the documentation and various articles I read online.
-
-On many occasions, I had to check the source code to get a clearer answer.
-
-
-One of the most important thing about Dynamic allocation and backpressure is the configuration.
-
-Surprisingly, the official documentations lacks in depth with that regards.
-
-So here a list of conf I could gather from here and there:
+The following is a summary of what I learned recently from various sources online and the spark source code. Surprisingly the spark streaming documentation can be rather thin on the subject of dynamic allocation and backpressure.
 
 <h2> Spark Streaming Backpressure </h2>
- 
+
  - `spark.streaming.backpressure.enabled`:
     
         Enables backpressure in spark streaming
-
- - `spark.streaming.backpressure.initialRate`:
-
-        The initial rate to start with. this only works 
-        on spark versions 2.4 and above. 
-        Otherwise, spark streaming will use the 
-        kafka max rate per partition as the initial rate.
 
  - `spark.streaming.kafka.maxRatePerPartition`:
 
@@ -113,9 +77,15 @@ So here a list of conf I could gather from here and there:
 
         Similar to max rate per partition but this sets the min...
 
-<h2> Spark Streaming Dynamic Allocation </h2>
+ - `spark.streaming.backpressure.initialRate`:
 
-Reminder, the below settings are for spark streaming DA and not Spark Dynamic Allocation.
+        The initial rate to start with. this only works 
+        on spark versions 2.4 and above. 
+        Otherwise, spark streaming will use the 
+        kafka max rate per partition as the initial rate.
+
+
+<h2> Spark Streaming Dynamic Allocation </h2>
 
  - `spark.streaming.dynamicAllocation.enabled`:
 
@@ -155,25 +125,31 @@ Reminder, the below settings are for spark streaming DA and not Spark Dynamic Al
         source code for verification:
 
 ```scala
- /** Request the specified number of executors over the currently active one */
+ /** Request the specified number of 
+ executors over the currently active one */
   private def requestExecutors(numNewExecutors: Int): Unit = {
     require(numNewExecutors >= 1)
     val allExecIds = client.getExecutorIds()
     logDebug(s"Executors (${allExecIds.size}) = ${allExecIds}")
     val targetTotalExecutors =
-      math.max(math.min(maxNumExecutors, allExecIds.size + numNewExecutors), minNumExecutors)
+      math.max(
+          math.min(maxNumExecutors, allExecIds.size + numNewExecutors),
+           minNumExecutors)
     client.requestTotalExecutors(targetTotalExecutors, 0, Map.empty)
     logInfo(s"Requested total $targetTotalExecutors executors")
   }
 ```
 
 ```scala
-val MAX_EXECUTORS_KEY = "spark.streaming.dynamicAllocation.maxExecutors"
+val MAX_EXECUTORS_KEY =
+ "spark.streaming.dynamicAllocation.maxExecutors"
 
 // AND
 
-private val maxNumExecutors = conf.getInt(MAX_EXECUTORS_KEY, Integer.MAX_VALUE)
+private val maxNumExecutors = 
+conf.getInt(MAX_EXECUTORS_KEY, Integer.MAX_VALUE)
 ```
+
 So what does this tell us?
 
 First an foremost, maxNumExecutors is the `spark.streaming.dynamicAllocation.maxExecutors`
@@ -191,8 +167,6 @@ the targetTotalExecutors to request is the maximum number between: the minNumExe
 ```scala
 val ratio = averageBatchProcTime.toDouble / batchDurationMs
 ```
-
-
 
 I get things might have gotten a bit confusing... but let us go back to what is important, configuring our cluster.
 
@@ -254,3 +228,14 @@ what happens in each case?
         close to or bigger than the Batch time, so most likely 
         additional resources are needed.
 
+<h2>Some additional resources</h2>
+ 
+ - Spark Source Code (more specifically: `ExecutorAllocationManager.scala`):
+        
+    https://github.com/apache/spark/blob/branch-2.4/streaming/src/main/scala/org/apache/spark/streaming/scheduler/ExecutorAllocationManager.scala
+
+ - Building Robust Scalable and Adaptive Applications on Spark Streaming talk during Spark Summit 2016
+ 
+     https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming
+
+     
