@@ -35,10 +35,16 @@ disableHugoGeneratorInject = false
 [author]
   name = "Fares Ismail"
 
+[taxonomies]
+  tag      = "tags"
+  category = ""
+
 [blackfriday]
   hrefTargetBlank = true
 
 [params]
+  
+  homeSubtitle = "My very public attempt at learning new stuff..."
 
   [params.logo]
     logoText     = "$ cd /home/"

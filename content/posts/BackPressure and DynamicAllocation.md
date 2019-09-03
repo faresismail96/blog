@@ -10,14 +10,13 @@ This article has been updated to reflect recently gained knowledge with spark st
 
 An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
 
-
-<h2>Dynamic Allocation in Spark Streaming</h2>
+## Dynamic Allocation in Spark Streaming
 
 Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.
 
 Spark streaming can dynamically scale up or down the number of executors based on a few configurations.
 
- 1. `spark.streaming.dynamicAllocation.enabled` 
+ 1. `spark.streaming.dynamicAllocation.enabled`
 
         This enables dynamic allocation with spark streaming. needs to be true.
 
@@ -32,7 +31,7 @@ Spark streaming can dynamically scale up or down the number of executors based o
         
         Default values are set to 0.9 and 0.3
 
-<h2>Back Pressure</h2>
+## Back Pressure
 
 Back Pressure is spark streamings ability to adjust the ingestion rate dynamically so that when a system is receiving data at a higher rate than it can process, we wouldnt have tasks queue up and slow down the stream.
 
@@ -40,24 +39,21 @@ The ingestion rate is adjusted dynamically based on previous microbatch processi
 
 What about the initial ingestion rate? well this depends on the version of spark you are running.
 
- - Prior to **Spark 2.4**: there was a bug that caused `spark.streaming.kafka.maxRatePerPartition` to be used as the initial rate AND the maximum rate per partition.
-
-  - As of **Spark 2.4**: We can use `spark.streaming.backpressure.initialRate` for the initial rate of ingestion. as maximum rate per partition can be set using: `spark.streaming.kafka.maxRatePerPartition`
+- Prior to **Spark 2.4**: there was a bug that caused `spark.streaming.kafka.maxRatePerPartition` to be used as the initial rate AND the maximum rate per partition.
+  
+- As of **Spark 2.4**: We can use `spark.streaming.backpressure.initialRate` for the initial rate of ingestion. as maximum rate per partition can be set using: `spark.streaming.kafka.maxRatePerPartition`
 
 If the input events is too high and spark streaming cannot process it in time, after the first batch is completed, spark will notice that the batch processing time is longer than the interval time and that is when backpressure will kick in to reduce the input rate.
 
 A one sentence summary of backpressure (and an interesting article):
 
-```
-Backpressure shifts the trouble of buffering input records to the 
-sender so it keeps records until they could be processed 
-by a streaming application.
-```
+    Backpressure shifts the trouble of buffering input records to the
+    sender so it keeps records until they could be processed
+    by a streaming application.
 
 ---
 
-
-<h1> What about the practical side of things? </h1>
+# What about the practical side of things
 
 This is where things might get a bit more complicated or hazy.
 
@@ -160,10 +156,9 @@ it tells us:
 the targetTotalExecutors to request is the maximum number between: the minNumExecutors and the min of (maxNumExecutors, `allAvailableExec + math.max(math.round(ratio).toInt, 1)`)
 
 > where allAvailableExec is the size of all the executorIds.
-
 > newNumExecutors is the max between one and the rounded ratio.
+> ratio is defined as
 
-> ratio is defined as 
 ```scala
 val ratio = averageBatchProcTime.toDouble / batchDurationMs
 ```
@@ -238,4 +233,6 @@ what happens in each case?
  
      https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming
 
-     
+ - Dynamic Allocation JIRA Design Document
+
+     https://issues.apache.org/jira/secure/attachment/12775710/dynamic-allocation-streaming-design.pdf
