@@ -53,54 +53,53 @@ A one sentence summary of backpressure (and an interesting article):
 
 ---
 
-# What about the practical side of things
+## What about the practical side of things
 
 This is where things might get a bit more complicated or hazy.
 
 The following is a summary of what I learned recently from various sources online and the spark source code. Surprisingly the spark streaming documentation can be rather thin on the subject of dynamic allocation and backpressure.
 
-<h2> Spark Streaming Backpressure </h2>
+## Spark Streaming Backpressure
 
- - `spark.streaming.backpressure.enabled`:
-    
+- `spark.streaming.backpressure.enabled`:
+
         Enables backpressure in spark streaming
 
- - `spark.streaming.kafka.maxRatePerPartition`:
+- `spark.streaming.kafka.maxRatePerPartition`:
 
         This is the maximum rate per partition to read kafka records.
 
- - `spark.streaming.kafka.minRatePerPartition`:
+- `spark.streaming.kafka.minRatePerPartition`:
 
         Similar to max rate per partition but this sets the min...
 
- - `spark.streaming.backpressure.initialRate`:
+- `spark.streaming.backpressure.initialRate`:
 
         The initial rate to start with. this only works 
         on spark versions 2.4 and above. 
         Otherwise, spark streaming will use the 
         kafka max rate per partition as the initial rate.
 
+## Spark Streaming Dynamic Allocation
 
-<h2> Spark Streaming Dynamic Allocation </h2>
-
- - `spark.streaming.dynamicAllocation.enabled`:
+- `spark.streaming.dynamicAllocation.enabled`:
 
         Enables DA for spark streaming
 
- - `spark.streaming.dynamicAllocation.scalingUpRatio`:
+- `spark.streaming.dynamicAllocation.scalingUpRatio`:
 
         Scales up when the ratio between the ProcessingTime and the 
         BatchTime is above x value.
 
- - `spark.streaming.dynamicAllocation.scalingDownRatio`:
+- `spark.streaming.dynamicAllocation.scalingDownRatio`:
 
         Similar as above but for scaling down.
 
- - `streaming.dynamicAllocation.scalingInterval`:
+- `streaming.dynamicAllocation.scalingInterval`:
 
         Interval in seconds to apply scaling.
 
- - `spark.streaming.dynamicAllocation.maxExecutors`:
+- `spark.streaming.dynamicAllocation.maxExecutors`:
 
         The name of this conf is very misleading and it took me a 
         while to figure it out...
@@ -120,29 +119,29 @@ The following is a summary of what I learned recently from various sources onlin
         But dont take my word for it... let us quickly check the spark 
         source code for verification:
 
-```scala
- /** Request the specified number of 
- executors over the currently active one */
-  private def requestExecutors(numNewExecutors: Int): Unit = {
-    require(numNewExecutors >= 1)
-    val allExecIds = client.getExecutorIds()
-    logDebug(s"Executors (${allExecIds.size}) = ${allExecIds}")
-    val targetTotalExecutors =
-      math.max(
-          math.min(maxNumExecutors, allExecIds.size + numNewExecutors),
-           minNumExecutors)
-    client.requestTotalExecutors(targetTotalExecutors, 0, Map.empty)
-    logInfo(s"Requested total $targetTotalExecutors executors")
-  }
+``` scala
+/** Request the specified number of
+executors over the currently active one */
+private def requestExecutors(numNewExecutors: Int): Unit = {
+       require(numNewExecutors >= 1)
+       val allExecIds = client.getExecutorIds()
+       logDebug(s"Executors (${allExecIds.size}) = ${allExecIds}")
+       val targetTotalExecutors =
+       math.max(
+       math.min(maxNumExecutors, allExecIds.size + numNewExecutors),
+       minNumExecutors)
+       client.requestTotalExecutors(targetTotalExecutors, 0, Map.empty)
+       logInfo(s"Requested total $targetTotalExecutors executors")
+}
 ```
 
-```scala
+``` scala
 val MAX_EXECUTORS_KEY =
  "spark.streaming.dynamicAllocation.maxExecutors"
 
 // AND
 
-private val maxNumExecutors = 
+private val maxNumExecutors =
 conf.getInt(MAX_EXECUTORS_KEY, Integer.MAX_VALUE)
 ```
 
@@ -160,7 +159,9 @@ the targetTotalExecutors to request is the maximum number between: the minNumExe
 > ratio is defined as
 
 ```scala
+
 val ratio = averageBatchProcTime.toDouble / batchDurationMs
+
 ```
 
 I get things might have gotten a bit confusing... but let us go back to what is important, configuring our cluster.
@@ -171,15 +172,17 @@ there are two things to know:
 
 `batch time`: this is a fixed amount in seconds. this represents the interval of time during which we will be processing data.
  from the spark structured streaming official doc:
+
 ```
-If the previous micro-batch completes within the interval, 
-then the engine will wait until the interval is over before 
+
+If the previous micro-batch completes within the interval,
+then the engine will wait until the interval is over before
 kicking off the next micro-batch.
 
 
-If the previous micro-batch takes longer than the interval 
-to complete (i.e. if an interval boundary is missed), then the 
-next micro-batch will start as soon as the previous one completes 
+If the previous micro-batch takes longer than the interval
+to complete (i.e. if an interval boundary is missed), then the
+next micro-batch will start as soon as the previous one completes
 (i.e., it will not wait for the next interval boundary).
 
 
@@ -190,9 +193,7 @@ The first scenario implies idle time.
 
 The second scenario implies queued tasks.
 
-
 `processing time`: the time it takes us to process the data. this can be less, equal or greater than batch time as seen in the example above.
-
 
 Let us look at some use cases:
 
@@ -211,7 +212,7 @@ Now assume our `ScalingUp` ratio is 0.9 and `ScalingDown` ratio is 0.3
 what happens in each case?
 
  1. Case 1 and 2: **ratio <= ScalingDown** so spark will request to kill x executors. (x is calculated based on the maxExecutor or the algorithm shown above)
-        
+
         the reason behind this is because the processing time is 
         significantly smaller than the batch time, so there is a lot 
         of idle time and so we probably have more resources than we need.
@@ -223,16 +224,16 @@ what happens in each case?
         close to or bigger than the Batch time, so most likely 
         additional resources are needed.
 
-<h2>Some additional resources</h2>
- 
- - Spark Source Code (more specifically: `ExecutorAllocationManager.scala`):
-        
-    https://github.com/apache/spark/blob/branch-2.4/streaming/src/main/scala/org/apache/spark/streaming/scheduler/ExecutorAllocationManager.scala
+## Some additional resources
 
- - Building Robust Scalable and Adaptive Applications on Spark Streaming talk during Spark Summit 2016
- 
-     https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming
+- Spark Source Code (more specifically: `ExecutorAllocationManager.scala`):
 
- - Dynamic Allocation JIRA Design Document
+    <https://github.com/apache/spark/blob/branch-2.4/streaming/src/main/scala/org/apache/spark/streaming/scheduler/ExecutorAllocationManager.scala>
 
-     https://issues.apache.org/jira/secure/attachment/12775710/dynamic-allocation-streaming-design.pdf
+- Building Robust Scalable and Adaptive Applications on Spark Streaming talk during Spark Summit 2016
+
+     <https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming>
+
+- Dynamic Allocation JIRA Design Document
+
+     <https://issues.apache.org/jira/secure/attachment/12775710/dynamic-allocation-streaming-design.pdf>

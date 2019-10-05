@@ -37,14 +37,13 @@ disableHugoGeneratorInject = false
 
 [taxonomies]
   tag      = "tags"
-  category = ""
 
 [blackfriday]
   hrefTargetBlank = true
 
 [params]
   
-  homeSubtitle = "My very public attempt at learning new stuff..."
+  homeSubtitle = "A very public attempt at applying the Feynman Technique"
 
   [params.logo]
     logoText     = "$ cd /home/"

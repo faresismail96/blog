@@ -2,9 +2,11 @@
 author = "Fares Ismail"
 date = "2019-09-03T20:55:00+00:00"
 title = "Interactive Rebase for a Cleaner Git Commit History"
+highlight = "true"
 tags = [
     "git",
     "rebase",
+    "fixup",
 ]
 +++
 
@@ -241,4 +243,4 @@ Date:   Mon Sep 2 22:21:41 2019 +0200
     Initial Commit
 ```
 
-Much cleaner than what we originally started with no??
+Much cleaner than what we originally started with no?
