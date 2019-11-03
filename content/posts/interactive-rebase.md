@@ -146,6 +146,7 @@ pick 1092c6e Added Unit Tests
 f 0206a22 Hope My tests Pass now...
 f 6728363 How About Now???
 ```
+
 The following will re-write the last two commits onto the last previous one (`Added Unit Tests`)
 The result ends up looking like this:
 

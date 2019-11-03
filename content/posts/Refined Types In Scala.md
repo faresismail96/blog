@@ -2,6 +2,7 @@
 author = "Fares Ismail"
 date = "2019-10-14T13:00:00+00:00"
 title = "Refined Types In Scala"
+tags = ["Refined Types"]
 +++
 
 The following is my interpretation of the [Refined Types presentation](http://fthomas.github.io/talks/2016-05-04-refined/)

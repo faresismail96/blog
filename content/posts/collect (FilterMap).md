@@ -8,10 +8,11 @@ Collect or FilterMap does exactly what is says. it filters a collection and then
 
 collect takes a partial function as a parameter and returns a Traversable of the same type.
 
-```scala 
+```scala
 def collect[B](pf: PartialFunction[A, B]): CC[B]
 ```
-Also from the scaladoc: 
+
+Also from the scaladoc:
 
 ```scala
 /**
@@ -48,6 +49,7 @@ The above code returns:
     else 0
   }
 ```
+
 so where is the benefit of using collect instead of map? the answer is the in filtering part.
 
 when applying collect we have the option to specify the range/type... of values we would like to apply the map on. the rest of the elements in our collection will not be mapped and therefore will no be collected in the result.
@@ -58,7 +60,8 @@ going back to our previous example, say we only wanted to collect values below 1
   val result = randomNumbers.collect {
     case x: Int if (x < 10) => x * 10
   }
-``` 
+```
+
 the result would be:
 > List(10.0, 20.0, 50.0)
 

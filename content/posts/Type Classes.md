@@ -2,6 +2,7 @@
 author = "Fares Ismail"
 date = "2019-10-14T12:00:00+00:00"
 title = "Type Classes In Cats"
+draft = "true"
 +++
 
 _Note_: _This article is long from being complete. But I will be adding content to it the more I learn about cats_
@@ -29,7 +30,7 @@ _Note_: _This article is long from being complete. But I will be adding content 
 
 4. Applicative:
 
-5. Traversable:
+5. Traverse:
 
 6. Monads:
 
