@@ -2,8 +2,9 @@
 author = "Fares Ismail"
 date = "2019-08-02T10:10:00+00:00"
 title = "Un-Apply in Scala"
-
+tags = ["Unapply", "Scala"]
 +++
+
 Unapply in Scala is the inverse of the apply... (queue no shit comments :p)
 
 So what does it do exactly? given a class Person:
@@ -25,9 +26,9 @@ case class Person(name: String, age: Int, hobbies: List[String])
 
 object Test {
   
-  val fares: Person = Person("fares", 23, List("Hiking", "Biking")) 
+  val fares: Person = Person("fares", 23, List("Hiking", "Biking"))
   val result: Option[(String, Int, List[String])] = Person.unapply(fares)
- 
+
 }
 ```
 
@@ -91,8 +92,8 @@ Going back to out Person case class and fares instance.
   println(faresAge)
   println(faresHobbies)
 
-  //the following code yields: 
- 
+  //the following code yields:
+
     fares
     23
     List(Hiking, Biking)

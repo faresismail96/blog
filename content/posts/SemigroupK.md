@@ -37,12 +37,14 @@ This might be a bit abstract, so lets look at a more concrete example:
 
   val allGrades = classOneGrades.combine(classTwoGrades)
 ```
+
 the result is as you'd expect: `List(75, 80, 78, 90, 100, 50, 68, 90, 98)`
 
 ```md
 Note:  We could have also called `classOneGrades |+| classTwoGrades`
 since the sign |+| is a `SemigroupOps` that calls combine.
 ```
+
 So where is the utility of semigroups?
 
 Assume we had a `List[A]` and we wished to combine all the elements in that list into one, we could easily call:
@@ -50,9 +52,10 @@ Assume we had a `List[A]` and we wished to combine all the elements in that list
 ```scala
   val result: A = list.foldLeft(???)(_ |+| _)
 ```
+
 this starts out with an initial single value (??? in this case) and traverses the list combining every 2 elements together and appending previous value.
 
-```
+``` text
 Note: the only issue in the above example is that we do not have an "empty" value to put in instead of the ??? (in the case the list is empty for example...)
 
 This however is taken care of by the Monoid which is a semigroup plus an 'empty' value that acts as the identity of the combine.
@@ -67,9 +70,10 @@ For Lists, the Semigroup's combine and the SemigroupK's combineK operate in the 
 
 so where is the difference?
 
-Here is an excerpt from cats' official documentation: 
-```
-SemigroupK has a very similar structure to Semigroup, the difference is that SemigroupK operates on type constructors of one argument. So, for example, whereas you can find a Semigroup for types which are fully specified like Int or List[Int] or Option[Int], you will find SemigroupK for type constructors like List and Option. 
+Here is an excerpt from cats' official documentation:
+
+``` text
+SemigroupK has a very similar structure to Semigroup, the difference is that SemigroupK operates on type constructors of one argument. So, for example, whereas you can find a Semigroup for types which are fully specified like Int or List[Int] or Option[Int], you will find SemigroupK for type constructors like List and Option.
 ```
 
 But what does SemigroupK do differently?
@@ -80,6 +84,7 @@ assume you have a function that takes a `previousValue` and a `currentValue`.
 you would like to return currentValue but if this is none, then you would like to return previousValue else return None.
 
 If we did not use SemigroupK, our solution would have to look like this:
+
 ```scala
 
   val res: Option[Int] = (curr, prev) match {
@@ -99,7 +104,6 @@ Using SemigroupK the same code becomes:
 With SemigroupK the code becomes much simpler and easier to read.
 
 Here are a few examples of returns with SemigroupK:
-
 
 ```scala
 
@@ -123,6 +127,6 @@ Note: a syntactic sugar for  semigroupK.combine is <+>
 
 ```scala
 curr <+> prev
-// this would result in the same thing as: 
+// this would result in the same thing as:
 SemigroupK[Option].combineK(curr ,prev)
 ```

@@ -9,14 +9,14 @@ The Professional Scrum Master Certification level 1 is one of those easy certifi
 
 This article will compile a list of useful resources that will help learn more about the scrum framework and eventually pass the certification.
 
-I highly suggest reading the official scrum guide. It is short and simple to read. With that said I will outline below the most important parts of each section and then mention some important points to keep in mind while passing the scrum certification.
+I highly suggest reading the official scrum guide. It is short and simple to read. With that said I will outline below the most important parts of each section and then mention important points to keep in mind while passing the scrum certification.
 
 ## Highlights from the Scrum Guide
 
 ### Definition of SCRUM
 
 Scrum is a `lightweight framework`that is based on `empirical process control theory`. This framework is used to create and maintain complex products.
-being empirical, means that scrum extracts its knowledge from experience.
+Being empirical, means that scrum extracts its knowledge from experience.
 
 Scrum relies on small teams of people that are `highly flexible` and `adaptive`
 
@@ -30,18 +30,18 @@ Scrum is built on three main pillars:
 
     Some example of where we find transparency in scrum:
 
-    - During the daily stand up meeting, every member of the dev team talks about his work and issues he is having. this allows everyone to have an idea of what everyone else is doing, and potentially giving insights on some subjects.
+    - During the daily stand up meeting, every member of the dev team talks about his work and issues he is having. this allows everyone to have an idea of what everyone else is doing, and potentially helping solve some of the encountered issues
 
-    - he Definition of Done (DOD) is another example of transparency in scrum. it allows the dev team and the PO to have an idea about what will be done.
+    - The Definition of Done (DOD) is another example of transparency in scrum. it allows the dev team and the PO to have an idea about what will be done.
 
 2. Inspection
 
     Inspection should be done frequently to make sure there are no unwanted variances from the sprint goal.
-    An example of inspection is the sprint review during which a team could hold a demo.
+    An example of inspection is the sprint review during which a team can hold a demo.
 
 3. Adaptation
   
-    If a person detects that a particular process has deviated outside of acceptable limits (and that the resulting product will be impacted/unacceptable) then that process must be adjusted as soon as possible to minimize further deviations.
+    If a person detects that a particular process has deviated outside of acceptable limits (and that the resulting product will be impacted/unacceptable) then that process must be adjusted *as soon as possible* to minimize further deviations.
 
     There are 4 official opportunities to inspect and adapt in scrum:
 
@@ -63,7 +63,7 @@ The 5 Scrum Values are:
 ### The Scrum Team
 
 The Scrum Teams are self organizing (They chose how to best accomplish the work and not directed by someone) and cross functional (they have the necessary skills to accomplish all the work without depending on others outside the scrum team).
-The SCrum Team consists of:
+The Scrum Team consists of:
 
 #### The Product Owner
 
@@ -75,7 +75,7 @@ The product owners job is to maximize the value of the work done by the developm
 
 #### The Development Team
 
-The Dev team is responsible for doing the work and delivering a potentially releasable increment of Done.
+The Dev team is responsible for doing the work and delivering a potentially releasable increment of the product.
 
 A done increment is required at the Sprint Review.
 
@@ -143,7 +143,7 @@ The dev team may invite other (external) people to the sprint planning to provid
 
 #### Daily Scrum
 
-The daily scrum is time boxed to 15 minutes. It is held at the same place and time everyday to reduce complexity.
+The daily scrum is time boxed to 15 minutes. It is held at the same time and place everyday to reduce complexity.
 
 The daily scrum should be organized in a way to better achieve the sprint goal. Scrum suggests the following format:
 
@@ -151,7 +151,7 @@ The daily scrum should be organized in a way to better achieve the sprint goal. 
 - What will I do today to help achieve the sprint goal?
 - Do I see any impediments that prevent me from achieving the sprint goal?
 
-The scrum master is only responsible for insuring the dev team holds the meeting and is kept within its time boxed.
+The scrum master is only responsible for insuring the dev team holds the meeting and that the latter is kept within its time boxed.
 The daily scrum is an internal meeting for the dev team. if others are present, the scrum master makes sure they do not disturb the meeting.
 
 #### Sprint Review

@@ -2,6 +2,7 @@
 author = "Fares Ismail"
 date = "2019-08-21T20:00:00+00:00"
 title = "Passing the DataBricks Apache Spark Certification"
+tags = ["Spark", "Databricks", "Spark Certification"]
 +++
 
 The following is a compilation of all the resources I've used to pass the Databricks 2.X Spark Certification, as well as some questions that came up.

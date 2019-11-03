@@ -2,7 +2,7 @@
 author = "Fares Ismail"
 date = "2019-07-29T21:37:00+00:00"
 title = "For Comprehensions Demystified"
-
+tags  =["For Comprehension", "Scala"]
 +++
 A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
 
@@ -12,12 +12,14 @@ At first glance it might look complicated and difficult to comprehend. But once 
 
 Lets look at the below couple functions:
 
-{{< highlight scala >}}
+```scala
+
 def computeA(a: Int): Either\[Throwable, Int\] = ???
 def computeB(b: Int): Either\[Throwable, Int\] = ???
 def computeC(c: String): Either\[Throwable, String\] = ???
 def computeD(a: Int, b:Int, c: String): String= ???
-{{< /highlight >}}
+
+```
 
 The issue here is that computeA, computeB and computeC all  return an Either of Throwable or Something.
 
@@ -27,21 +29,23 @@ But this quickly becomes cumbersome and annoying. it also makes the logic somewh
 
 So here comes For Comprehensions to the rescue.
 
-{{< highlight scala >}}
+```scala
+
 for {
-a <- computeA(1)
-b <- computeB(2)
-c <- computeC("Hi")
+    a <- computeA(1)
+    b <- computeB(2)
+    c <- computeC("Hi")
 } yield computeD(a,b, c)
-{{< /highlight >}}
+
+```
 
 so what does this mean exactly? when in doubt, use Intellij's desugar option.
 
 the above code desugarized (is that a word?) is equivalent to the following code:
 
-{{< highlight scala >}}
+```scala
 computeA(1).flatMap(a =>computeB(2).flatMap(b =>computeC("Hi").map(c =>computeD(a, b, c))))
-{{< /highlight >}}
+```
 
 Of the two, I'm sure we'd all prefer reading / writing the first format... It is more concise, readable and hence less prone to errors.
 
@@ -53,11 +57,11 @@ it basically says that for without the yield translates into a chain of foreach.
 
 for with yield translates into a chain of flatMap followed by a map.
 
-{{< highlight scala >}}
+```scala
 for(x <- c1; y <- c2; z <- c3) yield {...}
 //translates to
 c1.flatMap(x => c2.flatMap(y => c3.map(z => {...})))
-{{< /highlight >}}
+```
 
 Using for with an if condition translates into a `.wihFilter` and as a fallback of `filter` if the method `wihFilter` is not available.
 

@@ -119,7 +119,7 @@ The following is a summary of what I learned recently from various sources onlin
         But dont take my word for it... let us quickly check the spark 
         source code for verification:
 
-``` scala
+```scala
 /** Request the specified number of
 executors over the currently active one */
 private def requestExecutors(numNewExecutors: Int): Unit = {
@@ -159,9 +159,7 @@ the targetTotalExecutors to request is the maximum number between: the minNumExe
 > ratio is defined as
 
 ```scala
-
 val ratio = averageBatchProcTime.toDouble / batchDurationMs
-
 ```
 
 I get things might have gotten a bit confusing... but let us go back to what is important, configuring our cluster.
@@ -171,23 +169,20 @@ in order to do so, we need to know based on what will our cluster scale up or sc
 there are two things to know:
 
 `batch time`: this is a fixed amount in seconds. this represents the interval of time during which we will be processing data.
- from the spark structured streaming official doc:
+from the spark structured streaming official doc:
 
-```
-
-If the previous micro-batch completes within the interval,
-then the engine will wait until the interval is over before
-kicking off the next micro-batch.
+        If the previous micro-batch completes within the interval,
+        then the engine will wait until the interval is over before
+        kicking off the next micro-batch.
 
 
-If the previous micro-batch takes longer than the interval
-to complete (i.e. if an interval boundary is missed), then the
-next micro-batch will start as soon as the previous one completes
-(i.e., it will not wait for the next interval boundary).
+        If the previous micro-batch takes longer than the interval
+        to complete (i.e. if an interval boundary is missed), then the
+        next micro-batch will start as soon as the previous one completes
+        (i.e., it will not wait for the next interval boundary).
 
 
-If no new data is available, then no micro-batch will be kicked off.
-```
+        If no new data is available, then no micro-batch will be kicked off.
 
 The first scenario implies idle time.
 

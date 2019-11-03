@@ -16,7 +16,7 @@ Also from the scaladoc:
 
 ```scala
 /**
-  * @tparam CC type constructor of the collection (e.g. `List`, `Set`). Operations returning a 
+  * @tparam CC type constructor of the collection (e.g. `List`, `Set`). Operations returning a
   * collection with a different type of element `B` (e.g. `map`) return a `CC[B]`.
   */
 ```

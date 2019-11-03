@@ -3,6 +3,7 @@ author = "Fares Ismail"
 date = "2019-10-14T12:00:00+00:00"
 title = "Type Classes In Cats"
 draft = "true"
+tags = ["Type Classes"]
 +++
 
 _Note_: _This article is long from being complete. But I will be adding content to it the more I learn about cats_

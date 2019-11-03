@@ -3,6 +3,7 @@ author = "Fares Ismail"
 date = "2019-10-14T13:00:00+00:00"
 title = "Recursive Schemes with Matryoshka"
 draft = true
+tags = ["Matryoshka", "Recursive Schemes", "Scala"]
 +++
 
 I was always convinced that I would never even attempt to learn Matryoshka. Here are some of the reasons behind my decision:

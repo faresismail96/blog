@@ -66,7 +66,7 @@ value.fold(bar)(foo)
 
 In other words, the value on the left (`bar` in our case) will be applied if `value` is `None`, otherwise if it is `Some`, the function of the right (`foo` in our case) will be invoked on the value inside the Option.
 
-## Is there an even better way to do things?
+## Is there an even better way to do things
 
 I wont go into the details, but `Marconi Lanna` does in his video or his article <https://www.originate.com/thinking/stories/idiomatic-scala-your-options-do-not-match/>, but here are a few examples of code that can be better written. The below examples are taken/inspired by the video of `Marconi Lanna`.
 
