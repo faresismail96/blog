@@ -14,9 +14,9 @@ Lets look at the below couple functions:
 
 ```scala
 
-def computeA(a: Int): Either\[Throwable, Int\] = ???
-def computeB(b: Int): Either\[Throwable, Int\] = ???
-def computeC(c: String): Either\[Throwable, String\] = ???
+def computeA(a: Int): Either[Throwable, Int] = ???
+def computeB(b: Int): Either[Throwable, Int] = ???
+def computeC(c: String): Either[Throwable, String] = ???
 def computeD(a: Int, b:Int, c: String): String= ???
 
 ```
