@@ -243,3 +243,13 @@ There are some key points you need to keep in mind that will allow you to pass t
 - The PO has a final say in matters of product backlog. Dev teams have a final say in matters of Sprint Backlog
 
 - A dev team member cannot `own` a sprint backlog item. The entire dev team is responsible for all the items on the sprint backlog.
+
+## Update: Additional Resources
+
+Of the 2 or 3 people that actually read this blog (from time to time), someone asked me to add some additional resources. More specifically mock tests that can be used to further complete one's understanding of the subject and make sure that one is ready to pass the exam. So here's a short list of useful resources:
+
+- <https://mlapshin.com/index.php/scrum-quizzes> (both learning mode and real mode)
+
+- <https://www.examtopics.com/exams/scrum/psm-i/>
+
+- <https://quizlet.com/261765971/scrum-master-flash-cards/> Fun flashcards for your daily commute 🙃

@@ -11,7 +11,7 @@ title = "Cats Bifunctor"
 
 The following will be a short and rather simple article about a useful function I recently learned about: `bimap` by cats.
 
-In cats and in some cases scala, Monads like Either, Validated, Option... are right biased. which means that when we call `.map` on them, the function applied in the map is only applied on the case of a right.
+In cats and in some cases scala, types like Either, Validated, Option... are right biased. which means that when we call `.map` on them, the function applied in the map is only applied on the case of a right.
 
 Here are some examples:
 
@@ -22,6 +22,7 @@ val result: Either[String, Int] = either.map(int => int * 2)
 
 val option1: Option[Int] = Some(2)
 val result1: Option[Int] = option1.map(int => int * 2)
+// a map on a None returns a None.
 
 ```
 
