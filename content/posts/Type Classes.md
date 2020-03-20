@@ -58,6 +58,8 @@ I will join to each type class a phrase "In layman's term" or in other words the
 
 5. Traverse:
 
+    Long story short, traverse is a map followed by a sequence
+
     Used to traverse a structure with an effect.
     So whats the difference between traverse and a map? Traverse is an abstraction over things that can be traversed over.
 
