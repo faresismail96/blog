@@ -4,7 +4,7 @@ date = "2020-03-30T01:00:00+00:00"
 tags = [
     "cats",
     "validated",
-    "validatedNel"
+    "validatedNel",
     "validation",
 ]
 title = "Validated(Nel) for Validation"
