@@ -16,7 +16,7 @@ layoutDir    = "layouts"
 publishDir   = "public"
 
 buildDrafts  = false
-buildFuture  = false
+buildFuture  = true
 buildExpored = false
 canonifyURLs = true
 
