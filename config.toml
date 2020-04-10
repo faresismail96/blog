@@ -1,4 +1,4 @@
-baseURL = "http://fares.codes/"
+baseURL = "http://faresismail.com/"
 title   = "Learning Publicly"
 
 DefaultContentLanguage = "en"
@@ -28,6 +28,8 @@ disableRSS     = true
 disableSitemap = false
 disable404     = false
 disableHugoGeneratorInject = false
+
+staticDir = "static"
 
 [permalinks]
   posts = "/posts/:title/"
