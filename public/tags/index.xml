@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Learning Publicly</title>
+    <link>https://fares.codes/tags/</link>
+    <description>Recent content in Tags on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 03 Apr 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cats</title>
+      <link>https://fares.codes/tags/cats/</link>
+      <pubDate>Fri, 03 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/cats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chain</title>
+      <link>https://fares.codes/tags/chain/</link>
+      <pubDate>Fri, 03 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/chain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cond</title>
+      <link>https://fares.codes/tags/cond/</link>
+      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/cond/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://fares.codes/tags/scala/</link>
+      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>validated</title>
+      <link>https://fares.codes/tags/validated/</link>
+      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/validated/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>validatedNel</title>
+      <link>https://fares.codes/tags/validatednel/</link>
+      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/validatednel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>validation</title>
+      <link>https://fares.codes/tags/validation/</link>
+      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/validation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ior</title>
+      <link>https://fares.codes/tags/ior/</link>
+      <pubDate>Sat, 21 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/ior/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>show</title>
+      <link>https://fares.codes/tags/show/</link>
+      <pubDate>Fri, 20 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/show/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>toString</title>
+      <link>https://fares.codes/tags/tostring/</link>
+      <pubDate>Fri, 20 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/tostring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>healthcheck</title>
+      <link>https://fares.codes/tags/healthcheck/</link>
+      <pubDate>Thu, 19 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/healthcheck/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kafka</title>
+      <link>https://fares.codes/tags/kafka/</link>
+      <pubDate>Thu, 19 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bimap</title>
+      <link>https://fares.codes/tags/bimap/</link>
+      <pubDate>Sun, 09 Feb 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/bimap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nulls</title>
+      <link>https://fares.codes/tags/nulls/</link>
+      <pubDate>Sun, 19 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/nulls/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spark</title>
+      <link>https://fares.codes/tags/spark/</link>
+      <pubDate>Sun, 19 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/spark/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eval</title>
+      <link>https://fares.codes/tags/eval/</link>
+      <pubDate>Wed, 15 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/eval/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mutual recursion</title>
+      <link>https://fares.codes/tags/mutual-recursion/</link>
+      <pubDate>Wed, 15 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/mutual-recursion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stack safe</title>
+      <link>https://fares.codes/tags/stack-safe/</link>
+      <pubDate>Wed, 15 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/stack-safe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://fares.codes/tags/machine-learning/</link>
+      <pubDate>Mon, 09 Dec 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ML</title>
+      <link>https://fares.codes/tags/ml/</link>
+      <pubDate>Mon, 09 Dec 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Agile</title>
+      <link>https://fares.codes/tags/agile/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/agile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Certification</title>
+      <link>https://fares.codes/tags/certification/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/certification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PSM</title>
+      <link>https://fares.codes/tags/psm/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/psm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scrum</title>
+      <link>https://fares.codes/tags/scrum/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/scrum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scrum Master</title>
+      <link>https://fares.codes/tags/scrum-master/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/scrum-master/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Refined Types</title>
+      <link>https://fares.codes/tags/refined-types/</link>
+      <pubDate>Mon, 14 Oct 2019 13:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/refined-types/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>value-class</title>
+      <link>https://fares.codes/tags/value-class/</link>
+      <pubDate>Fri, 04 Oct 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/value-class/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fixup</title>
+      <link>https://fares.codes/tags/fixup/</link>
+      <pubDate>Tue, 03 Sep 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/fixup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://fares.codes/tags/git/</link>
+      <pubDate>Tue, 03 Sep 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rebase</title>
+      <link>https://fares.codes/tags/rebase/</link>
+      <pubDate>Tue, 03 Sep 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/rebase/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fold</title>
+      <link>https://fares.codes/tags/fold/</link>
+      <pubDate>Sun, 01 Sep 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/fold/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pattern matching</title>
+      <link>https://fares.codes/tags/pattern-matching/</link>
+      <pubDate>Sun, 01 Sep 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/pattern-matching/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Databricks</title>
+      <link>https://fares.codes/tags/databricks/</link>
+      <pubDate>Wed, 21 Aug 2019 20:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/databricks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spark Certification</title>
+      <link>https://fares.codes/tags/spark-certification/</link>
+      <pubDate>Wed, 21 Aug 2019 20:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/spark-certification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unapply</title>
+      <link>https://fares.codes/tags/unapply/</link>
+      <pubDate>Fri, 02 Aug 2019 10:10:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/unapply/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sealed Traits</title>
+      <link>https://fares.codes/tags/sealed-traits/</link>
+      <pubDate>Wed, 31 Jul 2019 21:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/sealed-traits/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>For Comprehension</title>
+      <link>https://fares.codes/tags/for-comprehension/</link>
+      <pubDate>Mon, 29 Jul 2019 21:37:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/for-comprehension/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

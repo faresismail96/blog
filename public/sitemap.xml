@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://fares.codes/tags/cats/</loc>
+    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/cats-chain/</loc>
+    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/chain/</loc>
+    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/cond/</loc>
+    <lastmod>2020-03-31T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/cond-in-scala/</loc>
+    <lastmod>2020-03-31T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scala/</loc>
+    <lastmod>2020-03-31T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/validated/</loc>
+    <lastmod>2020-03-30T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/validatednel-for-validation/</loc>
+    <lastmod>2020-03-30T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/validatednel/</loc>
+    <lastmod>2020-03-30T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/validation/</loc>
+    <lastmod>2020-03-30T01:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/cats-ior/</loc>
+    <lastmod>2020-03-21T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/ior/</loc>
+    <lastmod>2020-03-21T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/cats-show/</loc>
+    <lastmod>2020-03-20T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/show/</loc>
+    <lastmod>2020-03-20T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/tostring/</loc>
+    <lastmod>2020-03-20T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/healthcheck/</loc>
+    <lastmod>2020-03-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/kafka/</loc>
+    <lastmod>2020-03-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/kafka-healthchecks/</loc>
+    <lastmod>2020-03-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/bimap/</loc>
+    <lastmod>2020-02-09T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/cats-bifunctor/</loc>
+    <lastmod>2020-02-09T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/nulls/</loc>
+    <lastmod>2020-01-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/spark/</loc>
+    <lastmod>2020-01-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/spark-odd-behavior-with-nulls/</loc>
+    <lastmod>2020-01-19T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/eval/</loc>
+    <lastmod>2020-01-15T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/mutual-recursion/</loc>
+    <lastmod>2020-01-15T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/stack-safe/</loc>
+    <lastmod>2020-01-15T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/</loc>
+    <lastmod>2020-01-15T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/crash-course-in-machine-learning/</loc>
+    <lastmod>2019-12-09T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/machine-learning/</loc>
+    <lastmod>2019-12-09T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/ml/</loc>
+    <lastmod>2019-12-09T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/agile/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/certification/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/passing-the-scrum-master-certification/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/psm/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scrum/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scrum-master/</loc>
+    <lastmod>2019-11-03T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/refined-types/</loc>
+    <lastmod>2019-10-14T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/refined-types-in-scala/</loc>
+    <lastmod>2019-10-14T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/value-classes-in-scala/</loc>
+    <lastmod>2019-10-04T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/value-class/</loc>
+    <lastmod>2019-10-04T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/fixup/</loc>
+    <lastmod>2019-09-03T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/git/</loc>
+    <lastmod>2019-09-03T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/</loc>
+    <lastmod>2019-09-03T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/rebase/</loc>
+    <lastmod>2019-09-03T20:55:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/fold/</loc>
+    <lastmod>2019-09-01T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</loc>
+    <lastmod>2019-09-01T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/pattern-matching/</loc>
+    <lastmod>2019-09-01T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/databricks/</loc>
+    <lastmod>2019-08-21T20:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/passing-the-databricks-apache-spark-certification/</loc>
+    <lastmod>2019-08-21T20:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/spark-certification/</loc>
+    <lastmod>2019-08-21T20:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/dynamic-scaling-and-backpressure/</loc>
+    <lastmod>2019-08-10T09:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/semigroupk-and-combinek/</loc>
+    <lastmod>2019-08-03T15:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/collect-/-filtermap/</loc>
+    <lastmod>2019-08-03T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/un-apply-in-scala/</loc>
+    <lastmod>2019-08-02T10:10:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/unapply/</loc>
+    <lastmod>2019-08-02T10:10:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/sealed-traits/</loc>
+    <lastmod>2019-07-31T21:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/sealed-traits-in-scala/</loc>
+    <lastmod>2019-07-31T21:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/for-comprehension/</loc>
+    <lastmod>2019-07-29T21:37:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/for-comprehensions-demystified/</loc>
+    <lastmod>2019-07-29T21:37:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/about/</loc>
+    <lastmod>2019-07-27T21:14:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/</loc>
+    <lastmod>2019-07-27T21:14:20+02:00</lastmod>
+  </url>
+  
+</urlset>

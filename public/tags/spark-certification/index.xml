@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spark Certification on Learning Publicly</title>
+    <link>https://fares.codes/tags/spark-certification/</link>
+    <description>Recent content in Spark Certification on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 21 Aug 2019 20:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/spark-certification/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Passing the DataBricks Apache Spark Certification</title>
+      <link>https://fares.codes/posts/passing-the-databricks-apache-spark-certification/</link>
+      <pubDate>Wed, 21 Aug 2019 20:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/passing-the-databricks-apache-spark-certification/</guid>
+      <description>The following is a compilation of all the resources I&amp;rsquo;ve used to pass the Databricks 2.X Spark Certification, as well as some questions that came up.
+Background on the Exam The exam databricks spark 2.x spark with scala certification is made up of 40 MCQ questions, 3 hours to answer them in total. The registration grants you 2 trials, meaning if you fail the first attempt, you have to wait 15 days and then you can apply for a second trial.</description>
+    </item>
+    
+  </channel>
+</rss>

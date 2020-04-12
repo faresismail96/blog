@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Refined Types on Learning Publicly</title>
+    <link>https://fares.codes/tags/refined-types/</link>
+    <description>Recent content in Refined Types on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 14 Oct 2019 13:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/refined-types/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Refined Types In Scala</title>
+      <link>https://fares.codes/posts/refined-types-in-scala/</link>
+      <pubDate>Mon, 14 Oct 2019 13:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/refined-types-in-scala/</guid>
+      <description>The following is my interpretation of the Refined Types presentation
+In previous articles, I wrote about some issues surrounding the use of String parameters (passing an accountId instead of a userId and so on&amp;hellip;)
+Lets quickly recap:
+final case class UserBankAccount(userId: String, accountId: String, amount: Double) UserBankAccount(&amp;#34;user_10023&amp;#34;, &amp;#34;account_28179&amp;#34;, 2000) // Ok UserBankAccount(&amp;#34;account_28179&amp;#34;, &amp;#34;user_10023&amp;#34;, 2000) // Possible bug It would be cool if we had a type safe solution that would prevent the code from compiling&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

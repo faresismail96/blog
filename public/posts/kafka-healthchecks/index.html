@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="Ive been recently asked to write healthchecks for long running services that depend on kafka.
+This article will not go into the need for healthchecks nor a &amp;ldquo;let it crash&amp;rdquo; design. Instead I&amp;rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/kafka-healthchecks/" />
+
+
+<title>
+    
+    Kafka HealthChecks :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Kafka HealthChecks">
+<meta itemprop="description" content="Ive been recently asked to write healthchecks for long running services that depend on kafka.
+This article will not go into the need for healthchecks nor a &ldquo;let it crash&rdquo; design. Instead I&rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks.">
+<meta itemprop="datePublished" content="2020-03-19T10:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-19T10:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="719">
+
+
+
+<meta itemprop="keywords" content="kafka,healthcheck," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kafka HealthChecks"/>
+<meta name="twitter:description" content="Ive been recently asked to write healthchecks for long running services that depend on kafka.
+This article will not go into the need for healthchecks nor a &ldquo;let it crash&rdquo; design. Instead I&rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks."/>
+
+
+
+
+<meta property="article:published_time" content="2020-03-19 10:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/kafka-healthchecks/">Kafka HealthChecks</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>Ive been recently asked to write healthchecks for long running services that depend on kafka.</p>
+<p>This article will not go into the need for healthchecks nor a &ldquo;let it crash&rdquo; design. Instead I&rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.</p>
+<p>Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks.</p>
+<p>Before we begin, here are some key points to keep in mind:</p>
+<h2 id="what-are-brokers">What are brokers</h2>
+<p>Message brokers make the process of exchanging messages simple and reliable.</p>
+<p>A Kafka Message Broker is the central point where messages are published to.</p>
+<p>A kafka broker receives messages from producers and stores them on disk by unique offsets. It then allows consumers to consume the messages.</p>
+<h2 id="the-role-of-zookeeper-in-all-of-this">The role of Zookeeper in all of this</h2>
+<p>Kafka uses zookeeper to store shared information about brokers, consumers ect&hellip;</p>
+<p>For brokers, kafka determines the state of a particular broker as it sends regular heartbeat requests.</p>
+<p>Zookeeper is also used by kafka for broker election. In the case where the leader on a specific partition fails, it will no longer be registered with zookeeper. Zookeeper will then alert the remaining brokers on that partition and will proceed with a new election.</p>
+<p>For consumers, zookeeper keeps check of the offsets and maintains a consumer registry. They are ephemeral zNodes similar to brokers. When a consumer goes down, the node is destroyed.</p>
+<h2 id="checking-the-health-of-zookeeper">Checking the &ldquo;Health&rdquo; of Zookeeper</h2>
+<p>Checking the health of Zookeeper is simple:</p>
+<p>A zookeeper client has a function <code>zk.getState.isConnected</code>. This will return a boolean if zk is <code>CONNECTED or CONNECTEDREADONLY</code>.</p>
+<h2 id="checking-the-health-of-brokers">Checking the &ldquo;Health&rdquo; of brokers</h2>
+<p>The first implementation of a healthcheck consisted of checking zookeeper for brokerIds (since brokers register with zookeeper). And making sure that all the brokers are indeed registered with zookeeper.</p>
+<p>The idea came from the scaladoc in <code>KafkaHealthcheck</code>. Which mentions:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * This class registers the broker in zookeeper to allow
+</span><span style="color:#75715e"> * other brokers and consumers to detect failures. It uses an ephemeral znode with the path:
+</span><span style="color:#75715e"> *   /brokers/ids/[0...N] --&gt; advertisedHost:advertisedPort
+</span><span style="color:#75715e"> * Right now our definition of health is fairly naive. If we register in zk we are healthy, otherwise
+</span><span style="color:#75715e"> * we are dead.
+</span><span style="color:#75715e"> */</span>
+
+</code></pre></div><p>Note that I was using kafka 2.11 and that after checking more recent versions, this class disappears.</p>
+<h3 id="the-problem-with-this-implementation">The problem with this implementation</h3>
+<p>The problem here is that my previous implementation eliminates all the benefits of the fault tolerance of kafka.</p>
+<p>Each topic in kafka can have one or more partition. And each partition can be replicated 1 or more times.</p>
+<p>Each partition in Kafka will have a broker as it&rsquo;s leader. Meaning that this broker will handle receiving messages and dispatching this information to its followers. This broker (up until version 2.4.0) is also responsible to serving the consumers. <a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-392%3A+Allow+consumers+to+fetch+from+closest+replica">https://cwiki.apache.org/confluence/display/KAFKA/KIP-392%3A+Allow+consumers+to+fetch+from+closest+replica</a></p>
+<p>At the same time, this broker will also maintain a list of ISR (In-Sync-Replicas). This is a list of other brokers that are in sync with the leader (In the case the topic has a replication factor). So if a leader fails, any broker from that list is a prime candidate to replacing that broker.</p>
+<p>In other words, even if we lose a broker for a topic that is replicated, our application should not crash since we have other brokers that can step in.</p>
+<h3 id="the-proposed-solution">The proposed solution</h3>
+<p>The proposed solution is to: Retrieve the list of brokers from Zookeeper.
+For each topic, retrieve the list of partitions, and for each partition, retrieve the list of ISR. If there is at least one broker in that list of ISR, the the partition is healthy. If all partitions for a topic are healthy and if all topics for a given application are healthy, then the application is healthy.</p>
+<h3 id="additional-resources">Additional Resources</h3>
+<p>Here is a series of articles I found that are useful to learning more about the functioning of Kafka and Event Streaming in general.</p>
+<p>Part one: Storage Mechanics</p>
+<ul>
+<li><a href="https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-1-storage-mechanics/">https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-1-storage-mechanics/</a></li>
+<li><a href="https://thehoard.blog/how-kafkas-storage-internals-work-3a29b02e026">https://thehoard.blog/how-kafkas-storage-internals-work-3a29b02e026</a>
+Part two: Data Replication</li>
+<li><a href="https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-2-data-replication/">https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-2-data-replication/</a>
+Part Three: Scaling message delivery</li>
+<li><a href="https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-3-scaling-message-delivery/">https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-3-scaling-message-delivery/</a>
+Slightly outdated, does not mention the possibility of reading from replicas: <a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-392%3A+Allow+consumers+to+fetch+from+closest+replica">https://cwiki.apache.org/confluence/display/KAFKA/KIP-392%3A+Allow+consumers+to+fetch+from+closest+replica</a>
+Part Four: Competing Goals and Lessons Learned (Plus NATS que Kafka)</li>
+<li><a href="https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-4-trade-offs-and-lessons-learned/">https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-4-trade-offs-and-lessons-learned/</a>
+Part 5: Sketching a New System</li>
+<li><a href="https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-5-sketching-a-new-system/">https://bravenewgeek.com/building-a-distributed-log-from-scratch-part-5-sketching-a-new-system/</a></li>
+</ul>
+<p>Understanding Consensus: <a href="https://bravenewgeek.com/understanding-consensus/">https://bravenewgeek.com/understanding-consensus/</a></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/kafka">kafka</a></span><span class="tag"><a href="https://fares.codes/tags/healthcheck">healthcheck</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>719 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-03-19 11:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/cats-show/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Cats Show</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/cats-bifunctor/">
+                                <span class="button__text">Cats Bifunctor</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

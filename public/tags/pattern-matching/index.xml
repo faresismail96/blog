@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pattern matching on Learning Publicly</title>
+    <link>https://fares.codes/tags/pattern-matching/</link>
+    <description>Recent content in pattern matching on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 01 Sep 2019 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/pattern-matching/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fold vs Pattern Matching and Matching on Options</title>
+      <link>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</link>
+      <pubDate>Sun, 01 Sep 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</guid>
+      <description>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this example, we patten match on the Option value.</description>
+    </item>
+    
+  </channel>
+</rss>

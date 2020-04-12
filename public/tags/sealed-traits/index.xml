@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sealed Traits on Learning Publicly</title>
+    <link>https://fares.codes/tags/sealed-traits/</link>
+    <description>Recent content in Sealed Traits on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 31 Jul 2019 21:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/sealed-traits/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sealed Traits in Scala</title>
+      <link>https://fares.codes/posts/sealed-traits-in-scala/</link>
+      <pubDate>Wed, 31 Jul 2019 21:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/sealed-traits-in-scala/</guid>
+      <description>A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
+In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
+Taking a little step back, What exactly is a trait?
+Traits in Scala Traits in scala are similar to interfaces in java.</description>
+    </item>
+    
+  </channel>
+</rss>

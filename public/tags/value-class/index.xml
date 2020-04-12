@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>value-class on Learning Publicly</title>
+    <link>https://fares.codes/tags/value-class/</link>
+    <description>Recent content in value-class on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 04 Oct 2019 20:55:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/value-class/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Value Classes in Scala</title>
+      <link>https://fares.codes/posts/value-classes-in-scala/</link>
+      <pubDate>Fri, 04 Oct 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/value-classes-in-scala/</guid>
+      <description>Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&amp;#34;Danny&amp;#34;) val client2 = Client(2, &amp;#34;Emily&amp;#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:</description>
+    </item>
+    
+  </channel>
+</rss>

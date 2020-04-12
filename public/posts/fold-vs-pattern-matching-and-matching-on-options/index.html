@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this example, we patten match on the Option value." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/" />
+
+
+<title>
+    
+    Fold vs Pattern Matching and Matching on Options :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Fold vs Pattern Matching and Matching on Options">
+<meta itemprop="description" content="The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, we patten match on the Option value.">
+<meta itemprop="datePublished" content="2019-09-01T10:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-09-01T10:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="485">
+
+
+
+<meta itemprop="keywords" content="scala,pattern matching,fold," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Fold vs Pattern Matching and Matching on Options"/>
+<meta name="twitter:description" content="The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, we patten match on the Option value."/>
+
+
+
+
+<meta property="article:published_time" content="2019-09-01 10:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/">Fold vs Pattern Matching and Matching on Options</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna <a href="https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s">https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s</a></p>
+<hr>
+<p>Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> foo<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span> <span style="color:#66d9ef">=&gt;</span> bar
+<span style="color:#f92672">}</span>
+</code></pre></div><p>In this example, we patten match on the Option value. if it is defined, we call the function foo on the value inside the Some, otherwise we call bar.</p>
+<p>and this is technically correct, however: the scala doc states that:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The most idiomatic way to use an Option instance is to treat it as a collection or monad and use map,flatMap, filter, or foreach
+</code></pre></div><p>and that:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">A less-idiomatic way to use Option values is via pattern matching:
+</code></pre></div><p>with this in mind; the above can be re-written as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span> value<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>foo<span style="color:#f92672">).</span>getOrElse<span style="color:#f92672">(</span>bar<span style="color:#f92672">)</span>
+</code></pre></div><p>another, more readable way would be using the <code>fold</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>fold<span style="color:#f92672">(</span>bar<span style="color:#f92672">)(</span>foo<span style="color:#f92672">)</span>
+</code></pre></div><p><code>fold</code> has the following definition and impl:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#75715e">/** Returns the result of applying $f to this $option&#39;s
+</span><span style="color:#75715e">   *  value if the $option is nonempty.  Otherwise, evaluates
+</span><span style="color:#75715e">   *  expression `ifEmpty`.
+</span><span style="color:#75715e">   *
+</span><span style="color:#75715e">   *  @note This is equivalent to `$option map f getOrElse ifEmpty`.
+</span><span style="color:#75715e">   *
+</span><span style="color:#75715e">   *  @param  ifEmpty the expression to evaluate if empty.
+</span><span style="color:#75715e">   *  @param  f       the function to apply if nonempty.
+</span><span style="color:#75715e">   */</span>
+  <span style="color:#a6e22e">@inline</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">def</span> fold<span style="color:#f92672">[</span><span style="color:#66d9ef">B</span><span style="color:#f92672">](</span>ifEmpty<span style="color:#66d9ef">:</span> <span style="color:#f92672">=&gt;</span> B<span style="color:#f92672">)(</span>f<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> B<span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span> <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">)</span> ifEmpty <span style="color:#66d9ef">else</span> f<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span>get<span style="color:#f92672">)</span>
+</code></pre></div><p>In other words, the value on the left (<code>bar</code> in our case) will be applied if <code>value</code> is <code>None</code>, otherwise if it is <code>Some</code>, the function of the right (<code>foo</code> in our case) will be invoked on the value inside the Option.</p>
+<h2 id="is-there-an-even-better-way-to-do-things">Is there an even better way to do things</h2>
+<p>I wont go into the details, but <code>Marconi Lanna</code> does in his video or his article <a href="https://www.originate.com/thinking/stories/idiomatic-scala-your-options-do-not-match/">https://www.originate.com/thinking/stories/idiomatic-scala-your-options-do-not-match/</a>, but here are a few examples of code that can be better written. The below examples are taken/inspired by the video of <code>Marconi Lanna</code>.</p>
+<p>This is a silly example and uncommon, but:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>something<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span><span style="color:#f92672">){</span>
+ <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>which can easily be re-written as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">return</span> something
+</code></pre></div><h3 id="pattern-matching-on-boolean">Pattern Matching on boolean</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">condition <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Okay&#34;</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Not Okay&#34;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>can be re-written as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>condition<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;Okay&#34;</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;Not Okay&#34;</span>
+</code></pre></div><h3 id="checking-if-an-option-is-defined">Checking if an Option is Defined</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">)</span>    <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span>       <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">false</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>can simply be re-written as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>isDefined
+<span style="color:#75715e">//or its alias .nonEmpty (as of scala 2.10)
+</span></code></pre></div><p>To check the inverse, you can use: <code>.isEmpty</code></p>
+<h3 id="filtering-values">Filtering Values</h3>
+<p>What is we wanted to filter on an option?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">// given predicate p
+</span><span style="color:#75715e"></span>value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span><span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>p<span style="color:#f92672">(</span>a<span style="color:#f92672">))</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">None</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span>   <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">None</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>can be simplified by calling:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>filter<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span>
+<span style="color:#75715e">// Note, Find also works in the same manner.
+</span></code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/scala">scala</a></span><span class="tag"><a href="https://fares.codes/tags/pattern-matching">pattern matching</a></span><span class="tag"><a href="https://fares.codes/tags/fold">fold</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>485 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-09-01 12:00 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Interactive Rebase for a Cleaner Git Commit History</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/passing-the-databricks-apache-spark-certification/">
+                                <span class="button__text">Passing the DataBricks Apache Spark Certification</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

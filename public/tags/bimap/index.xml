@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bimap on Learning Publicly</title>
+    <link>https://fares.codes/tags/bimap/</link>
+    <description>Recent content in bimap on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Feb 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/bimap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cats Bifunctor</title>
+      <link>https://fares.codes/posts/cats-bifunctor/</link>
+      <pubDate>Sun, 09 Feb 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-bifunctor/</guid>
+      <description>The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
+In cats and in some cases scala, types like Either, Validated, Option&amp;hellip; are right biased. which means that when we call .map on them, the function applied in the map is only applied on the case of a right.
+Here are some examples:
+val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nulls on Learning Publicly</title>
+    <link>https://fares.codes/tags/nulls/</link>
+    <description>Recent content in nulls on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 19 Jan 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/nulls/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spark Odd Behavior with Nulls</title>
+      <link>https://fares.codes/posts/spark-odd-behavior-with-nulls/</link>
+      <pubDate>Sun, 19 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/spark-odd-behavior-with-nulls/</guid>
+      <description>Once again, I will put a 5 hour flight into good use to detail an interesting/odd behavior encountered with spark while dealing with nulls.
+Any basic spark tutorial will tell you that there are a couple ways to create dataframes.
+Some of which are:
+  Transforming existing dataframes.
+  Reading a file.
+  Parallelizing over a collection.
+  The first two will not be in the scope of this article.</description>
+    </item>
+    
+  </channel>
+</rss>

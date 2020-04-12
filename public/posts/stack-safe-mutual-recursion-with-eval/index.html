@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="The first time I heard someone say: &amp;ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&amp;rdquo; I figured I&amp;rsquo;d found the ONE thing I wouldn&amp;rsquo;t be able to write about, on the count of how complex it sounded.
+To start with, mutual recursion is not a topic I&amp;rsquo;m comfortable with, let alone Stack Safety&amp;hellip;
+But with some time and a small exercise, the idea is getting clearer in my head." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/" />
+
+
+<title>
+    
+    Stack Safe Mutual Recursion with Eval :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Stack Safe Mutual Recursion with Eval">
+<meta itemprop="description" content="The first time I heard someone say: &ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&rdquo; I figured I&rsquo;d found the ONE thing I wouldn&rsquo;t be able to write about, on the count of how complex it sounded.
+To start with, mutual recursion is not a topic I&rsquo;m comfortable with, let alone Stack Safety&hellip;
+But with some time and a small exercise, the idea is getting clearer in my head.">
+<meta itemprop="datePublished" content="2020-01-15T10:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-15T10:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1683">
+
+
+
+<meta itemprop="keywords" content="stack safe,eval,cats,mutual recursion," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Stack Safe Mutual Recursion with Eval"/>
+<meta name="twitter:description" content="The first time I heard someone say: &ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&rdquo; I figured I&rsquo;d found the ONE thing I wouldn&rsquo;t be able to write about, on the count of how complex it sounded.
+To start with, mutual recursion is not a topic I&rsquo;m comfortable with, let alone Stack Safety&hellip;
+But with some time and a small exercise, the idea is getting clearer in my head."/>
+
+
+
+
+<meta property="article:published_time" content="2020-01-15 10:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>8 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/">Stack Safe Mutual Recursion with Eval</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>The first time I heard someone say: &ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&rdquo; I figured I&rsquo;d found the ONE thing I wouldn&rsquo;t be able to write about, on the count of how complex it sounded.</p>
+<p>To start with, mutual recursion is not a topic I&rsquo;m comfortable with, let alone Stack Safety&hellip;</p>
+<p>But with some time and a small exercise, the idea is getting clearer in my head. So Imma take advantage of the 5 hour flight I&rsquo;m currently on to concretize the information in my head through this article 😛</p>
+<p>From the cats documentation: <code>Eval is a data type for controlling synchronous evaluation. Its implementation is designed to provide stack-safety at all times using a technique called trampolining.</code></p>
+<p>Alright so we just added more words to explain 🤦‍♂️</p>
+<p><code>Mutual Recursion</code>: Function A calling function B who in turn will call function A that will once again call function B till the end of times&hellip; Or until a certain condition is met or value is reached.</p>
+<p><code>Trampolining</code>: trampolining is replacing recursive function calls with objects representing these calls. This way the recursive computation is built up in the heap instead of the stack, and it is possible to represent much deeper recursive calls just because of the bigger size of the heap.</p>
+<p>There are 3 functions in Eval we will look into but first a quick recap on 2 notions:</p>
+<ol>
+<li>
+<p><code>Lazy Evaluation</code>: Lazy evaluations refers to an expression being evaluated the first time it is used instead of the first time it is defined. The opposite is called eager evaluation. in Scala: <code>lazy val</code> is lazy (obviously&hellip;) and <code>val</code> is eager.</p>
+</li>
+<li>
+<p><code>Memoization</code>: Refers to the “memorization“ of the evaluated value. If a value is used twice, will it be evaluated twice or will it be evaluated once and its value memorized? In scala, <code>def</code> is not memoized, every time we call the function, it will be evaluated. In contrast, <code>val</code> is memoized. We only define a value once and then use it as many times as we&rsquo;d like without having to recompute the value every single time.</p>
+</li>
+</ol>
+<h2 id="evaluation-strategies">Evaluation Strategies</h2>
+<h3 id="eval-now">Eval Now</h3>
+<p>Eval.now is an eager computation of the value. and its value is memoized.</p>
+<p>From the cats documentation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">val</span> eager <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>now <span style="color:#f92672">{</span>
+  println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// Running expensive calculation...
+</span><span style="color:#75715e">// eager: cats.Eval[Int] = Now(7)
+</span><span style="color:#75715e"></span>
+eager<span style="color:#f92672">.</span>value
+<span style="color:#75715e">// res0: Int = 7
+</span></code></pre></div><h3 id="eval-later">Eval Later</h3>
+<p>Eval.later is a lazy evaluation. The value is only evaluated once we call <code>.value</code> on the Later type.
+Keep in mind that the result of the Later is memoized, so it is lazily evaluated but only evaluated once. (Think of lazy val)</p>
+<p>From the cats documentation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">val</span> lazyEval <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>later <span style="color:#f92672">{</span>
+  println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// lazyEval: cats.Eval[Int] = cats.Later@6c2b03e9
+</span><span style="color:#75715e"></span>
+lazyEval<span style="color:#f92672">.</span>value
+<span style="color:#75715e">// Running expensive calculation...
+</span><span style="color:#75715e">// res1: Int = 7
+</span><span style="color:#75715e"></span>
+lazyEval<span style="color:#f92672">.</span>value
+<span style="color:#75715e">// res2: Int = 7
+</span><span style="color:#75715e"></span>
+</code></pre></div><h3 id="eval-always">Eval Always</h3>
+<p>Eval.always is the equivalent of a def in scala. In other words, it is lazy and its value is not memoized.</p>
+<p>From the cats documentation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">val</span> always <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>always <span style="color:#f92672">{</span>
+  println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// always: cats.Eval[Int] = cats.Always@6a9ffee8
+</span><span style="color:#75715e"></span>
+always<span style="color:#f92672">.</span>value
+<span style="color:#75715e">// Running expensive calculation...
+</span><span style="color:#75715e">// res3: Int = 7
+</span><span style="color:#75715e"></span>
+always<span style="color:#f92672">.</span>value
+<span style="color:#75715e">// Running expensive calculation...
+</span><span style="color:#75715e">// res4: Int = 7
+</span><span style="color:#75715e"></span>
+</code></pre></div><h2 id="so-when-do-we-use-each-strategy">So When Do We Use Each Strategy</h2>
+<ul>
+<li>Eval.now should be used when the value to be used in the Now is already in hand or if its computation is pure and fast.</li>
+</ul>
+<p>Example, assume we are delving into a spark Json object to find the Simple Values.</p>
+<p>Keep in mind that a json object can be a Struct containing field names and other Json Objects, an Array of Json Objects or simply a Json Value (denoted JValue).</p>
+<p>During a Lazy recursion over that object, if we reach a JValue (an object where the value is already in hand) we can call the Now.
+In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
+<p>As a rule of thumb, when there is no computation required, use the <code>Now</code></p>
+<ul>
+<li>
+<p>Eval.later will evaluate the computation and cache the value.</p>
+</li>
+<li>
+<p>Eval.always will evaluate the computation every time value is required. It should only be used when we need laziness without caching. Otherwise use Later.</p>
+</li>
+</ul>
+<h2 id="important-note-about-stack-safety">Important note about stack safety</h2>
+<p>When we chain multiple computations using <code>flatMap</code>, we are still stack safe as long as we don&rsquo;t nest calls to <code>.value</code> inside the Eval otherwise we will no longer be stack safe.</p>
+<h2 id="practical-example">Practical Example</h2>
+<p>So how does any of this help us? whats cool is that we can chain computations each returning an Eval and leave the actual evaluation till the end.</p>
+<p>I mentioned Json Objects above&hellip; so why not use that as an example:</p>
+<p>A Json Object can be:</p>
+<ul>
+<li>
+<p>JValue (JString, JInt, JDouble&hellip;)</p>
+</li>
+<li>
+<p>JArray (An Array of JObjects)</p>
+</li>
+<li>
+<p>JStruct (Containing a List [(FieldName, JObject)] so a list of tuple: FieldNames and the associated JObject)</p>
+</li>
+</ul>
+<h3 id="requirement">Requirement</h3>
+<p>Assume that for some unknown and obscene reason, we were asked to traverse a Json Object and increment all the Integers by 1 and transform all the strings to: &ldquo;String: &quot; + the actual String content.</p>
+<p>I know its weird but humor me 🤡</p>
+<p>Our Domain would look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">JObject</span>
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">JValue</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JObject</span>
+<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JValue</span>
+<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JValue</span>
+
+<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JObject</span>
+
+<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>fields<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JObject</span>
+
+</code></pre></div><p>One easy way to achieve the requirement is to do a simple recursion over the initial JObject value</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+  <span style="color:#66d9ef">def</span> transform<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+    value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>v <span style="color:#66d9ef">=&gt;</span> transform<span style="color:#f92672">(</span>v<span style="color:#f92672">)))</span>
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>fields<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span>
+        <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>fields<span style="color:#f92672">.</span>map <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">case</span> <span style="color:#f92672">(</span>str<span style="color:#f92672">,</span> jObject<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">(</span>str<span style="color:#f92672">,</span> transform<span style="color:#f92672">(</span>jObject<span style="color:#f92672">))</span>
+        <span style="color:#f92672">})</span>
+      <span style="color:#66d9ef">case</span> value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JValue</span> <span style="color:#f92672">=&gt;</span>
+        value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+          <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span>value<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;String: &#34;</span> <span style="color:#f92672">+</span> value<span style="color:#f92672">)</span>
+          <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span>value<span style="color:#f92672">)</span>    <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span>value <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+
+</code></pre></div><p>Took about 5 min to write and simple to read&hellip;</p>
+<p>But the issue here is that I do not have control over the initial Json Object ill be traversing. Each call to transform will create a new stack frame and for deeply nested JObjects, we will end up with a stack overflow problem.</p>
+<p>The more proper way of doing this is using Eval.</p>
+<p>From what we&rsquo;ve discussed earlier, the Eval.now should be used when we have reached a expected value.</p>
+<p>for the rest we will continue going one level deeper searching for the JValues</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+  <span style="color:#66d9ef">def</span> updateJObject<span style="color:#f92672">(</span>jo<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">def</span> iterate<span style="color:#f92672">(</span>elems<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eval</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+      <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>always<span style="color:#f92672">(</span>elems<span style="color:#f92672">).</span>flatMap <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">case</span> x <span style="color:#f92672">+:</span> xs <span style="color:#66d9ef">=&gt;</span> deepMap<span style="color:#f92672">(</span>x<span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span>x <span style="color:#66d9ef">=&gt;</span> iterate<span style="color:#f92672">(</span>xs<span style="color:#f92672">).</span>map<span style="color:#f92672">(</span>l <span style="color:#66d9ef">=&gt;</span> x <span style="color:#f92672">+:</span> l<span style="color:#f92672">))</span>
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Nil</span>     <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>now<span style="color:#f92672">(</span><span style="color:#a6e22e">Nil</span><span style="color:#f92672">)</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">def</span> deepMap<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eval</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+      <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>always<span style="color:#f92672">(</span>value<span style="color:#f92672">).</span>flatMap <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">case</span> value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JValue</span> <span style="color:#f92672">=&gt;</span>
+          value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span>value<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>now<span style="color:#f92672">(</span><span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;String: &#34;</span> <span style="color:#f92672">+</span> value<span style="color:#f92672">))</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span>value<span style="color:#f92672">)</span>    <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>now<span style="color:#f92672">(</span><span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span>value <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">))</span>
+          <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> iterate<span style="color:#f92672">(</span>elems<span style="color:#f92672">).</span>map<span style="color:#f92672">(</span><span style="color:#a6e22e">JArray</span><span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">case</span> jstruct<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JStruct</span> <span style="color:#f92672">=&gt;</span>
+          <span style="color:#66d9ef">val</span> <span style="color:#f92672">(</span>fieldNames<span style="color:#f92672">,</span> jobject<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> jstruct<span style="color:#f92672">.</span>fields<span style="color:#f92672">.</span>unzip
+          iterate<span style="color:#f92672">(</span>jobject<span style="color:#f92672">).</span>map<span style="color:#f92672">(</span>ob <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>fieldNames<span style="color:#f92672">.</span>zip<span style="color:#f92672">(</span>ob<span style="color:#f92672">)))</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    deepMap<span style="color:#f92672">(</span>jo<span style="color:#f92672">).</span>value
+  <span style="color:#f92672">}</span>
+
+</code></pre></div><h3 id="code-breakdown">Code Breakdown</h3>
+<p>From a high level point of view, we notice there are two functions now&hellip; instead of one.</p>
+<p>and each functions calls the other function and so on and so forth.</p>
+<p>I&rsquo;ve found it helpful when dealing with recursion to start with the stopping criteria.</p>
+<p>In this case, we can look at the places where we call the Eval.now, and thats in the deepMap whenever we find a JValue. This is expected given the task at hand. notice that we could have abstracted the transformations applied on the Int or the String to another function (and it would have been better and more readable)&hellip;</p>
+<p>Functionally speaking, we are given a JObject and we would like to traverse it and all its sub structures in order to find the JString or the JInt.</p>
+<p>This is where the case of JArray and of JStruct come into play.</p>
+<p>In case we have an array, we would like to go one level deeper into every element of said array, and apply the function on that element.</p>
+<p>Calling <code>deepMap</code> does not help because of the accepted params. deepMap takes a JObject, but we need to pass that function a List of JObjects.</p>
+<p>Additionally, we cannot map over every element of the Array and apply deepMap on each element, because we need to conserve the initial structure: an Array of JObjects in order to return an <code>Eval[JArray[JObject]]</code>. Applying the map on every element would have resulted in a:
+<code>Eval[JArray[Eval[JObject]]]</code> which would no longer be compatible with the main return type of <code>Eval[JObject]</code></p>
+<p>This is why we had to create another function <code>iterate</code>.</p>
+<p>Iterate takes a sequence of JObects and decomposes it into head and tail. It applies the <code>deepMap</code> function to the head, and then calls itself one more tail but this time only passing the tail as a param. Eventually, we would have applied deepMap on every element of the Seq&hellip; we append all the elements together and return an <code>Eval[Seq[JObject]]</code></p>
+<p>In the case of JArray, the return of <code>iterate</code> is inserted into the Object JArray making the final return type <code>Eval[JArray[JObject]]</code></p>
+<p>As for the JStruct, the idea is pretty similar to that of the JArray, but we had to add a small manipulation in order to be able to reconstruct the Struct using the FieldNames so we unzipped the data and re-zipped it after applying the transformations. Note that the map on an eval will retrieve the entire JObject inside the Eval, not every element of the JObject.</p>
+<p>And this was how <code>Eval</code> can be used to achieve stack safe mutual recursion.</p>
+<h2 id="to-test-this-out">To Test This Out</h2>
+<p>Run the below example to test the functions above:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+  <span style="color:#66d9ef">val</span> identity<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>
+    <span style="color:#a6e22e">List</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)](</span>
+      <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)),</span>
+      <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Age&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">JInt</span><span style="color:#f92672">(</span><span style="color:#ae81ff">23</span><span style="color:#f92672">)),</span>
+      <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Profession&#34;</span><span style="color:#f92672">,</span>
+       <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span><span style="color:#a6e22e">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">](</span><span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Google Cloud Professional Data Engineer&#34;</span><span style="color:#f92672">),</span>
+                            <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Apache Spark Developer&#34;</span><span style="color:#f92672">))))</span>
+    <span style="color:#f92672">))</span>
+
+  println<span style="color:#f92672">(</span>updateJObject<span style="color:#f92672">(</span>identity<span style="color:#f92672">))</span>
+
+  <span style="color:#75715e">// JStruct(List((Name,JString(String: Fares)), (Age,JInt(24)), (Profession,JArray(List(JString(String: Google Cloud Professional Data Engineer), JString(String: Apache Spark Developer))))))
+</span><span style="color:#75715e"></span>
+</code></pre></div><h2 id="some-metrics">Some Metrics</h2>
+<p>Erik Osheim (@non) ran a benchmark to compare <code>Eval</code>, <code>TailRec library</code> and <code>Trampoline technic</code>. Here are the results (Sep. 2015):</p>
+<table>
+<thead>
+<tr>
+<th align="center">Benchmark</th>
+<th align="center">Mode</th>
+<th align="center">Cnt</th>
+<th align="center">Score</th>
+<th align="center">Error</th>
+<th align="center">Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">TrampolineBench.eval</td>
+<td align="center">thrpt</td>
+<td align="center">3</td>
+<td align="center">23049.351</td>
+<td align="center">± 3891.576</td>
+<td align="center">ops/s</td>
+</tr>
+<tr>
+<td align="center">TrampolineBench.stdlib</td>
+<td align="center">thrpt</td>
+<td align="center">3</td>
+<td align="center">11827.608</td>
+<td align="center">± 1919.654</td>
+<td align="center">ops/s</td>
+</tr>
+<tr>
+<td align="center">TrampolineBench.trampoline</td>
+<td align="center">thrpt</td>
+<td align="center">3</td>
+<td align="center">5743.017</td>
+<td align="center">±  197.309</td>
+<td align="center">ops/s</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <a href="https://github.com/non/cats/tree/topic/eval-call-bench">https://github.com/non/cats/tree/topic/eval-call-bench</a> and <a href="https://gitter.im/typelevel/cats?at=55f07c1ce30ef74f74f95d3a">https://gitter.im/typelevel/cats?at=55f07c1ce30ef74f74f95d3a</a></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/stack-safe">stack safe</a></span><span class="tag"><a href="https://fares.codes/tags/eval">eval</a></span><span class="tag"><a href="https://fares.codes/tags/cats">cats</a></span><span class="tag"><a href="https://fares.codes/tags/mutual-recursion">mutual recursion</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1683 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-15 11:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/spark-odd-behavior-with-nulls/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Spark Odd Behavior with Nulls</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/crash-course-in-machine-learning/">
+                                <span class="button__text">Crash Course in Machine Learning</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

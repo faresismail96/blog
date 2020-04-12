@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kafka on Learning Publicly</title>
+    <link>https://fares.codes/tags/kafka/</link>
+    <description>Recent content in kafka on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 19 Mar 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kafka HealthChecks</title>
+      <link>https://fares.codes/posts/kafka-healthchecks/</link>
+      <pubDate>Thu, 19 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/kafka-healthchecks/</guid>
+      <description>Ive been recently asked to write healthchecks for long running services that depend on kafka.
+This article will not go into the need for healthchecks nor a &amp;ldquo;let it crash&amp;rdquo; design. Instead I&amp;rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks.</description>
+    </item>
+    
+  </channel>
+</rss>

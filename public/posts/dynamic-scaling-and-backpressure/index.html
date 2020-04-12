@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="Taking a little break from Scala to review some interesting features of spark streaming.
+This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
+An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
+Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/dynamic-scaling-and-backpressure/" />
+
+
+<title>
+    
+    Dynamic Scaling and Backpressure :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Dynamic Scaling and Backpressure">
+<meta itemprop="description" content="Taking a little break from Scala to review some interesting features of spark streaming.
+This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
+An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
+Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.">
+<meta itemprop="datePublished" content="2019-08-10T09:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-10T09:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1163">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dynamic Scaling and Backpressure"/>
+<meta name="twitter:description" content="Taking a little break from Scala to review some interesting features of spark streaming.
+This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
+An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
+Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload."/>
+
+
+
+
+<meta property="article:published_time" content="2019-08-10 09:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/dynamic-scaling-and-backpressure/">Dynamic Scaling and Backpressure</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>Taking a little break from Scala to review some interesting features of spark streaming.</p>
+<p>This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.</p>
+<p>An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.</p>
+<h2 id="dynamic-allocation-in-spark-streaming">Dynamic Allocation in Spark Streaming</h2>
+<p>Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.</p>
+<p>Spark streaming can dynamically scale up or down the number of executors based on a few configurations.</p>
+<ol>
+<li>
+<p><code>spark.streaming.dynamicAllocation.enabled</code></p>
+<pre><code>This enables dynamic allocation with spark streaming. needs to be true.
+</code></pre>
+</li>
+<li>
+<p><code>spark.dynamicAllocation.initialExecutors</code></p>
+<pre><code>Initial number of executors to start with.
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.dynamicAllocation.scalingUpRatio</code> and <code>spark.streaming.dynamicAllocation.scalingDownRatio</code></p>
+<pre><code>The two configs specify when we would scale up or down the
+number of executors based on processing time and interval time.
+    
+Default values are set to 0.9 and 0.3
+</code></pre>
+</li>
+</ol>
+<h2 id="back-pressure">Back Pressure</h2>
+<p>Back Pressure is spark streamings ability to adjust the ingestion rate dynamically so that when a system is receiving data at a higher rate than it can process, we wouldnt have tasks queue up and slow down the stream.</p>
+<p>The ingestion rate is adjusted dynamically based on previous microbatch processing time.</p>
+<p>What about the initial ingestion rate? well this depends on the version of spark you are running.</p>
+<ul>
+<li>
+<p>Prior to <strong>Spark 2.4</strong>: there was a bug that caused <code>spark.streaming.kafka.maxRatePerPartition</code> to be used as the initial rate AND the maximum rate per partition.</p>
+</li>
+<li>
+<p>As of <strong>Spark 2.4</strong>: We can use <code>spark.streaming.backpressure.initialRate</code> for the initial rate of ingestion. as maximum rate per partition can be set using: <code>spark.streaming.kafka.maxRatePerPartition</code></p>
+</li>
+</ul>
+<p>If the input events is too high and spark streaming cannot process it in time, after the first batch is completed, spark will notice that the batch processing time is longer than the interval time and that is when backpressure will kick in to reduce the input rate.</p>
+<p>A one sentence summary of backpressure (and an interesting article):</p>
+<pre><code>Backpressure shifts the trouble of buffering input records to the
+sender so it keeps records until they could be processed
+by a streaming application.
+</code></pre>
+<hr>
+<h2 id="what-about-the-practical-side-of-things">What about the practical side of things</h2>
+<p>This is where things might get a bit more complicated or hazy.</p>
+<p>The following is a summary of what I learned recently from various sources online and the spark source code. Surprisingly the spark streaming documentation can be rather thin on the subject of dynamic allocation and backpressure.</p>
+<h2 id="spark-streaming-backpressure">Spark Streaming Backpressure</h2>
+<ul>
+<li>
+<p><code>spark.streaming.backpressure.enabled</code>:</p>
+<pre><code>  Enables backpressure in spark streaming
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.kafka.maxRatePerPartition</code>:</p>
+<pre><code>  This is the maximum rate per partition to read kafka records.
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.kafka.minRatePerPartition</code>:</p>
+<pre><code>  Similar to max rate per partition but this sets the min...
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.backpressure.initialRate</code>:</p>
+<pre><code>  The initial rate to start with. this only works 
+  on spark versions 2.4 and above. 
+  Otherwise, spark streaming will use the 
+  kafka max rate per partition as the initial rate.
+</code></pre>
+</li>
+</ul>
+<h2 id="spark-streaming-dynamic-allocation">Spark Streaming Dynamic Allocation</h2>
+<ul>
+<li>
+<p><code>spark.streaming.dynamicAllocation.enabled</code>:</p>
+<pre><code>  Enables DA for spark streaming
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.dynamicAllocation.scalingUpRatio</code>:</p>
+<pre><code>  Scales up when the ratio between the ProcessingTime and the 
+  BatchTime is above x value.
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.dynamicAllocation.scalingDownRatio</code>:</p>
+<pre><code>  Similar as above but for scaling down.
+</code></pre>
+</li>
+<li>
+<p><code>streaming.dynamicAllocation.scalingInterval</code>:</p>
+<pre><code>  Interval in seconds to apply scaling.
+</code></pre>
+</li>
+<li>
+<p><code>spark.streaming.dynamicAllocation.maxExecutors</code>:</p>
+<pre><code>  The name of this conf is very misleading and it took me a 
+  while to figure it out...
+
+  The name might imply that this represents the maximum number 
+  of executors we can scale up to... but it is not.
+  The maximum number of executors we can reach is the `spark.cores.max` 
+  divided by the `spark.executor.core` setting.
+    
+  This configuration, is the number of executors spark streaming 
+  will request from the cluster manager (mesos, yarn...)
+  which is why we can see the following in the logs:
+            
+          &quot;Capping the total amount of executors to X&quot;
+          &quot;Requested total X executors&quot;
+    
+  But dont take my word for it... let us quickly check the spark 
+  source code for verification:
+</code></pre>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">/** Request the specified number of
+</span><span style="color:#75715e">executors over the currently active one */</span>
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> requestExecutors<span style="color:#f92672">(</span>numNewExecutors<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+       require<span style="color:#f92672">(</span>numNewExecutors <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+       <span style="color:#66d9ef">val</span> allExecIds <span style="color:#66d9ef">=</span> client<span style="color:#f92672">.</span>getExecutorIds<span style="color:#f92672">()</span>
+       logDebug<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Executors (</span><span style="color:#e6db74">${</span>allExecIds<span style="color:#f92672">.</span>size<span style="color:#e6db74">}</span><span style="color:#e6db74">) = </span><span style="color:#e6db74">${</span>allExecIds<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+       <span style="color:#66d9ef">val</span> targetTotalExecutors <span style="color:#66d9ef">=</span>
+       math<span style="color:#f92672">.</span>max<span style="color:#f92672">(</span>
+       math<span style="color:#f92672">.</span>min<span style="color:#f92672">(</span>maxNumExecutors<span style="color:#f92672">,</span> allExecIds<span style="color:#f92672">.</span>size <span style="color:#f92672">+</span> numNewExecutors<span style="color:#f92672">),</span>
+       minNumExecutors<span style="color:#f92672">)</span>
+       client<span style="color:#f92672">.</span>requestTotalExecutors<span style="color:#f92672">(</span>targetTotalExecutors<span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Map</span><span style="color:#f92672">.</span>empty<span style="color:#f92672">)</span>
+       logInfo<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Requested total </span><span style="color:#e6db74">$targetTotalExecutors</span><span style="color:#e6db74"> executors&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> <span style="color:#a6e22e">MAX_EXECUTORS_KEY</span> <span style="color:#66d9ef">=</span>
+ <span style="color:#e6db74">&#34;spark.streaming.dynamicAllocation.maxExecutors&#34;</span>
+
+<span style="color:#75715e">// AND
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> maxNumExecutors <span style="color:#66d9ef">=</span>
+conf<span style="color:#f92672">.</span>getInt<span style="color:#f92672">(</span><span style="color:#a6e22e">MAX_EXECUTORS_KEY</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Integer</span><span style="color:#f92672">.</span><span style="color:#a6e22e">MAX_VALUE</span><span style="color:#f92672">)</span>
+</code></pre></div><p>So what does this tell us?</p>
+<p>First an foremost, maxNumExecutors is the <code>spark.streaming.dynamicAllocation.maxExecutors</code>
+or by default it is the <code>Integer.MAX_VALUE</code>.</p>
+<p>alright&hellip; but what about the algorithm?
+it tells us:
+the targetTotalExecutors to request is the maximum number between: the minNumExecutors and the min of (maxNumExecutors, <code>allAvailableExec + math.max(math.round(ratio).toInt, 1)</code>)</p>
+<blockquote>
+<p>where allAvailableExec is the size of all the executorIds.
+newNumExecutors is the max between one and the rounded ratio.
+ratio is defined as</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> ratio <span style="color:#66d9ef">=</span> averageBatchProcTime<span style="color:#f92672">.</span>toDouble <span style="color:#f92672">/</span> batchDurationMs
+</code></pre></div><p>I get things might have gotten a bit confusing&hellip; but let us go back to what is important, configuring our cluster.</p>
+<p>in order to do so, we need to know based on what will our cluster scale up or scale down.</p>
+<p>there are two things to know:</p>
+<p><code>batch time</code>: this is a fixed amount in seconds. this represents the interval of time during which we will be processing data.
+from the spark structured streaming official doc:</p>
+<pre><code>    If the previous micro-batch completes within the interval,
+    then the engine will wait until the interval is over before
+    kicking off the next micro-batch.
+
+
+    If the previous micro-batch takes longer than the interval
+    to complete (i.e. if an interval boundary is missed), then the
+    next micro-batch will start as soon as the previous one completes
+    (i.e., it will not wait for the next interval boundary).
+
+
+    If no new data is available, then no micro-batch will be kicked off.
+</code></pre>
+<p>The first scenario implies idle time.</p>
+<p>The second scenario implies queued tasks.</p>
+<p><code>processing time</code>: the time it takes us to process the data. this can be less, equal or greater than batch time as seen in the example above.</p>
+<p>Let us look at some use cases:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Case</th>
+<th align="center">Processing Time</th>
+<th align="left">Batch Time</th>
+<th align="center">Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="center">2s</td>
+<td align="left">60s</td>
+<td align="center">0.033</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="center">10s</td>
+<td align="left">60s</td>
+<td align="center">0.166</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="center">20s</td>
+<td align="left">60s</td>
+<td align="center">0.333</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="center">30s</td>
+<td align="left">60s</td>
+<td align="center">0.5</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="center">45s</td>
+<td align="left">60s</td>
+<td align="center">0.75</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="center">60s</td>
+<td align="left">60s</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="center">80s</td>
+<td align="left">60s</td>
+<td align="center">1.33</td>
+</tr>
+</tbody>
+</table>
+<p>Now assume our <code>ScalingUp</code> ratio is 0.9 and <code>ScalingDown</code> ratio is 0.3</p>
+<p>what happens in each case?</p>
+<ol>
+<li>
+<p>Case 1 and 2: <strong>ratio &lt;= ScalingDown</strong> so spark will request to kill x executors. (x is calculated based on the maxExecutor or the algorithm shown above)</p>
+<pre><code>the reason behind this is because the processing time is 
+significantly smaller than the batch time, so there is a lot 
+of idle time and so we probably have more resources than we need.
+</code></pre>
+</li>
+<li>
+<p>Case 3, 4, 5: <strong>ratio is neither smaller than ScalingDown nor bigger than ScalingUp</strong>, so we do nothing.</p>
+</li>
+<li>
+<p>Case 6 and 7: <strong>ratio &gt;= ScalingUp</strong> so spark will request additional executors based on the algorithm mentioned above.</p>
+<pre><code>The reason behind this is because the processing time is 
+close to or bigger than the Batch time, so most likely 
+additional resources are needed.
+</code></pre>
+</li>
+</ol>
+<h2 id="some-additional-resources">Some additional resources</h2>
+<ul>
+<li>
+<p>Spark Source Code (more specifically: <code>ExecutorAllocationManager.scala</code>):</p>
+<p><a href="https://github.com/apache/spark/blob/branch-2.4/streaming/src/main/scala/org/apache/spark/streaming/scheduler/ExecutorAllocationManager.scala">https://github.com/apache/spark/blob/branch-2.4/streaming/src/main/scala/org/apache/spark/streaming/scheduler/ExecutorAllocationManager.scala</a></p>
+</li>
+<li>
+<p>Building Robust Scalable and Adaptive Applications on Spark Streaming talk during Spark Summit 2016</p>
+<p><a href="https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming">https://databricks.com/session/building-robust-scalable-and-adaptive-applications-on-spark-streaming</a></p>
+</li>
+<li>
+<p>Dynamic Allocation JIRA Design Document</p>
+<p><a href="https://issues.apache.org/jira/secure/attachment/12775710/dynamic-allocation-streaming-design.pdf">https://issues.apache.org/jira/secure/attachment/12775710/dynamic-allocation-streaming-design.pdf</a></p>
+</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1163 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-08-10 11:00 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/passing-the-databricks-apache-spark-certification/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Passing the DataBricks Apache Spark Certification</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/semigroupk-and-combinek/">
+                                <span class="button__text">SemigroupK and CombineK</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

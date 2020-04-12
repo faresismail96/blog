@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Learning Publicly</title>
+    <link>https://fares.codes/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 09 Dec 2019 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Crash Course in Machine Learning</title>
+      <link>https://fares.codes/posts/crash-course-in-machine-learning/</link>
+      <pubDate>Mon, 09 Dec 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/crash-course-in-machine-learning/</guid>
+      <description>I take article requests now&amp;hellip; 😛
+The following article will be a quick overview of classical machine learning and the different types and algorithms out there.
+Don&amp;rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.
+On a high level, we can think of a machine learning model as a black box.</description>
+    </item>
+    
+  </channel>
+</rss>

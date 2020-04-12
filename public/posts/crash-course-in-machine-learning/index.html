@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="I take article requests now&amp;hellip; 😛
+The following article will be a quick overview of classical machine learning and the different types and algorithms out there.
+Don&amp;rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.
+On a high level, we can think of a machine learning model as a black box." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/crash-course-in-machine-learning/" />
+
+
+<title>
+    
+    Crash Course in Machine Learning :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Crash Course in Machine Learning">
+<meta itemprop="description" content="I take article requests now&hellip; 😛
+The following article will be a quick overview of classical machine learning and the different types and algorithms out there.
+Don&rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.
+On a high level, we can think of a machine learning model as a black box.">
+<meta itemprop="datePublished" content="2019-12-09T10:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-09T10:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1279">
+
+
+
+<meta itemprop="keywords" content="Machine Learning,ML," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Crash Course in Machine Learning"/>
+<meta name="twitter:description" content="I take article requests now&hellip; 😛
+The following article will be a quick overview of classical machine learning and the different types and algorithms out there.
+Don&rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.
+On a high level, we can think of a machine learning model as a black box."/>
+
+
+
+
+<meta property="article:published_time" content="2019-12-09 10:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/crash-course-in-machine-learning/">Crash Course in Machine Learning</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>I take article requests now&hellip; 😛</p>
+<p>The following article will be a quick overview of classical machine learning and the different types and algorithms out there.</p>
+<p>Don&rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.</p>
+<p>On a high level, we can think of a machine learning model as a black box. One that will take in some input data, do something with that data and then spit out some output data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">                    +-------------------------+
+Input Data ------&gt;  | Machine Learning Model  | ------&gt; Output Data
+                    +-------------------------+
+
+</code></pre></div><p>This black box however needs to be trained. This is where the word <code>Learning</code> comes from.</p>
+<p>Similarly, on a very high level, Machine learning models can be broken down into two categories: <code>Supervised</code> and <code>Unsupervised</code>. Those categories relate to how this model will be trained.</p>
+<hr>
+<h2 id="supervised-learning">Supervised Learning</h2>
+<p>In supervised machine learning, We rely on a <code>training dataset</code> to teach the ML model how to make accurate future predictions. We say that we have a labeled dataset. That is a dataset containing both the input data (features) and for each input data, the corresponding output data (prediction).</p>
+<p>Supervised Learning looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+                    +-------------------------+
+Input Data  -----&gt;  |     Machine learning    | ------&gt; Machine Learning
+Output Data -----&gt;  |        Algorithm        |             Model
+                    +-------------------------+
+
+
+   Real             +-------------------------+            Real
+Input Data ------&gt;  | Machine Learning Model  | ------&gt; Output Data
+                    +-------------------------+
+
+</code></pre></div><p>Here&rsquo;s an example for a more concrete understanding.</p>
+<p>Assume this is out training data:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Age</th>
+<th align="center">Profession</th>
+<th align="center">Car</th>
+<th align="center">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Danny</td>
+<td align="center">36</td>
+<td align="center">HR Manager</td>
+<td align="center">Mercedes</td>
+<td align="center">126,000</td>
+</tr>
+<tr>
+<td align="center">Eric</td>
+<td align="center">25</td>
+<td align="center">Software Engineer</td>
+<td align="center">Toyota</td>
+<td align="center">45,000</td>
+</tr>
+<tr>
+<td align="center">Sarah</td>
+<td align="center">45</td>
+<td align="center">CEO</td>
+<td align="center">BMW</td>
+<td align="center">170,000</td>
+</tr>
+<tr>
+<td align="center">Emily</td>
+<td align="center">21</td>
+<td align="center">Art Major</td>
+<td align="center">N/A</td>
+<td align="center">10,000</td>
+</tr>
+</tbody>
+</table>
+<p>If I were to hide the last column and ask you to predict who has the highest salary&hellip; Intuitively you&rsquo;d say that that person is most likely in some sort of managerial position, is a bit older in age and drives a nice car&hellip; I&rsquo;m not saying its always the case (Kylie Jenner became the youngest billionaire ever at 21&hellip; 🤦‍♂️) ok pardon the digression&hellip; It&rsquo;s not always the case but it is the case in general&hellip;</p>
+<p>This is exactly what we&rsquo;ll be doing with our model. We will give it the input data called features, well give it a lot of data (10,000 to 100,000) and for each row of feature, well give the model the correct prediction (in this case the salary). We will then ask our model to learn what makes people have a high salary.</p>
+<p>Later on, we will use that trained model to make actual prediction for people whose salaries are truly unknown to us.</p>
+<p>But how can we trust our model and more importantly how can we trust its predictions&hellip; There are a lot of techniques to validate a trained model, but the simplest is this:</p>
+<p>Split the labeled data into two different sets. A training set that we will feed to the machine learning algorithm, and a testing set that we will use to validate the predictions of the models.
+Once the model is trained, we will hide the <code>Salary</code> Column of the testing set and we will ask the model to predict the salaries of the testing data. Then we will compare the results of the model with our actual results.</p>
+<hr>
+<p>There are two subcategories in <code>Supervised Learning</code>: <code>Classification</code> and <code>Regression</code>. Those depend on the nature of the value to be predicted.</p>
+<h3 id="classification">Classification</h3>
+<p>Like the name indicates, in classification, we class features into a specific category (also called classes). For example, if we&rsquo;re predicting if a certain credit card transaction is fraudulent or not, we&rsquo;d be training a classification model. More specifically, a two class classification model: A transaction can be <code>Fraudulent</code> or it can be <code>Non Fraudulent</code>.
+If We were predicting if an email is <code>Spam</code> or <code>Personal</code> or <code>Business</code> then we&rsquo;d also be training a classification model. But this time, it&rsquo;ll be a three class classification model, because an email can fall into one of three categories.</p>
+<h4 id="some-classification-algorithms">Some Classification Algorithms</h4>
+<ul>
+<li>
+<p>Support Vector Machines (SVM)</p>
+</li>
+<li>
+<p>Decision Trees</p>
+</li>
+<li>
+<p>Logistic Regression (despite its name 😝)</p>
+</li>
+<li>
+<p>K Nearest Neighbor (KNN)</p>
+</li>
+<li>
+<p>Naive Bayes Classifier</p>
+</li>
+</ul>
+<h3 id="regression">Regression</h3>
+<p>Unlike Classification, regression is where we try to predict a continuous value instead of a category.</p>
+<p>For example, out previous case with the predictions of salaries is a regression problem. We are not trying to classify people as rich or not, we are attempting to predict the numerical value representing their salaries. Another example can be the prediction of the cost of a house based on X criteria.</p>
+<h4 id="some-regression-algorithms">Some Regression Algorithms</h4>
+<p>The most well known and easy to understand algorithm is the <code>Linear Regression</code>. Its when we try to model the data to a specific trend line. Using the famous: <code>y= a.X +b</code></p>
+<p>Other algos include:</p>
+<ul>
+<li>
+<p>Non Linear Regression</p>
+</li>
+<li>
+<p>Ridge Regression</p>
+</li>
+<li>
+<p>Lasso Regression</p>
+</li>
+<li>
+<p>Elastic Regression</p>
+</li>
+</ul>
+<hr>
+<h2 id="unsupervised-learning">Unsupervised Learning</h2>
+<p>In unsupervised learning, the dataset is not labeled. The ML algorithm will attempt to find certain patterns or groups in the dataset.
+With unsupervised learning, we are also unsure of the expected outcome.</p>
+<p>So why is unsupervised learning useful? because sometimes, we simply don&rsquo;t really know what the correct output is. In other times, it can be too costly to label a specific dataset with 10,000 or 100,000 rows&hellip; Unsupervised learning is also very useful in anomaly detection, finding the outliers.</p>
+<p>Unsupervised learning can be grouped into 3 categories:</p>
+<ul>
+<li>
+<p>Clustering</p>
+</li>
+<li>
+<p>Association Rules</p>
+</li>
+<li>
+<p>Dimensionality Reduction</p>
+</li>
+</ul>
+<h3 id="clustering">Clustering</h3>
+<p>In Clustering models, we attempt to find groups of data points that are similar to one another.</p>
+<h4 id="some-clustering-algorithms">Some Clustering Algorithms</h4>
+<ul>
+<li>
+<p>K-Means Clustering</p>
+</li>
+<li>
+<p>K-NN Clustering</p>
+</li>
+<li>
+<p>Hierarchical Clustering</p>
+</li>
+</ul>
+<h3 id="association-rules">Association Rules</h3>
+<p>I bet you&rsquo;ve done one of the following: bought a item off Amazon, watched a YouTube video, binged watched a series on Netflix, listened to a playlist on Spotify&hellip;</p>
+<p>They all have one thing in common, they all recommend us even more products.</p>
+<p>How do they do it?</p>
+<p>Humans are inherently predictable. If 5 people watched the same 10 series on Netflix, odds are they have similar taste in series&hellip; So if one of those 5 people started watching a new series, we could recommend it to others as well.</p>
+<p>Similarly for supermarkets and Amazon&hellip; Someone who recently bought a printer will most likely also buy some paper to go with it.</p>
+<p>Those are called association rules. We associate product A with product B because we assume that if a person buys product A, he is most likely to also buy product B. Keep in mind that it might not work the other way around: If I recently bought a printer, ill most likely buy paper. But if I recently bought some paper, I might not need a printer to go with them.</p>
+<p>From a marketing perspective, association rules are interesting because they&rsquo;re a way to increase sales.</p>
+<h4 id="some-association-rules-algorithms">Some Association Rules Algorithms</h4>
+<ul>
+<li>
+<p>Apriori Algorithm</p>
+</li>
+<li>
+<p>FP Growth Algorithm</p>
+</li>
+</ul>
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+<p>From a mathematical perspective, dimensionality reduction is the process of reducing the number of random variables under consideration by obtaining a set of principal variables.</p>
+<p>If this doesn&rsquo;t make any sense, its ok&hellip; here&rsquo;s a more concrete example:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Age</th>
+<th align="center">Profession</th>
+<th align="center">Car</th>
+<th align="center">Salary in $</th>
+<th align="center">Salary in €</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Danny</td>
+<td align="center">36</td>
+<td align="center">HR Manager</td>
+<td align="center">Mercedes</td>
+<td align="center">126,000</td>
+<td align="center">113309.36</td>
+</tr>
+<tr>
+<td align="center">Eric</td>
+<td align="center">25</td>
+<td align="center">Software Engineer</td>
+<td align="center">Toyota</td>
+<td align="center">45,000</td>
+<td align="center">40467.63</td>
+</tr>
+<tr>
+<td align="center">Sarah</td>
+<td align="center">45</td>
+<td align="center">CEO</td>
+<td align="center">BMW</td>
+<td align="center">170,000</td>
+<td align="center">152877.70</td>
+</tr>
+<tr>
+<td align="center">Emily</td>
+<td align="center">21</td>
+<td align="center">Art Major</td>
+<td align="center">N/A</td>
+<td align="center">10,000</td>
+<td align="center">8992.81</td>
+</tr>
+</tbody>
+</table>
+<p>There is a linear correlation between the two columns <code>Salaries in $</code> and <code>Salaries in €</code>. One of the two columns does not bring in any new information and so its just noise in the data.</p>
+<p>With Dimensionality Reduction, this type of correlation can be detected and removed.</p>
+<h4 id="some-dimensionality-reduction-algorithms">Some Dimensionality Reduction Algorithms</h4>
+<ul>
+<li>
+<p>Principal Component Analysis (PCA)</p>
+</li>
+<li>
+<p>Linear Discriminant Analysis (LDA)</p>
+</li>
+<li>
+<p>Generalized Discriminant Analysis (GDA)</p>
+</li>
+</ul>
+<hr>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/machine-learning">Machine Learning</a></span><span class="tag"><a href="https://fares.codes/tags/ml">ML</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1279 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-12-09 11:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Stack Safe Mutual Recursion with Eval</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/passing-the-scrum-master-certification/">
+                                <span class="button__text">Passing the Scrum Master Certification</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

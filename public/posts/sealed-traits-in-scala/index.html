@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
+In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
+Taking a little step back, What exactly is a trait?
+Traits in Scala Traits in scala are similar to interfaces in java." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/sealed-traits-in-scala/" />
+
+
+<title>
+    
+    Sealed Traits in Scala :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Sealed Traits in Scala">
+<meta itemprop="description" content="A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
+In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
+Taking a little step back, What exactly is a trait?
+Traits in Scala Traits in scala are similar to interfaces in java.">
+<meta itemprop="datePublished" content="2019-07-31T21:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-07-31T21:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="555">
+
+
+
+<meta itemprop="keywords" content="Sealed Traits," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sealed Traits in Scala"/>
+<meta name="twitter:description" content="A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
+In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
+Taking a little step back, What exactly is a trait?
+Traits in Scala Traits in scala are similar to interfaces in java."/>
+
+
+
+
+<meta property="article:published_time" content="2019-07-31 21:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/sealed-traits-in-scala/">Sealed Traits in Scala</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.</p>
+<p>In other words, if <code>case class B</code> wishes to extend <code>sealed trait A</code> B has to be defined in the same file where trait A is defined.</p>
+<p>Taking a little step back,  <em>What exactly is a trait?</em></p>
+<h2 id="traits-in-scala">Traits in Scala</h2>
+<p>Traits in scala are similar to interfaces in java.</p>
+<p>They encapsulate methods and field definitions so that they can be reused by different classes/objects</p>
+<p>A single class can inherit from multiple traits by <code>mixing</code> them.</p>
+<p>While a single class can only extend one abstract class.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">A</span>
+<span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">B</span>
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> A <span style="color:#66d9ef">with</span> B
+</code></pre></div><p>Traits can include both function definition and function implementation, but there must be at least one abstract function in the trait for it to be considered as such.</p>
+<p>Another useful note; wherever a trait is required, a subtype of the trait can be used.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>  
+ <span style="color:#66d9ef">def</span> getName<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span><span style="color:#f92672">{</span>  
+   <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> getName<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=</span> name
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span><span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> getName<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=</span> name
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">val</span> l<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Animal</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#a6e22e">Cat</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Blacky&#34;</span><span style="color:#f92672">),</span> <span style="color:#a6e22e">Dog</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Verra&#34;</span><span style="color:#f92672">))</span>
+</code></pre></div><p>Notice how we were able to pass a list of Cat and Dog to a list of Animal?</p>
+<p>Why are traits useful?</p>
+<p>Traits allow you to model behavior and reuse functions across multiple classes that could potentially be unrelated.</p>
+<h2 id="sealed-traits-in-scala">Sealed Traits In Scala</h2>
+<p>As mentioned earlier, sealed traits can only be extended by classes in the same source folder as the trait itself.</p>
+<p>This makes the code easier to read because we would have the trait as well as all the classes that extend it, in once file. As opposed to having to look for the subtypes across the project files.</p>
+<p>to make a trait sealed, we just need to add the keyword <code>sealed</code> before it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Database</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">def</span> insert<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">def</span> delete<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">def</span> update<span style="color:#f92672">(</span>old<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">,</span> `new`<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> color<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> owner<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LocalDatabase</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Database</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> insert<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> delete<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> update<span style="color:#f92672">(</span>old<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">,</span> `new`<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MongoDB</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Database</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Animal</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> insert<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Animal</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> delete<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Animal</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> update<span style="color:#f92672">(</span>old<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Animal</span><span style="color:#f92672">,</span> `new`<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Animal</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>Another important benifit of using sealed traits is <code>exhausiveness checking</code>. During pattern matching, the compiler can check and make sure that the cases cover all the basis and that no case is left unhandeled.</p>
+<p>Assume we were living in a world where only the following 3 shapes existed:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Line</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+
+</code></pre></div><p>if we were to do a pattern matching on a function that returns a shape while omitting one case:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Line</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
+
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">ShapeArea</span><span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">def</span> getType<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Shape</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+  <span style="color:#66d9ef">val</span> name <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;Circle&#34;</span>
+  getType<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Line</span>   <span style="color:#66d9ef">=&gt;</span> <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>we would get the following warning:</p>
+<p><code>Warning: match may not be exhaustive. It would fail on the following input: Rectangle</code></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/sealed-traits">Sealed Traits</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>555 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-07-31 23:00 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/un-apply-in-scala/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Un-Apply in Scala</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/for-comprehensions-demystified/">
+                                <span class="button__text">For Comprehensions Demystified</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

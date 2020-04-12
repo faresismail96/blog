@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&amp;#34;Danny&amp;#34;) val client2 = Client(2, &amp;#34;Emily&amp;#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/value-classes-in-scala/" />
+
+
+<title>
+    
+    Value Classes in Scala :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Value Classes in Scala">
+<meta itemprop="description" content="Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&#34;Danny&#34;) val client2 = Client(2, &#34;Emily&#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:">
+<meta itemprop="datePublished" content="2019-10-04T20:55:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-10-04T20:55:00&#43;00:00" />
+<meta itemprop="wordCount" content="640">
+
+
+
+<meta itemprop="keywords" content="scala,value-class," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Value Classes in Scala"/>
+<meta name="twitter:description" content="Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&#34;Danny&#34;) val client2 = Client(2, &#34;Emily&#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:"/>
+
+
+
+
+<meta property="article:published_time" content="2019-10-04 20:55:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/value-classes-in-scala/">Value Classes in Scala</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>Before we look into value classes, lets start by why we might need them in the first place.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> amount<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Double</span><span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">val</span> account1 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> account2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">200</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> account3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span><span style="color:#ae81ff">1000</span><span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">val</span> client1 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;Danny&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> client2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Emily&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><p>In this example, we have three bank accounts, two belonging to Danny and one to Emily.</p>
+<p>Now we add a function that checks if two bank accounts belong to the same client:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> isSameOwner<span style="color:#f92672">(</span>bankAccountId1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> bankAccountId2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+</code></pre></div><p>Now if we were to call the function with these parameters, the code will compile normally:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> client1<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
+<span style="color:#75715e">//or even
+</span><span style="color:#75715e"></span>isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> account2<span style="color:#f92672">.</span>clientId<span style="color:#f92672">)</span>
+</code></pre></div><p>The reason this compiles is obvious, the function <code>isSameOwner</code> takes Int for parameters.</p>
+<p>One possible solution would be to use tiny types in scala:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AccountId</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ClientId</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span>accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AccountId</span><span style="color:#f92672">,</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ClientId</span><span style="color:#f92672">,</span> amount<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Double</span><span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">def</span> isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AccountId</span><span style="color:#f92672">,</span> account2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AccountId</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+</code></pre></div><p>The issue with this solutions becomes memory allocation at runtime.</p>
+<p>Which is where value classes come in. The main benefit is avoiding allocating runtime objects. At compile time, we would have the case case and at runtime we would have the underlying data type.</p>
+<p>So what are value classes officially?</p>
+<p>Value classes are a new mechanism in Scala to avoid allocating runtime objects. This is accomplished through the definition of new AnyVal subclasses. (<a href="https://docs.scala-lang.org/overviews/core/value-classes.html)">https://docs.scala-lang.org/overviews/core/value-classes.html)</a></p>
+<p>This means that value classes:</p>
+<ol>
+<li>
+<p>Can only extend universal traits (ones that extend Any) and cannot be extended itself.</p>
+</li>
+<li>
+<p>Can define a def but no val or var or classes&hellip;</p>
+</li>
+</ol>
+<p>lets look at a very simple example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+
+</code></pre></div><p>As we can see in this example, value classes contain one simple underlying data type and extend AnyVal.</p>
+<p>Now lets look at the byte code generated by our example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fares</span><span style="color:#f92672">();</span>
+</code></pre></div><p>This practically means that at compile time we can use the class User, but are runtime, the value class is replaced by its underlying value of type int.</p>
+<p>So How is this useful?</p>
+<p>instead of writing the following lines:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> getAccountInfo<span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+</code></pre></div><p>and then running the risk of calling the function with accountId as the first param instead of the second (code would still compile)</p>
+<p>We could use the refined types and transform it into something that is type-safe:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+  <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AccountId</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+
+  <span style="color:#66d9ef">def</span> getAccountInfo<span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ClientId</span><span style="color:#f92672">,</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AccountId</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+
+</code></pre></div><p>The second implementation would cause a compile time error if we try to call the function with the params inverted all while still giving us the same runtime performance.</p>
+<h2 id="clearly-value-classes-are-great-but-whats-the-catch">Clearly Value Classes are great&hellip; but whats the catch</h2>
+<p>from the scala documentation: Because the JVM does not support value classes, Scala sometimes needs to actually instantiate a value class.</p>
+<p>There are 3 cases during which a value class is actually instantiated:</p>
+<ul>
+<li>a value class is treated as another type.</li>
+<li>a value class is assigned to an array.</li>
+<li>doing runtime type tests, such as pattern matching.</li>
+</ul>
+<p>The third case is rather simple, so lets look into the first two:</p>
+<h3 id="when-a-value-class-is-treated-as-another-type">when a value class is treated as another type</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+  <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Any</span>
+
+  <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Person</span>
+
+  <span style="color:#66d9ef">def</span> getName<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+  
+  <span style="color:#66d9ef">val</span> student1<span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Student</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Emily&#34;</span><span style="color:#f92672">)</span>
+  
+  getName<span style="color:#f92672">(</span>student1<span style="color:#f92672">)</span>
+
+</code></pre></div><p>Because we are calling a function that takes a Person and we are then passing it a Student that extends Person, the value class will be instantiated.</p>
+<h3 id="when-a-value-class-is-assigned-to-an-array">when a value class is assigned to an array</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">val</span> classroom <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Student</span><span style="color:#f92672">](</span>student1<span style="color:#f92672">)</span>
+
+</code></pre></div><p>In that case, the array <code>classroom</code>, will actually contain the instances of <code>Student</code> and not just the underlying datatype <code>String</code></p>
+<hr>
+<p>Overall, value classes can prove to be very useful and their use could bring significant improvement to your code.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/scala">scala</a></span><span class="tag"><a href="https://fares.codes/tags/value-class">value-class</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>640 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-10-04 22:55 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fares.codes/posts/refined-types-in-scala/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Refined Types In Scala</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/">
+                                <span class="button__text">Interactive Rebase for a Cleaner Git Commit History</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

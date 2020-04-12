@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learning Publicly</title>
+    <link>https://fares.codes/</link>
+    <description>Recent content on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 27 Jul 2019 21:14:20 +0200</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cats Chain</title>
+      <link>https://fares.codes/posts/cats-chain/</link>
+      <pubDate>Fri, 03 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-chain/</guid>
+      <description>In previous articles, I&amp;rsquo;ve talked about accumulating errors with Validated, and for that we said that we needed a Semigroup on the left side that will be used to accumulate the errors (We used a NonEmptyList[A] as an example). Today well talk about Chain and NonEmptyChain[A] and how it&amp;rsquo;s different from a List.
+Appending to a List requires iterating over the entire collection (linear time). So using ValidatedNel[A,B] will make us incur a heavy performance penalty specially if we traverse it.</description>
+    </item>
+    
+    <item>
+      <title>Cond in Scala</title>
+      <link>https://fares.codes/posts/cond-in-scala/</link>
+      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cond-in-scala/</guid>
+      <description>This is probably one of the simplest articles I&amp;rsquo;ve written&amp;hellip; except for the About section of this site&amp;hellip;
+The reason I&amp;rsquo;m writing it is because I recently discovered a simple yet very useful function that facilitates the construction of an Either monad or a Validated monad.
+This function is called cond probably short for condition. Ans here is how it works:
+import cats.data.Validated def someFunction: Boolean = ??? val either: Either[String, String] = Either.</description>
+    </item>
+    
+    <item>
+      <title>Validated(Nel) for Validation</title>
+      <link>https://fares.codes/posts/validatednel-for-validation/</link>
+      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/validatednel-for-validation/</guid>
+      <description>Week two of being stuck at home due to the Corona-virus confinement. I&amp;rsquo;m writing this article because I desperately need to feel like I&amp;rsquo;ve accomplished ONE productive thing this weekend. On a side note, I&amp;rsquo;ve recently taken up cooking and managed to completely botch a recipe that was considered kids friendly&amp;hellip; So yea those are my life updates&amp;hellip;
+I will begin my explanation of Validated by explaining something else entirely&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Cats Ior</title>
+      <link>https://fares.codes/posts/cats-ior/</link>
+      <pubDate>Sat, 21 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-ior/</guid>
+      <description>If you&amp;rsquo;ve gotten this far reading my blog, you&amp;rsquo;re probably very familiar with Either. Of course Im also assuming someone is reading this blog in the first place 😛
+Anyway, Either[A,B] allows us to return either an A or a B depending on some conditions&amp;hellip; In other words, its a XOR (exclusive or) A value can either be A or it can be B but it cannot be both.
+You probably see where this is going, IOR is a cats datatype that stands for Inclusive Or.</description>
+    </item>
+    
+    <item>
+      <title>Cats Show</title>
+      <link>https://fares.codes/posts/cats-show/</link>
+      <pubDate>Fri, 20 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-show/</guid>
+      <description>You can tell I&amp;rsquo;m not looking to write something serious by the topic I&amp;rsquo;ve chosen 😛
+The first time I read about Show I instantly said to my self &amp;ldquo;its just a glorified toString&amp;rdquo;. I still struggle to see the difference&amp;hellip; Okay not really but they are pretty similar.
+Backing up, Here is the signature of show:
+/** creates an instance of [[Show]] using the provided function */ def show[A](f: A =&amp;gt; String): Show[A] = new Show[A] { def show(a: A): String = f(a) } So it takes a A as a type parameter and a function that takes an A and transforms it to a String.</description>
+    </item>
+    
+    <item>
+      <title>Kafka HealthChecks</title>
+      <link>https://fares.codes/posts/kafka-healthchecks/</link>
+      <pubDate>Thu, 19 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/kafka-healthchecks/</guid>
+      <description>Ive been recently asked to write healthchecks for long running services that depend on kafka.
+This article will not go into the need for healthchecks nor a &amp;ldquo;let it crash&amp;rdquo; design. Instead I&amp;rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks.</description>
+    </item>
+    
+    <item>
+      <title>Cats Bifunctor</title>
+      <link>https://fares.codes/posts/cats-bifunctor/</link>
+      <pubDate>Sun, 09 Feb 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-bifunctor/</guid>
+      <description>The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
+In cats and in some cases scala, types like Either, Validated, Option&amp;hellip; are right biased. which means that when we call .map on them, the function applied in the map is only applied on the case of a right.
+Here are some examples:
+val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either.</description>
+    </item>
+    
+    <item>
+      <title>Spark Odd Behavior with Nulls</title>
+      <link>https://fares.codes/posts/spark-odd-behavior-with-nulls/</link>
+      <pubDate>Sun, 19 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/spark-odd-behavior-with-nulls/</guid>
+      <description>Once again, I will put a 5 hour flight into good use to detail an interesting/odd behavior encountered with spark while dealing with nulls.
+Any basic spark tutorial will tell you that there are a couple ways to create dataframes.
+Some of which are:
+  Transforming existing dataframes.
+  Reading a file.
+  Parallelizing over a collection.
+  The first two will not be in the scope of this article.</description>
+    </item>
+    
+    <item>
+      <title>Stack Safe Mutual Recursion with Eval</title>
+      <link>https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/</link>
+      <pubDate>Wed, 15 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/</guid>
+      <description>The first time I heard someone say: &amp;ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&amp;rdquo; I figured I&amp;rsquo;d found the ONE thing I wouldn&amp;rsquo;t be able to write about, on the count of how complex it sounded.
+To start with, mutual recursion is not a topic I&amp;rsquo;m comfortable with, let alone Stack Safety&amp;hellip;
+But with some time and a small exercise, the idea is getting clearer in my head.</description>
+    </item>
+    
+    <item>
+      <title>Crash Course in Machine Learning</title>
+      <link>https://fares.codes/posts/crash-course-in-machine-learning/</link>
+      <pubDate>Mon, 09 Dec 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/crash-course-in-machine-learning/</guid>
+      <description>I take article requests now&amp;hellip; 😛
+The following article will be a quick overview of classical machine learning and the different types and algorithms out there.
+Don&amp;rsquo;t expect any code implementation or a hands-on lab this is just to provide an overview of the types of machine learning algorithms and when those can be used.
+On a high level, we can think of a machine learning model as a black box.</description>
+    </item>
+    
+    <item>
+      <title>Passing the Scrum Master Certification</title>
+      <link>https://fares.codes/posts/passing-the-scrum-master-certification/</link>
+      <pubDate>Sun, 03 Nov 2019 12:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/passing-the-scrum-master-certification/</guid>
+      <description>The Professional Scrum Master Certification level 1 is one of those easy certifications you can easily obtain by reading a little bit about scrum and doing a couple mock tests.
+This article will compile a list of useful resources that will help learn more about the scrum framework and eventually pass the certification.
+I highly suggest reading the official scrum guide. It is short and simple to read. With that said I will outline below the most important parts of each section and then mention important points to keep in mind while passing the scrum certification.</description>
+    </item>
+    
+    <item>
+      <title>Refined Types In Scala</title>
+      <link>https://fares.codes/posts/refined-types-in-scala/</link>
+      <pubDate>Mon, 14 Oct 2019 13:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/refined-types-in-scala/</guid>
+      <description>The following is my interpretation of the Refined Types presentation
+In previous articles, I wrote about some issues surrounding the use of String parameters (passing an accountId instead of a userId and so on&amp;hellip;)
+Lets quickly recap:
+final case class UserBankAccount(userId: String, accountId: String, amount: Double) UserBankAccount(&amp;#34;user_10023&amp;#34;, &amp;#34;account_28179&amp;#34;, 2000) // Ok UserBankAccount(&amp;#34;account_28179&amp;#34;, &amp;#34;user_10023&amp;#34;, 2000) // Possible bug It would be cool if we had a type safe solution that would prevent the code from compiling&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Value Classes in Scala</title>
+      <link>https://fares.codes/posts/value-classes-in-scala/</link>
+      <pubDate>Fri, 04 Oct 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/value-classes-in-scala/</guid>
+      <description>Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&amp;#34;Danny&amp;#34;) val client2 = Client(2, &amp;#34;Emily&amp;#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:</description>
+    </item>
+    
+    <item>
+      <title>Interactive Rebase for a Cleaner Git Commit History</title>
+      <link>https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/</link>
+      <pubDate>Tue, 03 Sep 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/</guid>
+      <description>Any article you read online about maintaining a clean project will mention a version control system (usually git) and will then talk about maintaining a clean commit history through atomic commits, meaningful commit messages and so on.
+This article wont go into all the techniques above, instead Im going to focus on a single technique that I have recently learned: Interactive Rebase.
+No matter how hard we try to keep our commit messages clean and clear, we often end up with something looking like this:</description>
+    </item>
+    
+    <item>
+      <title>Fold vs Pattern Matching and Matching on Options</title>
+      <link>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</link>
+      <pubDate>Sun, 01 Sep 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</guid>
+      <description>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this example, we patten match on the Option value.</description>
+    </item>
+    
+    <item>
+      <title>Passing the DataBricks Apache Spark Certification</title>
+      <link>https://fares.codes/posts/passing-the-databricks-apache-spark-certification/</link>
+      <pubDate>Wed, 21 Aug 2019 20:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/passing-the-databricks-apache-spark-certification/</guid>
+      <description>The following is a compilation of all the resources I&amp;rsquo;ve used to pass the Databricks 2.X Spark Certification, as well as some questions that came up.
+Background on the Exam The exam databricks spark 2.x spark with scala certification is made up of 40 MCQ questions, 3 hours to answer them in total. The registration grants you 2 trials, meaning if you fail the first attempt, you have to wait 15 days and then you can apply for a second trial.</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Scaling and Backpressure</title>
+      <link>https://fares.codes/posts/dynamic-scaling-and-backpressure/</link>
+      <pubDate>Sat, 10 Aug 2019 09:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/dynamic-scaling-and-backpressure/</guid>
+      <description>Taking a little break from Scala to review some interesting features of spark streaming.
+This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
+An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
+Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.</description>
+    </item>
+    
+    <item>
+      <title>SemigroupK and CombineK</title>
+      <link>https://fares.codes/posts/semigroupk-and-combinek/</link>
+      <pubDate>Sat, 03 Aug 2019 15:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/semigroupk-and-combinek/</guid>
+      <description>Before we get into SemigroupKand combineK let us first quickly recap what a semigroup is.
+ Semigroup A Semigroup for a given type A has a single operation that takes two values of type A and returns a single value of the same type. This operation needs to be associative. We will call this operation combine for simplicity.
+from algebra.Semigroup we have:
+/** * A semigroup is any set `A` with an associative operation (`combine`).</description>
+    </item>
+    
+    <item>
+      <title>Collect / FilterMap</title>
+      <link>https://fares.codes/posts/collect-/-filtermap/</link>
+      <pubDate>Sat, 03 Aug 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/collect-/-filtermap/</guid>
+      <description>Collect or FilterMap does exactly what is says. it filters a collection and then maps the values.
+collect takes a partial function as a parameter and returns a Traversable of the same type.
+def collect[B](pf: PartialFunction[A, B]): CC[B] Also from the scaladoc:
+/** * @tparam CC type constructor of the collection (e.g. `List`, `Set`). Operations returning a * collection with a different type of element `B` (e.g. `map`) return a `CC[B]`.</description>
+    </item>
+    
+    <item>
+      <title>Un-Apply in Scala</title>
+      <link>https://fares.codes/posts/un-apply-in-scala/</link>
+      <pubDate>Fri, 02 Aug 2019 10:10:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/un-apply-in-scala/</guid>
+      <description>Unapply in Scala is the inverse of the apply&amp;hellip; (queue no shit comments :p)
+So what does it do exactly? given a class Person:
+case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to decompose the class person into a set of attributes:
+ name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
+    </item>
+    
+    <item>
+      <title>Sealed Traits in Scala</title>
+      <link>https://fares.codes/posts/sealed-traits-in-scala/</link>
+      <pubDate>Wed, 31 Jul 2019 21:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/sealed-traits-in-scala/</guid>
+      <description>A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
+In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
+Taking a little step back, What exactly is a trait?
+Traits in Scala Traits in scala are similar to interfaces in java.</description>
+    </item>
+    
+    <item>
+      <title>For Comprehensions Demystified</title>
+      <link>https://fares.codes/posts/for-comprehensions-demystified/</link>
+      <pubDate>Mon, 29 Jul 2019 21:37:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/for-comprehensions-demystified/</guid>
+      <description>A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
+At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&amp;rsquo;ll realise it&amp;rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.
+ Lets look at the below couple functions:
+def computeA(a: Int): Either[Throwable, Int] = ?</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://fares.codes/about/</link>
+      <pubDate>Sat, 27 Jul 2019 21:14:20 +0200</pubDate>
+      
+      <guid>https://fares.codes/about/</guid>
+      <description>23, Data Engineer and attempting to become better at: List a bunch of stuff here
+I read somewhere that one of the best ways to learn, is to do so publically.
+Hence this site. I will be detailing here as often as I can the tips and tricks I learn everyday&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

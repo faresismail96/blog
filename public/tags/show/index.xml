@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>show on Learning Publicly</title>
+    <link>https://fares.codes/tags/show/</link>
+    <description>Recent content in show on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 20 Mar 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/show/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cats Show</title>
+      <link>https://fares.codes/posts/cats-show/</link>
+      <pubDate>Fri, 20 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-show/</guid>
+      <description>You can tell I&amp;rsquo;m not looking to write something serious by the topic I&amp;rsquo;ve chosen 😛
+The first time I read about Show I instantly said to my self &amp;ldquo;its just a glorified toString&amp;rdquo;. I still struggle to see the difference&amp;hellip; Okay not really but they are pretty similar.
+Backing up, Here is the signature of show:
+/** creates an instance of [[Show]] using the provided function */ def show[A](f: A =&amp;gt; String): Show[A] = new Show[A] { def show(a: A): String = f(a) } So it takes a A as a type parameter and a function that takes an A and transforms it to a String.</description>
+    </item>
+    
+  </channel>
+</rss>

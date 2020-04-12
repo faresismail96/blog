@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cats on Learning Publicly</title>
+    <link>https://fares.codes/tags/cats/</link>
+    <description>Recent content in cats on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 03 Apr 2020 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/cats/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cats Chain</title>
+      <link>https://fares.codes/posts/cats-chain/</link>
+      <pubDate>Fri, 03 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-chain/</guid>
+      <description>In previous articles, I&amp;rsquo;ve talked about accumulating errors with Validated, and for that we said that we needed a Semigroup on the left side that will be used to accumulate the errors (We used a NonEmptyList[A] as an example). Today well talk about Chain and NonEmptyChain[A] and how it&amp;rsquo;s different from a List.
+Appending to a List requires iterating over the entire collection (linear time). So using ValidatedNel[A,B] will make us incur a heavy performance penalty specially if we traverse it.</description>
+    </item>
+    
+    <item>
+      <title>Cond in Scala</title>
+      <link>https://fares.codes/posts/cond-in-scala/</link>
+      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cond-in-scala/</guid>
+      <description>This is probably one of the simplest articles I&amp;rsquo;ve written&amp;hellip; except for the About section of this site&amp;hellip;
+The reason I&amp;rsquo;m writing it is because I recently discovered a simple yet very useful function that facilitates the construction of an Either monad or a Validated monad.
+This function is called cond probably short for condition. Ans here is how it works:
+import cats.data.Validated def someFunction: Boolean = ??? val either: Either[String, String] = Either.</description>
+    </item>
+    
+    <item>
+      <title>Validated(Nel) for Validation</title>
+      <link>https://fares.codes/posts/validatednel-for-validation/</link>
+      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/validatednel-for-validation/</guid>
+      <description>Week two of being stuck at home due to the Corona-virus confinement. I&amp;rsquo;m writing this article because I desperately need to feel like I&amp;rsquo;ve accomplished ONE productive thing this weekend. On a side note, I&amp;rsquo;ve recently taken up cooking and managed to completely botch a recipe that was considered kids friendly&amp;hellip; So yea those are my life updates&amp;hellip;
+I will begin my explanation of Validated by explaining something else entirely&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Cats Ior</title>
+      <link>https://fares.codes/posts/cats-ior/</link>
+      <pubDate>Sat, 21 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-ior/</guid>
+      <description>If you&amp;rsquo;ve gotten this far reading my blog, you&amp;rsquo;re probably very familiar with Either. Of course Im also assuming someone is reading this blog in the first place 😛
+Anyway, Either[A,B] allows us to return either an A or a B depending on some conditions&amp;hellip; In other words, its a XOR (exclusive or) A value can either be A or it can be B but it cannot be both.
+You probably see where this is going, IOR is a cats datatype that stands for Inclusive Or.</description>
+    </item>
+    
+    <item>
+      <title>Cats Show</title>
+      <link>https://fares.codes/posts/cats-show/</link>
+      <pubDate>Fri, 20 Mar 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-show/</guid>
+      <description>You can tell I&amp;rsquo;m not looking to write something serious by the topic I&amp;rsquo;ve chosen 😛
+The first time I read about Show I instantly said to my self &amp;ldquo;its just a glorified toString&amp;rdquo;. I still struggle to see the difference&amp;hellip; Okay not really but they are pretty similar.
+Backing up, Here is the signature of show:
+/** creates an instance of [[Show]] using the provided function */ def show[A](f: A =&amp;gt; String): Show[A] = new Show[A] { def show(a: A): String = f(a) } So it takes a A as a type parameter and a function that takes an A and transforms it to a String.</description>
+    </item>
+    
+    <item>
+      <title>Cats Bifunctor</title>
+      <link>https://fares.codes/posts/cats-bifunctor/</link>
+      <pubDate>Sun, 09 Feb 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-bifunctor/</guid>
+      <description>The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
+In cats and in some cases scala, types like Either, Validated, Option&amp;hellip; are right biased. which means that when we call .map on them, the function applied in the map is only applied on the case of a right.
+Here are some examples:
+val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either.</description>
+    </item>
+    
+    <item>
+      <title>Stack Safe Mutual Recursion with Eval</title>
+      <link>https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/</link>
+      <pubDate>Wed, 15 Jan 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/stack-safe-mutual-recursion-with-eval/</guid>
+      <description>The first time I heard someone say: &amp;ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&amp;rdquo; I figured I&amp;rsquo;d found the ONE thing I wouldn&amp;rsquo;t be able to write about, on the count of how complex it sounded.
+To start with, mutual recursion is not a topic I&amp;rsquo;m comfortable with, let alone Stack Safety&amp;hellip;
+But with some time and a small exercise, the idea is getting clearer in my head.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scala on Learning Publicly</title>
+    <link>https://fares.codes/tags/scala/</link>
+    <description>Recent content in scala on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 31 Mar 2020 01:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/scala/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cond in Scala</title>
+      <link>https://fares.codes/posts/cond-in-scala/</link>
+      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cond-in-scala/</guid>
+      <description>This is probably one of the simplest articles I&amp;rsquo;ve written&amp;hellip; except for the About section of this site&amp;hellip;
+The reason I&amp;rsquo;m writing it is because I recently discovered a simple yet very useful function that facilitates the construction of an Either monad or a Validated monad.
+This function is called cond probably short for condition. Ans here is how it works:
+import cats.data.Validated def someFunction: Boolean = ??? val either: Either[String, String] = Either.</description>
+    </item>
+    
+    <item>
+      <title>Cats Bifunctor</title>
+      <link>https://fares.codes/posts/cats-bifunctor/</link>
+      <pubDate>Sun, 09 Feb 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-bifunctor/</guid>
+      <description>The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
+In cats and in some cases scala, types like Either, Validated, Option&amp;hellip; are right biased. which means that when we call .map on them, the function applied in the map is only applied on the case of a right.
+Here are some examples:
+val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either.</description>
+    </item>
+    
+    <item>
+      <title>Value Classes in Scala</title>
+      <link>https://fares.codes/posts/value-classes-in-scala/</link>
+      <pubDate>Fri, 04 Oct 2019 20:55:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/value-classes-in-scala/</guid>
+      <description>Before we look into value classes, lets start by why we might need them in the first place.
+case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&amp;#34;Danny&amp;#34;) val client2 = Client(2, &amp;#34;Emily&amp;#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
+Now we add a function that checks if two bank accounts belong to the same client:</description>
+    </item>
+    
+    <item>
+      <title>Fold vs Pattern Matching and Matching on Options</title>
+      <link>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</link>
+      <pubDate>Sun, 01 Sep 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</guid>
+      <description>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;amp;t=1s
+ Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this example, we patten match on the Option value.</description>
+    </item>
+    
+    <item>
+      <title>Un-Apply in Scala</title>
+      <link>https://fares.codes/posts/un-apply-in-scala/</link>
+      <pubDate>Fri, 02 Aug 2019 10:10:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/un-apply-in-scala/</guid>
+      <description>Unapply in Scala is the inverse of the apply&amp;hellip; (queue no shit comments :p)
+So what does it do exactly? given a class Person:
+case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to decompose the class person into a set of attributes:
+ name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
+    </item>
+    
+    <item>
+      <title>For Comprehensions Demystified</title>
+      <link>https://fares.codes/posts/for-comprehensions-demystified/</link>
+      <pubDate>Mon, 29 Jul 2019 21:37:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/for-comprehensions-demystified/</guid>
+      <description>A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
+At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&amp;rsquo;ll realise it&amp;rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.
+ Lets look at the below couple functions:
+def computeA(a: Int): Either[Throwable, Int] = ?</description>
+    </item>
+    
+  </channel>
+</rss>
