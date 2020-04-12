@@ -2,6 +2,7 @@
 author = "Fares Ismail"
 date = "2020-04-03T10:00:00+00:00"
 tags = [
+    "scala",
     "cats",
     "chain",
 ]
