@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2020-04-13T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/pureconfig/</loc>
+    <lastmod>2020-04-13T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/pureconfig-from-a-to-f/</loc>
+    <lastmod>2020-04-13T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scala/</loc>
+    <lastmod>2020-04-13T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2020-04-13T10:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/tags/cats/</loc>
     <lastmod>2020-04-03T10:00:00+00:00</lastmod>
   </url>
@@ -18,27 +43,12 @@
   </url>
   
   <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
-    <lastmod>2020-04-03T10:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://fares.codes/tags/cond/</loc>
     <lastmod>2020-03-31T01:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://fares.codes/posts/cond-in-scala/</loc>
-    <lastmod>2020-03-31T01:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/scala/</loc>
     <lastmod>2020-03-31T01:00:00+00:00</lastmod>
   </url>
   

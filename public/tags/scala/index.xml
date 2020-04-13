@@ -5,10 +5,31 @@
     <link>https://fares.codes/tags/scala/</link>
     <description>Recent content in scala on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Mar 2020 01:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 10:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/scala/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PureConfig From A to F</title>
+      <link>https://fares.codes/posts/pureconfig-from-a-to-f/</link>
+      <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/pureconfig-from-a-to-f/</guid>
+      <description>If you&amp;rsquo;re saying to yourself: &amp;ldquo;Surely theres a typo here&amp;hellip; Its normally From A to Z&amp;rdquo;, yes&amp;hellip; but since I have much left to learn in pureconfig, well stop at F 😉
+Sometimes I write useless articles (cond or cats show) and in other times, I write something slightly more interesting and useful 😃
+PureConfig allows us to quickly and easily load configurations from config files in a type safe and boiler plate free manner.</description>
+    </item>
+    
+    <item>
+      <title>Cats Chain</title>
+      <link>https://fares.codes/posts/cats-chain/</link>
+      <pubDate>Fri, 03 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-chain/</guid>
+      <description>In previous articles, I&amp;rsquo;ve talked about accumulating errors with Validated, and for that we said that we needed a Semigroup on the left side that will be used to accumulate the errors (We used a NonEmptyList[A] as an example). Today well talk about Chain and NonEmptyChain[A] and how it&amp;rsquo;s different from a List.
+Appending to a List requires iterating over the entire collection (linear time). So using ValidatedNel[A,B] will make us incur a heavy performance penalty specially if we traverse it.</description>
+    </item>
     
     <item>
       <title>Cond in Scala</title>
