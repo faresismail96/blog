@@ -5,10 +5,28 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 03 Apr 2020 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 10:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>pureconfig</title>
+      <link>https://fares.codes/tags/pureconfig/</link>
+      <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/pureconfig/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://fares.codes/tags/scala/</link>
+      <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/tags/scala/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>cats</title>
@@ -34,15 +52,6 @@
       <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
       
       <guid>https://fares.codes/tags/cond/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Tue, 31 Mar 2020 01:00:00 +0000</pubDate>
-      
-      <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
     </item>
     
