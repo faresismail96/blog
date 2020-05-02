@@ -305,9 +305,7 @@ Appending to a List requires iterating over the entire collection (linear time).
 <span style="color:#a6e22e">NonEmptyChain</span><span style="color:#f92672">.</span>one<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">// res3: cats.data.NonEmptyChain[Int] = Chain(1)
 </span><span style="color:#75715e"></span>
-</code></pre></div><h2 id="what-the-documentation-doesnt-say-about-chain">What the documentation doesn&rsquo;t say about Chain</h2>
-<p>Given the information above, one might think that any code where <code>List</code> exists, could benefit from replacing that list with a <code>Chain</code>. But after further reading, I realized it wasn&rsquo;t always the case, and that sometimes using a Chain instead of a List could negatively impact performance. Heres why:</p>
-]]></content>
+</code></pre></div>]]></content>
         </item>
         
         <item>
