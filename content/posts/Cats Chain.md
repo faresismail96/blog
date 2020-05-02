@@ -63,7 +63,3 @@ NonEmptyChain.one(1)
 // res3: cats.data.NonEmptyChain[Int] = Chain(1)
 
 ```
-
-## What the documentation doesn't say about Chain
-
-Given the information above, one might think that any code where ``List`` exists, could benefit from replacing that list with a ``Chain``. But after further reading, I realized it wasn't always the case, and that sometimes using a Chain instead of a List could negatively impact performance. Heres why:
