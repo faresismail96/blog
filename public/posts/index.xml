@@ -4,8 +4,61 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sun, 03 May 2020 10:00:00 +0200</lastBuildDate>
+        <lastBuildDate>Sun, 03 May 2020 20:00:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Scala Sealed Trait vs Sealed Abstract Class</title>
+            <link>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</link>
+            <pubDate>Sun, 03 May 2020 20:00:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</guid>
+            <description>From my previous articles, you&amp;rsquo;ve seen me create ADTs in two different ways:
+sealed abstract class Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } or
+sealed trait Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } This article will outline the difference between those two implementations.
+Sealed Trait If a behavior is to be re-used, traits are very handy since they can be mixed in.</description>
+            <content type="html"><![CDATA[<p>From my previous articles, you&rsquo;ve seen me create ADTs in two different ways:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>
+
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
+
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span>
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>or</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span>
+
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
+
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span>
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>This article will outline the difference between those two implementations.</p>
+<h2 id="sealed-trait">Sealed Trait</h2>
+<p>If a behavior is to be re-used, traits are very handy since they can be mixed in. We can also mix in multiple traits, as opposed to abstract classes where we can only extend one.</p>
+<p>A disadvantage for traits (and a huge advantage for abstract classes) is that traits can&rsquo;t take constructor arguments.</p>
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<span style="color:#75715e">// Will not compile
+</span></code></pre></div><p>In other words, if our base behavior takes constructor arguments, use an abstract class.</p>
+<p>Its worth also nothing that in traits we can do the following</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">def</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Which ultimately is the same thing&hellip; except its a def so can be implemented as a <code>val</code> or a <code>def</code> ==&gt; more flexible</p>
+<h2 id="sealed-abstract-class">Sealed Abstract Class</h2>
+<p>The primary advantage of abstract classes over traits is that they have a direct mapping to a structure in java, as opposed to trait which do not.</p>
+<p>So if you intend on calling your code will be accessed in java, think about defining abstract classes.</p>
+<p>Another worthy note, mentioned above for traits:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+</code></pre></div><p>name is a <code>val</code>. So it wouldnt be possible for a case class to implement name as a def (which could have been possible with a trait) ==&gt; Less flexible.</p>
+<h2 id="if-you-must-remember-2-things">If you must remember 2 things</h2>
+<p>A class can only extend one abstract class, as opposed to traits where we can mix in multiple traits</p>
+<p>If you want to call your code from java, use abstract classes since Scala traits with implemented methods can’t be called from Java code.</p>
+<h2 id="general-advice">General advice</h2>
+<p>If you&rsquo;re not sure, you can start by creating a trait and move to an abstract class later on if you need it. Keep in mind that traits are more flexible.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Smart Constructors in Scala</title>

@@ -5,10 +5,22 @@
     <link>https://fares.codes/tags/scala/</link>
     <description>Recent content in scala on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 03 May 2020 10:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 03 May 2020 20:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/scala/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scala Sealed Trait vs Sealed Abstract Class</title>
+      <link>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</link>
+      <pubDate>Sun, 03 May 2020 20:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</guid>
+      <description>From my previous articles, you&amp;rsquo;ve seen me create ADTs in two different ways:
+sealed abstract class Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } or
+sealed trait Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } This article will outline the difference between those two implementations.
+Sealed Trait If a behavior is to be re-used, traits are very handy since they can be mixed in.</description>
+    </item>
     
     <item>
       <title>Smart Constructors in Scala</title>
