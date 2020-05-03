@@ -11,6 +11,18 @@
     
     
     <item>
+      <title>Scala Sealed Trait vs Sealed Abstract Class</title>
+      <link>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</link>
+      <pubDate>Sun, 03 May 2020 20:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/scala-sealed-trait-vs-sealed-abstract-class/</guid>
+      <description>From my previous articles, you&amp;rsquo;ve seen me create ADTs in two different ways:
+sealed abstract class Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } or
+sealed trait Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } This article will outline the difference between those two implementations.
+Sealed Trait If a behavior is to be re-used, traits are very handy since they can be mixed in.</description>
+    </item>
+    
+    <item>
       <title>PureConfig From A to F</title>
       <link>https://fares.codes/posts/pureconfig-from-a-to-f/</link>
       <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
