@@ -11,6 +11,17 @@
     
     
     <item>
+      <title>Smart Constructors in Scala</title>
+      <link>https://fares.codes/posts/smart-constructors-in-scala/</link>
+      <pubDate>Sun, 03 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/smart-constructors-in-scala/</guid>
+      <description>Assume we have the following ADT:
+sealed trait Person { def name: String def age: Int } object Person { final case class Adult(name: String, age: Int, fieldOfWork: String) extends Person final case class Child(name: String,age: Int, favAnimal: String) extends Person } Probably a very naive way to see humanity but for our example, it&amp;rsquo;ll do.
+So a Person can either be an Adult with a field of work or a Child with a favorite animal.</description>
+    </item>
+    
+    <item>
       <title>PureConfig From A to F</title>
       <link>https://fares.codes/posts/pureconfig-from-a-to-f/</link>
       <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>

@@ -5,10 +5,46 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Apr 2020 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 May 2020 10:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>constructor</title>
+      <link>https://fares.codes/tags/constructor/</link>
+      <pubDate>Sun, 03 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/constructor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://fares.codes/tags/scala/</link>
+      <pubDate>Sun, 03 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smart constructor</title>
+      <link>https://fares.codes/tags/smart-constructor/</link>
+      <pubDate>Sun, 03 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/smart-constructor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>validation</title>
+      <link>https://fares.codes/tags/validation/</link>
+      <pubDate>Sun, 03 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/validation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>pureconfig</title>
@@ -16,15 +52,6 @@
       <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
       
       <guid>https://fares.codes/tags/pureconfig/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Mon, 13 Apr 2020 10:00:00 +0000</pubDate>
-      
-      <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
     </item>
     
@@ -70,15 +97,6 @@
       <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
       
       <guid>https://fares.codes/tags/validatednel/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>validation</title>
-      <link>https://fares.codes/tags/validation/</link>
-      <pubDate>Mon, 30 Mar 2020 01:00:00 +0000</pubDate>
-      
-      <guid>https://fares.codes/tags/validation/</guid>
       <description></description>
     </item>
     
