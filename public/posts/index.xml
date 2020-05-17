@@ -4,8 +4,67 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sun, 03 May 2020 20:00:00 +0200</lastBuildDate>
+        <lastBuildDate>Sun, 17 May 2020 10:00:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Cats Kleisli</title>
+            <link>https://fares.codes/posts/cats-kleisli/</link>
+            <pubDate>Sun, 17 May 2020 10:00:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/cats-kleisli/</guid>
+            <description>I wont lie&amp;hellip; The main reason I&amp;rsquo;m looking into Kleisli is because I think the name is cool.
+Kleisli allows the composition of functions where the return type is a monadic value while the input to the next function is not.
+Function Composition Function Composition allows us to chain function calls together.
+Here is a dummy example:
+val getValueFromDB: Unit =&amp;gt; String = _ =&amp;gt; &amp;#34;Fares&amp;#34; val transformValue: String =&amp;gt; String = _.</description>
+            <content type="html"><![CDATA[<p>I wont lie&hellip; The main reason I&rsquo;m looking into <code>Kleisli</code> is because I think the name is cool.</p>
+<p>Kleisli allows the composition of functions where the return type is a monadic value while the input to the next function is not.</p>
+<h2 id="function-composition">Function Composition</h2>
+<p>Function Composition allows us to chain function calls together.</p>
+<p>Here is a dummy example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Fares&#34;</span>
+  <span style="color:#66d9ef">val</span> transformValue<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>toUpperCase
+  <span style="color:#66d9ef">val</span> saveValueToDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Unit</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">()</span>
+</code></pre></div><p>The following are 3 dummy functions that load a value from a database, transforms it (to uppercase) and finally saves it back to the database.</p>
+<p>Here&rsquo;s how it would look like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  saveValueToDB<span style="color:#f92672">(</span>transformValue<span style="color:#f92672">(</span>getValueFromDB<span style="color:#f92672">()))</span>
+</code></pre></div><p>Except it&rsquo;s quite ugly to look at and to read.</p>
+<p>But luckily there is another way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> saveValueToDB compose transformValue compose getValueFromDB
+  result<span style="color:#f92672">()</span>
+</code></pre></div><p>or</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> getValueFromDB andThen transformValue andThen saveValueToDB
+  result<span style="color:#f92672">()</span>
+</code></pre></div><p>I&rsquo;ll admit I think using <code>andThen</code> is the better option since it is the most readable and since we have a tendency to read left to right and not the other way around.</p>
+<h2 id="issue-when-it-returns-a-monadic-value">Issue (When it returns a monadic value)</h2>
+<p>Alright so thats cool&hellip; But the problem becomes if those functions return a monadic value. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> transformValue<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> x <span style="color:#66d9ef">=&gt;</span>  <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>x<span style="color:#f92672">.</span>toUpperCase<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> saveValueToDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> x <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>println<span style="color:#f92672">(</span>x<span style="color:#f92672">))</span>
+</code></pre></div><p>Sure in this context, the return type doesn&rsquo;t make much sense, but just imagine a real world scenario 😛</p>
+<p>In that case, we would no longer be able to use function composition because the return types no longer match with the input parameter of the next function.</p>
+<p>One solution that normally comes to mind:</p>
+<h3 id="for-comprehension">For Comprehension</h3>
+<p>The following works well:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+    value          <span style="color:#66d9ef">&lt;-</span> getValueFromDB<span style="color:#f92672">()</span>
+    transformedVal <span style="color:#66d9ef">&lt;-</span> transformValue<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">_</span>              <span style="color:#66d9ef">&lt;-</span> saveValueToDB<span style="color:#f92672">(</span>transformedVal<span style="color:#f92672">)</span>
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">()</span>
+</code></pre></div><p>But there is another way, using <code>Kleisli</code>.</p>
+<h2 id="using-kleisli">Using Kleisli</h2>
+<p>Effectively, Kleisli is a  MonadTransformer but for functions. It allows us to abstractly ignore the context when performing composition of functions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span>
+  <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>getValueFromDB<span style="color:#f92672">)</span> andThen
+  <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>transformValue<span style="color:#f92672">)</span> andThen
+  <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>saveValueToDB<span style="color:#f92672">)</span>
+
+  res<span style="color:#f92672">.</span>run<span style="color:#f92672">()</span>
+</code></pre></div><p>We need to call run in the end because the end result of res is <code>Kleisli[Either, Unit, Unit]</code></p>
+<p>So thats about it for Kleisli&hellip; But if you ask me, for this particular usage, using a for-comprehension to me is a lot more straightforward.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Scala Sealed Trait vs Sealed Abstract Class</title>
