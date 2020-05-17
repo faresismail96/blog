@@ -5,10 +5,23 @@
     <link>https://fares.codes/tags/cats/</link>
     <description>Recent content in cats on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 03 Apr 2020 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 10:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/cats/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cats Kleisli</title>
+      <link>https://fares.codes/posts/cats-kleisli/</link>
+      <pubDate>Sun, 17 May 2020 10:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-kleisli/</guid>
+      <description>I wont lie&amp;hellip; The main reason I&amp;rsquo;m looking into Kleisli is because I think the name is cool.
+Kleisli allows the composition of functions where the return type is a monadic value while the input to the next function is not.
+Function Composition Function Composition allows us to chain function calls together.
+Here is a dummy example:
+val getValueFromDB: Unit =&amp;gt; String = _ =&amp;gt; &amp;#34;Fares&amp;#34; val transformValue: String =&amp;gt; String = _.</description>
+    </item>
     
     <item>
       <title>Cats Chain</title>
