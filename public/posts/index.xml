@@ -4,8 +4,182 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sun, 17 May 2020 10:00:00 +0200</lastBuildDate>
+        <lastBuildDate>Mon, 29 Jun 2020 00:05:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Type Hinting in Python</title>
+            <link>https://fares.codes/posts/type-hinting-in-python/</link>
+            <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/type-hinting-in-python/</guid>
+            <description>As I turn 24, my blog is about to turn 1 year old!! 🎊
+This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)
+Typing is a new module starting python 3.5 and introduced by PEP 484. Its goal is to introduce static types to Python.</description>
+            <content type="html"><![CDATA[<p>As I turn 24, my blog is about to turn 1 year old!! 🎊</p>
+<p>This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)</p>
+<p>Typing is a new module starting python 3.5 and introduced by <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a>. Its goal is to introduce static types to Python.</p>
+<h2 id="table-of-content">Table of Content</h2>
+<ol>
+<li><a href="#to-clarify-one-thing">To Clarify One Thing</a></li>
+<li><a href="#hello-world-example">Hello World Example</a></li>
+<li><a href="#custom-types-with-newtype">Custom Types with NewType</a>
+<ul>
+<li><a href="#one-thing-to-pay-attention-for">One thing to pay attention for</a></li>
+</ul>
+</li>
+<li><a href="#callable-type">Callable Type</a></li>
+<li><a href="#generic-types">Generic Types</a>
+<ul>
+<li><a href="#typevars">TypeVars</a></li>
+</ul>
+</li>
+<li><a href="#types">Types</a></li>
+<li><a href="#union-types">Union Types</a></li>
+<li><a href="#optional">Optional</a></li>
+<li><a href="#if-you-must-remember-3-things">If You Must Remember 3 Things</a></li>
+</ol>
+<hr>
+<h2 id="to-clarify-one-thing">To Clarify One Thing</h2>
+<p>To clarify something from the start:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Python will remain a dynamically typed language,
+and the authors have no desire to ever make type
+hints mandatory, even by convention.
+</code></pre></div><p>This is taken from the PEP&rsquo;s Non Goal section.</p>
+<p>So even if type hints are available, they are not checked at runtime (even though there is a support for that through <code>get_type_hints()</code>). Instead, type hints are meant to be checked by offline type checkers or linters.</p>
+<h2 id="hello-world-example">Hello World Example</h2>
+<p>Here is how type hinting might work:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_human</span>(name: str) <span style="color:#f92672">-&gt;</span> str:
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello &#39;</span> <span style="color:#f92672">+</span> name
+
+</code></pre></div><p>without type hints, the function would look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_human</span>(name):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> name
+</code></pre></div><p>You might be saying to yourself that it isn&rsquo;t much difference&hellip; But after a year of experience with Scala I can confirm that types can really make a code more readable.</p>
+<h2 id="custom-types-with-newtype">Custom Types with NewType</h2>
+<p>If the built-in types are not enough, NewType allows us to create custom types:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> NewType
+
+Url <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#34;Url&#34;</span>, str)
+
+website <span style="color:#f92672">=</span> Url(<span style="color:#e6db74">&#34;fares.codes&#34;</span>)
+</code></pre></div><h3 id="one-thing-to-pay-attention-for">One thing to pay attention for</h3>
+<p>Operations on newtypes will be treated as operations on the underlying type and the result is the underlying type.</p>
+<p>Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#34;UserId&#34;</span>, int)
+
+fares <span style="color:#f92672">=</span> UserId(<span style="color:#ae81ff">1</span>)
+emily <span style="color:#f92672">=</span> UserId(<span style="color:#ae81ff">3</span>)
+
+total <span style="color:#f92672">=</span> fares <span style="color:#f92672">+</span> emily  <span style="color:#75715e">## Will output 4</span>
+
+</code></pre></div><p>So what is the point? It allows its users to pass any int when a UserId is expected, but at the same time doesn&rsquo;t allow them to create a UserId in an invalid way.</p>
+<p>At runtime, the NewType expression is transformed to a regular function call and therefore no additional overhead is introduced.</p>
+<blockquote>
+<p>Warning: Since NewTypes do not exist at runtime, it is impossible to create subtypes of NewTypes.</p>
+</blockquote>
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+<span style="color:#75715e"># Fails at runtime and does not typecheck</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AdminUserId</span>(UserId): <span style="color:#66d9ef">pass</span>
+
+</code></pre></div><p>However, it is possible to create a NewType based on another NewType:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+ProUserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;ProUserId&#39;</span>, UserId)
+
+</code></pre></div><h2 id="callable-type">Callable Type</h2>
+<p>Return type can also be a <code>Callable</code>. It follows this signature:</p>
+<p><code>Callable[[Arg1Type, Arg2Type], ReturnType]</code></p>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Callable
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">feeder</span>(get_next_item: Callable[[], str]) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#75715e"># Body</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">async_query</span>(on_success: Callable[[int], None],
+                on_error: Callable[[int, <span style="color:#a6e22e">Exception</span>], None]) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#75715e"># Body</span>
+
+</code></pre></div><p>If we don&rsquo;t want to declare the types of the arguments, we can use the following syntax:</p>
+<p><code>Callable[..., ReturnType]</code></p>
+<h2 id="generic-types">Generic Types</h2>
+<p>A normal example of a sequence of UserIds would look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(sequence: Sequence[UserId]) <span style="color:#f92672">-&gt;</span> None: <span style="color:#f92672">...</span>
+
+</code></pre></div><p>But what if we wanted the input to the function to be generic?</p>
+<p>In comes <code>TypeVars</code></p>
+<h3 id="typevars">TypeVars</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Sequence, TypeVar
+
+T <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;T&#39;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(sequence: Sequence[T]) <span style="color:#f92672">-&gt;</span> None: <span style="color:#f92672">...</span>
+</code></pre></div><p>Classes in python can also be generic:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> TypeVar, Generic
+
+T <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;T&#39;</span>)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>(Generic[T]):
+    <span style="color:#66d9ef">def</span> __init__(self, value: T, name: str) <span style="color:#f92672">-&gt;</span> None:
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> value
+
+</code></pre></div><p>Type variables can also be constrained to specific types:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">S <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;S&#39;</span>, int, str)
+</code></pre></div><p>In that case, the type S can either be a str or an int.</p>
+<p>Note: by default type variables are invariant, but they can be marked as covariant or contravariant by passing: <code>covariant=True</code> or <code>contravariant=True</code>. Additionally, an upper bound can be specified using: <code>bound=&lt;type&gt;</code>.</p>
+<h2 id="types">Types</h2>
+<p>What is the difference between the following two declarations:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+</code></pre></div><p>and</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Type
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, Type[int])
+</code></pre></div><p>or even</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+T_int <span style="color:#f92672">=</span> int
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, T_int)
+</code></pre></div><p><code>T_int = int</code> and <code>Type[int]</code> are the same thing. They allow the variable to accept a type int but to also accept <code>class object of int</code>.</p>
+<p>While the second example, only allows the variable to be of type int.</p>
+<p>Example from the doc:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>: <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BasicUser</span>(User): <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProUser</span>(User): <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TeamUser</span>(User): <span style="color:#f92672">...</span>
+
+<span style="color:#75715e"># Accepts User, BasicUser, ProUser, TeamUser, ...</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_new_user</span>(user_class: Type[User]) <span style="color:#f92672">-&gt;</span> User:
+    <span style="color:#75715e"># ...</span>
+    <span style="color:#66d9ef">return</span> user_class()
+</code></pre></div><p>When using types, we can only pass classes, Any, type variables or a Union of those.</p>
+<h2 id="union-types">Union Types</h2>
+<p>Union types are used to indicate an one of multiple types. It is used as <code>Union[X, Y]</code>. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Union[int, str, float]
+Union[str, int]
+</code></pre></div><h2 id="optional">Optional</h2>
+<p>Optional allows us to define a type that can also be None. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(arg: Optional[int] <span style="color:#f92672">=</span> None) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#f92672">...</span>
+
+</code></pre></div><p>Note that <code>Optional[X]</code> is also equivalent to: <code>Union[X, None]</code></p>
+<h2 id="if-you-must-remember-3-things">If you must remember 3 things</h2>
+<ol>
+<li>Type hints makes your code more readable to you should try to use them as often as you can</li>
+<li>Type hints are only checked by static type checkers or linters and not during runtime</li>
+<li>I just turned 24 😄</li>
+</ol>
+]]></content>
+        </item>
         
         <item>
             <title>Cats Kleisli</title>

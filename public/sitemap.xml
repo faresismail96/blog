@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/python/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/type-hinting-in-python/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/type-hints/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/typing/</loc>
+    <lastmod>2020-06-29T00:05:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/tags/cats/</loc>
     <lastmod>2020-05-17T10:00:00+02:00</lastmod>
   </url>
@@ -18,17 +48,7 @@
   </url>
   
   <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2020-05-17T10:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://fares.codes/tags/scala/</loc>
-    <lastmod>2020-05-17T10:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2020-05-17T10:00:00+02:00</lastmod>
   </url>
   
