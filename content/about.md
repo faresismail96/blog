@@ -6,10 +6,8 @@ draft = false
   name = "Fares Ismail"
 +++
 
-23, Data Engineer and attempting to become better at: **List a bunch of stuff here**
+24, Data Engineer and attempting to become better at: **List a bunch of stuff here**
 
-I read somewhere that one of the best ways to learn, is to do so publically.
+I read somewhere that one of the best ways to learn, is to do so publicly.
 
 Hence this site. I will be detailing here as often as I can the tips and tricks I learn everyday...
-
-

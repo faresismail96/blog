@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="As I turn 24, my blog is about to turn 1 year old!! 🎊
+This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)
+Typing is a new module starting python 3.5 and introduced by PEP 484. Its goal is to introduce static types to Python." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/type-hinting-in-python/" />
+
+
+<title>
+    
+    Type Hinting in Python :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Type Hinting in Python">
+<meta itemprop="description" content="As I turn 24, my blog is about to turn 1 year old!! 🎊
+This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)
+Typing is a new module starting python 3.5 and introduced by PEP 484. Its goal is to introduce static types to Python.">
+<meta itemprop="datePublished" content="2020-06-29T00:05:00&#43;02:00" />
+<meta itemprop="dateModified" content="2020-06-29T00:05:00&#43;02:00" />
+<meta itemprop="wordCount" content="855">
+
+
+
+<meta itemprop="keywords" content="python,typing,type hints," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Type Hinting in Python"/>
+<meta name="twitter:description" content="As I turn 24, my blog is about to turn 1 year old!! 🎊
+This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)
+Typing is a new module starting python 3.5 and introduced by PEP 484. Its goal is to introduce static types to Python."/>
+
+
+
+
+<meta property="article:published_time" content="2020-06-29 00:05:00 &#43;0200 CEST" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/type-hinting-in-python/">Type Hinting in Python</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>As I turn 24, my blog is about to turn 1 year old!! 🎊</p>
+<p>This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)</p>
+<p>Typing is a new module starting python 3.5 and introduced by <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a>. Its goal is to introduce static types to Python.</p>
+<h2 id="table-of-content">Table of Content</h2>
+<ol>
+<li><a href="#to-clarify-one-thing">To Clarify One Thing</a></li>
+<li><a href="#hello-world-example">Hello World Example</a></li>
+<li><a href="#custom-types-with-newtype">Custom Types with NewType</a>
+<ul>
+<li><a href="#one-thing-to-pay-attention-for">One thing to pay attention for</a></li>
+</ul>
+</li>
+<li><a href="#callable-type">Callable Type</a></li>
+<li><a href="#generic-types">Generic Types</a>
+<ul>
+<li><a href="#typevars">TypeVars</a></li>
+</ul>
+</li>
+<li><a href="#types">Types</a></li>
+<li><a href="#union-types">Union Types</a></li>
+<li><a href="#optional">Optional</a></li>
+<li><a href="#if-you-must-remember-3-things">If You Must Remember 3 Things</a></li>
+</ol>
+<hr>
+<h2 id="to-clarify-one-thing">To Clarify One Thing</h2>
+<p>To clarify something from the start:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Python will remain a dynamically typed language,
+and the authors have no desire to ever make type
+hints mandatory, even by convention.
+</code></pre></div><p>This is taken from the PEP&rsquo;s Non Goal section.</p>
+<p>So even if type hints are available, they are not checked at runtime (even though there is a support for that through <code>get_type_hints()</code>). Instead, type hints are meant to be checked by offline type checkers or linters.</p>
+<h2 id="hello-world-example">Hello World Example</h2>
+<p>Here is how type hinting might work:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_human</span>(name: str) <span style="color:#f92672">-&gt;</span> str:
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello &#39;</span> <span style="color:#f92672">+</span> name
+
+</code></pre></div><p>without type hints, the function would look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_human</span>(name):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> name
+</code></pre></div><p>You might be saying to yourself that it isn&rsquo;t much difference&hellip; But after a year of experience with Scala I can confirm that types can really make a code more readable.</p>
+<h2 id="custom-types-with-newtype">Custom Types with NewType</h2>
+<p>If the built-in types are not enough, NewType allows us to create custom types:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> NewType
+
+Url <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#34;Url&#34;</span>, str)
+
+website <span style="color:#f92672">=</span> Url(<span style="color:#e6db74">&#34;fares.codes&#34;</span>)
+</code></pre></div><h3 id="one-thing-to-pay-attention-for">One thing to pay attention for</h3>
+<p>Operations on newtypes will be treated as operations on the underlying type and the result is the underlying type.</p>
+<p>Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#34;UserId&#34;</span>, int)
+
+fares <span style="color:#f92672">=</span> UserId(<span style="color:#ae81ff">1</span>)
+emily <span style="color:#f92672">=</span> UserId(<span style="color:#ae81ff">3</span>)
+
+total <span style="color:#f92672">=</span> fares <span style="color:#f92672">+</span> emily  <span style="color:#75715e">## Will output 4</span>
+
+</code></pre></div><p>So what is the point? It allows its users to pass any int when a UserId is expected, but at the same time doesn&rsquo;t allow them to create a UserId in an invalid way.</p>
+<p>At runtime, the NewType expression is transformed to a regular function call and therefore no additional overhead is introduced.</p>
+<blockquote>
+<p>Warning: Since NewTypes do not exist at runtime, it is impossible to create subtypes of NewTypes.</p>
+</blockquote>
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+<span style="color:#75715e"># Fails at runtime and does not typecheck</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AdminUserId</span>(UserId): <span style="color:#66d9ef">pass</span>
+
+</code></pre></div><p>However, it is possible to create a NewType based on another NewType:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+ProUserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;ProUserId&#39;</span>, UserId)
+
+</code></pre></div><h2 id="callable-type">Callable Type</h2>
+<p>Return type can also be a <code>Callable</code>. It follows this signature:</p>
+<p><code>Callable[[Arg1Type, Arg2Type], ReturnType]</code></p>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Callable
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">feeder</span>(get_next_item: Callable[[], str]) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#75715e"># Body</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">async_query</span>(on_success: Callable[[int], None],
+                on_error: Callable[[int, <span style="color:#a6e22e">Exception</span>], None]) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#75715e"># Body</span>
+
+</code></pre></div><p>If we don&rsquo;t want to declare the types of the arguments, we can use the following syntax:</p>
+<p><code>Callable[..., ReturnType]</code></p>
+<h2 id="generic-types">Generic Types</h2>
+<p>A normal example of a sequence of UserIds would look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(sequence: Sequence[UserId]) <span style="color:#f92672">-&gt;</span> None: <span style="color:#f92672">...</span>
+
+</code></pre></div><p>But what if we wanted the input to the function to be generic?</p>
+<p>In comes <code>TypeVars</code></p>
+<h3 id="typevars">TypeVars</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Sequence, TypeVar
+
+T <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;T&#39;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_something</span>(sequence: Sequence[T]) <span style="color:#f92672">-&gt;</span> None: <span style="color:#f92672">...</span>
+</code></pre></div><p>Classes in python can also be generic:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> TypeVar, Generic
+
+T <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;T&#39;</span>)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>(Generic[T]):
+    <span style="color:#66d9ef">def</span> __init__(self, value: T, name: str) <span style="color:#f92672">-&gt;</span> None:
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> value
+
+</code></pre></div><p>Type variables can also be constrained to specific types:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">S <span style="color:#f92672">=</span> TypeVar(<span style="color:#e6db74">&#39;S&#39;</span>, int, str)
+</code></pre></div><p>In that case, the type S can either be a str or an int.</p>
+<p>Note: by default type variables are invariant, but they can be marked as covariant or contravariant by passing: <code>covariant=True</code> or <code>contravariant=True</code>. Additionally, an upper bound can be specified using: <code>bound=&lt;type&gt;</code>.</p>
+<h2 id="types">Types</h2>
+<p>What is the difference between the following two declarations:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, int)
+</code></pre></div><p>and</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Type
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, Type[int])
+</code></pre></div><p>or even</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+T_int <span style="color:#f92672">=</span> int
+UserId <span style="color:#f92672">=</span> NewType(<span style="color:#e6db74">&#39;UserId&#39;</span>, T_int)
+</code></pre></div><p><code>T_int = int</code> and <code>Type[int]</code> are the same thing. They allow the variable to accept a type int but to also accept <code>class object of int</code>.</p>
+<p>While the first example, only allows the variable to be of type int.</p>
+<p>Example from the doc:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>: <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BasicUser</span>(User): <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProUser</span>(User): <span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TeamUser</span>(User): <span style="color:#f92672">...</span>
+
+<span style="color:#75715e"># Accepts User, BasicUser, ProUser, TeamUser, ...</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_new_user</span>(user_class: Type[User]) <span style="color:#f92672">-&gt;</span> User:
+    <span style="color:#75715e"># ...</span>
+    <span style="color:#66d9ef">return</span> user_class()
+</code></pre></div><p>When using types, we can only pass classes, Any, type variables or a Union of those.</p>
+<h2 id="union-types">Union Types</h2>
+<p>Union types are used to indicate an one of multiple types. It is used as <code>Union[X, Y]</code>. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Union[int, str, float]
+Union[str, int]
+</code></pre></div><h2 id="optional">Optional</h2>
+<p>Optional allows us to define a type that can also be None. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(arg: Optional[int] <span style="color:#f92672">=</span> None) <span style="color:#f92672">-&gt;</span> None:
+    <span style="color:#f92672">...</span>
+
+</code></pre></div><p>Note that <code>Optional[X]</code> is also equivalent to: <code>Union[X, None]</code></p>
+<h2 id="if-you-must-remember-3-things">If you must remember 3 things</h2>
+<ol>
+<li>Type hints makes your code more readable to you should try to use them as often as you can</li>
+<li>Type hints are only checked by static type checkers or linters and not during runtime</li>
+<li>I just turned 24 😄</li>
+</ol>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/python">python</a></span><span class="tag"><a href="https://fares.codes/tags/typing">typing</a></span><span class="tag"><a href="https://fares.codes/tags/type-hints">type hints</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>855 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-06-29 00:05 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/cats-kleisli/">
+                                <span class="button__text">Cats Kleisli</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

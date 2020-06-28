@@ -5,10 +5,37 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 17 May 2020 10:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2020 00:05:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python</title>
+      <link>https://fares.codes/tags/python/</link>
+      <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>type hints</title>
+      <link>https://fares.codes/tags/type-hints/</link>
+      <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/type-hints/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>typing</title>
+      <link>https://fares.codes/tags/typing/</link>
+      <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/typing/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>cats</title>
