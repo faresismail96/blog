@@ -4,8 +4,489 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Mon, 29 Jun 2020 00:05:00 +0200</lastBuildDate>
+        <lastBuildDate>Sat, 04 Jul 2020 12:20:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Everything You Probably Need to Know About Airflow</title>
+            <link>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</link>
+            <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</guid>
+            <description>Taking a small break from scala to look into Airflow.
+Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
+Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
+            <content type="html"><![CDATA[<p>Taking a small break from scala to look into Airflow.</p>
+<p>Also, I&rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&hellip; Probably the only thing keeping me from starting a travel blog.</p>
+<h2 id="table-of-content">Table of Content</h2>
+<ul>
+<li><a href="#intro-to-airflow">Intro to Airflow</a></li>
+<li><a href="#task-dependencies">Task Dependencies</a></li>
+<li><a href="#the-dag-file">The Dag File</a></li>
+<li><a href="#intervals-in-airflow">Intervals</a></li>
+<li><a href="#backfilling">BackFilling</a></li>
+<li><a href="#best-practice-for-airflow-tasks">Best Practice For Airflow Tasks</a></li>
+<li><a href="#Templating">Templating</a></li>
+<li><a href="#passing-arguments-to-python-operator">Passing Arguments to Python Operator</a></li>
+<li><a href="#triggering-workflows">Triggering WorkFlows</a></li>
+<li><a href="#triggering-rules">Triggering Rules</a></li>
+<li><a href="#xcom">XCOM</a></li>
+<li><a href="#sensors">Sensors</a></li>
+<li><a href="#random-til">Random TILs</a></li>
+<li><a href="#if-you-must-remember-3-things">If You Must Remember 3 Things</a></li>
+</ul>
+<hr>
+<h2 id="intro-to-airflow">Intro to Airflow</h2>
+<p>Airflow is a platform to programmatically author, schedule and monitor workflows. It does so through DAGs (directed acyclic graph) consisting of one or multiple Tasks.</p>
+<p>A task consists of an Operator that executes a command for a job.</p>
+<p>It is worth noting that some competitors to Airflow are: Oozie (but it is specific to hadoop job ie: spark, hive&hellip;) and <a href="https://metaflow.org/">MetaFlow</a> but MetaFlow is more data science oriented.</p>
+<p>So how does it work?</p>
+<p>Airflow has a central process called the scheduler. Its job is to push tasks to be executed by different workers. The scheduler will read dag files from the dag folder and will access the database. Users on the other hand will only interact with the <code>Webserver</code> a graphical user interface that will represent a global view of all dags available along with their execution details both current and past. To do this, the Webserver accesses both the dag file and the database.</p>
+<p>Additionally, Airflow can scale out on multiple machines. But for the time being, only the <code>Celery</code> and <code>Kubernetes</code> workers support Airflow in cluster mode. (More on that later).</p>
+<p>We&rsquo;ve mentioned Dags representing the bunch of tasks we&rsquo;d like executed.</p>
+<p>A DAG might look something like this:</p>
+<p><img src="/images/airflow/example-dag1.png" alt="Example Dag"></p>
+<p>Every task is an operator, and airflow comes with a bunch of prebuilt Operators such as:</p>
+<ul>
+<li>BashOperator: An operator to run a bash command.</li>
+<li>PythonOperator: An operator that will execute a python function</li>
+</ul>
+<p>The tasks in the dag define clear dependencies. In the previous example, task1 will be executed and its success will trigger the execution of task2. Its failure will halt the execution of all tasks that depend on task1 and in our case, this represents all the other tasks.</p>
+<h2 id="task-dependencies">Task Dependencies</h2>
+<p>The Dag file is written in python. and there are two ways to define dependencies between dags:</p>
+<p>assume we&rsquo;ve already created the tasks <code>task1</code>, <code>task2</code>, <code>task3a</code>, <code>task3b</code> (more on that in a bit), we can then declare the dependencies in the following way:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">task1 <span style="color:#f92672">&gt;&gt;</span> task2 <span style="color:#f92672">&gt;&gt;</span> [task3a, task3b]
+</code></pre></div><p>This is in my opinion the clearest way to showcase that task2 depends on task 1 and that both task 3a and 3b depends on task2. Notice that we can group tasks in between brackets.</p>
+<p>Another way to define dependencies between tasks in to explicitly use the keywords <code>set_upstream</code> or <code>set_downstream</code>. To better understand it, I found it helpful to think of the ensemble of tasks as a stream and have data flow in that stream.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    task1<span style="color:#f92672">.</span>set_downstream(task2)
+    task2<span style="color:#f92672">.</span>set_downstream([task3a, task3b])
+</code></pre></div><p>or the other way around:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    task3a<span style="color:#f92672">.</span>set_upstream(task2)
+    task3b<span style="color:#f92672">.</span>set_upstream(task2)
+    task2<span style="color:#f92672">.</span>set_upstream(task1)
+</code></pre></div><p>You&rsquo;d be correct in questioning the usefulness of the <code>set_upstream</code>. In this case it is much more verbose (since one task is branching out to many), but if the case was reversed and multiple tasks were converging into one, then it&rsquo;d have been easier to use <code>set_upstream</code></p>
+<h2 id="the-dag-file">The Dag File</h2>
+<p>As mentioned earlier, tasks and dependencies are defined using python in a Dag file. The following example is fairly self explanatory but I&rsquo;ll still comment on some points:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> DAG(
+    dag_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;my_dag&#39;</span>,
+    schedule_interval<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;@daily&#39;</span>,
+    start_date<span style="color:#f92672">=</span>dt<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2019</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">28</span>)
+) <span style="color:#66d9ef">as</span> dag:
+    task1 <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task1&#39;</span>)
+    task2 <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task2&#39;</span>)
+    task3a <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task3a&#39;</span>)
+    task3b <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task3b&#39;</span>)
+
+    task1 <span style="color:#f92672">&gt;&gt;</span> task2 <span style="color:#f92672">&gt;&gt;</span> [task3a, task3b]
+</code></pre></div><p>This type of dag definition uses the context manager, so that all the tasks defined here will belong to the same dag. Another possible declaration though more verbose:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dag <span style="color:#f92672">=</span> DAG(
+    dag_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;branch_without_trigger&#39;</span>,
+    schedule_interval<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;@once&#39;</span>,
+    start_date<span style="color:#f92672">=</span>dt<span style="color:#f92672">.</span>datetime(<span style="color:#ae81ff">2019</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">28</span>)
+)
+
+task1 <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task1&#39;</span>, dag<span style="color:#f92672">=</span> dag)
+task2 <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task2&#39;</span>, dag<span style="color:#f92672">=</span> dag)
+task3a <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task3a&#39;</span>, dag<span style="color:#f92672">=</span> dag)
+task3b <span style="color:#f92672">=</span> DummyOperator(<span style="color:#e6db74">&#39;task3b&#39;</span>, dag<span style="color:#f92672">=</span> dag)
+</code></pre></div><p>you can see why in most cases option one is preferred.</p>
+<h2 id="intervals-in-airflow">Intervals in Airflow</h2>
+<p>In the previous section, we&rsquo;ve seen that in the definition of the dag, we provide a start_date.</p>
+<p>We also have the possibility to define a <code>schedule_interval</code>. This way, airflow will automatically trigger the dag at regular intervals. So how does this work?</p>
+<p>using the start_date and the interval value, airflow splits the dag into interval.</p>
+<p>At the <strong>end</strong> of each interval, airflow will trigger the dag. Let us go through an example:</p>
+<p><img src="/images/airflow/example-interval1.jpg" alt="Airflow Interval Example"></p>
+<p>In this example, our intervals are one hour long, and at the end of each interval  the dag will be triggered.</p>
+<h3 id="schedule_intervals">Schedule_Intervals</h3>
+<p>We&rsquo;ve just mentioned the <code>schedule_interval</code> that allows us to schedule a dag run at specific time periods.</p>
+<p>This parameter accepts different types of input:</p>
+<ul>
+<li>A Preset: <code>@once</code>, <code>@hourly</code>, <code>@daily</code>, <code>@weekly</code> (while simple to read and understand, it is quite limited).</li>
+<li>A Cron: <code>0****</code>, <code>00***</code>, <code>0011*</code> where each asterisk from left to right mean: every minute of every hour of every day of every month and every day of the week</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"> * * * * *  command to execute
+ ┬ ┬ ┬ ┬ ┬
+ │ │ │ │ │
+ │ │ │ │ │
+ │ │ │ │ └───── day of week (0 - 7) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)
+ │ │ │ └────────── month (1 - 12)
+ │ │ └─────────────── day of month (1 - 31)
+ │ └──────────────────── hour (0 - 23)
+ └───────────────────────── min (0 - 59)
+</code></pre></div><ul>
+<li>datetime.timedelta: <code>timedelta(minutes = 10)</code> or <code>timedelta(hours = 2)</code></li>
+</ul>
+<p>We can also reference time dynamically, we have access to variables like <code>execution_date</code>, <code>next_execution_date</code>, <code>previous...</code>.</p>
+<h2 id="backfilling">BackFilling</h2>
+<p>If the startdate of a dag is in the past, then airflow will start by re-running all previous runs of this dag. To disable this, set the parameter <code>catchup</code> to False.</p>
+<h2 id="best-practice-for-airflow-tasks">Best Practice For Airflow Tasks</h2>
+<p>As a rule of thumb and as a best practice, Airflow tasks should be Atomic and Idempotent.</p>
+<h3 id="atomic">Atomic</h3>
+<p>Either a task succeeds fully and produces an end result, or it fails and does so with no side effect to the system.</p>
+<p>The reasoning behind this is that Airflow can re-launch failed tasks multiple times and if the first failed launch does not leave the system intact, it could end up producing erroneous data in the output of the second run, or simply polluting the system.</p>
+<h3 id="idempotent">Idempotent</h3>
+<p>Since Airflow tasks can be re-run or retried, it becomes important to generate the same output for the same input.</p>
+<h2 id="templating">Templating</h2>
+<p>One feature of airflow is that it supports jinja templating.</p>
+<p>And every operator in Airflow keeps a list of attributes that can be templated through the variable: <code>templated_fields</code>.</p>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+BashOperator(
+    task_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;say_hello&#34;</span>,
+    bash_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;echo Hello {{name}}&#34;</span>,
+    dag <span style="color:#f92672">=</span> dag
+)
+
+</code></pre></div><p>The above example will output: <code>Hello Fares</code> assuming name is fares. This is because the BashOperator declares the bash_command as a templated_field. If it weren&rsquo;t, the output would have been: <code>Hello {{name}}</code></p>
+<h3 id="how-to-implement-that-in-custom-operators-and-sensors">How to Implement that in Custom Operators and Sensors</h3>
+<p>As mentioned above, to implement this in a custom operator, we would need to declare the attribute in the list of templated_fields. Airflow will take care of the rest.</p>
+<h2 id="passing-arguments-to-python-operator">Passing Arguments to Python Operator</h2>
+<p>A PythonOperator takes a function callable and executes it within the DAG. Pretty simple&hellip; But what happens if we&rsquo;d like to pass an argument to that function? There are two ways to do so, either through the args variable or the kwargs.</p>
+<h3 id="using-op_args">Using op_args</h3>
+<p>Assume we had a function</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_print_hello</span>(name):
+   <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Hello {name}!&#34;</span>)
+</code></pre></div><p>In the PythonOperator we can provide name in the following manner:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print_context <span style="color:#f92672">=</span> PythonOperator(
+    task_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;print_hello&#34;</span>,
+    python_callable<span style="color:#f92672">=</span>_print_hello,
+    op_args<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Fares&#34;</span>]
+    dag<span style="color:#f92672">=</span>dag,
+)
+</code></pre></div><p>This would be the same as calling <code>_print_hello(&quot;Fares&quot;)</code>.</p>
+<h3 id="using-op_kwargs">Using op_kwargs</h3>
+<p>Another way of passing arguments is through the kwargs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print_context <span style="color:#f92672">=</span> PythonOperator(
+    task_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;print_hello&#34;</span>,
+    python_callable<span style="color:#f92672">=</span>_print_hello,
+    op_kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;Fares&#34;</span>}
+    dag<span style="color:#f92672">=</span>dag,
+)
+</code></pre></div><p>Which would be equivalent to calling <code>_print_hello(name=&quot;Fares&quot;)</code></p>
+<h3 id="passing-the-airflow-context-to-the-function">Passing the Airflow Context to the Function</h3>
+<p>To pass the context to the python function simply set the <code>provide_context</code> to True in the Operator.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_print_context</span>(<span style="color:#f92672">**</span>context):
+   <span style="color:#66d9ef">print</span>(context)
+
+print_context <span style="color:#f92672">=</span> PythonOperator(
+    task_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;print_context&#34;</span>,
+    python_callable<span style="color:#f92672">=</span>_print_context,
+    provide_context<span style="color:#f92672">=</span>True,
+    dag<span style="color:#f92672">=</span>dag,
+)
+</code></pre></div><h2 id="triggering-workflows">Triggering WorkFlows</h2>
+<p>We&rsquo;ve seen that Dags can be triggered on a specific time or timedelta using the scheduled parameter. But there are other ways to trigger dags.</p>
+<p>One of the is using the experimental REST api for airflow (In airflow 2.0 the API no longer becomes experimental).</p>
+<p>Here is an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+curl -X POST <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8080/api/experimental/dags/&lt;DAG_ID&gt;/dag_runs <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#39;Cache-Control: no-cache&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;conf&#34;:&#34;{\&#34;key\&#34;:\&#34;value\&#34;}&#34;}&#39;</span>
+
+</code></pre></div><p>For more options and the full API see <a href="https://airflow.apache.org/docs/stable/rest-api-ref.html">Documentation</a></p>
+<p>Another way to trigger a workflow is through sensors.</p>
+<p>Sensors will continuously poll a system or a certain state until a condition is met, or a timeout is reached.</p>
+<p>Airflow provides a bunch of sensors out of the box as well as the possibility to create custom sensors by extending <code>BaseSensor</code> or any other sensor. Example of existing sensors: <code>WebHDFSSensor</code>, <code>TimeSensor</code>, <code>TimeDeltaSensor</code>&hellip; <a href="https://airflow.apache.org/docs/stable/_api/airflow/sensors/index.html">Full List Here</a></p>
+<p>We will discuss sensors in a later section.</p>
+<h2 id="triggering-rules">Triggering Rules</h2>
+<p>By default, when a dag is triggered, the only way a task can be executed is by having all its upstream tasks in success. But this behavior can be altered depending on the version of airflow and using the parameter: <code>trigger_rule</code></p>
+<p>In airflow 1.10.1:</p>
+<ul>
+<li><code>all_success</code>: (Default Value) all parents are in success</li>
+<li><code>all_failed</code>: All parents are in a failed or upstream_failed state</li>
+<li><code>all_done</code>: All parents are done executing. This can be skipped, failed, success etc&hellip;</li>
+<li><code>one_failed</code>: The task will execute as soon as one parent is in a failed state. It will not wait for all parents to finish executing.</li>
+<li><code>one_success</code>: The task will execute as soon as one parent is in a success state. It will not wait for other parents to finish execution.</li>
+<li><code>dummy</code>: Dependencies are not really existent, it will trigger at will</li>
+</ul>
+<p>In Airflow 1.10.10:</p>
+<p>We still have all the trigger rules defined in the earlier version, but to those we add:</p>
+<ul>
+<li><code>none_failed</code>: Will trigger a task when all the parents have finished executing AND none of them are in a failed state. Parents can however be in a skipped state.</li>
+<li><code>none_failed_or_skipped</code>: Will trigger a task when all parents have finished execution AND none of them are in a failed or skipped state. This is similar to the <code>one_success</code> but the difference is that it waits for all its parents to finish execution.</li>
+</ul>
+<h2 id="xcom">XCOM</h2>
+<p>XCOM stands for <code>cross communication</code>. It is the way different tasks in Airflow communicate with one another. It works by defining a key and value, and pushing those into the Airflow Database. Other tasks can later on pull the value from the Database by using the key. One requirement for a value to be pushed into xcom is that it needs to be &ldquo;picklable&rdquo; (not sure if picklable is a real word but airflow should be able to <code>pickle</code> the value).</p>
+<p>For additional information, pickling is the process by which python converts data into a byte stream (by serializing it) and unpickling is the deserializing process. Those are also sometimes referred to as: <code>serialization</code>, <code>marshalling</code> or <code>flattening</code>.</p>
+<p><a href="https://docs.python.org/2.4/lib/node66.html">Here is a list of things that can be pickled and unpickled</a></p>
+<p>Data sent in XCOM are stored in the <code>Apache Airflow Backend Database</code>.</p>
+<p>There are two way to push data into xcom: either by pushing it explicitly through xcom_push or implicitly by simply returning a value.</p>
+<h3 id="pushing-to-xcom-explicitly">Pushing to XCOM explicitly</h3>
+<p>Here is an example on how an Operator or a PythonOperator&rsquo;s callable function can push a value into xcom:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+context[<span style="color:#e6db74">&#39;task_instance&#39;</span>]<span style="color:#f92672">.</span>xcom_push(context[<span style="color:#e6db74">&#39;task&#39;</span>]<span style="color:#f92672">.</span>task_id, some_value_to_push)
+
+</code></pre></div><p>Alright, so what is happening here? first we are retrieving the <code>task_instance</code> object from the context and then calling the xcom_push function, passing the key and the value to it. In this case we chose the key to be the task_id so we are also retrieving that value from the context.</p>
+<p>Under the hood, we&rsquo;d be calling the following function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">XCom<span style="color:#f92672">.</span>set(
+            key<span style="color:#f92672">=</span>key,
+            value<span style="color:#f92672">=</span>value,
+            task_id<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>task_id,
+            dag_id<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>dag_id,
+            execution_date<span style="color:#f92672">=</span>execution_date <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>execution_date)
+</code></pre></div><p><a href="https://github.com/apache/airflow/blob/v1-10-stable/airflow/models/taskinstance.py#L1483">Source Code</a></p>
+<h3 id="pushing-to-xcom-by-returning-a-value">Pushing to XCOM by returning a value</h3>
+<p>Operators can push a value in their <code>execute</code> function, and a PythonOperator can push a value to xcom by returning it in its <code>python_callable</code> function.</p>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">push_function</span>(<span style="color:#f92672">**</span>context):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;xyz&#39;</span>
+
+</code></pre></div><p>the value &ldquo;xyz&rdquo; will be pushed to xcom with the key being the task_id of the function pushing this value.</p>
+<h3 id="pulling-data-from-xcom">Pulling data from XCOM</h3>
+<p>Data can be pulled from xcom and additionally, we can filter based on key, task_ids, dag_id etc&hellip;</p>
+<p>Pulling data from xcom is done through the <code>xcom_pull()</code> function. One important thing to note is that this function takes in a key argument and by default, this key argument is set to <code>XCOM_RETURN_KEY</code>. This limits the search to values that were pushed using the <code>return</code> key word and ignores those pushed manually.</p>
+<p>To change this, pass <code>None</code> to the <code>key</code> param.</p>
+<p>Here is an example on how to retrieve data from xcom:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">task_instance <span style="color:#f92672">=</span> context[<span style="color:#e6db74">&#39;task_instance&#39;</span>] <span style="color:#75715e">## We can also use ti instead of task_instance. They&#39;re aliases.</span>
+task_instance<span style="color:#f92672">.</span>xcom_pull(key <span style="color:#f92672">=</span> None, task_ids <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;the_task_id_used_while_pushing_the_data&#34;</span>)
+
+</code></pre></div><p>We can also pass None to <code>task_ids</code> to retrieve all values pushed to xcom.</p>
+<p>The full signature of the task instance pull is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xcom_pull</span>(
+            self,
+            task_ids<span style="color:#f92672">=</span>None,
+            dag_id<span style="color:#f92672">=</span>None,
+            key<span style="color:#f92672">=</span>XCOM_RETURN_KEY,
+            include_prior_dates<span style="color:#f92672">=</span>False)
+</code></pre></div><p>If we pass a value to <code>dag_id</code>, xcom will only pull values from this dag.</p>
+<p><code>include_prior_dates=False</code> will only pull data from current <code>execution_date</code>. Otherwise it will also include all history.</p>
+<p><a href="https://github.com/apache/airflow/blob/v1-10-stable/airflow/models/taskinstance.py#L1515">Link to Source Code</a></p>
+<h2 id="sensors">Sensors</h2>
+<p>As we&rsquo;ve mentioned above, sensors are special type of operators that will continuously poll a certain system/state&hellip; until a success criteria is met or a timeout is reached.</p>
+<p>Sensors extend the <code>BaseSensorOperator</code> and define a <code>poke</code> function. That is all we need to create a custom sensor: an <code>init</code> for the class and a <code>poke</code> function.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyCustomSensor</span>(BaseSensorOperator):
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">poke</span>(self, context):
+        <span style="color:#f92672">...</span>
+</code></pre></div><p>Poke is expected to return a boolean that indicates if a success criteria is met or not. If it is met, the sensor will set the tasks&rsquo; state to <code>Success</code> and will end the execution. If the return of the poke is <code>False</code>, the sensor will continue polling based on one of two modes defined later on.</p>
+<p>From the <code>BaseSensorOperator</code> we inherit a couple behaviors:</p>
+<ul>
+<li><code>poke_interval</code>: Amount of time to wait in between two checks</li>
+<li><code>timeout</code>: time before the Sensors stops checking the condition and sets the state to failed. By default it is set to one week: <code>60*60*24*7</code></li>
+<li><code>soft_fail</code>: In the case where the timeout is reached and this is set to True, instead of failing, the sensors will simply be set to <code>Skipped</code></li>
+<li><code>mode</code>: set to either <code>poke</code> or <code>rescheduled</code> Those two will be explained in the next section.</li>
+</ul>
+<p>It is worth noting that <code>BaseSensorOperator</code> also extends from <code>BaseOperator</code> so in addition to the above attributes, we also have those defined in <code>BaseOperator</code>.</p>
+<h3 id="poke-mode">Poke Mode</h3>
+<p>To understand the advantages/disadvantages of the poke vs rescheduled mode one needs to understand how Airflow schedules and launches jobs&hellip;</p>
+<p>Airflow&rsquo;s configuration file will contain a couple variables that dictate the amounts of tasks that can be run at the same time both in total and within the same dag. In some cases by the same executor (If we&rsquo;re in Celery or Kubernetese)</p>
+<p>At the heart of Airflow is the <code>Scheduler</code> who will interact with both the dag file and the database to submit the work to workers. There are a maximum of x slots that can be running at the same time and each running task will occupy one slot. If a task is scheduled to be run while there are no slots available, that task will be queued up until a slot becomes available.</p>
+<p>One Airflow best practice is to use pools to regulate the available slots based on type etc&hellip; But more on that later.</p>
+<p>In poke mode, the Sensor will occupy one slot and will not release it until a success criteria is met or a timeout reached.</p>
+<p>In that mode we can have a guarantee that the condition will continuously be checked at regular intervals, but at the same time we would be occupying a slot for the time of execution and potentially preventing other tasks from running.</p>
+<h3 id="rescheduled-mode">Rescheduled Mode</h3>
+<p>In rescheduled mode; once the sensor finishes its check and returns a <code>False</code>, it will rescheduled itself for a later time (depending on poke_interval) and will release the slot it uses.</p>
+<p>After the poke_interval, the sensor will re-check for the condition.</p>
+<p>The advantage in this case is that once the sensor finishes its check, it releases the slot and so another task can use it to run.</p>
+<p>The disadvantage is that if multiple tasks are running at the same time, the sensor can be queued while waiting for a slot to become available.</p>
+<p>This can be managed by having a specific pool for scheduled tasks and coordinating long running tasks at different times during the day/night.</p>
+<h3 id="sensor-deadlock">Sensor Deadlock</h3>
+<p>Since sensors have a default timeout period of one week, we could easily end up with a deadlock scenario.</p>
+<p>Assume a sensor checks if a file is present on HDFS before resuming the rest of the workflow. Also assume that this sensor is in a DAG that is scheduled to run once per day.</p>
+<p>If the file never arrives, the sensor will continue running for one week occupying one slot. But on day two another instance of the DAG will run and another sensor will then continue running for a week occupying another slot. The same thing will happen on day three and four and so on and so forth. Eventually we will have consumed seven slots that will continue running and occupying slots, preventing other tasks from being executed.</p>
+<p>So it is important to pay special attention to timeout, even more so when using the poke mode instead of the rescheduled mode.</p>
+<hr>
+<h2 id="random-til">Random til</h2>
+<p>Here is a list of random stuff I recently learned on airflow and find cool. I&rsquo;m cramming them here because I&rsquo;m too lazy to re-think the structure of this article to fit them where they should fit.</p>
+<h3 id="sla">SLA</h3>
+<p>SLA stands for service level agreement.</p>
+<p>In Airflow, we have the possibility to define a max time for either dags or tasks that should not be exceeded during a run. If that time is exceeded, an email could be sent as an alert and it will be logged in a monitoring page called SLA Misses.</p>
+<p>SLA is typed as an <code>Optional[timedelta]</code> so it can either be set to None if we do not want to alert on task taking too much time, or set to a timedelta representing the max time a task execution can take.</p>
+<h4 id="configuring-sla-miss-emails">Configuring SLA Miss Emails</h4>
+<p>To configure the SLA email define the following in your <code>airflow.cfg</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">smtp</span>]
+<span style="color:#a6e22e">smtp_host</span> = <span style="color:#a6e22e">smtp</span>.<span style="color:#a6e22e">gmail</span>.<span style="color:#a6e22e">com</span>
+<span style="color:#a6e22e">smtp_starttls</span> = <span style="color:#a6e22e">True</span>
+<span style="color:#a6e22e">smtp_ssl</span> = <span style="color:#a6e22e">False</span>
+<span style="color:#a6e22e">smtp_user</span> = <span style="color:#a6e22e">YOUR_EMAIL_ADDRESS</span>
+<span style="color:#a6e22e">smtp_password</span> = <span style="color:#ae81ff">16</span><span style="color:#a6e22e">_DIGIT_APP_PASSWORD</span>
+<span style="color:#a6e22e">smtp_port</span> = <span style="color:#ae81ff">587</span>
+<span style="color:#a6e22e">smtp_mail_from</span> = <span style="color:#a6e22e">YOUR_EMAIL_ADDRESS</span>
+</code></pre></div><p>and pass a specific <code>email</code> parameter to the operator.</p>
+<h4 id="dag-level-sla">DAG Level SLA</h4>
+<p>SLA can be set on a DAG level by passing it in the default_args:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">default_args <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;owner&#39;</span>: <span style="color:#e6db74">&#39;airflow&#39;</span>,
+    <span style="color:#e6db74">&#39;depends_on_past&#39;</span>: False,
+    <span style="color:#e6db74">&#39;sla&#39;</span>: timedelta(hours<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e">## HERE</span>
+}
+</code></pre></div><p>Then at the end of each task Airflow tests whether or not the tasks&rsquo; execution time exceeded the SLA. If it did, an email is sent to the set of emails defined in <code>default_args</code> and the next task continues its execution.</p>
+<p>If the task did not exceed the SLA, the next task is executed normally and no email is sent.</p>
+<p>So to recap: the check is made AFTER the task is executed and a violation of SLA has no impact on the execution of the DAG.</p>
+<h4 id="task-level-sla">Task Level SLA</h4>
+<p>We have the possibility to define an SLA for a single task by passing the <code>sla</code> param. This parameter is inherited from BaseOperator so all operators/sensors should have it.</p>
+<p>It checks for a miss at the start of the task and at the end. If a violation occurs during the tasks&rsquo; execution, an email is only sent after it finishes its execution.</p>
+<p><strong>NOTE</strong> The SLA specified at the task level is the time from the DAGs execution NOT that of the task.</p>
+<h4 id="sla-misses">SLA Misses</h4>
+<p>Airflow give us a view of all SLA misses across all DAGs in: Browse &raquo; SLA Misses</p>
+<p>This can be a useful monitoring tool asides the emails that are sent.</p>
+<p>In that view, we can see:</p>
+<ul>
+<li>Dag id</li>
+<li>Task id</li>
+<li>Execution date: The execution date of the DAG with the SLA miss</li>
+<li>Email sent: If an email was sent or not.</li>
+<li>Timestamp: Time when the SLA miss was detected</li>
+</ul>
+<p>Note that all SLA that share the same timeout will be grouped in one email.</p>
+<h4 id="sla-miss-callback">SLA Miss Callback</h4>
+<p>In addition to the email that is sent on an SLA Miss and the monitoring view, Airflow allows developers to execute a callable when an SLA Miss is detected. This can be done by passing a function to the: <code>sla_miss_callback</code> parameter.</p>
+<h4 id="important-note">Important Note</h4>
+<p>SLA works with scheduled DAG runs only.</p>
+<h3 id="deferred-dag-assignment">Deferred Dag Assignment</h3>
+<p>Sometimes we would like to dynamically create a DAG based on some conditions or state. In that case, deferred dag assignment can be very useful:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span>(some_check()):
+    task_1<span style="color:#f92672">.</span>dag <span style="color:#f92672">=</span> dag
+    start_task <span style="color:#f92672">&gt;&gt;</span> task_1
+
+<span style="color:#66d9ef">else</span>:
+    task_2<span style="color:#f92672">.</span>dag<span style="color:#f92672">=</span>dag
+    start_task <span style="color:#f92672">&gt;&gt;</span> task_2
+</code></pre></div><p>That way, based on the function <code>some_check</code> our dag is constructed and if evaluates to True, task_2 will not be in that dag.</p>
+<p>This can be quite helpful when we generate tasks dynamically.</p>
+<h3 id="priority-weights">Priority Weights</h3>
+<p>We have previously talked about how airflow functions and mentioned that the scheduler decides which tasks to push to executors.</p>
+<p>But how does it do that?</p>
+<p>Each task will have a weight associated to it. The weight can go from one to int max value. The higher the weight, the more priority it has.</p>
+<p>This weight can be set using the <code>priority_weight</code> parameter.</p>
+<h3 id="weight-rules">Weight Rules</h3>
+<p>Weight rules are different methods used to calculate the effective weight of a given task. By default this parameter is set to Downstream but other rules exist:</p>
+<ul>
+<li>
+<p><code>Absolute</code>: In absolute mode, the weight of a task is the weight assigned in <code>priority_weight</code>. Seems straightforward and simple. This rule has the benefit of speeding up the dag creation since no extra computation is required to figure out the effective weight of each task. Additionally, it allows developers to have a better understanding of the execution priority and order.</p>
+</li>
+<li>
+<p><code>Downstream</code>: In Downstream mode, the weight of a task is the sum of weights of this task and all its downstream tasks.</p>
+<p>When in Downstream mode, the upstream tasks will have higher priority and those will go down as soon as more tasks finish executing.</p>
+</li>
+<li>
+<p><code>Upstream</code>: In Upstream mode the weight of a task is the sum of weights of all its upstream tasks. It is the opposite of the downstream rule. This is useful when we have multiple dag run instances and want the current dag run to finish executing before the other instances start.</p>
+</li>
+</ul>
+<h3 id="add-docs-to-tasks">Add Docs to Tasks</h3>
+<p>Though in most cases the DAGs should be self explanatory, we sometimes might want to provide a context or an explanation to a specific task.</p>
+<p>In those cases Airflow allows us to document tasks and dags with comments in different formats.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+another  <span style="color:#f92672">=</span> BashOperator(task_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;one&#34;</span>, bash_command<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;echo another&#34;</span>, dag<span style="color:#f92672">=</span>dag)
+
+another<span style="color:#f92672">.</span>doc_md <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"># Hello World
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">## Context
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">This is where context can go
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">## Usefulness
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Here is where I can explain why this task is useful
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">### Note
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Over here I can give more details
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+</code></pre></div><p>In the task instance details of this task, we will be able to see the following:</p>
+<p><img src="/images/airflow/DocumentedTask.png" alt="Example Of a Documented Task"></p>
+<p>If we do not want to write in markdown, we still have the possibility to write a regular string, in rst format, yaml and json. The last two are especially useful for printing out configuration.</p>
+<p>This is done through the following attributes:</p>
+<p><code>doc</code>, <code>doc_md</code>, <code>doc_rst</code>, <code>doc_json</code>, and <code>doc_yaml</code>.</p>
+<h3 id="add-docs-to-dags">Add Docs to Dags</h3>
+<p>In addition to adding documentation to tasks, we can also add documentations to DAGs themselves:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+dag<span style="color:#f92672">=</span> DAG(dag_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fares-test&#34;</span>, default_args<span style="color:#f92672">=</span>DEFAULT_ARGS, user_defined_macros<span style="color:#f92672">=</span>USER_DEFINED_MACROS, schedule_interval<span style="color:#f92672">=</span>None)
+
+
+dag<span style="color:#f92672">.</span>doc_md <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74"># fares-test DAG
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">## Actions
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">1. Reads Files from HDFS
+</span><span style="color:#e6db74">2. Computes something
+</span><span style="color:#e6db74">3. Writes files to HDFS
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">## Trigger Time
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">This DAG is scheduled everyday at 3 am.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+</code></pre></div><p><img src="/images/airflow/Documented-DAG.png" alt="Documented DAG"></p>
+<h3 id="airflow-variables">Airflow Variables</h3>
+<p>Airflow Variables are used to store and fetch data at runtime without having to hard code it into a DAG file.</p>
+<p>Variables are comprised of a Key and a Value and are stored in the metadata database in a table called Variables. They are also accessible to the user through the webserver in Admin &raquo; Variables.</p>
+<p>To create them, either do so from the Webserver by accessing Webserver &raquo; Variables &raquo; Create</p>
+<p>or through the command line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+airflow variables -s my_key my_value
+
+</code></pre></div><p>We can also pass a json configuration file through the <code>-e</code> instead of <code>-s</code></p>
+<p>Or through code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> airflow.models <span style="color:#f92672">import</span> Variable
+my_var <span style="color:#f92672">=</span> Variable<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#34;my_key&#34;</span>, <span style="color:#e6db74">&#34;my_value&#34;</span>)
+</code></pre></div><p>But remember not to put the variables sets/gets outside of tasks or they will be executed multiple times. See Best Practices section for more information.</p>
+<h4 id="where-does-airflow-look-for-variables">Where does Airflow Look for Variables</h4>
+<p>Airflow will look for the variable in the following places and in this order:</p>
+<ol>
+<li>Airflow Backend Secrets</li>
+<li>AIRFLOW_ENV</li>
+<li>Meta store</li>
+</ol>
+<p>If it finds it in one of the first two places, it will not create the expensive connection to the meta store.</p>
+<h4 id="how-to-hide-variable-values">How to Hide Variable Values</h4>
+<p>To hide the value of some sensitive information that we wish to store in Airflow Variables we need to add one of the following keywords to the key:</p>
+<ul>
+<li><code>password</code></li>
+<li><code>secret</code></li>
+<li><code>passwd</code></li>
+<li><code>authorization</code></li>
+<li><code>api_key</code></li>
+<li><code>apikey</code></li>
+<li><code>access_token</code></li>
+</ul>
+<p>The result would look like this:</p>
+<p><img src="/images/airflow/secret_variable.png" alt="Secret Variable"></p>
+<p>Note however that anyone who has access to the DAGs or the CLI can still see the underlying value. So we shouldn&rsquo;t rely on this method to store sensitive values.</p>
+<h4 id="storing-sensitive-variables-in-environment-variables">Storing Sensitive Variables in Environment Variables</h4>
+<p>This functionality is available as of Airflow 1.10.10. To make use of it, simply follow this naming convention: <code>AIRFLOW_VAR_&lt;KEY_OF_THE_VAR&gt;</code></p>
+<h3 id="best-practices">Best Practices</h3>
+<p>Asides the idempotent and deterministic characteristics we previously talked about here are a bunch of additional best practices:</p>
+<h4 id="avoid-doing-any-computation-in-your-dag-definition">Avoid doing any computation in your DAG definition</h4>
+<p>Airflow needs to execute your Python DAG file to derive the corresponding DAG. Moreover, to pick up any changes you may have made to your DAG, Airflow has to re-read your DAG file at regular intervals and sync any changes to its internal state.</p>
+<p>If your DAG definition contains a computation, this computation will be executed every time the Dag Bag is refreshed. Which I believe is by default once every 30 seconds (configured through <code>process_poll_interval</code> in <code>airflow.cfg</code>).</p>
+<p>Not knowing this lead me to write over 100 test messages in my kafka topic 🤷‍♂🤦‍♂</p>
+<h4 id="using-pools">Using Pools</h4>
+<p>Airflow Pools are used to limit the parallelism is specific type of operators. Example: Limit database accesses to 5 tasks at any given time.</p>
+<p>Pools can be created in the webserver through Menu &raquo; Admin &raquo; Pools by giving a pool name and assigning a number of slots to the pool. Then in the Task definition, we can pass the pool name in the <code>pool</code> parameter.</p>
+<p>By doing this, we&rsquo;d be allocating those slots to tasks that are part of this pool only. They will not be accessed by other tasks no matter their priority weight.</p>
+<h3 id="different-types-of-executors">Different Types of Executors</h3>
+<p>In the intro, we&rsquo;ve talked about the Celery and Kubernetes executors as the only ones being able to scale out, but we haven&rsquo;t delved into the details of each executor and the pros and cons.</p>
+<p>We&rsquo;ve mentioned that the scheduler interacts with the dag files on regular bases to decide which tasks to push to the executor next.</p>
+<p>There are different types of executors: <code>LocalExecutor</code>, <code>CeleryExecutor</code>, <code>KubernetesExecutor</code>, <code>SequentialExecutor</code>.</p>
+<h4 id="localexecutor">LocalExecutor</h4>
+<p>Pretty simple, everything runs on the same machine, including the scheduler. So no need for additional resources outside that machine.</p>
+<p>Even though it runs on one machine it still supports parallelism, but it is a single point of failure and is not scalable.</p>
+<p>Its useful for testing, but as soon as you find yourself with multiple DAGs in production needing a lot of resources, consider moving to <code>CeleryExecutor</code></p>
+<h4 id="celeryexecutor">CeleryExecutor</h4>
+<p>Celery is built for horizontal scaling.</p>
+<p>The Scheduler adds a message to a queue and the <code>CeleryBroker</code> delivers it to the executor or executors. If a worker goes down, the executor will re-assign this task to another worker increasing the fault tolerance.</p>
+<h4 id="kubernetesexecutor">KubernetesExecutor</h4>
+<p>from <a href="https://www.astronomer.io/guides/airflow-executors-explained/">Astronomer IO</a> &ldquo;the Kubernetes Executor relies on a fixed single Pod that dynamically delegates work and resources. For each and every task that needs to run, the Executor talks to the Kubernetes API to dynamically launch an additional Pod, each with its own Scheduler and Webserver, which it terminates when that task is completed. The fixed single Pod has a Webserver and Scheduler just the same, but it&rsquo;ll act as the middle-man with connection to Redis and all other workers.&rdquo;</p>
+<h4 id="sequentialexecutor">SequentialExecutor</h4>
+<p>A much more primitive executor, it runs a single tasks instance and does not have any parallelism. It is also a single point of failure.</p>
+<h2 id="if-you-must-remember-3-things">If you Must Remember 3 Things</h2>
+<ol>
+<li>Airflow is a platform to programmatically author, schedule and monitor workflows</li>
+<li>Do not execute computation in the Dag file outside of tasks</li>
+<li>I do not have a travel blog (yet).</li>
+</ol>
+]]></content>
+        </item>
         
         <item>
             <title>Type Hinting in Python</title>
@@ -174,7 +655,7 @@ Union[str, int]
 </code></pre></div><p>Note that <code>Optional[X]</code> is also equivalent to: <code>Union[X, None]</code></p>
 <h2 id="if-you-must-remember-3-things">If you must remember 3 things</h2>
 <ol>
-<li>Type hints makes your code more readable to you should try to use them as often as you can</li>
+<li>Type hints make your code more readable so you should try to use them as often as you can</li>
 <li>Type hints are only checked by static type checkers or linters and not during runtime</li>
 <li>I just turned 24 😄</li>
 </ol>

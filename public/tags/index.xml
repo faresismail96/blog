@@ -5,17 +5,53 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 29 Jun 2020 00:05:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2020 12:20:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>airflow</title>
+      <link>https://fares.codes/tags/airflow/</link>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/airflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hook</title>
+      <link>https://fares.codes/tags/hook/</link>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/hook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>operator</title>
+      <link>https://fares.codes/tags/operator/</link>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/operator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>python</title>
       <link>https://fares.codes/tags/python/</link>
-      <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
       
       <guid>https://fares.codes/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sensor</title>
+      <link>https://fares.codes/tags/sensor/</link>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/sensor/</guid>
       <description></description>
     </item>
     

@@ -11,6 +11,17 @@
     
     
     <item>
+      <title>Everything You Probably Need to Know About Airflow</title>
+      <link>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</link>
+      <pubDate>Sat, 04 Jul 2020 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</guid>
+      <description>Taking a small break from scala to look into Airflow.
+Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
+Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
+    </item>
+    
+    <item>
       <title>Type Hinting in Python</title>
       <link>https://fares.codes/posts/type-hinting-in-python/</link>
       <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
