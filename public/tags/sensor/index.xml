@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on Learning Publicly</title>
-    <link>https://fares.codes/tags/python/</link>
-    <description>Recent content in python on Learning Publicly</description>
+    <title>sensor on Learning Publicly</title>
+    <link>https://fares.codes/tags/sensor/</link>
+    <description>Recent content in sensor on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 04 Jul 2020 12:20:00 +0200</lastBuildDate>
     
-	<atom:link href="https://fares.codes/tags/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fares.codes/tags/sensor/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       <description>Taking a small break from scala to look into Airflow.
 Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
 Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
-    </item>
-    
-    <item>
-      <title>Type Hinting in Python</title>
-      <link>https://fares.codes/posts/type-hinting-in-python/</link>
-      <pubDate>Mon, 29 Jun 2020 00:05:00 +0200</pubDate>
-      
-      <guid>https://fares.codes/posts/type-hinting-in-python/</guid>
-      <description>As I turn 24, my blog is about to turn 1 year old!! 🎊
-This article will mostly be a summary of the official python documentation. I have found it useful to read a documentation and then re-summarize it in my own words. (Examples are mostly theirs though)
-Typing is a new module starting python 3.5 and introduced by PEP 484. Its goal is to introduce static types to Python.</description>
     </item>
     
   </channel>

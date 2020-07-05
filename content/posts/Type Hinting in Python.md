@@ -263,6 +263,6 @@ Note that ``Optional[X]`` is also equivalent to: ``Union[X, None]``
 
 ## If you must remember 3 things
 
-1. Type hints makes your code more readable to you should try to use them as often as you can
+1. Type hints make your code more readable so you should try to use them as often as you can
 2. Type hints are only checked by static type checkers or linters and not during runtime
 3. I just turned 24 :smile:
