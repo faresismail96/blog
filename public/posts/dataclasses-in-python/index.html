@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="This is one of those cool features you&amp;rsquo;d probably wished you&amp;rsquo;d have known about a while back. Unless I&amp;rsquo;m the only person to not have known this from the start 🙊
+DataClasses is a module that was introduced in python 3.7 and described in PEP 557. This module simplifies the creation of new classes by defining boilerplate code for you.
+Dataclasses are classes designed to store data objects (think case classes in Scala)." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/dataclasses-in-python/" />
+
+
+<title>
+    
+    DataClasses in Python :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="DataClasses in Python">
+<meta itemprop="description" content="This is one of those cool features you&rsquo;d probably wished you&rsquo;d have known about a while back. Unless I&rsquo;m the only person to not have known this from the start 🙊
+DataClasses is a module that was introduced in python 3.7 and described in PEP 557. This module simplifies the creation of new classes by defining boilerplate code for you.
+Dataclasses are classes designed to store data objects (think case classes in Scala).">
+<meta itemprop="datePublished" content="2020-07-11T19:15:00&#43;02:00" />
+<meta itemprop="dateModified" content="2020-07-11T19:15:00&#43;02:00" />
+<meta itemprop="wordCount" content="1446">
+
+
+
+<meta itemprop="keywords" content="python,dataclasses," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DataClasses in Python"/>
+<meta name="twitter:description" content="This is one of those cool features you&rsquo;d probably wished you&rsquo;d have known about a while back. Unless I&rsquo;m the only person to not have known this from the start 🙊
+DataClasses is a module that was introduced in python 3.7 and described in PEP 557. This module simplifies the creation of new classes by defining boilerplate code for you.
+Dataclasses are classes designed to store data objects (think case classes in Scala)."/>
+
+
+
+
+<meta property="article:published_time" content="2020-07-11 19:15:00 &#43;0200 CEST" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/dataclasses-in-python/">DataClasses in Python</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>This is one of those cool features you&rsquo;d probably wished you&rsquo;d have known about a while back. Unless I&rsquo;m the only person to not have known this from the start 🙊</p>
+<p>DataClasses is a module that was introduced in python 3.7 and described in <a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a>. This module simplifies the creation of new classes by defining boilerplate code for you.</p>
+<p>Dataclasses are classes designed to store data objects (think case classes in Scala).</p>
+<p>Python 3.7 also provides a decorator that transforms a class into a dataclass. Simply wrap it with <code>@dataclass</code>.</p>
+<p>To understand the usefulness of dataclasses lets look at what we normally have to do when constructing a class in python:</p>
+<h2 id="the-init">The Init</h2>
+<p>Classes in python define an <code>__init__</code> method. This method is the constructor of the class. It is called when an instance of that class is to be created.</p>
+<p>Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
+    self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+    self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+    self<span style="color:#f92672">.</span>hobbies <span style="color:#f92672">=</span> hobbies
+    self<span style="color:#f92672">.</span>currently_reading <span style="color:#f92672">=</span> currently_reading
+</code></pre></div><p>Here we are defining a Person with a name, age, hobbies a currently_reading that is set to The Divine Comedy by default. In the init method, we take those values and we set them in the self which is supposed to represent the instance of the class.</p>
+<p>But all this is a bit verbose and it gets quite repetitive&hellip;</p>
+<h3 id="init-using-dataclass">Init Using DataClass</h3>
+<p>DataClass handles all this for us. Here is the same example using DataClass:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+
+<span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  name: str
+  age: int
+  hobbies: List[str]
+  currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
+</code></pre></div><p>With this simple decorator, the init (as well as a bunch of other methods) are defined for us!</p>
+<p>Lets take a look at some of those other methods</p>
+<h2 id="the-repr">The repr</h2>
+<p>Lets forget about dataclass for a moment and go back to our initial Person class. What happens if we create an instance of Person and print it?</p>
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+<span style="color:#66d9ef">print</span>(p)
+</code></pre></div><p>The output would be:</p>
+<p><code>&lt;__main__.Person object at 0x109c7a2b0&gt;</code> Clearly neither useful nor readable&hellip;</p>
+<p>To output something useful, we&rsquo;d need to define a <code>__repr__</code> method for that class:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
+    self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+    self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+    self<span style="color:#f92672">.</span>hobbies <span style="color:#f92672">=</span> hobbies
+    self<span style="color:#f92672">.</span>currently_reading <span style="color:#f92672">=</span> currently_reading
+
+  <span style="color:#66d9ef">def</span> __repr__(self):
+    <span style="color:#66d9ef">return</span> (f<span style="color:#e6db74">&#34;Person(name = {self.name}, age = {self.age},&#34;</span><span style="color:#f92672">+</span>
+      f<span style="color:#e6db74">&#34;hobbies = {self.hobbies}, currently_reading = {self.currently_reading})&#34;</span>)
+
+p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+<span style="color:#66d9ef">print</span>(p)
+
+<span style="color:#75715e">## Person(name = Fares, age = 24, hobbies = [&#39;Skiing&#39;, &#39;Reading&#39;],</span>
+<span style="color:#75715e">#    currently_reading = The Divine Comedy)</span>
+</code></pre></div><h3 id="repr-using-dataclass">Repr Using DataClass</h3>
+<p>This is even more tedious and boring&hellip; Buuut with dataclasses it comes out of the box by simply adding the decorator:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  name: str
+  age: int
+  hobbies: List[str]
+  currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
+
+p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+<span style="color:#66d9ef">print</span>(p)
+<span style="color:#75715e">## Person(name=&#39;Fares&#39;, age=24, hobbies=[&#39;Skiing&#39;, &#39;Reading&#39;],</span>
+<span style="color:#75715e">#    currently_reading=&#39;The Divine Comedy&#39;)</span>
+</code></pre></div><h2 id="eq-lt-and-other-ordering-stuff">eq, lt And Other Ordering Stuff</h2>
+<p>But it&rsquo;s not all&hellip; What if we wanted to compare two instances of the class Person? Normally we&rsquo;d have to define a function: <code>__eq__</code> like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+  <span style="color:#66d9ef">def</span> __eq__(self, value):
+    <span style="color:#66d9ef">return</span> (
+        (self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age, self<span style="color:#f92672">.</span>hobbies, self<span style="color:#f92672">.</span>currently_reading) <span style="color:#f92672">==</span>
+        ((value<span style="color:#f92672">.</span>name, value<span style="color:#f92672">.</span>age, value<span style="color:#f92672">.</span>hobbies, value<span style="color:#f92672">.</span>currently_reading))
+        )
+
+old  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">23</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+current  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+
+<span style="color:#66d9ef">print</span>(old <span style="color:#f92672">==</span> current)
+<span style="color:#75715e">## False</span>
+</code></pre></div><h3 id="eq-using-dataclass">Eq Using DataClass</h3>
+<p>But again with DataClass this is already done for us so no need to create the eq function.</p>
+<p>How does eq work? Same as the eq definition we declared for out Person Class: a tuple of every attribute should be equal to a tuple of other attributes. (order is the same as the one defined in the class definition)</p>
+<h3 id="what-about-lt-gt-and-other-ordering-stuff">What about lt, gt and Other Ordering Stuff</h3>
+<p>Those are not defined by default for us but they can be!</p>
+<p>Simply pass <code>order = True</code> to the decorator like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(order <span style="color:#f92672">=</span> True)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#f92672">...</span>
+</code></pre></div><h2 id="dataclass-decorator-as-a-callable">DataClass Decorator as a Callable</h2>
+<p>We&rsquo;ve seen that by default we have an <code>init</code> and a <code>repr</code> and well as an <code>eq</code> but no <code>le</code> or <code>lt</code> etc&hellip; What are out options? Here is the dataclass decorator with the full list of default arguments:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(init<span style="color:#f92672">=</span>True, repr<span style="color:#f92672">=</span>True, eq<span style="color:#f92672">=</span>True, order<span style="color:#f92672">=</span>False, unsafe_hash<span style="color:#f92672">=</span>False, frozen<span style="color:#f92672">=</span>False)
+</code></pre></div><ul>
+<li>
+<p><code>init</code>: defines the <code>__init__()</code> method</p>
+</li>
+<li>
+<p><code>repr</code>: defines the <code>__repr__()</code> method</p>
+</li>
+<li>
+<p><code>eq</code>: defines the <code>__eq__()</code> method</p>
+</li>
+<li>
+<p><code>order</code>: defines <code>__lt__()</code>, <code>__le__()</code>, <code>__gt__()</code>, <code>__ge__()</code> methods. If this is set to true, eq has to be defined.</p>
+</li>
+<li>
+<p><code>unsafe_hash</code>: if False, a <code>__hash__()</code> method may be generated if it is safe to do so (It can also set hash = None if frozen = False). Setting this to True will force dataclass to create the method. It is not recommended to set it to True if you do not know what you&rsquo;re doing 🙄</p>
+</li>
+<li>
+<p><code>frozen</code>: Passing frozen=True, we can emulate immutability in Python. Assigning values to the fields will raise an exception. In other words this emulates a read-only frozen instance of the class.</p>
+<p>There is a performance penalty when using frozen since the init will have to use <code>object.__setattr__()</code>.</p>
+</li>
+</ul>
+<p>Note that if any of the mentioned methods above (<code>init</code>, <code>repr</code>, <code>eq</code>) are already present in the class, the dataclass parameter will be ignored.
+If the class defines one of the order function while order is set to True, a <code>TypeError</code> is raised.</p>
+<h2 id="post-init">Post Init</h2>
+<p>Sometimes in the init function, we&rsquo;d like to make some extra computation. For example, assume that in our Person class, the moment where we instantiate it, we&rsquo;d like to retrieve the extra details we have on that person from our database&hellip;</p>
+<p>Normally we&rsquo;d have to do something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> __init__(self):
+    <span style="color:#f92672">...</span>,
+    self<span style="color:#f92672">.</span>extra_details <span style="color:#f92672">=</span> _get_extra_details(self<span style="color:#f92672">.</span>person_id)
+</code></pre></div><p>But with dataclasses this possibility disappears. It&rsquo;s been replaced by a <code>__post_init__()</code> function. Post Init is a special function that allows extra processing after the init function has been called.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+
+<span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  name: str
+  age: int
+  hobbies: List[str]
+  currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__post_init__</span>(self):
+      self<span style="color:#f92672">.</span>extra_details <span style="color:#f92672">=</span> _get_extra_details(self<span style="color:#f92672">.</span>person_id)
+</code></pre></div><h2 id="customizing-specific-dataclass-fields">Customizing Specific DataClass Fields</h2>
+<p>Dataclass allows us to customize each field. For example we could chose not to include it in the init or to not include it in the repr etc&hellip;</p>
+<p>We can do this using the specifier <code>field()</code>. Field supports multiple parameters:</p>
+<ul>
+<li>default: Default value of the field</li>
+<li>default_factory: Function that returns the initial value of the field</li>
+<li>init: Whether or not to include this field in the <code>__init__</code> function. Set to True by default.</li>
+<li>repr: Whether or not to include this field in the <code>repr</code> function. Set to True by default.</li>
+<li>compare: Whether or not to include this field in comparisons. Set to True by default.</li>
+<li>hash: Whether or not to include this field in the hash computation. (Default is to use the same as for compare.)</li>
+<li>metadata: A mapping with information about the field. Can also be None.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+
+<span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+  name: str
+  age: int <span style="color:#f92672">=</span> field(repr<span style="color:#f92672">=</span> False) <span style="color:#75715e">## For people sensitive about their age 🤷‍♂</span>
+  hobbies: List[str]
+  currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
+</code></pre></div><h2 id="using-slot-instead-of-dict-access">Using Slot Instead Of Dict Access</h2>
+<p>By default, the dataclass attributes are stored in dictionaries. But if you wish to optimize data access and use less memory for certain fields, you could use <code>slots</code>.</p>
+<p>Although slots is an entire topic on its own, ill try to recap it here as quickly/simply as I can.</p>
+<p>The attributes of a dataclass are stored in a dictionary and can be accessed through <code>__dict__</code>. This dict does not have any fixed number of attributes and we can add attributes dynamically.</p>
+<p>Slots on the other hand has a static structure and prohibits the adding of attributes after the creation of the instance.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    __slots__ <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#e6db74">&#34;hobbies&#34;</span>, <span style="color:#e6db74">&#34;currently_reading&#34;</span>)
+    name: str
+    age: int
+    hobbies: list
+    currently_reading: str
+
+p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>], <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>)
+
+p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Data Engineer&#34;</span>
+<span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>profession)
+<span style="color:#75715e">## AttributeError: &#39;Person&#39; object has no attribute &#39;profession&#39;</span>
+</code></pre></div><p>And if we were not using slots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+        self<span style="color:#f92672">.</span>hobbies <span style="color:#f92672">=</span> hobbies
+        self<span style="color:#f92672">.</span>currently_reading <span style="color:#f92672">=</span> currently_reading
+
+p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>], <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>)
+
+p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Data Engineer&#34;</span>
+<span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>profession) <span style="color:#75715e">## Data Engineer</span>
+</code></pre></div><p>So we can see that with <code>__slots__</code> we can no longer create attributes dynamically but the access becomes faster and uses less memory.</p>
+<h2 id="inheritance">Inheritance</h2>
+<p>Dataclasses can be inherited like normal classes in Python.</p>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Developer</span>(Person):
+    salary: float
+</code></pre></div><p>Developer will have all the attributes of the class <code>Person</code> in addition to a salary attribute.</p>
+<h2 id="if-you-must-remember-3-things">If you Must Remember 3 Things</h2>
+<ol>
+<li>DataClasses are special classes meant to hold data objects. They define a bunch of methods for us.</li>
+<li>We have the possibility to tweak each field of the data class.</li>
+<li>They are available as of Python 3.7 and immensely simplify the creation of new classes.</li>
+</ol>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/python">python</a></span><span class="tag"><a href="https://fares.codes/tags/dataclasses">dataclasses</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1446 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-07-11 19:15 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/">
+                                <span class="button__text">Everything You Probably Need to Know About Airflow</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>
