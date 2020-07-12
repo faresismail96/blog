@@ -5,10 +5,21 @@
     <link>https://fares.codes/tags/python/</link>
     <description>Recent content in python on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 Jul 2020 19:15:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jul 2020 09:15:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Named Tuples In Python</title>
+      <link>https://fares.codes/posts/named-tuples-in-python/</link>
+      <pubDate>Sun, 12 Jul 2020 09:15:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/named-tuples-in-python/</guid>
+      <description>This cool little feature has been out since Python 2.6 but I&amp;rsquo;m only discovering this now 🤦‍♂
+Before we begin, let us take a quick look at tuples in python and how they work:
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]} is {res[1]} years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age.</description>
+    </item>
     
     <item>
       <title>DataClasses in Python</title>
