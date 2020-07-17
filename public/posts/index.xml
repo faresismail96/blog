@@ -4,8 +4,80 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sun, 12 Jul 2020 09:15:00 +0200</lastBuildDate>
+        <lastBuildDate>Fri, 17 Jul 2020 06:20:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Keyword and Positional Only Arguments in Python</title>
+            <link>https://fares.codes/posts/keyword-and-positional-only-arguments-in-python/</link>
+            <pubDate>Fri, 17 Jul 2020 06:20:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/keyword-and-positional-only-arguments-in-python/</guid>
+            <description>My flights are now synonymous with new articles&amp;hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&amp;hellip;
+Here&amp;rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.
+The Keyword-Only argument feature was not so recently introduced in PEP 3102. But as with most things, I&amp;rsquo;m discovering this a little bit too late 🤦‍♂</description>
+            <content type="html"><![CDATA[<p>My flights are now synonymous with new articles&hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&hellip;</p>
+<p>Here&rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.</p>
+<p>The Keyword-Only argument feature was not so recently introduced in <a href="https://www.python.org/dev/peps/pep-3102/">PEP 3102</a>. But as with most things, I&rsquo;m discovering this a little bit too late 🤦‍♂</p>
+<p>What this allows us to do is force a bunch of arguments to be passed by keyword only as opposed to positional arguments.</p>
+<h2 id="quick-recap">Quick Recap</h2>
+<p>In python, there are two ways to pass arguments to a function. Either by explicitly naming them, or by arranging arguments in a specific position.</p>
+<p>We will be using the following function for our example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+
+</code></pre></div><h3 id="keyword-argument">Keyword Argument</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+</code></pre></div><h3 id="positional-argument">Positional Argument</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+</code></pre></div><h3 id="mix-of-both">Mix of Both</h3>
+<p>We can also start with positional arguments and end with keyword arguments:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+
+</code></pre></div><p>By default, the flavor of function calling is left to the discretion of the person calling the function.</p>
+<h2 id="forcing-behaviors">Forcing Behaviors</h2>
+<p>There is however a way to force callers to pass some/all arguments as keyword only (or as of python 3.8, as positional arguments only).</p>
+<h3 id="forcing-keyword-only">Forcing Keyword Only</h3>
+<p>To force users to use keyword only arguments for either all or some of the arguments, simply add a <code>*</code> before the arguments. Anything after the <code>*</code> will be keyword only.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(<span style="color:#f92672">*</span>, name: str, age: int, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+
+show_person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+<span style="color:#75715e">## &#34;The Person is Fares, he is 24 years old and has the following hobbies: [&#39;Skiing&#39;]&#34;</span>
+</code></pre></div><p>And what happens if we pass positional arguments?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+
+<span style="color:#75715e">## Traceback (most recent call last):</span>
+<span style="color:#75715e">##   File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt;</span>
+<span style="color:#75715e">## TypeError: show_person() takes 0 positional arguments but 3 were given</span>
+</code></pre></div><p>Another example of keyword only function is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, <span style="color:#f92672">*</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In the above example, both name and age are allowed to be passed by either keyword or positional arguments, but hobbies is required to be a keyword argument.</p>
+<h3 id="forcing-positional-only-as-of-python-38">Forcing Positional Only (as of Python 3.8)</h3>
+<p>This functionality is relatively new and was introduced in Python 3.8.</p>
+<p>The same way we can force users to call a function by only passing keyword arguments, we can also force users to call a function by only passing positional arguments.</p>
+<p>This is done through the <code>/</code> sign in the function. Anything before that sign is required to be passed as a positional only argument. Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, <span style="color:#f92672">/</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In that case, when calling the function, <code>name</code> and <code>age</code> have to be passed in positional argument only otherwise an error is returned:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+</code></pre></div><h3 id="forcing-both">Forcing Both</h3>
+<p>We could also require that users call a function with specific arguments in positional and the rest in keyword.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, <span style="color:#f92672">/</span>, <span style="color:#f92672">*</span>, age: int, <span style="color:#f92672">/</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In this case, <code>name</code> can only be passed as positional while <code>age</code> and <code>hobbies</code> can only be passed in keyword arguments.</p>
+<h2 id="my-two-cents">My Two Cents</h2>
+<p>While I see an immense benefit to using keyword only argument to improve readability, I cannot say the same thing about positional only arguments.</p>
+<p>The only usage I see is when a function takes an obvious value and a clear name for the parameter is not so easy to come up with. But then again, some might say this is an indication that you&rsquo;ve done something wrong in the design of your function 😛.</p>
+<h2 id="if-you-must-remember-two-things">If You Must Remember Two Things</h2>
+<ul>
+<li>To require users to call a function with <code>keyword-only</code> arguments, add a <code>*</code> before those arguments.</li>
+<li>To require users to call a function with <code>positional-only</code> arguments, add a <code>/</code> after those arguments.</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>Named Tuples In Python</title>
