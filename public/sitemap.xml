@@ -3,27 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/posts/keyword-and-positional-only-arguments-in-python/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/keyword-only/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/pep-3102/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/positional-only/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/python/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2020-07-17T06:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/tags/named-tuples/</loc>
     <lastmod>2020-07-12T09:15:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://fares.codes/posts/named-tuples-in-python/</loc>
-    <lastmod>2020-07-12T09:15:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2020-07-12T09:15:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/python/</loc>
-    <lastmod>2020-07-12T09:15:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2020-07-12T09:15:00+02:00</lastmod>
   </url>
   

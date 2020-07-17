@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="My flights are now synonymous with new articles&amp;hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&amp;hellip;
+Here&amp;rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.
+The Keyword-Only argument feature was not so recently introduced in PEP 3102. But as with most things, I&amp;rsquo;m discovering this a little bit too late 🤦‍♂" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/keyword/positional-only-arguments-in-python/" />
+
+
+<title>
+    
+    Keyword/Positional Only Arguments in Python :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Keyword/Positional Only Arguments in Python">
+<meta itemprop="description" content="My flights are now synonymous with new articles&hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&hellip;
+Here&rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.
+The Keyword-Only argument feature was not so recently introduced in PEP 3102. But as with most things, I&rsquo;m discovering this a little bit too late 🤦‍♂">
+<meta itemprop="datePublished" content="2020-07-17T06:20:00&#43;02:00" />
+<meta itemprop="dateModified" content="2020-07-17T06:20:00&#43;02:00" />
+<meta itemprop="wordCount" content="715">
+
+
+
+<meta itemprop="keywords" content="python,keyword only,positional only,PEP 3102," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Keyword/Positional Only Arguments in Python"/>
+<meta name="twitter:description" content="My flights are now synonymous with new articles&hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&hellip;
+Here&rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.
+The Keyword-Only argument feature was not so recently introduced in PEP 3102. But as with most things, I&rsquo;m discovering this a little bit too late 🤦‍♂"/>
+
+
+
+
+<meta property="article:published_time" content="2020-07-17 06:20:00 &#43;0200 CEST" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/keyword/positional-only-arguments-in-python/">Keyword/Positional Only Arguments in Python</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>My flights are now synonymous with new articles&hellip; It is a welcomed distraction from the subtle armrest war, the crammed chairs with barely any leg room and the crying babies&hellip;</p>
+<p>Here&rsquo;s a small feature I recently learned about that might significantly impact your code readability: Forcing functions to take Keyword-Only Arguments or Positional Only Arguments!.</p>
+<p>The Keyword-Only argument feature was not so recently introduced in <a href="https://www.python.org/dev/peps/pep-3102/">PEP 3102</a>. But as with most things, I&rsquo;m discovering this a little bit too late 🤦‍♂</p>
+<p>What this allows us to do is force a bunch of arguments to be passed by keyword only as opposed to positional arguments.</p>
+<h2 id="quick-recap">Quick Recap</h2>
+<p>In python, there are two ways to pass arguments to a function. Either by explicitly naming them, or by arranging arguments in a specific position.</p>
+<p>We will be using the following function for our example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+
+</code></pre></div><h3 id="keyword-argument">Keyword Argument</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+</code></pre></div><h3 id="positional-argument">Positional Argument</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+</code></pre></div><h3 id="mix-of-both">Mix of Both</h3>
+<p>We can also start with positional arguments and end with keyword arguments:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>,<span style="color:#e6db74">&#34;Drinking&#34;</span>])
+
+</code></pre></div><p>By default, the flavor of function calling is left to the discretion of the person calling the function.</p>
+<h2 id="forcing-behaviors">Forcing Behaviors</h2>
+<p>There is however a way to force callers to pass some/all arguments as keyword only (or as of python 3.8, as positional arguments only).</p>
+<h3 id="forcing-keyword-only">Forcing Keyword Only</h3>
+<p>To force users to use keyword only arguments for either all or some of the arguments, simply add a <code>*</code> before the arguments. Anything after the <code>*</code> will be keyword only.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(<span style="color:#f92672">*</span>, name: str, age: int, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+
+show_person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+<span style="color:#75715e">## &#34;The Person is Fares, he is 24 years old and has the following hobbies: [&#39;Skiing&#39;]&#34;</span>
+</code></pre></div><p>And what happens if we pass positional arguments?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+
+<span style="color:#75715e">## Traceback (most recent call last):</span>
+<span style="color:#75715e">##   File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt;</span>
+<span style="color:#75715e">## TypeError: show_person() takes 0 positional arguments but 3 were given</span>
+</code></pre></div><p>Another example of keyword only function is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, <span style="color:#f92672">*</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In the above example, both name and age are allowed to be passed by either keyword or positional arguments, but hobbies is required to be a keyword argument.</p>
+<h3 id="forcing-positional-only-as-of-python-38">Forcing Positional Only (as of Python 3.8)</h3>
+<p>This functionality is relatively new and was introduced in Python 3.8.</p>
+<p>The same way we can force users to call a function by only passing keyword arguments, we can also force users to call a function by only passing positional arguments.</p>
+<p>This is done through the <code>/</code> sign in the function. Anything before that sign is required to be passed as a positional only argument. Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, age: int, <span style="color:#f92672">/</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In that case, when calling the function, <code>name</code> and <code>age</code> have to be passed in positional argument only otherwise an error is returned:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">show_person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, hobbies<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Skiing&#34;</span>])
+</code></pre></div><h3 id="forcing-both">Forcing Both</h3>
+<p>We could also require that users call a function with specific arguments in positional and the rest in keyword.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_person</span>(name: str, <span style="color:#f92672">/</span>, <span style="color:#f92672">*</span>, age: int, <span style="color:#f92672">/</span>, hobbies: List[str]):
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;&#34;&#34;The Person is {name}, he is {age} years old and has the following hobbies: {hobbies}&#34;&#34;&#34;</span>
+</code></pre></div><p>In this case, <code>name</code> can only be passed as positional while <code>age</code> and <code>hobbies</code> can only be passed in keyword arguments.</p>
+<h2 id="my-two-cents">My Two Cents</h2>
+<p>While I see an immense benefit to using keyword only argument to improve readability, I cannot say the same thing about positional only arguments.</p>
+<p>The only usage I see is when a function takes an obvious value and a clear name for the parameter is not so easy to come up with. But then again, some might say this is an indication that you&rsquo;ve done something wrong in the design of your function 😛.</p>
+<h2 id="if-you-must-remember-two-things">If You Must Remember Two Things</h2>
+<ul>
+<li>To require users to call a function with <code>keyword-only</code> arguments, add a <code>*</code> before those arguments.</li>
+<li>To require users to call a function with <code>positional-only</code> arguments, add a <code>/</code> after those arguments.</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/python">python</a></span><span class="tag"><a href="https://fares.codes/tags/keyword-only">keyword only</a></span><span class="tag"><a href="https://fares.codes/tags/positional-only">positional only</a></span><span class="tag"><a href="https://fares.codes/tags/pep-3102">PEP 3102</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>715 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-07-17 06:20 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/named-tuples-in-python/">
+                                <span class="button__text">Named Tuples In Python</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>
