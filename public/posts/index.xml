@@ -4,8 +4,47 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Fri, 17 Jul 2020 06:20:00 +0200</lastBuildDate>
+        <lastBuildDate>Sun, 13 Sep 2020 14:08:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Resolving Circular Dependencies Due to Type Hinting</title>
+            <link>https://fares.codes/posts/resolving-circular-dependencies-due-to-type-hinting/</link>
+            <pubDate>Sun, 13 Sep 2020 14:08:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/resolving-circular-dependencies-due-to-type-hinting/</guid>
+            <description>In a previous article, I&amp;rsquo;ve talked about type hinting and its usefulness. However I recently realized that while using typing and defining custom types, one can easily find oneself in a circular dependency loop.
+Here&amp;rsquo;s a case scenario:
+root | custom_types.py my_function.py custom_types is the module in which we define all custom types used in my_function.py
+my_function is the module in which we define all functions.
+So it&amp;rsquo;s clear that my_function will depend on our custom_types.</description>
+            <content type="html"><![CDATA[<p>In a previous article, I&rsquo;ve talked about type hinting and its usefulness. However I recently realized that while using typing and defining custom types, one can easily find oneself in a circular dependency loop.</p>
+<p>Here&rsquo;s a case scenario:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">root
+  |
+  custom_types.py
+  my_function.py
+
+</code></pre></div><p>custom_types is the module in which we define all custom types used in my_function.py</p>
+<p>my_function is the module in which we define all functions.</p>
+<p>So it&rsquo;s clear that my_function will depend on our custom_types. But what if, in our custom_types, the value of a field is the result of a function call. A function defined in my_function.</p>
+<p>Then we&rsquo;d run into a circular dependency problem since custom_types imports my_function and my_function imports custom_types.</p>
+<p>In general, there are no simple ways to deal with circular dependency problems and in most cases the solution is to re-write the function itself, or even re-organize the code. In our case, we could move that function to the custom_types module as a private function.</p>
+<p>But for circular dep problems due to type hints, the typing library offers a simpler solution: a flag.</p>
+<p>the flag <code>TYPE_CHECKING</code> is by default set to false, and static type checkers set this value to true.</p>
+<p>With this we could reorganize our imports in python to avoid a circular dependency since type hints are only on compile type and not in runtime. So in runtime, we do not need to have a dependency on our custom type classes.</p>
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> module_a <span style="color:#f92672">import</span> a
+<span style="color:#f92672">from</span> module_b <span style="color:#f92672">import</span> b
+
+<span style="color:#66d9ef">if</span>(TYPE_CHECKING):
+    <span style="color:#f92672">from</span> my_function <span style="color:#f92672">import</span> x
+    <span style="color:#f92672">from</span> my_function <span style="color:#f92672">import</span> y
+    <span style="color:#f92672">from</span> my_function <span style="color:#f92672">import</span> z
+
+</code></pre></div>]]></content>
+        </item>
         
         <item>
             <title>Keyword and Positional Only Arguments in Python</title>
