@@ -11,6 +11,19 @@
     
     
     <item>
+      <title>Resolving Circular Dependencies Due to Type Hinting</title>
+      <link>https://fares.codes/posts/resolving-circular-dependencies-due-to-type-hinting/</link>
+      <pubDate>Sun, 13 Sep 2020 14:08:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/resolving-circular-dependencies-due-to-type-hinting/</guid>
+      <description>In a previous article, I&amp;rsquo;ve talked about type hinting and its usefulness. However I recently realized that while using typing and defining custom types, one can easily find oneself in a circular dependency loop.
+Here&amp;rsquo;s a case scenario:
+root | custom_types.py my_function.py custom_types is the module in which we define all custom types used in my_function.py
+my_function is the module in which we define all functions.
+So it&amp;rsquo;s clear that my_function will depend on our custom_types.</description>
+    </item>
+    
+    <item>
       <title>Keyword and Positional Only Arguments in Python</title>
       <link>https://fares.codes/posts/keyword-and-positional-only-arguments-in-python/</link>
       <pubDate>Fri, 17 Jul 2020 06:20:00 +0200</pubDate>
