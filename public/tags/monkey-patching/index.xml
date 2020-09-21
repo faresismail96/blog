@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monkey Patching on Learning Publicly</title>
+    <link>https://fares.codes/tags/monkey-patching/</link>
+    <description>Recent content in Monkey Patching on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 21 Sep 2020 06:20:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/monkey-patching/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monkey Patching in Python</title>
+      <link>https://fares.codes/posts/monkey-patching-in-python/</link>
+      <pubDate>Mon, 21 Sep 2020 06:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/monkey-patching-in-python/</guid>
+      <description>Asides from giving you the ability to say the words &amp;ldquo;Monkey Patch&amp;rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&amp;hellip; More on that in a bit.
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&amp;hellip; The reason I&amp;rsquo;m recopying them can be summarized in the following french quote: &amp;ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&amp;rdquo; - Unknown.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -4,8 +4,88 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sun, 13 Sep 2020 14:08:00 +0200</lastBuildDate>
+        <lastBuildDate>Mon, 21 Sep 2020 06:20:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Monkey Patching in Python</title>
+            <link>https://fares.codes/posts/monkey-patching-in-python/</link>
+            <pubDate>Mon, 21 Sep 2020 06:20:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/monkey-patching-in-python/</guid>
+            <description>Asides from giving you the ability to say the words &amp;ldquo;Monkey Patch&amp;rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&amp;hellip; More on that in a bit.
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&amp;hellip; The reason I&amp;rsquo;m recopying them can be summarized in the following french quote: &amp;ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&amp;rdquo; - Unknown.</description>
+            <content type="html"><![CDATA[<p>Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.</p>
+<p>For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown. (though in no way shape or form do I think of myself as a savant 🙄)</p>
+<h2 id="what-is-monkey-patching">What is Monkey Patching</h2>
+<p>Monkey patching is Python&rsquo;s ability to dynamically apply a modification (at runtime) to a class or even a module.</p>
+<p>What does that mean and how is it useful?</p>
+<p>Let us look at a simple example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+
+Cat()<span style="color:#f92672">.</span>say_hi()   <span style="color:#75715e">## Meow</span>
+</code></pre></div><p>The above code behaves as expected&hellip; But what if we wanted to change the behavior of the class <code>Cat</code> by modifying the greeting function?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Meow</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>(self):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Woof&#34;</span>)
+
+Cat<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
+Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Woof</span>
+
+</code></pre></div><p>From now on, any cat will say <code>Woof</code> instead of <code>Meow</code></p>
+<h3 id="when-is-it-useful">When Is It Useful</h3>
+<p>Monkey Patching can be useful when working with a third party library and where we do not have control over the source code. Possible situation: in my python module, I import the library: <code>my_lib</code> who has a <code>say_hello</code> function that I wish to modify. Except the library and therefore the function are not directly accessible and I do not have control over the implementation.</p>
+<h2 id="different-scopes-of-monkey-patching">Different scopes of Monkey Patching</h2>
+<p>FARES: TODO talk about local affecting one instance and global, affecting all Cat (unless previously patched at instance level).</p>
+<p>There are different types of Monkey Patching, each affecting a different scope.</p>
+<ul>
+<li>Instance level monkey patch:</li>
+</ul>
+<p>In instance level patching, only the instance will behave differently, the rest of the instances will remain the same.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+cat1 <span style="color:#f92672">=</span> Cat()
+cat1<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Meow</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Modified Meow&#34;</span>)
+
+cat1<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
+
+cat1<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Modified Meow</span>
+cat2 <span style="color:#f92672">=</span> Cat()
+cat2<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Meow</span>
+
+</code></pre></div><ul>
+<li>Global Patching:</li>
+</ul>
+<p>Global patching is the same as the first example we&rsquo;ve seen. In that case all the instances of <code>Cat</code> will be modified, <strong>except those that have been patched at an instance level.</strong></p>
+<h2 id="to-monkey-patch-or-not-to-monkey-patch">To Monkey Patch or Not to Monkey Patch</h2>
+<p>Beware when monkey patching, if any other piece of code calls the function you&rsquo;re patching, it will (depending on the patching scope) also receive a piece of the modified code.</p>
+<p>In my opinion, monkey patching is an evil hack and should be avoided when possible. It makes the code a lot harder to read and for large projects, almost impossible to debug multiple years down the road&hellip;</p>
+<p>I can imagine a scenario where the documentation of the library says one thing but the reality is completely unrelated&hellip; I would also imagine that the debugging process will not be fun.</p>
+<p>Some additional issues: If two modules monkey patch the same function, one of them will get canceled out (the one that ran first). It can also lead to upgrade problems.</p>
+<p>But to play the devils advocate, this evil might be necessary in some cases to fix existing bugs in the external library without having to fork the entire library and adding another deps to your own project.</p>
+<p>Monkey Patching could also be very handy when it comes to testing. Where for example we might bypass a connection to some database etc&hellip;</p>
+<h2 id="if-you-must-remember-three-things">If You Must Remember Three Things</h2>
+<ol>
+<li>Monkey Patching is modifying a variable or a functions&rsquo; behavior at runtime.</li>
+<li>We can either monkey patch an instance or the entire Class and all its instances.</li>
+<li>It is an evil hack that if used without caution can lead to confusion and additional bugs.</li>
+</ol>
+]]></content>
+        </item>
         
         <item>
             <title>Resolving Circular Dependencies Due to Type Hinting</title>
