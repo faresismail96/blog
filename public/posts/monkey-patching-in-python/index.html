@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="Asides from giving you the ability to say the words &amp;ldquo;Monkey Patch&amp;rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&amp;hellip; More on that in a bit.
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&amp;hellip; The reason I&amp;rsquo;m recopying them can be summarized in the following french quote: &amp;ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&amp;rdquo; - Unknown." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/monkey-patching-in-python/" />
+
+
+<title>
+    
+    Monkey Patching in Python :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Monkey Patching in Python">
+<meta itemprop="description" content="Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown.">
+<meta itemprop="datePublished" content="2020-09-21T06:20:00&#43;02:00" />
+<meta itemprop="dateModified" content="2020-09-21T06:20:00&#43;02:00" />
+<meta itemprop="wordCount" content="664">
+
+
+
+<meta itemprop="keywords" content="python,Monkey Patching," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Monkey Patching in Python"/>
+<meta name="twitter:description" content="Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown."/>
+
+
+
+
+<meta property="article:published_time" content="2020-09-21 06:20:00 &#43;0200 CEST" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/monkey-patching-in-python/">Monkey Patching in Python</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.</p>
+<p>For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown. (though in no way shape or form do I think of myself as a savant 🙄)</p>
+<h2 id="what-is-monkey-patching">What is Monkey Patching</h2>
+<p>Monkey patching is Python&rsquo;s ability to dynamically apply a modification (at runtime) to a class or even a module.</p>
+<p>What does that mean and how is it useful?</p>
+<p>Let us look at a simple example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+
+Cat()<span style="color:#f92672">.</span>say_hi()   <span style="color:#75715e">## Meow</span>
+</code></pre></div><p>The above code behaves as expected&hellip; But what if we wanted to change the behavior of the class <code>Cat</code> by modifying the greeting function?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Meow</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>(self):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Woof&#34;</span>)
+
+Cat<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
+Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Woof</span>
+
+</code></pre></div><p>From now on, any cat will say <code>Woof</code> instead of <code>Meow</code></p>
+<h3 id="when-is-it-useful">When Is It Useful</h3>
+<p>Monkey Patching can be useful when working with a third party library and where we do not have control over the source code. Possible situation: in my python module, I import the library: <code>my_lib</code> who has a <code>say_hello</code> function that I wish to modify. Except the library and therefore the function are not directly accessible and I do not have control over the implementation.</p>
+<h2 id="different-scopes-of-monkey-patching">Different scopes of Monkey Patching</h2>
+<p>FARES: TODO talk about local affecting one instance and global, affecting all Cat (unless previously patched at instance level).</p>
+<p>There are different types of Monkey Patching, each affecting a different scope.</p>
+<ul>
+<li>Instance level monkey patch:</li>
+</ul>
+<p>In instance level patching, only the instance will behave differently, the rest of the instances will remain the same.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+
+cat1 <span style="color:#f92672">=</span> Cat()
+cat1<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Meow</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Modified Meow&#34;</span>)
+
+cat1<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
+
+cat1<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Modified Meow</span>
+cat2 <span style="color:#f92672">=</span> Cat()
+cat2<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Meow</span>
+
+</code></pre></div><ul>
+<li>Global Patching:</li>
+</ul>
+<p>Global patching is the same as the first example we&rsquo;ve seen. In that case all the instances of <code>Cat</code> will be modified, <strong>except those that have been patched at an instance level.</strong></p>
+<h2 id="to-monkey-patch-or-not-to-monkey-patch">To Monkey Patch or Not to Monkey Patch</h2>
+<p>Beware when monkey patching, if any other piece of code calls the function you&rsquo;re patching, it will (depending on the patching scope) also receive a piece of the modified code.</p>
+<p>In my opinion, monkey patching is an evil hack and should be avoided when possible. It makes the code a lot harder to read and for large projects, almost impossible to debug multiple years down the road&hellip;</p>
+<p>I can imagine a scenario where the documentation of the library says one thing but the reality is completely unrelated&hellip; I would also imagine that the debugging process will not be fun.</p>
+<p>Some additional issues: If two modules monkey patch the same function, one of them will get canceled out (the one that ran first). It can also lead to upgrade problems.</p>
+<p>But to play the devils advocate, this evil might be necessary in some cases to fix existing bugs in the external library without having to fork the entire library and adding another deps to your own project.</p>
+<p>Monkey Patching could also be very handy when it comes to testing. Where for example we might bypass a connection to some database etc&hellip;</p>
+<h2 id="if-you-must-remember-three-things">If You Must Remember Three Things</h2>
+<ol>
+<li>Monkey Patching is modifying a variable or a functions&rsquo; behavior at runtime.</li>
+<li>We can either monkey patch an instance or the entire Class and all its instances.</li>
+<li>It is an evil hack that if used without caution can lead to confusion and additional bugs.</li>
+</ol>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/python">python</a></span><span class="tag"><a href="https://fares.codes/tags/monkey-patching">Monkey Patching</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>664 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-09-21 06:20 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/resolving-circular-dependencies-due-to-type-hinting/">
+                                <span class="button__text">Resolving Circular Dependencies Due to Type Hinting</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>
