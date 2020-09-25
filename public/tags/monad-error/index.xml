@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monad Error on Learning Publicly</title>
+    <link>https://fares.codes/tags/monad-error/</link>
+    <description>Recent content in Monad Error on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 25 Sep 2020 06:20:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://fares.codes/tags/monad-error/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cats MonadError</title>
+      <link>https://fares.codes/posts/cats-monaderror/</link>
+      <pubDate>Fri, 25 Sep 2020 06:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-monaderror/</guid>
+      <description>I&amp;rsquo;ve been mostly focusing on Python for the past couple weeks so I&amp;rsquo;ll attempt to balance things out by prioritizing a couple Scala articles&amp;hellip;
+I&amp;rsquo;ve also come to realize that I have not been following the methodology that has inspired this blog in the first place. In this article, I&amp;rsquo;ll attempt to constantly answer the question &amp;ldquo;why&amp;rdquo; and in doing so hopefully strengthen my grasp of the subject . And so for all my readers, the both of you might notice a change in format 😝.</description>
+    </item>
+    
+  </channel>
+</rss>

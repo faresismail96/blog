@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="I&amp;rsquo;ve been mostly focusing on Python for the past couple weeks so I&amp;rsquo;ll attempt to balance things out by prioritizing a couple Scala articles&amp;hellip;
+I&amp;rsquo;ve also come to realize that I have not been following the methodology that has inspired this blog in the first place. In this article, I&amp;rsquo;ll attempt to constantly answer the question &amp;ldquo;why&amp;rdquo; and in doing so hopefully strengthen my grasp of the subject . And so for all my readers, the both of you might notice a change in format 😝." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/cats-monaderror/" />
+
+
+<title>
+    
+    Cats MonadError :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Cats MonadError">
+<meta itemprop="description" content="I&rsquo;ve been mostly focusing on Python for the past couple weeks so I&rsquo;ll attempt to balance things out by prioritizing a couple Scala articles&hellip;
+I&rsquo;ve also come to realize that I have not been following the methodology that has inspired this blog in the first place. In this article, I&rsquo;ll attempt to constantly answer the question &ldquo;why&rdquo; and in doing so hopefully strengthen my grasp of the subject . And so for all my readers, the both of you might notice a change in format 😝.">
+<meta itemprop="datePublished" content="2020-09-25T06:20:00&#43;02:00" />
+<meta itemprop="dateModified" content="2020-09-25T06:20:00&#43;02:00" />
+<meta itemprop="wordCount" content="743">
+
+
+
+<meta itemprop="keywords" content="scala,cats,Monad Error," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cats MonadError"/>
+<meta name="twitter:description" content="I&rsquo;ve been mostly focusing on Python for the past couple weeks so I&rsquo;ll attempt to balance things out by prioritizing a couple Scala articles&hellip;
+I&rsquo;ve also come to realize that I have not been following the methodology that has inspired this blog in the first place. In this article, I&rsquo;ll attempt to constantly answer the question &ldquo;why&rdquo; and in doing so hopefully strengthen my grasp of the subject . And so for all my readers, the both of you might notice a change in format 😝."/>
+
+
+
+
+<meta property="article:published_time" content="2020-09-25 06:20:00 &#43;0200 CEST" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/cats-monaderror/">Cats MonadError</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>I&rsquo;ve been mostly focusing on Python for the past couple weeks so I&rsquo;ll attempt to balance things out by prioritizing a couple Scala articles&hellip;</p>
+<p>I&rsquo;ve also come to realize that I have not been following the methodology that has inspired this blog in the first place. In this article, I&rsquo;ll attempt to constantly answer the question &ldquo;why&rdquo; and in doing so hopefully strengthen my grasp of the subject . And so for all my readers, the both of you might notice a change in format 😝.</p>
+<h2 id="monaderrors-what-are-they">MonadErrors What are they</h2>
+<p><code>MonadErrors</code> are an abstraction over <code>Either</code>-like data types.</p>
+<h3 id="why-are-they-useful">Why are they useful</h3>
+<p>This abstraction is useful if you&rsquo;re working with both <code>Either</code> and <code>Try</code> and would like your function to return a value independently of the context it&rsquo;s in.</p>
+<p>More concretely, assume you have a function <code>sayHello</code> that can return an exception. Depending on where you&rsquo;re calling this function, you would like it to either return an <code>Either[Throwable, String]</code> or a <code>Try[String]</code> (or something else&hellip;).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> scala.language.higherKinds
+<span style="color:#66d9ef">import</span> cats.MonadError
+<span style="color:#66d9ef">import</span> scala.util.Try
+
+<span style="color:#66d9ef">def</span> sayHello<span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]](</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)(</span><span style="color:#66d9ef">implicit</span> me<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">MonadError</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">Throwable</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+    me<span style="color:#f92672">.</span>catchNonFatal<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello &#34;</span><span style="color:#f92672">+</span> value<span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">val</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Try</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">import</span> cats.instances.try_._
+  sayHello<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)</span>  <span style="color:#75715e">// Success(Hello Fares)
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+println<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">val</span> y<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">import</span> cats.instances.either._
+  sayHello<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Emily&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+println<span style="color:#f92672">(</span>y<span style="color:#f92672">)</span>  <span style="color:#75715e">// Right(Hello Emily)
+</span></code></pre></div><p>In each case, the function <code>sayHello</code> is returning the result in a different <code>F</code> context. This is because whe specified that the return type is an <code>F[_]</code> and not a specific Monad.</p>
+<h4 id="why-does-it-work">Why does it work</h4>
+<p>MonadError has the following definition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">MonadError</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">_</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">E</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">ApplicativeError</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span>, <span style="color:#66d9ef">E</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Monad</span><span style="color:#f92672">[</span><span style="color:#66d9ef">F</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+
+  <span style="color:#66d9ef">def</span> ensure<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>fa<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">])(</span>error<span style="color:#66d9ef">:</span> <span style="color:#f92672">=&gt;</span> E<span style="color:#f92672">)(</span>predicate<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+    flatMap<span style="color:#f92672">(</span>fa<span style="color:#f92672">)(</span>a <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>predicate<span style="color:#f92672">(</span>a<span style="color:#f92672">))</span> pure<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> raiseError<span style="color:#f92672">(</span>error<span style="color:#f92672">))</span>
+
+<span style="color:#f92672">}</span>
+</code></pre></div><p>This also depends of the version of cats you&rsquo;re using. More recent versions also include: <code>ensureOr</code>, <code>adaptError</code>, <code>rethrow</code> as well as everything coming from <code>ApplicativeError[F[_], E]</code> and <code>Applicative[F]</code>.
+MonadError takes two type parameters:</p>
+<ul>
+<li><code>F</code>: The type of the Monad</li>
+<li><code>E</code>: The error that will be within the <code>F</code> i.e: <code>Throwable</code></li>
+</ul>
+<p>So when we say: <code>Either[Throwable, String]</code>, the <code>F</code> is the <code>Either</code> context and the <code>E</code> is the <code>Throwable</code>.</p>
+<h5 id="what-are-the-helper-functions-useful-for">What are the helper functions useful for</h5>
+<p>I won&rsquo;t go through all of them, but here are some examples of the functions defined in the <code>MonadError</code> trait:</p>
+<ul>
+<li><code>Ensure</code>: Ensure allows us to turn a successful value into an error if it does not satisfy the predicate.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.syntax.either._
+
+  <span style="color:#66d9ef">val</span> fares<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> emily<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Emily&#34;</span><span style="color:#f92672">)</span>
+
+  <span style="color:#66d9ef">def</span> isFares<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Fares&#34;</span>
+
+  <span style="color:#66d9ef">val</span> res1 <span style="color:#66d9ef">=</span> fares<span style="color:#f92672">.</span>ensure<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Exception</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Not Fares&#34;</span><span style="color:#f92672">))(</span>isFares<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> res2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> emily<span style="color:#f92672">.</span>ensure<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Exception</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Not Fares&#34;</span><span style="color:#f92672">))(</span>isFares<span style="color:#f92672">)</span>
+
+  println<span style="color:#f92672">(</span>res1<span style="color:#f92672">)</span> <span style="color:#75715e">// Right(Fares)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>res2<span style="color:#f92672">)</span> <span style="color:#75715e">// Left(java.lang.Exception: Not Fares)
+</span></code></pre></div><ul>
+<li><code>ensureOr</code>: Definition:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"> <span style="color:#66d9ef">def</span> ensureOr<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>fa<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">])(</span>error<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> E<span style="color:#f92672">)(</span>predicate<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+    flatMap<span style="color:#f92672">(</span>fa<span style="color:#f92672">)(</span>a <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>predicate<span style="color:#f92672">(</span>a<span style="color:#f92672">))</span> pure<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> raiseError<span style="color:#f92672">(</span>error<span style="color:#f92672">(</span>a<span style="color:#f92672">)))</span>
+</code></pre></div><p>Pretty similar to <code>ensure</code> but instead of error being <code>error: =&gt; E</code> it&rsquo;s: <code>error: A =&gt; B</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">def</span> toError<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Throwable</span> <span style="color:#66d9ef">=</span> str <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Exception</span><span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;</span><span style="color:#e6db74">$str</span><span style="color:#e6db74"> is not Fares&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> res1 <span style="color:#66d9ef">=</span> fares<span style="color:#f92672">.</span>ensureOr<span style="color:#f92672">(</span>toError<span style="color:#f92672">)(</span>isFares<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> res2 <span style="color:#66d9ef">=</span> emily<span style="color:#f92672">.</span>ensureOr<span style="color:#f92672">(</span>toError<span style="color:#f92672">)(</span>isFares<span style="color:#f92672">)</span>
+
+  println<span style="color:#f92672">(</span>res1<span style="color:#f92672">)</span> <span style="color:#75715e">// Right(Fares)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>res2<span style="color:#f92672">)</span> <span style="color:#75715e">// Left(java.lang.Exception: Emily is not Fares)
+</span></code></pre></div><ul>
+<li><code>adaptError</code>: Transforms the error into something else and then rethrow it.</li>
+</ul>
+<p>Definition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">def</span> adaptError<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>fa<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">])(</span>pf<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PartialFunction</span><span style="color:#f92672">[</span><span style="color:#66d9ef">E</span>, <span style="color:#66d9ef">E</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+    recoverWith<span style="color:#f92672">(</span>fa<span style="color:#f92672">)(</span>pf<span style="color:#f92672">.</span>andThen<span style="color:#f92672">(</span>raiseError<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">))</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">def</span> partialFunction<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">PartialFunction</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Exception</span>, <span style="color:#66d9ef">Exception</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">case</span> a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Exception</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RuntimeException</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Encountered An Error&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#f92672">}</span>
+
+  <span style="color:#66d9ef">val</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Exception</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">.</span>asRight<span style="color:#f92672">[</span><span style="color:#66d9ef">Exception</span><span style="color:#f92672">].</span>adaptError<span style="color:#f92672">(</span>partialFunction<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> y<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Exception</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Exception</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Not Fares&#34;</span><span style="color:#f92672">).</span>asLeft<span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">].</span>adaptError<span style="color:#f92672">(</span>partialFunction<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> z<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Exception</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Exception</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Some error&#34;</span><span style="color:#f92672">).</span>asLeft<span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">].</span>adaptError<span style="color:#f92672">(</span>partialFunction<span style="color:#f92672">)</span>
+
+  println<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>    <span style="color:#75715e">// Right(Fares)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>y<span style="color:#f92672">)</span>    <span style="color:#75715e">// Left(java.lang.RuntimeException: Encountered An Error)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>z<span style="color:#f92672">)</span>    <span style="color:#75715e">// Left(java.lang.RuntimeException: Encountered An Error)
+</span></code></pre></div><p>Not the most ingenious example, but does the trick.</p>
+<p>One limiting thing: the definition of adaptError states <code>[E,E]</code> which means that we can not freely adapt the errors to a different type!</p>
+<ul>
+<li><code>rethrow</code>: Handles values by potentially turning them into Errors. Takes a <code>F[Either[EE, A]]</code> if the outer value is an Error like, the result is an error. If its a Success like value then we check in Either, if it&rsquo;s a left, the result is an error otherwise its a success.</li>
+</ul>
+<p>Definition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> rethrow<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">EE</span> <span style="color:#66d9ef">&lt;:</span> <span style="color:#66d9ef">E</span><span style="color:#f92672">](</span>fa<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">EE</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+    flatMap<span style="color:#f92672">(</span>fa<span style="color:#f92672">)(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>fold<span style="color:#f92672">(</span>raiseError<span style="color:#f92672">,</span> pure<span style="color:#f92672">))</span>
+</code></pre></div><p>Examples:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Try</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Success</span><span style="color:#f92672">(</span><span style="color:#a6e22e">Left</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> java<span style="color:#f92672">.</span>lang<span style="color:#f92672">.</span><span style="color:#a6e22e">Exception</span><span style="color:#f92672">))</span>
+  a<span style="color:#f92672">.</span>rethrow <span style="color:#75715e">// Failure(java.lang.Exception)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">val</span> b<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Try</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Success</span><span style="color:#f92672">(</span><span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">))</span>
+  b<span style="color:#f92672">.</span>rethrow <span style="color:#75715e">// Success(Fares)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">val</span> c<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Try</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Failure</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> java<span style="color:#f92672">.</span>lang<span style="color:#f92672">.</span><span style="color:#a6e22e">Exception</span><span style="color:#f92672">)</span>
+  c<span style="color:#f92672">.</span>rethrow <span style="color:#75715e">// Failure(java.lang.Exception)
+</span></code></pre></div><h3 id="what-are-some-instances-of-monaderror">What are some Instances of MonadError</h3>
+<p>Cats provides instances for <code>MonadError</code> for multiple data types like: <code>Either</code>, <code>Future</code>, <code>Try</code></p>
+<p>Either can be used with any error on the left, but Future and Try have to have a Throwable on the Left.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/scala">scala</a></span><span class="tag"><a href="https://fares.codes/tags/cats">cats</a></span><span class="tag"><a href="https://fares.codes/tags/monad-error">Monad Error</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>743 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-09-25 06:20 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/monkey-patching-in-python/">
+                                <span class="button__text">Monkey Patching in Python</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>
