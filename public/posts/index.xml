@@ -4,8 +4,154 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Fri, 25 Sep 2020 06:20:00 +0200</lastBuildDate>
+        <lastBuildDate>Sun, 04 Oct 2020 23:00:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Writer Monads</title>
+            <link>https://fares.codes/posts/writer-monads/</link>
+            <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/writer-monads/</guid>
+            <description>This is actually one of the very first GitHub tickets I&amp;rsquo;ve opened. I tend read medium articles on my daily commute to work and I always see articles on the Writer Monad (along other monad instances I plan to write about). I did not use to read them because they&amp;rsquo;re topics I do not understand but I&amp;rsquo;ve been meaning to learn about them for a while now&amp;hellip; And so here is goes:</description>
+            <content type="html"><![CDATA[<p>This is actually one of the very first GitHub tickets I&rsquo;ve opened. I tend read medium articles on my daily commute to work and I always see articles on the <code>Writer Monad</code> (along other monad instances I plan to write about). I did not use to read them because they&rsquo;re topics I do not understand but I&rsquo;ve been meaning to learn about them for a while now&hellip; And so here is goes:</p>
+<p>Note that my main support for this article is the <a href="https://books.underscore.io/scala-with-cats/scala-with-cats.html#writer-monad">scala with cats book</a></p>
+<p>The <code>Writer</code> monad is used to carry a log along a computation.</p>
+<p>It&rsquo;s <code>Writer[A,B]</code> Where A represents what we&rsquo;d like to log and B is the computation. One thing worth noting is that the Writer DataType is actually a Type Alias:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">WriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Id</span>, <span style="color:#66d9ef">L</span>, <span style="color:#66d9ef">V</span><span style="color:#f92672">]</span>
+</code></pre></div><p>Before we go through an example here&rsquo;s a couple functions you should know:</p>
+<p>To create a writer Monad:</p>
+<ul>
+<li>Create the Writer using both values with Apply:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">WriterT</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Id</span>, <span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;First Step&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+</code></pre></div><p>or a more eye pleasing syntax:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> b <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">42.</span>writer<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Result of something&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><p>Both return a MonadTransformer WriterT. We can see later on how to extract the actual values.</p>
+<ul>
+<li>Create the Writer from the Left value:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> res<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;Step&#34;</span><span style="color:#f92672">.</span>tell
+</code></pre></div><ul>
+<li>Create the Writer from the Right value</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Logged</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+<span style="color:#66d9ef">val</span> t<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Logged</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">2.</span>pure<span style="color:#f92672">[</span><span style="color:#66d9ef">Logged</span>
+</code></pre></div><p>The reason we had to do that is because pure takes a <code>F[_]</code> so we had to fix the left value by creating a type alias. (Might one day write an article on type alias and type lambdas).</p>
+<ul>
+<li>Create a writer of Unit:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> res<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;Step&#34;</span><span style="color:#f92672">.</span>tell
+</code></pre></div><h2 id="extracting-values-from-writers">Extracting values from Writers</h2>
+<ul>
+<li>To extract the Right value:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> b <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">42.</span>writer<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Result of something&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> bResult<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Id</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> a<span style="color:#f92672">.</span>value
+</code></pre></div><ul>
+<li>To extract the Left value:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> b <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">42.</span>writer<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Result of something&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> bValue<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Id</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> b<span style="color:#f92672">.</span>written
+</code></pre></div><ul>
+<li>To extract both into a tuple:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> b <span style="color:#66d9ef">=</span> <span style="color:#ae81ff">42.</span>writer<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Result of something&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">val</span> bothResult<span style="color:#66d9ef">:</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> b<span style="color:#f92672">.</span>run
+</code></pre></div><h2 id="what-to-use-as-log-type">What to use as Log type</h2>
+<p>In the previous example, we used String but it doesn&rsquo;t make much sense since ideally we&rsquo;d have multiple computations and would like to keep all the logs from each step. A good practice is to use a vector.</p>
+<h3 id="why-a-vector">Why a Vector</h3>
+<p>Given the need, you might be inclined to ask yourselves: <code>Why a vector and not a List</code> <em>(I know I did)</em>. The answer, it turns out, is because a vector is more efficient at append and concatenate operations.</p>
+<h2 id="example">Example</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">Logged</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Writer</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Vector</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span>, <span style="color:#66d9ef">A</span><span style="color:#f92672">]</span>
+
+  <span style="color:#66d9ef">val</span> writer1 <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+    a <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">10.</span>pure<span style="color:#f92672">[</span><span style="color:#66d9ef">Logged</span><span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Started off with 10&#34;</span><span style="color:#f92672">).</span>tell
+    b <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">32.</span>writer<span style="color:#f92672">(</span><span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;New Writer with initial value: 32&#34;</span><span style="color:#f92672">))</span>
+    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Now Adding both Writers&#34;</span><span style="color:#f92672">).</span>tell
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> a <span style="color:#f92672">+</span> b
+
+  println<span style="color:#f92672">(</span>writer1<span style="color:#f92672">)</span> <span style="color:#75715e">// WriterT((Vector(Started off with 10,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//New Writer with initial value: 32, Now Adding both Writers),42))
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>Ok&hellip; So what just happened here:</p>
+<p>We started off with a Writer(Vector(), 10)
+Then in the second line of the for comprehension, we added our first log. <em>(note, we could have done both in the same statement)</em>.
+Third line: We created a new Writer with an initial value of 32
+Fourth line, we added to our second writer a log stating that we will add both writers.</p>
+<p>The end result: All logs were appended to one another, and both values were added to one another.</p>
+<h3 id="mapping-on-the-logs">Mapping on the logs</h3>
+<p>Think of this as the equivalent of a left map, we have the possibility to map on the logs to transform them. The result will be a new Writer:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> writer2 <span style="color:#66d9ef">=</span> writer1<span style="color:#f92672">.</span>mapWritten<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>mkString<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\n&#34;</span><span style="color:#f92672">))</span>
+  println<span style="color:#f92672">(</span>writer2<span style="color:#f92672">)</span>
+</code></pre></div><p>And the result:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">WriterT((Started off with 10
+New Writer with initial value: 32
+Now Adding both Writers,42))
+</code></pre></div><p>To map on both values: either use the classical <code>bimap</code> or <code>mapBoth</code>. The differences are simply in the input parameters:</p>
+<h4 id="bimap">bimap</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> writer1a <span style="color:#66d9ef">=</span> writer2<span style="color:#f92672">.</span>bimap<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>toLowerCase<span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
+println<span style="color:#f92672">(</span>writer1a<span style="color:#f92672">)</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">WriterT((started off with 10
+new writer with initial value: 32
+now adding both writers,43))
+</code></pre></div><h4 id="mapboth">mapBoth</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> writer1b <span style="color:#66d9ef">=</span> writer2<span style="color:#f92672">.</span>mapBoth<span style="color:#f92672">((</span>str<span style="color:#f92672">,</span> i<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">(</span>str<span style="color:#f92672">.</span>toLowerCase<span style="color:#f92672">,</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">))</span>
+  println<span style="color:#f92672">(</span>writer1b<span style="color:#f92672">)</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">WriterT((started off with 10
+new writer with initial value: 32
+now adding both writers,43))
+</code></pre></div><p>Not much difference between both but it depends on how you want to use them or your preference.</p>
+<h2 id="why-cant-we-just-append-to-a-file-or-a-var">Why can&rsquo;t we just append to a file or a var</h2>
+<p>Appending the logs to a global variable or even a log file might sound like a good replacement for Writer monads but it has its limitations, specially when dealing with concurrency and failed computations.</p>
+<p>If two actions are executed simultaneously, we might lose control over our log file/list. In addition, if a specific computation began its execution and logging and failed at some task, retrying the computation/task might be problematic and might complicate the handling of the logs.</p>
+<p>Another issue (albeit not small) with having a global variable or a log file is that the code no longer remains pure, and code purity is something all functional programmers push for.</p>
+<p>Having a pure function means the function can only interact with the arguments that are passed to it and cannot mutate some other state and cannot have side effects (like writing to a file).</p>
+<h2 id="real-life-example">Real Life example</h2>
+<p>As a kid I loved math, specially algebra. But I would always get marks off my exams and homework even if my final answer was correct. My teachers would always nag me to &ldquo;SHOW YOUR WORK&rdquo;.</p>
+<p>In this example, we will attempt to solve for x while logging our work.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> initialExpression <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;(x-1)(x-2)(x-3)=0&#34;</span>
+
+  <span style="color:#66d9ef">val</span> solver <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">0.</span>writer<span style="color:#f92672">(</span><span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;initial equation: </span><span style="color:#e6db74">$initialExpression</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">))</span>
+    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span>
+      <span style="color:#e6db74">&#34;The answer is x=1, x=2,x=3 but yall want me to &#34;</span> <span style="color:#f92672">+</span>
+      <span style="color:#e6db74">&#34;show my work so here it goes:&#34;</span>
+    <span style="color:#f92672">).</span>tell
+    <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span>
+      <span style="color:#e6db74">&#34;There is a value for x that satisfies this &#34;</span> <span style="color:#f92672">+</span>
+      <span style="color:#e6db74">&#34;equation for (x-1)=0, (x-2)=0 and (x-3)=0&#34;</span>
+    <span style="color:#f92672">).</span>tell
+    res1 <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">1.</span>writer<span style="color:#f92672">(</span><span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;(x-1)=0 so x=1&#34;</span><span style="color:#f92672">))</span>
+    res2 <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">2.</span>writer<span style="color:#f92672">(</span><span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;(x-2)=0 so x=2&#34;</span><span style="color:#f92672">))</span>
+    res3 <span style="color:#66d9ef">&lt;-</span> <span style="color:#ae81ff">3.</span>writer<span style="color:#f92672">(</span><span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;(x-3)=0 so x=3&#34;</span><span style="color:#f92672">))</span>
+    <span style="color:#66d9ef">_</span>    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Vector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;roots of x: &#34;</span><span style="color:#f92672">).</span>tell
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">(</span>res1<span style="color:#f92672">,</span> res2<span style="color:#f92672">,</span> res3<span style="color:#f92672">)</span>
+
+  <span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span> solver<span style="color:#f92672">.</span>mapWritten<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>mkString<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\n&#34;</span><span style="color:#f92672">)).</span>run
+  print<span style="color:#f92672">(</span>res<span style="color:#f92672">.</span>_1<span style="color:#f92672">)</span>
+  println<span style="color:#f92672">(</span>res<span style="color:#f92672">.</span>_2<span style="color:#f92672">)</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">initial equation: (x-1)(x-2)(x-3)=0
+The answer is x=1, x=2,x=3 but yall want me to show my work so here it goes:
+There is a value for x that satisfies this equation for:
+     (x-1)=0, (x-2)=0 and (x-3)=0
+(x-1)=0 so x=1
+(x-2)=0 so x=2
+(x-3)=0 so x=3
+roots of x: (1,2,3)
+</code></pre></div><p>Yes I am a vindictive and vengeful person 🙄</p>
+<h2 id="drawbacks">Drawbacks</h2>
+<ol>
+<li>
+<p>The logs are not directly written, instead they are written at the end of the computation. This doesn&rsquo;t really show in our case because the computations are simple (0, 1, 2 etc&hellip;) but in the case where they were complex functions, the log would only be appended at the end of each function execution. For that reason, using timestamps in the logs is not a good idea.</p>
+</li>
+<li>
+<p>If one step fails, the entire computation is lost and the logs along with them.</p>
+</li>
+</ol>
+]]></content>
+        </item>
         
         <item>
             <title>Cats MonadError</title>

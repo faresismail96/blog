@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://fares.codes/tags/cats/</loc>
-    <lastmod>2020-09-25T06:20:00+02:00</lastmod>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/monad/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scala/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/writer/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/writer-monads/</loc>
+    <lastmod>2020-10-04T23:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -14,21 +44,6 @@
   
   <url>
     <loc>https://fares.codes/tags/monad-error/</loc>
-    <lastmod>2020-09-25T06:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2020-09-25T06:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/scala/</loc>
-    <lastmod>2020-09-25T06:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2020-09-25T06:20:00+02:00</lastmod>
   </url>
   

@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Writer Monads</title>
+      <link>https://fares.codes/posts/writer-monads/</link>
+      <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/writer-monads/</guid>
+      <description>This is actually one of the very first GitHub tickets I&amp;rsquo;ve opened. I tend read medium articles on my daily commute to work and I always see articles on the Writer Monad (along other monad instances I plan to write about). I did not use to read them because they&amp;rsquo;re topics I do not understand but I&amp;rsquo;ve been meaning to learn about them for a while now&amp;hellip; And so here is goes:</description>
+    </item>
+    
+    <item>
       <title>Cats MonadError</title>
       <link>https://fares.codes/posts/cats-monaderror/</link>
       <pubDate>Fri, 25 Sep 2020 06:20:00 +0200</pubDate>
