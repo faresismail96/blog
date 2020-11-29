@@ -5,7 +5,7 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 04 Oct 2020 23:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 20:37:00 +0100</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>cats</title>
       <link>https://fares.codes/tags/cats/</link>
-      <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
+      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
       
       <guid>https://fares.codes/tags/cats/</guid>
       <description></description>
@@ -22,16 +22,25 @@
     <item>
       <title>monad</title>
       <link>https://fares.codes/tags/monad/</link>
-      <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
+      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
       
       <guid>https://fares.codes/tags/monad/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>reader</title>
+      <link>https://fares.codes/tags/reader/</link>
+      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/tags/reader/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>scala</title>
       <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
+      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
       
       <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
