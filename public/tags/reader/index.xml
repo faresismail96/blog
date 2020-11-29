@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>monad on Learning Publicly</title>
-    <link>https://fares.codes/tags/monad/</link>
-    <description>Recent content in monad on Learning Publicly</description>
+    <title>reader on Learning Publicly</title>
+    <link>https://fares.codes/tags/reader/</link>
+    <description>Recent content in reader on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 29 Nov 2020 20:37:00 +0100</lastBuildDate>
     
-	<atom:link href="https://fares.codes/tags/monad/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fares.codes/tags/reader/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <description>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
 I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
-    </item>
-    
-    <item>
-      <title>Writer Monads</title>
-      <link>https://fares.codes/posts/writer-monads/</link>
-      <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
-      
-      <guid>https://fares.codes/posts/writer-monads/</guid>
-      <description>This is actually one of the very first GitHub tickets I&amp;rsquo;ve opened. I tend read medium articles on my daily commute to work and I always see articles on the Writer Monad (along other monad instances I plan to write about). I did not use to read them because they&amp;rsquo;re topics I do not understand but I&amp;rsquo;ve been meaning to learn about them for a while now&amp;hellip; And so here is goes:</description>
     </item>
     
   </channel>

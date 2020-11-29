@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
+As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/reader-monads-and-dependency-injection/" />
+
+
+<title>
+    
+    Reader Monads and Dependency Injection :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Reader Monads and Dependency Injection">
+<meta itemprop="description" content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
+As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
+I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;.">
+<meta itemprop="datePublished" content="2020-11-29T20:37:00&#43;01:00" />
+<meta itemprop="dateModified" content="2020-11-29T20:37:00&#43;01:00" />
+<meta itemprop="wordCount" content="951">
+
+
+
+<meta itemprop="keywords" content="scala,cats,reader,monad," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reader Monads and Dependency Injection"/>
+<meta name="twitter:description" content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
+As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
+I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;."/>
+
+
+
+
+<meta property="article:published_time" content="2020-11-29 20:37:00 &#43;0100 CET" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/reader-monads-and-dependency-injection/">Reader Monads and Dependency Injection</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.</p>
+<p>As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.</p>
+<p>I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;.</p>
+<p>For this, we&rsquo;ll simplify our &ldquo;Person&rdquo; and consider that a <code>Person</code> is only a name, age and recommendedBooks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> recommendedBooks<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
+</code></pre></div><p>But I&rsquo;m jumping the gun. Let&rsquo;s go back to reader Monads:</p>
+<h2 id="what-is-it">What is it</h2>
+<p>The reader monad allows us to sequence some operation that depend on the same external input (also called configuration).</p>
+<h3 id="creating-readers">Creating Readers</h3>
+<p>To create a reader, we can use the apply method and pass to it a function that takes our external configuration/input and returns something:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.data.Reader
+  <span style="color:#66d9ef">import</span> cats.implicits._
+
+  <span style="color:#66d9ef">val</span> canBeFriend<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
+  <span style="color:#66d9ef">val</span> reader<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Reader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Reader</span><span style="color:#f92672">(</span>canBeFriend<span style="color:#f92672">)</span>
+</code></pre></div><p><code>canBeFriend</code> is a function that takes a Person and returns a Boolean. It checks if the person would normally recommend the book &ldquo;The Little Prince&rdquo; to others. Coz can we really be friends with someone who doesn&rsquo;t???</p>
+<p><code>reader</code> is simply an apply. The type is a <code>Reader[Person, Boolean]</code>. So it&rsquo;s a <code>Reader</code> that takes in a Person and returns a Boolean.</p>
+<p>You might also notice that reader is implemented as a <code>Kleisli</code> but well talk about that later. (You can also check out my article on Kleisli)</p>
+<h2 id="why-are-they-better-than-a-raw-function">Why are they better than a raw function</h2>
+<p>A valid question could be: Why are they useful? What is the difference between doing this and a simple raw function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> canBeFriends<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> person<span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
+</code></pre></div><p>Put like that, there isn&rsquo;t and a raw function is simpler to use/read.</p>
+<p>But is &ldquo;Le Petit Prince&rdquo; the only criteria for being friends with someone? After all it is the second most translated book in the world after the bible&hellip; So maybe filter some more people out?</p>
+<p>In an attempt to simplify the modeling of whether or not two people click together, we will assume that I can click with any person who is above 21 years old, below 30 years old aaaand who would recommend the book: Le Petit Prince. (I&rsquo;m not that picky when it comes to friends).</p>
+<p>We will also test this theory with 3 different people: myself, some random idiot who loves twilight and Eric an ok but slightly old person.</p>
+<p>Our code might look like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
+    <span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span>
+    <span style="color:#ae81ff">24</span><span style="color:#f92672">,</span>
+    <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
+      <span style="color:#e6db74">&#34;All The Light We Cannot See&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;The Catcher in the Rye&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;L&#39;étranger&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;La Vie Devant Soi&#34;</span>
+    <span style="color:#f92672">)</span>
+  <span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> someIdiot <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Random Human&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">16</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Twilight&#34;</span><span style="color:#f92672">))</span>
+  <span style="color:#66d9ef">val</span> okButOld <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Eric&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">38</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Le Petit Prince&#34;</span><span style="color:#f92672">))</span>
+
+  <span style="color:#66d9ef">def</span> isOldEnough<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span>
+    person<span style="color:#f92672">.</span>age <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">21</span>
+
+  <span style="color:#66d9ef">def</span> isYoungEnough<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span>
+    person<span style="color:#f92672">.</span>age <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span>
+
+  <span style="color:#66d9ef">def</span> okTasteInBooks<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span>
+    person<span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
+
+  <span style="color:#66d9ef">def</span> canWeBeFriends<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span>
+    isOldEnough<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> isYoungEnough<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> okTasteInBooks<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span>
+</code></pre></div><p>aaand the fun part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Fares,24,true)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> someIdiot<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Random Human,16,false) ==&gt; Shocker!
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>okButOld<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> okButOld<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>okButOld<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Eric,38,false)
+</span></code></pre></div><p>It&rsquo;s not so bad but here are my couple concerns with the above implementation:</p>
+<ul>
+<li>It is not the easiest code to read. In our case, its a simple function but more complex ones might be even harder to understand.</li>
+<li>We also need to pass the input parameter person through all the intermediary functions just so that they can be passed to our different functions. In addition, our <code>person</code> input to every single one of our functions.</li>
+</ul>
+<h3 id="how-can-we-do-better-with-reader">How can we do better with reader</h3>
+<p>If we were to write the same code but this time using <code>Readers</code> it&rsquo;ll look something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
+    <span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span>
+    <span style="color:#ae81ff">24</span><span style="color:#f92672">,</span>
+    <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
+      <span style="color:#e6db74">&#34;All The Light We Cannot See&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;The Catcher in the Rye&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;L&#39;étranger&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span><span style="color:#f92672">,</span>
+      <span style="color:#e6db74">&#34;La Vie Devant Soi&#34;</span>
+    <span style="color:#f92672">)</span>
+  <span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> someIdiot <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Random Human&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">16</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Twilight&#34;</span><span style="color:#f92672">))</span>
+  <span style="color:#66d9ef">val</span> okButOld <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Eric&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">38</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Le Petit Prince&#34;</span><span style="color:#f92672">))</span>
+
+  <span style="color:#66d9ef">val</span> isOldEnoughReader<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Reader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Reader</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>age <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">21</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> isYoungEnoughReader<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Reader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Reader</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>age <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30</span><span style="color:#f92672">)</span>
+
+  <span style="color:#66d9ef">val</span> okTasteInBooks<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
+  <span style="color:#66d9ef">val</span> okTasteInBooksReader<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Reader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Reader</span><span style="color:#f92672">(</span>okTasteInBooks<span style="color:#f92672">)</span>
+</code></pre></div><p>In the above code, we&rsquo;ve defined our <code>Person</code>s instances and our <code>Reader[Person, Boolean]</code>. One for each validation we would like to have.</p>
+<p>Then we can sequence the operations in a for comprehension:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> canWeBeFriends<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Kleisli</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Id</span>, <span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+    okTaste     <span style="color:#66d9ef">&lt;-</span> okTasteInBooksReader
+    youngEnough <span style="color:#66d9ef">&lt;-</span> isYoungEnoughReader
+    oldEnough   <span style="color:#66d9ef">&lt;-</span> isOldEnoughReader
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> okTaste <span style="color:#f92672">&amp;&amp;</span> youngEnough <span style="color:#f92672">&amp;&amp;</span> oldEnough
+</code></pre></div><p>aaand again the fun part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Fares,24,true)
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> someIdiot<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Random Human,16,false) ==&gt; Shocker!
+</span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>okButOld<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> okButOld<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>okButOld<span style="color:#f92672">))</span>
+  <span style="color:#75715e">// (Eric,32,false)
+</span></code></pre></div><p>Note: the apply <code>canWeBeFriends(someIdiot)</code> consists of calling the <code>run</code> function. So they&rsquo;re interchangeable.</p>
+<p>With the reader implementation, we simply need to defined our readers and create the for-comprehension that will hold our business logic. We then simply have to call the result of the for comprehension with the specific input. This is also the reason why <code>Readers</code> are also used as dependency injection.</p>
+<p>You might have also noticed that the result of the for-comprehension is a <code>Kleisli[Id, Person, Boolean]</code>. If you recall from my previous article, Kleisli allows for the composition of functions where the return type is monadic.</p>
+<p>And how is the return type Monadic? Isn&rsquo;t it Boolean? if you look at any of the above applies of the reader, the return type will be an Id[Boolean], Where Id is a Monad.</p>
+<p>I&rsquo;ll probably write an article on that but for now know that Id[A] and A can be used interchangeably.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/scala">scala</a></span><span class="tag"><a href="https://fares.codes/tags/cats">cats</a></span><span class="tag"><a href="https://fares.codes/tags/reader">reader</a></span><span class="tag"><a href="https://fares.codes/tags/monad">monad</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>951 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-29 20:37 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/writer-monads/">
+                                <span class="button__text">Writer Monads</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

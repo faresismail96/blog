@@ -11,6 +11,17 @@
     
     
     <item>
+      <title>Reader Monads and Dependency Injection</title>
+      <link>https://fares.codes/posts/reader-monads-and-dependency-injection/</link>
+      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/posts/reader-monads-and-dependency-injection/</guid>
+      <description>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
+As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
+    </item>
+    
+    <item>
       <title>Writer Monads</title>
       <link>https://fares.codes/posts/writer-monads/</link>
       <pubDate>Sun, 04 Oct 2020 23:00:00 +0200</pubDate>
