@@ -5,10 +5,46 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 29 Nov 2020 20:37:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 14 Feb 2021 12:20:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>adt</title>
+      <link>https://fares.codes/tags/adt/</link>
+      <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/adt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>product type</title>
+      <link>https://fares.codes/tags/product-type/</link>
+      <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/product-type/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://fares.codes/tags/scala/</link>
+      <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sum type</title>
+      <link>https://fares.codes/tags/sum-type/</link>
+      <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/sum-type/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>cats</title>
@@ -34,15 +70,6 @@
       <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
       
       <guid>https://fares.codes/tags/reader/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
-      
-      <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
     </item>
     
@@ -196,15 +223,6 @@
       <pubDate>Sun, 03 May 2020 20:00:00 +0200</pubDate>
       
       <guid>https://fares.codes/tags/abstract-class/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ADT</title>
-      <link>https://fares.codes/tags/adt/</link>
-      <pubDate>Sun, 03 May 2020 20:00:00 +0200</pubDate>
-      
-      <guid>https://fares.codes/tags/adt/</guid>
       <description></description>
     </item>
     
