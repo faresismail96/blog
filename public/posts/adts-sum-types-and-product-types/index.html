@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Fares Ismail">
+<meta name="description"
+    content="It has been a while since I haven&amp;rsquo;t posted a new article, and in an attempt to break the cycle I&amp;rsquo;m starting off with something pretty simple.
+When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&amp;rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://fares.codes/posts/adts-sum-types-and-product-types/" />
+
+
+<title>
+    
+    ADTs: Sum Types and Product Types :: Learning Publicly 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://fares.codes/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fares.codes/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fares.codes/favicon-16x16.png">
+<link rel="manifest" href="https://fares.codes/site.webmanifest">
+<link rel="mask-icon" href="https://fares.codes/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="https://fares.codes/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="ADTs: Sum Types and Product Types">
+<meta itemprop="description" content="It has been a while since I haven&rsquo;t posted a new article, and in an attempt to break the cycle I&rsquo;m starting off with something pretty simple.
+When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both.">
+<meta itemprop="datePublished" content="2021-02-14T12:20:00&#43;02:00" />
+<meta itemprop="dateModified" content="2021-02-14T12:20:00&#43;02:00" />
+<meta itemprop="wordCount" content="669">
+
+
+
+<meta itemprop="keywords" content="adt,sum type,product type,scala," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ADTs: Sum Types and Product Types"/>
+<meta name="twitter:description" content="It has been a while since I haven&rsquo;t posted a new article, and in an attempt to break the cycle I&rsquo;m starting off with something pretty simple.
+When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both."/>
+
+
+
+
+<meta property="article:published_time" content="2021-02-14 12:20:00 &#43;0200 &#43;0200" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fares.codes/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fares.codes/about">About</a></li><li><a href="https://fares.codes/posts">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://fares.codes/posts/adts-sum-types-and-product-types/">ADTs: Sum Types and Product Types</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>It has been a while since I haven&rsquo;t posted a new article, and in an attempt to break the cycle I&rsquo;m starting off with something pretty simple.</p>
+<p>When listening to people talk of ADTs, you&rsquo;ll often hear the words: <code>Sum type</code> and <code>Product type</code>. Now I have a bad habit of confusing the two so in this article I&rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both.</p>
+<p>But first, ADT stands for Algebraic Data Type and they&rsquo;re essentially all about combining existing types to create new ones to better model a specific domain.</p>
+<p>A simplistic explanation of domain is &ldquo;an area of knowledge&rdquo;, the problem space we are working with. This includes all related entities, their behavior and the laws they obey.</p>
+<p>ADTs allow us to model all that, including the relationships between different entities.</p>
+<h2 id="product-types">Product Types</h2>
+<p>Product types are created by combining two or more types together with the <code>AND</code> operator. Here are a couple examples:</p>
+<p>Street addresses are comprised of a street number and a street name.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StreetAddress</span><span style="color:#f92672">(</span>streetNumber<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> streetName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+</code></pre></div><p>A book consists of a title, and author and an ISBN.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
+</code></pre></div><h2 id="sum-types">Sum Types</h2>
+<p>A sum type is a type that combines other types using the <code>OR</code> operator. Here are a couple examples:</p>
+<ul>
+<li>
+<p>A grade is a pass or fail class is a Sum type, it can either be <code>Pass</code> or can be <code>Fail</code> but not both.</p>
+</li>
+<li>
+<p>A boolean can either be <code>True</code> or it can be <code>False</code> but not both.</p>
+</li>
+<li>
+<p>A dice roll can only be one out of six possibilities at a time but not more.</p>
+</li>
+</ul>
+<p>In our PostalAddress class, we represented a fullName as a String. But what if we wanted to push this further?</p>
+<p>A fullName can be comprised of a firstName and a lastName, but a persons&rsquo; name can also include a middleName</p>
+<p>So here&rsquo;s one way of modeling this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span>
+  firstName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
+  middleName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">],</span> 
+  lastName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
+<span style="color:#f92672">)</span>
+</code></pre></div><p>And I guess thats okay&hellip; But we&rsquo;ll have to add <code>None</code> everywhere a middle name does not exist and when it does, we&rsquo;ll have to wrap it in a <code>Some</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> stephen <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Stephen&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">None</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Chbosky&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> sagan <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Carl&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Edward&#34;</span><span style="color:#f92672">),</span> <span style="color:#e6db74">&#34;Sagan&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><p>But what about people with a singe name such as : <code>Aristotle</code>, <code>Charlemagne</code>, <code>Fibonacci</code> etc&hellip;</p>
+<p>Should we make the firstName optional? can those really be considered their last names? or should be put some cases aside as special cases to be handled separately? If so wouldn&rsquo;t we end up in a situation where we have so many exceptions of different kind that it becomes unmanageable?</p>
+<p>If I&rsquo;m asking these questions its because they best demonstrate where Sum Types really shine!</p>
+<p>A FullName can be modeled as a first and last name OR a first, middle and last name OR a single name etc&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">FullName</span>
+
+<span style="color:#66d9ef">object</span> <span style="color:#a6e22e">FullName</span> <span style="color:#f92672">{</span>
+  
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FirstLastName</span><span style="color:#f92672">(</span>
+    firstName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> 
+    lastName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
+    <span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">FullName</span>
+
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WithMiddleName</span><span style="color:#f92672">(</span>
+    firstName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> 
+    middleName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> 
+    lastName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> 
+    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">FullName</span>
+
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SingleName</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">FullName</span>
+  
+  <span style="color:#66d9ef">val</span> stephen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">FirstLastName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Stephen&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Chbosky&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> sagan<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">WithMiddleName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Carl&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Edward&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Sagan&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">val</span> aristotle<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">SingleName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Aristotle&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>I&rsquo;m definitely not the best at coming up with class names, but this point aside&hellip; All three instances are of the same type: <code>FullName</code> which is a Sum Type that can either be one of the three defined above.</p>
+<p>We&rsquo;re not restricted to Either Sum or Product Types. Instead we can use both together to better model our domain. Here&rsquo;s our Book type better represented using the FullName Sum Type:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
+</code></pre></div><p>The last one is known as a Hybrid type or a <code>Sum of Products</code> type.</p>
+<h2 id="if-you-must-remember-two-things">If you must remember two things</h2>
+<ul>
+<li>ADTs are all about combining existing types to create new ones and better model our domain.</li>
+<li>Sum Types combine types with the OR operator while Product Types do it with the AND operator.</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/adt">adt</a></span><span class="tag"><a href="https://fares.codes/tags/sum-type">sum type</a></span><span class="tag"><a href="https://fares.codes/tags/product-type">product type</a></span><span class="tag"><a href="https://fares.codes/tags/scala">scala</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>669 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-02-14 11:20 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fares.codes/posts/reader-monads-and-dependency-injection/">
+                                <span class="button__text">Reader Monads and Dependency Injection</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://fares.codes/">Fares Ismail</a></span>
+            
+            <span></span>
+            <span> <a href="https://fares.codes/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

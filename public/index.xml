@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>ADTs: Sum Types and Product Types</title>
+      <link>https://fares.codes/posts/adts-sum-types-and-product-types/</link>
+      <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/adts-sum-types-and-product-types/</guid>
+      <description>It has been a while since I haven&amp;rsquo;t posted a new article, and in an attempt to break the cycle I&amp;rsquo;m starting off with something pretty simple.
+When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&amp;rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both.</description>
+    </item>
+    
+    <item>
       <title>Reader Monads and Dependency Injection</title>
       <link>https://fares.codes/posts/reader-monads-and-dependency-injection/</link>
       <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>

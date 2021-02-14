@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/tags/adt/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/adts-sum-types-and-product-types/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/product-type/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scala/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/sum-type/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/tags/cats/</loc>
     <lastmod>2020-11-29T20:37:00+01:00</lastmod>
   </url>
@@ -13,27 +48,12 @@
   </url>
   
   <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2020-11-29T20:37:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://fares.codes/tags/reader/</loc>
     <lastmod>2020-11-29T20:37:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://fares.codes/posts/reader-monads-and-dependency-injection/</loc>
-    <lastmod>2020-11-29T20:37:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/scala/</loc>
-    <lastmod>2020-11-29T20:37:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2020-11-29T20:37:00+01:00</lastmod>
   </url>
   
@@ -169,11 +189,6 @@
   
   <url>
     <loc>https://fares.codes/tags/abstract-class/</loc>
-    <lastmod>2020-05-03T20:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/adt/</loc>
     <lastmod>2020-05-03T20:00:00+02:00</lastmod>
   </url>
   
