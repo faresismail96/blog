@@ -11,6 +11,17 @@
     
     
     <item>
+      <title>Property Based Testing with ScalaCheck</title>
+      <link>https://fares.codes/posts/property-based-testing-with-scalacheck/</link>
+      <pubDate>Sun, 28 Feb 2021 19:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/property-based-testing-with-scalacheck/</guid>
+      <description>Unit testing is an effective way of catching bugs and protecting our code from future bugs related to refactoring.
+But with the classical unit tests (example based tests), we are restricted to the test cases we can think ok. We can only write a finite number of tests that cover a finite number of cases.
+In this article I&amp;rsquo;ll begin by showing the limitations of example based tests before moving to scalacheck and property based testing.</description>
+    </item>
+    
+    <item>
       <title>ADTs: Sum Types and Product Types</title>
       <link>https://fares.codes/posts/adts-sum-types-and-product-types/</link>
       <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>

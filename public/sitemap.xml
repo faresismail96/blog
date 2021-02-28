@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/posts/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/property-based-testing/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/property-based-testing-with-scalacheck/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scala/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/scalacheck/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/testing/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/unit-testing/</loc>
+    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/tags/adt/</loc>
     <lastmod>2021-02-14T12:20:00+02:00</lastmod>
   </url>
@@ -13,27 +53,12 @@
   </url>
   
   <url>
-    <loc>https://fares.codes/posts/</loc>
-    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://fares.codes/tags/product-type/</loc>
     <lastmod>2021-02-14T12:20:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fares.codes/tags/scala/</loc>
-    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://fares.codes/tags/sum-type/</loc>
-    <lastmod>2021-02-14T12:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2021-02-14T12:20:00+02:00</lastmod>
   </url>
   
