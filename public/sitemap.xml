@@ -4,7 +4,32 @@
   
   <url>
     <loc>https://fares.codes/posts/</loc>
-    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/python/</loc>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/string-interpolation/</loc>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/string-interpolation-in-python/</loc>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/strings/</loc>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
   </url>
   
   <url>
@@ -24,11 +49,6 @@
   
   <url>
     <loc>https://fares.codes/tags/scalacheck/</loc>
-    <lastmod>2021-02-28T19:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2021-02-28T19:20:00+02:00</lastmod>
   </url>
   
@@ -109,11 +129,6 @@
   
   <url>
     <loc>https://fares.codes/posts/monkey-patching-in-python/</loc>
-    <lastmod>2020-09-21T06:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/python/</loc>
     <lastmod>2020-09-21T06:20:00+02:00</lastmod>
   </url>
   
