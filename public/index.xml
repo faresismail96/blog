@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>String Interpolation in Python</title>
+      <link>https://fares.codes/posts/string-interpolation-in-python/</link>
+      <pubDate>Tue, 30 Mar 2021 19:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/string-interpolation-in-python/</guid>
+      <description>Right off the bat, I&amp;rsquo;ll say this: my go to solution for string interpolation in python are f-strings. They&amp;rsquo;re elegant, simple to read and even simpler to understand. But in some cases, depending on your setup, you might be forced to use another way. In this article I&amp;rsquo;ll outline the different possibilities that I have come to learn exist when talking about string interpolation in python.
+Note: This article is mostly me recopying what is said here: https://www.</description>
+    </item>
+    
+    <item>
       <title>Property Based Testing with ScalaCheck</title>
       <link>https://fares.codes/posts/property-based-testing-with-scalacheck/</link>
       <pubDate>Sun, 28 Feb 2021 19:20:00 +0200</pubDate>
