@@ -4,8 +4,84 @@
         <link>https://fares.codes/posts/</link>
         <description>Recent content in Posts on Learning Publicly</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Tue, 30 Mar 2021 19:20:00 +0200</lastBuildDate>
+        <lastBuildDate>Sun, 31 Oct 2021 12:20:00 +0200</lastBuildDate>
         <atom:link href="https://fares.codes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Schema on Read v.s Schema on Write</title>
+            <link>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</link>
+            <pubDate>Sun, 31 Oct 2021 12:20:00 +0200</pubDate>
+            
+            <guid>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</guid>
+            <description>There are two mechanisms to store data in a database.
+Either follow a schema on read approach or a schema on write approach.
+Schema on Write This is typically used with relational databases.
+With this approach, the schema is defined and created before the data is inserted into a db.
+It usually follows the below steps:
+ Create the schema (create tables) Load the data Query the data and extract insight  The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
+            <content type="html"><![CDATA[<p>There are two mechanisms to store data in a database.</p>
+<p>Either follow a schema on read approach or a schema on write approach.</p>
+<h2 id="schema-on-write">Schema on Write</h2>
+<p>This is typically used with relational databases.</p>
+<p>With this approach, the schema is defined and created before the data is inserted into a db.</p>
+<p>It usually follows the below steps:</p>
+<ol>
+<li>Create the schema (create tables)</li>
+<li>Load the data</li>
+<li>Query the data and extract insight</li>
+</ol>
+<p>The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</p>
+<p>But this approach also presents some inconveniences</p>
+<ul>
+<li>To be able to create accurate schema, the data needs to be known and well understood in advance.</li>
+<li>The data is modeled and sometimes modified to a specific use case</li>
+<li>If the schema is redefined, the table is dropped and reloaded. Is can be problematic with large datasets and data with foreign keys.</li>
+</ul>
+<h2 id="schema-on-read">Schema on Read</h2>
+<p>On the flip side, schema on read consists of delaying the schema definition to the moment we query the data.</p>
+<ol>
+<li>Load the unstructured data</li>
+<li>Apply a schema</li>
+<li>Query the data with that schema</li>
+</ol>
+<p>This mechanism allows us to store unstructured and structured data without worrying about the schema or any transformations. It facilitates a fast ingestion because the data does not follow any internal schema.</p>
+<p>It is up to the code that does the ETL to handle the data. No need to drop tables and reload data at a schema change, simply change the code that does the querying.</p>
+<p>Schema on read also allows us to store the full data as is, and therefore that same data can be reused for different applications/purposes as it has not been subjected to a specific schema yet.</p>
+<p>On inconvenience though is that the stored data can contain a lot of missing/invalid values.</p>
+<h2 id="summary">Summary</h2>
+<p>There is no overall better approche, just a better approche for a use case.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><em>Schema on Write</em></th>
+<th align="right"><em>Schema on Read</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fast reads</td>
+<td align="right">Slow Reads</td>
+</tr>
+<tr>
+<td align="left">Slower loads</td>
+<td align="right">Fast Loads</td>
+</tr>
+<tr>
+<td align="left">Structured data</td>
+<td align="right">Structured/Unstructured data</td>
+</tr>
+<tr>
+<td align="left">Fewer Errors</td>
+<td align="right">More errors</td>
+</tr>
+<tr>
+<td align="left">SQL</td>
+<td align="right">NoSQL</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+        </item>
         
         <item>
             <title>String Interpolation in Python</title>
@@ -5067,6 +5143,16 @@ def computeA(a: Int): Either[Throwable, Int] = ?</description>
 <p><em>Another important note</em>, you could also use assignment inside the for comprehension. you also do not need to add the key word val or var ( though I dont see why you should&hellip;). All assignments inside the for are vals.</p>
 <p><em>third note (getting out of hand no?):</em> When we first said for comprehensions are a sequence of <code>flatMap</code> and <code>filter</code> followed by a <code>map</code>, it is important to know that it is actually the yield that calls the map.</p>
 ]]></content>
+        </item>
+        
+        <item>
+            <title></title>
+            <link>https://fares.codes/posts/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            
+            <guid>https://fares.codes/posts/</guid>
+            <description></description>
+            <content type="html"><![CDATA[]]></content>
         </item>
         
     </channel>

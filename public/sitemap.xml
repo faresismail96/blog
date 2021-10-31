@@ -3,8 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://fares.codes/tags/datalake/</loc>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://fares.codes/posts/</loc>
-    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/schema-on-read/</loc>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</loc>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/schema-on-write/</loc>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/tags/</loc>
+    <lastmod>2021-10-31T12:20:00+02:00</lastmod>
   </url>
   
   <url>
@@ -24,11 +49,6 @@
   
   <url>
     <loc>https://fares.codes/tags/strings/</loc>
-    <lastmod>2021-03-30T19:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fares.codes/tags/</loc>
     <lastmod>2021-03-30T19:20:00+02:00</lastmod>
   </url>
   
@@ -560,6 +580,10 @@
   <url>
     <loc>https://fares.codes/</loc>
     <lastmod>2019-07-27T21:14:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fares.codes/posts/</loc>
   </url>
   
 </urlset>
