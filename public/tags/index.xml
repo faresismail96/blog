@@ -5,10 +5,37 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 30 Mar 2021 19:20:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 31 Oct 2021 12:20:00 +0200</lastBuildDate>
     
 	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Datalake</title>
+      <link>https://fares.codes/tags/datalake/</link>
+      <pubDate>Sun, 31 Oct 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/datalake/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schema on Read</title>
+      <link>https://fares.codes/tags/schema-on-read/</link>
+      <pubDate>Sun, 31 Oct 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/schema-on-read/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schema on Write</title>
+      <link>https://fares.codes/tags/schema-on-write/</link>
+      <pubDate>Sun, 31 Oct 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/schema-on-write/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>python</title>

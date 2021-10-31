@@ -11,6 +11,20 @@
     
     
     <item>
+      <title>Schema on Read v.s Schema on Write</title>
+      <link>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</link>
+      <pubDate>Sun, 31 Oct 2021 12:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</guid>
+      <description>There are two mechanisms to store data in a database.
+Either follow a schema on read approach or a schema on write approach.
+Schema on Write This is typically used with relational databases.
+With this approach, the schema is defined and created before the data is inserted into a db.
+It usually follows the below steps:
+ Create the schema (create tables) Load the data Query the data and extract insight  The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
+    </item>
+    
+    <item>
       <title>String Interpolation in Python</title>
       <link>https://fares.codes/posts/string-interpolation-in-python/</link>
       <pubDate>Tue, 30 Mar 2021 19:20:00 +0200</pubDate>
@@ -459,6 +473,15 @@ def computeA(a: Int): Either[Throwable, Int] = ?</description>
       <description>24, Data Engineer and attempting to become better at: List a bunch of stuff here
 I read somewhere that one of the best ways to learn, is to do so publicly.
 Hence this site. I will be detailing here as often as I can the tips and tricks I learn everyday&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://fares.codes/posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fares.codes/posts/</guid>
+      <description></description>
     </item>
     
   </channel>
