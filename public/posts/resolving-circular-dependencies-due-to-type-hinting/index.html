@@ -30,7 +30,7 @@ So it&amp;rsquo;s clear that my_function will depend on our custom_types." />
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -45,13 +45,9 @@ So it&amp;rsquo;s clear that my_function will depend on our custom_types." />
 Here&rsquo;s a case scenario:
 root | custom_types.py my_function.py custom_types is the module in which we define all custom types used in my_function.py
 my_function is the module in which we define all functions.
-So it&rsquo;s clear that my_function will depend on our custom_types.">
-<meta itemprop="datePublished" content="2020-09-13T14:08:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-09-13T14:08:00&#43;02:00" />
+So it&rsquo;s clear that my_function will depend on our custom_types."><meta itemprop="datePublished" content="2020-09-13T14:08:00+02:00" />
+<meta itemprop="dateModified" content="2020-09-13T14:08:00+02:00" />
 <meta itemprop="wordCount" content="261">
-
-
-
 <meta itemprop="keywords" content="python,typing,type hints," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Resolving Circular Dependencies Due to Type Hinting"/>
 <meta name="twitter:description" content="In a previous article, I&rsquo;ve talked about type hinting and its usefulness. However I recently realized that while using typing and defining custom types, one can easily find oneself in a circular dependency loop.
@@ -134,7 +130,7 @@ So it&rsquo;s clear that my_function will depend on our custom_types."/>
             <div class="post-content">
                 <p>In a previous article, I&rsquo;ve talked about type hinting and its usefulness. However I recently realized that while using typing and defining custom types, one can easily find oneself in a circular dependency loop.</p>
 <p>Here&rsquo;s a case scenario:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">root
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">root
   |
   custom_types.py
   my_function.py
@@ -148,7 +144,7 @@ So it&rsquo;s clear that my_function will depend on our custom_types."/>
 <p>the flag <code>TYPE_CHECKING</code> is by default set to false, and static type checkers set this value to true.</p>
 <p>With this we could reorganize our imports in python to avoid a circular dependency since type hints are only on compile type and not in runtime. So in runtime, we do not need to have a dependency on our custom type classes.</p>
 <p>example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#f92672">from</span> module_a <span style="color:#f92672">import</span> a
 <span style="color:#f92672">from</span> module_b <span style="color:#f92672">import</span> b
 
@@ -211,7 +207,7 @@ So it&rsquo;s clear that my_function will depend on our custom_types."/>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -240,7 +236,7 @@ So it&rsquo;s clear that my_function will depend on our custom_types."/>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

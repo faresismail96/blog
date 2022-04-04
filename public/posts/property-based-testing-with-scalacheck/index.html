@@ -28,7 +28,7 @@ In this article I&amp;rsquo;ll begin by showing the limitations of example based
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ In this article I&amp;rsquo;ll begin by showing the limitations of example based
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Property Based Testing with ScalaCheck">
 <meta itemprop="description" content="Unit testing is an effective way of catching bugs and protecting our code from future bugs related to refactoring.
 But with the classical unit tests (example based tests), we are restricted to the test cases we can think ok. We can only write a finite number of tests that cover a finite number of cases.
-In this article I&rsquo;ll begin by showing the limitations of example based tests before moving to scalacheck and property based testing.">
-<meta itemprop="datePublished" content="2021-02-28T19:20:00&#43;02:00" />
-<meta itemprop="dateModified" content="2021-02-28T19:20:00&#43;02:00" />
+In this article I&rsquo;ll begin by showing the limitations of example based tests before moving to scalacheck and property based testing."><meta itemprop="datePublished" content="2021-02-28T19:20:00+02:00" />
+<meta itemprop="dateModified" content="2021-02-28T19:20:00+02:00" />
 <meta itemprop="wordCount" content="2142">
-
-
-
 <meta itemprop="keywords" content="testing,unit testing,property based testing,scalacheck,scala," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Property Based Testing with ScalaCheck"/>
 <meta name="twitter:description" content="Unit testing is an effective way of catching bugs and protecting our code from future bugs related to refactoring.
@@ -129,10 +125,10 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
                 <p>Unit testing is an effective way of catching bugs and protecting our code from future bugs related to refactoring.</p>
 <p>But with the classical unit tests (example based tests), we are restricted to the test cases we can think ok. We can only write a finite number of tests that cover a finite number of cases.</p>
 <p>In this article I&rsquo;ll begin by showing the limitations of example based tests before moving to scalacheck and property based testing.</p>
-<p>The following article is inspired by Magda Stożeks&rsquo; talk in the ScalaLove 2021 conference: &ldquo;Property-based testing - let your testing library work for you&rdquo;.</p>
+<p>The following article is inspired by Magda Stożeks' talk in the ScalaLove 2021 conference: &ldquo;Property-based testing - let your testing library work for you&rdquo;.</p>
 <h2 id="example-based-tests">Example Based Tests</h2>
 <p>Example based tests are a great way to test out code against a specific input and compare it with a precomputed output. Here&rsquo;s how a simple one might look:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  behavior of <span style="color:#e6db74">&#34;MyFunc&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  behavior of <span style="color:#e6db74">&#34;MyFunc&#34;</span>
 
   it should <span style="color:#e6db74">&#34;correctly compute result&#34;</span> in <span style="color:#f92672">{</span>
 
@@ -144,7 +140,7 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
   <span style="color:#f92672">}</span>
 </code></pre></div><p>In addition to allowing us to quickly test our code against a specific example, this type of tests also serves as a documentation. Anyone reading those types of unit tests can easily and quickly get a sense of what our code does and what are the cases that it handles etc&hellip;</p>
 <p>But as I&rsquo;ve mentioned above, they&rsquo;re somewhat restricted to the examples we can think of.</p>
-<p>Assume we are computing someones&rsquo; age based on birthday to authorize access to a site, we might think of testing a &ldquo;happy path&rdquo; where the person is above 18 years old and so should be granted access to our site, and test that if a person is below 18, their access will be denied.</p>
+<p>Assume we are computing someones' age based on birthday to authorize access to a site, we might think of testing a &ldquo;happy path&rdquo; where the person is above 18 years old and so should be granted access to our site, and test that if a person is below 18, their access will be denied.</p>
 <p>But we might forget to test what happens if the person inputs a birth date that is in the future. The age will be negative and if our code does not handle that, it will lead to a bug.</p>
 <p>Using a framework that can automatically generate test cases based on a specified properties can immensely improve our code and potentially catch unthought of bugs.</p>
 <h2 id="property-based-testing">Property Based Testing</h2>
@@ -160,7 +156,7 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
 <h3 id="scalacheck">ScalaCheck</h3>
 <p>ScalaCheck is a framework that allows us to automatically generate test cases using the properties that are provided.</p>
 <p>Here is how the concatenation of two list test would look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> org.scalacheck.Properties
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> org.scalacheck.Properties
 <span style="color:#66d9ef">import</span> org.scalacheck.Prop.forAll
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">MainSpec</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Properties</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Main&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -169,12 +165,12 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
   <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>This will yield the following result:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+ Main.concatLists: OK, passed 100 tests.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+ Main.concatLists: OK, passed 100 tests.
 </code></pre></div><p>Essentially, ScalaCheck generated 100 test cases and ran them all against our property to validate that it holds for all test cases. In each of those test cases, scalacheck created two lists with varying numbers and lengths and ran them through our function to validate that for each case, the property holds true.</p>
 <h3 id="generators">Generators</h3>
 <p>We&rsquo;ve seen how ScalaCheck can generate random data for our simple types like String, Int, List[String] etc&hellip; But what if your test takes a case class instance as input? In that case, we will need to supply the forAll function with a custom generator that it&rsquo;ll use to generate that data.</p>
 <p>For our examples, we will look at Grade Reports. Here&rsquo;s how we might model one in scala:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Scala" data-lang="Scala">  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GradeReport</span><span style="color:#f92672">(</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Scala" data-lang="Scala">  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GradeReport</span><span style="color:#f92672">(</span>
     firstName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
     lastName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
     studentId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">,</span>
@@ -191,10 +187,10 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
     <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Failing</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">OverallStatus</span>
   <span style="color:#f92672">}</span>
 
-</code></pre></div><p>Its a pretty simplistic view, A grade report will contain information about the student, a list of courses the student has taken along with their respective grades and the students&rsquo; overall status along with his average.</p>
-<p>So how can we generate Grade Reports knowing that some fields in our GradeReport depend on others. For example, a students&rsquo; overall status depends on the general average which in turn depends on the list of courses taken. Naturally, our Generator will have to take all that into account.</p>
+</code></pre></div><p>Its a pretty simplistic view, A grade report will contain information about the student, a list of courses the student has taken along with their respective grades and the students' overall status along with his average.</p>
+<p>So how can we generate Grade Reports knowing that some fields in our GradeReport depend on others. For example, a students' overall status depends on the general average which in turn depends on the list of courses taken. Naturally, our Generator will have to take all that into account.</p>
 <p>To generate simple fields like a name of an id:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> nameGen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaLowerStr
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> nameGen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaLowerStr
 </code></pre></div><p>We&rsquo;re using the method alphaLowerStr because we would like to restrict ourselves to the 26 characters of the english alphabet, and we&rsquo;d also like to have everything in lowercase.</p>
 <p>Here&rsquo;s some examples of what might get generated:</p>
 <ul>
@@ -213,7 +209,7 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
 <p>So overall the generated values are valid strings with varying lengths.</p>
 <p>Note that we also have out of the box generators for numeric string, alphanumeric string, constant values where the generator will always return the same value etc&hellip;</p>
 <p>For the studentId, we can have the generator pick a value from a given range:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> studentId <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>choose<span style="color:#f92672">(</span><span style="color:#ae81ff">100L</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">100000L</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> studentId <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>choose<span style="color:#f92672">(</span><span style="color:#ae81ff">100L</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">100000L</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">// Examples:
 </span><span style="color:#75715e">// 98159
 </span><span style="color:#75715e">// 9138
@@ -221,7 +217,7 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
 </span><span style="color:#75715e"></span>
 </code></pre></div><p>On to more interesting generators.</p>
 <p>How can we generate a list of <code>CourseResult</code>? start small:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> courseResultGen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CourseResult</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> courseResultGen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CourseResult</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
     courseName  <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaLowerStr
     courseId    <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaStr
     courseGrade <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>choose<span style="color:#f92672">(</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
@@ -229,15 +225,15 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
 
 </code></pre></div><p>Over here, we are creating a generator for our case class. The for comprehension syntax is just a prettier representation and allows us to easily create generators for custom product types.</p>
 <p>Then we could reuse this generator to create a list of <code>CourseResult</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> listCourseResult<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CourseResult</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> listCourseResult<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">CourseResult</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> 
     <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>listOf<span style="color:#f92672">(</span>courseResultGen<span style="color:#f92672">)</span>
 
 <span style="color:#75715e">// If we want to fix the list length, use:
 </span><span style="color:#75715e">//   Gen.listOfN(NUMBER, courseResultGen)
 </span></code></pre></div><p>Alright&hellip; now that we have a generator for listOfCourseResult, we can calculate the generalAverage and based on that, choose a specific OverallStatus:</p>
 <h3 id="dependant-generators">Dependant Generators</h3>
-<p>A students&rsquo; Overall Status should only be passing if the average of his courses is above some value (say 70%). So when generating a value, our generator needs to take into account the generated value for another field. In our case the list of courses along with their details. Here&rsquo;s how this might look:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<p>A students' Overall Status should only be passing if the average of his courses is above some value (say 70%). So when generating a value, our generator needs to take into account the generated value for another field. In our case the list of courses along with their details. Here&rsquo;s how this might look:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> gradeReportGen<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Gen</span><span style="color:#f92672">[</span><span style="color:#66d9ef">GradeReport</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
     firstName      <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaLowerStr
     lastName       <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>alphaLowerStr
@@ -261,46 +257,46 @@ In this article I&rsquo;ll begin by showing the limitations of example based tes
 <h3 id="not-so-random-data">Not So Random Data</h3>
 <p>Before moving on to generating biased generators, how can you verify what I&rsquo;ve said? Prop offers a classify function that collects data about the test cases and displays them in the final result.</p>
 <h4 id="collecting-test-data-with-classify">Collecting Test Data with Classify</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  property<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;something&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> forAll<span style="color:#f92672">(</span>gradeReportGen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> name <span style="color:#66d9ef">=&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  property<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;something&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> forAll<span style="color:#f92672">(</span>gradeReportGen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> name <span style="color:#66d9ef">=&gt;</span>
     <span style="color:#a6e22e">Prop</span><span style="color:#f92672">.</span>classify<span style="color:#f92672">(</span>name<span style="color:#f92672">.</span>generalAverage <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">50</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;below 50&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;above 50&#34;</span><span style="color:#f92672">){</span> 
         <span style="color:#66d9ef">true</span> 
     <span style="color:#f92672">}</span>
   <span style="color:#f92672">}</span>
 </code></pre></div><p>This shows the following results:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
 52% above 50
 48% below 50
 </code></pre></div><p>And in another run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
 54% below 50
 46% above 50
 </code></pre></div><p>So when we compare with 70?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&gt; Collected test data: 
 88% below 70
 12% above 70
 </code></pre></div><p>This somewhat verifies it.</p>
 <h4 id="biased-generators">Biased Generators</h4>
 <p>One way of creating a biased generator is by using the frequency function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> beverageGen <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>frequency<span style="color:#f92672">(</span>
     <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>const<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hot Chocolate&#34;</span><span style="color:#f92672">)),</span>
     <span style="color:#f92672">(</span><span style="color:#ae81ff">5</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>const<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Coffee&#34;</span><span style="color:#f92672">))</span>
 <span style="color:#f92672">)</span>
 
-</code></pre></div><p>In this case our custom Beverage Generator is biased towards coffee. 5 out of 6 times, the result will be Coffee and not Hot Chocolate. the numbers represent the results&rsquo; weight.</p>
+</code></pre></div><p>In this case our custom Beverage Generator is biased towards coffee. 5 out of 6 times, the result will be Coffee and not Hot Chocolate. the numbers represent the results' weight.</p>
 <p>But this is a bit harder to apply to our case since we&rsquo;re dealing with continuous variables and not discrete ones. Instead lets look at defining a distribution and using that to generate our data:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">courseGrade <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>const<span style="color:#f92672">(</span><span style="color:#a6e22e">Random</span><span style="color:#f92672">.</span>nextGaussian<span style="color:#f92672">()</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">70</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">courseGrade <span style="color:#66d9ef">&lt;-</span> <span style="color:#a6e22e">Gen</span><span style="color:#f92672">.</span>const<span style="color:#f92672">(</span><span style="color:#a6e22e">Random</span><span style="color:#f92672">.</span>nextGaussian<span style="color:#f92672">()</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">70</span><span style="color:#f92672">)</span>
 </code></pre></div><p>A lot of things are happening in the above line, so let&rsquo;s break it down:</p>
 <p>Random.nextGaussian() will generate a pseudorandom number that has a normal distribution. Those values will have a standard deviation of 1 and a mean of 0.</p>
 <p>To shift that to our own average, we multiply by 10 (standard deviation) and add 70.</p>
 <p>Here are some examples of the generated values:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">85.84898535417973
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">85.84898535417973
 71.96463467037076
 70.75840861524729
 54.78215028238531
 66.1747348048266
 </code></pre></div><p>and the classify result:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+ Main.something: OK, passed 100 tests.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+ Main.something: OK, passed 100 tests.
 &gt; Collected test data: 
 51% above 70
 49% below 70
@@ -310,7 +306,7 @@ Also note that the same applies for numbers below 0 (which in our case would be 
 <p>ScalaCheck also offers some neat features that I couldn&rsquo;t mention in the context of my example, but I&rsquo;ll list them below</p>
 <h2 id="limiting-test-cases">Limiting Test Cases</h2>
 <p>In some cases, we would like to exclude some test values from running through our unit test. This could either be because they are not possible in our use case or because they are not handled etc&hellip; Fortunately, ScalaCheck offers a simple way to exclude some cases:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   property<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;something&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> forAll<span style="color:#f92672">(</span>gradeReportGen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">GradeReport</span> <span style="color:#f92672">=&gt;</span>
     name<span style="color:#f92672">.</span>coursesResult<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>x <span style="color:#66d9ef">=&gt;</span>
      <span style="color:#f92672">(</span>x<span style="color:#f92672">.</span>courseGrade <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span>x<span style="color:#f92672">.</span>courseGrade <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
@@ -321,23 +317,23 @@ Also note that the same applies for numbers below 0 (which in our case would be 
 <h3 id="dangers-in-doing-so">Dangers in doing so</h3>
 <p>When filtering out test cases, it is important to make sure that the condition will not filter most if not all the test cases.</p>
 <p>In some cases, the property test will fail with a similar message:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Gave up after only 9 passed tests. 501 tests were discarded.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Gave up after only 9 passed tests. 501 tests were discarded.
 Found 1 failing properties.
 </code></pre></div><p>We could also be filtering out test cases by accident that could have proved interesting.</p>
 <h2 id="labeling-test-cases">Labeling Test Cases</h2>
 <p>ScalaCheck has allows us to label our assertions, and it&rsquo;ll use those labels in the report for clearer error messages. Here is a simple example that demonstrate labeling assertions and the results:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   property<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;bigger than 0&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> forAll <span style="color:#f92672">{</span> num<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span> <span style="color:#f92672">=&gt;</span>
     <span style="color:#f92672">(</span>num <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">:</span><span style="color:#66d9ef">|</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#66d9ef">number</span> <span style="color:#66d9ef">should</span> <span style="color:#66d9ef">be</span> <span style="color:#66d9ef">bigger</span> <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">equal</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">zero</span><span style="color:#960050;background-color:#1e0010">&#34;</span>
   <span style="color:#f92672">}</span>
 
 </code></pre></div><p>Generates the following error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">! Main.bigger than 0: Falsified after 2 passed tests.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">! Main.bigger than 0: Falsified after 2 passed tests.
 &gt; Labels of failing property: 
 number should be bigger or equal to zero
 &gt; ARG_0: -1
 </code></pre></div><p>When the same test is ran without the labels, here is the output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 ! Main.bigger than 0: Falsified after 1 passed tests.
 &gt; ARG_0: -1
 Found 1 failing properties.
@@ -408,7 +404,7 @@ Found 1 failing properties.
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -437,7 +433,7 @@ Found 1 failing properties.
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

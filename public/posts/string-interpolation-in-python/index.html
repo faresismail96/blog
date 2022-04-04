@@ -27,7 +27,7 @@ Note: This article is mostly me recopying what is said here: https://www." />
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -39,13 +39,9 @@ Note: This article is mostly me recopying what is said here: https://www." />
 <link rel="shortcut icon" href="https://fares.codes/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="String Interpolation in Python">
 <meta itemprop="description" content="Right off the bat, I&rsquo;ll say this: my go to solution for string interpolation in python are f-strings. They&rsquo;re elegant, simple to read and even simpler to understand. But in some cases, depending on your setup, you might be forced to use another way. In this article I&rsquo;ll outline the different possibilities that I have come to learn exist when talking about string interpolation in python.
-Note: This article is mostly me recopying what is said here: https://www.">
-<meta itemprop="datePublished" content="2021-03-30T19:20:00&#43;02:00" />
-<meta itemprop="dateModified" content="2021-03-30T19:20:00&#43;02:00" />
+Note: This article is mostly me recopying what is said here: https://www."><meta itemprop="datePublished" content="2021-03-30T19:20:00+02:00" />
+<meta itemprop="dateModified" content="2021-03-30T19:20:00+02:00" />
 <meta itemprop="wordCount" content="719">
-
-
-
 <meta itemprop="keywords" content="python,strings,String Interpolation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="String Interpolation in Python"/>
 <meta name="twitter:description" content="Right off the bat, I&rsquo;ll say this: my go to solution for string interpolation in python are f-strings. They&rsquo;re elegant, simple to read and even simpler to understand. But in some cases, depending on your setup, you might be forced to use another way. In this article I&rsquo;ll outline the different possibilities that I have come to learn exist when talking about string interpolation in python.
@@ -127,24 +123,24 @@ Note: This article is mostly me recopying what is said here: https://www."/>
 <p>Note: This article is mostly me recopying what is said here: <a href="https://www.programiz.com/python-programming/string-interpolation">https://www.programiz.com/python-programming/string-interpolation</a> (along with a bit more examples and context).</p>
 <h2 id="f-strings">F Strings</h2>
 <p>As I mentioned before, they&rsquo;re my go to interpolation. They were added in Python 3.6 and consist of prefixing the string with an f. Here&rsquo;s an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;fares&#34;</span>
-greeting <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;hello {name}!! Hope you&#39;re doing well&#34;</span>
-<span style="color:#66d9ef">print</span>(greeting)
+greeting <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;hello </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">!! Hope you&#39;re doing well&#34;</span>
+print(greeting)
 </code></pre></div><p>This results in: <strong>hello fares!! Hope you&rsquo;re doing well</strong></p>
 <p>anything in the braces is evaluated and added to the string. So in our example, the variable name is replaced with fares in the string.
 We could also add inline operations inside the braces:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;The sum of 1+1 is {1+1}&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;The sum of 1+1 is </span><span style="color:#e6db74">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
 
 </code></pre></div><p>Which results in: <strong>The sum of 1+1 is 2</strong></p>
 <p>This is a simple example but we could also call a function etc&hellip;</p>
 <h3 id="escaping-characters-in-f-strings">Escaping characters in f strings</h3>
 <p>What happens if we wanted to print a json string or a real braces in an f string? then we would need to escape it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
-message <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;the result in: {{&#39;value&#39;:&#39;OK&#39;}}&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+message <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;the result in: </span><span style="color:#ae81ff">{{</span><span style="color:#e6db74">&#39;value&#39;:&#39;OK&#39;</span><span style="color:#ae81ff">}}</span><span style="color:#e6db74">&#34;</span>
 
-<span style="color:#66d9ef">print</span>(message)
+print(message)
 <span style="color:#75715e">## the result in: {&#39;value&#39;:&#39;OK&#39;}</span>
 
 </code></pre></div><p>So to escape the braces, we need to add another braces on each end.</p>
@@ -153,56 +149,56 @@ message <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;t
 <h2 id="other-options">Other Options</h2>
 <h3 id="-formatting">% formatting</h3>
 <p>% formatting is one of the oldest string interpolation. while it gets the job done, having multiple variables in your string can make readability/refactoring an issue. Here&rsquo;s how a simple example might look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Fares&#34;</span>
 day <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Thursday&#34;</span>
 message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, today is </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span>(name, day)
 
-<span style="color:#66d9ef">print</span>(message) <span style="color:#75715e"># hello Fares, today is Thursday</span>
+print(message) <span style="color:#75715e"># hello Fares, today is Thursday</span>
 
 </code></pre></div><p>The %s formats the variable as a string, %d formats the value as a digit, %f for floats, %r for <code>__repr__</code> conversion.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 day <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 month <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;April&#34;</span>
 message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;today is </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">st&#34;</span> <span style="color:#f92672">%</span>(month, day)
 
-<span style="color:#66d9ef">print</span>(message) <span style="color:#75715e"># today is April 1st</span>
+print(message) <span style="color:#75715e"># today is April 1st</span>
 
 </code></pre></div><p>You could also apply some padding with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello </span><span style="color:#e6db74">%10s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (<span style="color:#e6db74">&#39;Fares&#39;</span>)
-<span style="color:#66d9ef">print</span>(message) <span style="color:#75715e"># Hello      Fares</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello </span><span style="color:#e6db74">%10s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (<span style="color:#e6db74">&#39;Fares&#39;</span>)
+print(message) <span style="color:#75715e"># Hello      Fares</span>
 </code></pre></div><p>Or apply left padding:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello </span><span style="color:#e6db74">%-10s</span><span style="color:#e6db74"> how are you?&#39;</span> <span style="color:#f92672">%</span> (<span style="color:#e6db74">&#39;Fares&#39;</span>,)
-<span style="color:#66d9ef">print</span>(message) <span style="color:#75715e"># Hello Fares      how are you?</span>
+print(message) <span style="color:#75715e"># Hello Fares      how are you?</span>
 
 </code></pre></div><p>While this option is very verbose and not so readable, it still does the job and answers our Python + Jinja issue.</p>
 <h3 id="strformat">Str.format()</h3>
 <p>This option is widely seen as the better alternative to % formatting, but in our specific case it cannot be used as it is not compatible with our weird setup. Nevertheless, it deserves an honorable mention.</p>
 <p>Here&rsquo;s how it works:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Fares&#39;</span>
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Hello, {}&#39;</span><span style="color:#f92672">.</span>format(name)) <span style="color:#75715e"># Hello, Fares</span>
+print(<span style="color:#e6db74">&#39;Hello, </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(name)) <span style="color:#75715e"># Hello, Fares</span>
 
 </code></pre></div><p>What if we had multiple variables? then we can simply name them:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Fares&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Fares&#39;</span>
 day <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 month <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;April&#34;</span>
 
-message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello {name}, We&#39;re the {date}st of {month}&#34;</span><span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span>name, date<span style="color:#f92672">=</span>day, month<span style="color:#f92672">=</span>month)
+message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello </span><span style="color:#e6db74">{name}</span><span style="color:#e6db74">, We&#39;re the </span><span style="color:#e6db74">{date}</span><span style="color:#e6db74">st of </span><span style="color:#e6db74">{month}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span>name, date<span style="color:#f92672">=</span>day, month<span style="color:#f92672">=</span>month)
 
-<span style="color:#66d9ef">print</span>(message)
+print(message)
 <span style="color:#75715e"># Hello Fares, We&#39;re the 1st of April</span>
 </code></pre></div><p>You can clearly see why this is preferred over the older % formatting for strings. But if you&rsquo;re wondering why this cannot work in our environment, its because the values to be interpolated are in <code>{}</code>, which will be in conflict with the Json brackets.</p>
 <h3 id="template-strings">Template Strings</h3>
 <p>The last option and in my personal opinion the best for our case is using Template String from the python standard library.</p>
 <p>It works by defining a template with variables to be substituted, and then calling the substitute function while passing the values to be replaced. Here&rsquo;s an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> Template
 message_template <span style="color:#f92672">=</span> Template(<span style="color:#e6db74">&#34;Hello $name, I am $emotion&#34;</span>)
 
 message <span style="color:#f92672">=</span> message_template<span style="color:#f92672">.</span>substitute(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Fares&#39;</span>, emotion<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tired&#34;</span>)
-<span style="color:#66d9ef">print</span>(message)
+print(message)
 <span style="color:#75715e"># Hello Fares, I am tired</span>
 
 </code></pre></div><p>This works well in our case and has the added value of resembling the s strings in <code>Scala</code></p>
@@ -260,7 +256,7 @@ message <span style="color:#f92672">=</span> message_template<span style="color:
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -289,7 +285,7 @@ message <span style="color:#f92672">=</span> message_template<span style="color:
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

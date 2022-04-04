@@ -5,11 +5,7 @@
     <link>https://fares.codes/tags/git/</link>
     <description>Recent content in git on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 03 Sep 2019 20:55:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/tags/git/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 03 Sep 2019 20:55:00 +0000</lastBuildDate><atom:link href="https://fares.codes/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Interactive Rebase for a Cleaner Git Commit History</title>
       <link>https://fares.codes/posts/interactive-rebase-for-a-cleaner-git-commit-history/</link>

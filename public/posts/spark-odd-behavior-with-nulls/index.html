@@ -32,7 +32,7 @@ Some of which are:
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -49,13 +49,9 @@ Some of which are:
   Transforming existing dataframes.
   Reading a file.
   Parallelizing over a collection.
-  The first two will not be in the scope of this article.">
-<meta itemprop="datePublished" content="2020-01-19T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-01-19T10:00:00&#43;00:00" />
+  The first two will not be in the scope of this article."><meta itemprop="datePublished" content="2020-01-19T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-01-19T10:00:00+00:00" />
 <meta itemprop="wordCount" content="649">
-
-
-
 <meta itemprop="keywords" content="Spark,nulls," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Spark Odd Behavior with Nulls"/>
 <meta name="twitter:description" content="Once again, I will put a 5 hour flight into good use to detail an interesting/odd behavior encountered with spark while dealing with nulls.
@@ -156,7 +152,7 @@ Some of which are:
 <p>Let me start with a little bit of context:</p>
 <p>I was reading a row and a specific schema and creating a dataframe, I noticed that the resulting DataFrame would differ for the same inputs depending on the underlying <code>createDataFrame</code> function that is being called.</p>
 <p>Lets start with something simple:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
     <span style="color:#66d9ef">val</span> schema<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">StructType</span> <span style="color:#f92672">=</span>
       <span style="color:#a6e22e">StructType</span><span style="color:#f92672">(</span>
         <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -173,7 +169,7 @@ Some of which are:
     df<span style="color:#f92672">.</span>show<span style="color:#f92672">()</span>
 
 </code></pre></div><p>We would expect the dataframe to look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 +-----+---+
 | Name|Age|
 +-----+---+
@@ -182,7 +178,7 @@ Some of which are:
 
 </code></pre></div><p>Alright now assume the age was <code>null</code>. Looking at the Schema (Age is required and cannot be null), we would expect the <code>createDataFrame</code> to throw a null pointer exception.</p>
 <p>Except that when we run the below code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
     <span style="color:#66d9ef">val</span> schema<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">StructType</span> <span style="color:#f92672">=</span>
       <span style="color:#a6e22e">StructType</span><span style="color:#f92672">(</span>
         <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -199,7 +195,7 @@ Some of which are:
     df<span style="color:#f92672">.</span>show<span style="color:#f92672">()</span>
 
 </code></pre></div><p>we get:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 +-----+---+
 | Name|Age|
 +-----+---+
@@ -207,7 +203,7 @@ Some of which are:
 +-----+---+
 
 </code></pre></div><p>The reason behind this has the do with the underlying functions being called by this specific <code>createDataFrame</code>. In the example of TimestampType, the underlying function being called is: <code>fromExternalRows</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">def</span> fromExternalRows<span style="color:#f92672">(</span>output<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Attribute</span><span style="color:#f92672">],</span> data<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Row</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">LocalRelation</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">val</span> schema <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">StructType</span><span style="color:#f92672">.</span>fromAttributes<span style="color:#f92672">(</span>output<span style="color:#f92672">)</span>
     <span style="color:#66d9ef">val</span> converter <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">CatalystTypeConverters</span><span style="color:#f92672">.</span>createToCatalystConverter<span style="color:#f92672">(</span>schema<span style="color:#f92672">)</span>
@@ -216,7 +212,7 @@ Some of which are:
 
 </code></pre></div><p>This will in turn call: <code>CatalystTypeConverters.createToCatalystConverter(schema)</code></p>
 <p>and in the case of a timestamp type, we end up calling:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#75715e">/**
 </span><span style="color:#75715e">   * Returns the number of micros since epoch from java.sql.Timestamp.
 </span><span style="color:#75715e">   */</span>
@@ -229,7 +225,7 @@ Some of which are:
   <span style="color:#f92672">}</span>
 
 </code></pre></div><p>So when we execute a code like the one below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
     <span style="color:#66d9ef">val</span> schema<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">StructType</span> <span style="color:#f92672">=</span>
       <span style="color:#a6e22e">StructType</span><span style="color:#f92672">(</span>
         <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -245,7 +241,7 @@ Some of which are:
     df<span style="color:#f92672">.</span>show<span style="color:#f92672">()</span>
 
 </code></pre></div><p>We end up with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 +-------------------+
 |                 TS|
 +-------------------+
@@ -255,7 +251,7 @@ Some of which are:
 </code></pre></div><p>The same &ldquo;Default Value&rdquo; case can be encountered with <code>IntegerType</code>, <code>BooleanType</code>, <code>LongType</code>, <code>DoubleType</code> ect&hellip;</p>
 <h2 id="what-if-we-do-not-want-this-behavior">What if we do not want this behavior</h2>
 <p>This only happens when we call a specific instance of the <code>createDataFrame</code> passing it a java list. If such a behavior is to be avoided, one simply has to use another instance of the function. For example, we can call in the following manner:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
     <span style="color:#66d9ef">val</span> schema<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">StructType</span> <span style="color:#f92672">=</span>
       <span style="color:#a6e22e">StructType</span><span style="color:#f92672">(</span>
         <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -269,11 +265,11 @@ Some of which are:
     df<span style="color:#f92672">.</span>show<span style="color:#f92672">()</span>
 
 </code></pre></div><p>And end up with the expected error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
   The 0th field &#39;TS&#39; of input row cannot be null.
 
 </code></pre></div><p>The reason for that is due to the instance of the function being called. in the case of the latter its:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#75715e">/**
 </span><span style="color:#75715e">   * Creates a `DataFrame` from an RDD[Row].
 </span><span style="color:#75715e">   * User can specify whether the input rows should be converted to Catalyst rows.
@@ -348,7 +344,7 @@ Some of which are:
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -377,7 +373,7 @@ Some of which are:
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

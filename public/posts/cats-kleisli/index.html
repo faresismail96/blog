@@ -30,7 +30,7 @@ val getValueFromDB: Unit =&amp;gt; String = _ =&amp;gt; &amp;#34;Fares&amp;#34; 
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -45,13 +45,9 @@ val getValueFromDB: Unit =&amp;gt; String = _ =&amp;gt; &amp;#34;Fares&amp;#34; 
 Kleisli allows the composition of functions where the return type is a monadic value while the input to the next function is not.
 Function Composition Function Composition allows us to chain function calls together.
 Here is a dummy example:
-val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformValue: String =&gt; String = _.">
-<meta itemprop="datePublished" content="2020-05-17T10:00:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-05-17T10:00:00&#43;02:00" />
+val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformValue: String =&gt; String = _."><meta itemprop="datePublished" content="2020-05-17T10:00:00+02:00" />
+<meta itemprop="dateModified" content="2020-05-17T10:00:00+02:00" />
 <meta itemprop="wordCount" content="391">
-
-
-
 <meta itemprop="keywords" content="scala,cats,kleisli," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cats Kleisli"/>
 <meta name="twitter:description" content="I wont lie&hellip; The main reason I&rsquo;m looking into Kleisli is because I think the name is cool.
@@ -137,23 +133,23 @@ val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformVal
 <h2 id="function-composition">Function Composition</h2>
 <p>Function Composition allows us to chain function calls together.</p>
 <p>Here is a dummy example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Fares&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Fares&#34;</span>
   <span style="color:#66d9ef">val</span> transformValue<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>toUpperCase
   <span style="color:#66d9ef">val</span> saveValueToDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Unit</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">()</span>
 </code></pre></div><p>The following are 3 dummy functions that load a value from a database, transforms it (to uppercase) and finally saves it back to the database.</p>
 <p>Here&rsquo;s how it would look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  saveValueToDB<span style="color:#f92672">(</span>transformValue<span style="color:#f92672">(</span>getValueFromDB<span style="color:#f92672">()))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  saveValueToDB<span style="color:#f92672">(</span>transformValue<span style="color:#f92672">(</span>getValueFromDB<span style="color:#f92672">()))</span>
 </code></pre></div><p>Except it&rsquo;s quite ugly to look at and to read.</p>
 <p>But luckily there is another way:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> saveValueToDB compose transformValue compose getValueFromDB
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> saveValueToDB compose transformValue compose getValueFromDB
   result<span style="color:#f92672">()</span>
 </code></pre></div><p>or</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> getValueFromDB andThen transformValue andThen saveValueToDB
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> getValueFromDB andThen transformValue andThen saveValueToDB
   result<span style="color:#f92672">()</span>
 </code></pre></div><p>I&rsquo;ll admit I think using <code>andThen</code> is the better option since it is the most readable and since we have a tendency to read left to right and not the other way around.</p>
 <h2 id="issue-when-it-returns-a-monadic-value">Issue (When it returns a monadic value)</h2>
 <p>Alright so thats cool&hellip; But the problem becomes if those functions return a monadic value. Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> getValueFromDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> transformValue<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> x <span style="color:#66d9ef">=&gt;</span>  <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>x<span style="color:#f92672">.</span>toUpperCase<span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> saveValueToDB<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Unit</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> x <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>println<span style="color:#f92672">(</span>x<span style="color:#f92672">))</span>
 </code></pre></div><p>Sure in this context, the return type doesn&rsquo;t make much sense, but just imagine a real world scenario 😛</p>
@@ -161,7 +157,7 @@ val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformVal
 <p>One solution that normally comes to mind:</p>
 <h3 id="for-comprehension">For Comprehension</h3>
 <p>The following works well:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
     value          <span style="color:#66d9ef">&lt;-</span> getValueFromDB<span style="color:#f92672">()</span>
     transformedVal <span style="color:#66d9ef">&lt;-</span> transformValue<span style="color:#f92672">(</span>value<span style="color:#f92672">)</span>
     <span style="color:#66d9ef">_</span>              <span style="color:#66d9ef">&lt;-</span> saveValueToDB<span style="color:#f92672">(</span>transformedVal<span style="color:#f92672">)</span>
@@ -169,7 +165,7 @@ val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformVal
 </code></pre></div><p>But there is another way, using <code>Kleisli</code>.</p>
 <h2 id="using-kleisli">Using Kleisli</h2>
 <p>Effectively, Kleisli is a  MonadTransformer but for functions. It allows us to abstractly ignore the context when performing composition of functions.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span>
   <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>getValueFromDB<span style="color:#f92672">)</span> andThen
   <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>transformValue<span style="color:#f92672">)</span> andThen
   <span style="color:#a6e22e">Kleisli</span><span style="color:#f92672">(</span>saveValueToDB<span style="color:#f92672">)</span>
@@ -231,7 +227,7 @@ val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformVal
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -260,7 +256,7 @@ val getValueFromDB: Unit =&gt; String = _ =&gt; &#34;Fares&#34; val transformVal
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

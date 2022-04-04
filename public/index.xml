@@ -5,10 +5,18 @@
     <link>https://fares.codes/</link>
     <description>Recent content on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 27 Jul 2019 21:14:20 +0200</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 04 Apr 2022 20:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Single Abstract Method</title>
+      <link>https://fares.codes/posts/single-abstract-method/</link>
+      <pubDate>Mon, 04 Apr 2022 20:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/posts/single-abstract-method/</guid>
+      <description>Short and quick article to explain a syntactic sugar in Scala.
+Often we&amp;rsquo;ll have traits that declare a single abstract method to be overridden in the subclasses of that trait.
+This might look like this:
+sealed trait Animal{ def sayHi(name: String): String } object Animal{ final case object Dog { override def siHi(name: String): String = s&amp;#34;Woof $name&amp;#34; } } But we can also instantiate anonymous classes that implement the trait Animal:</description>
+    </item>
     
     <item>
       <title>Schema on Read v.s Schema on Write</title>
@@ -63,7 +71,7 @@ When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Su
       <guid>https://fares.codes/posts/reader-monads-and-dependency-injection/</guid>
       <description>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
     </item>
     
     <item>
@@ -127,7 +135,7 @@ The Keyword-Only argument feature was not so recently introduced in PEP 3102. Bu
       <guid>https://fares.codes/posts/named-tuples-in-python/</guid>
       <description>This cool little feature has been out since Python 2.6 but I&amp;rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]} is {res[1]} years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age.</description>
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]}is {res[1]}years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list.</description>
     </item>
     
     <item>

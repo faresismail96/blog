@@ -29,7 +29,7 @@ Traits in Scala Traits in scala are similar to interfaces in java." />
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ Traits in Scala Traits in scala are similar to interfaces in java." />
 <meta itemprop="description" content="A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
 In other words, if case class B wishes to extend sealed trait A B has to be defined in the same file where trait A is defined.
 Taking a little step back, What exactly is a trait?
-Traits in Scala Traits in scala are similar to interfaces in java.">
-<meta itemprop="datePublished" content="2019-07-31T21:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-07-31T21:00:00&#43;00:00" />
+Traits in Scala Traits in scala are similar to interfaces in java."><meta itemprop="datePublished" content="2019-07-31T21:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-31T21:00:00+00:00" />
 <meta itemprop="wordCount" content="555">
-
-
-
 <meta itemprop="keywords" content="Sealed Traits," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sealed Traits in Scala"/>
 <meta name="twitter:description" content="A sealed trait in scala forces all the case classes/objects that wish to extend it to be in the same source file.
@@ -137,12 +133,12 @@ Traits in Scala Traits in scala are similar to interfaces in java."/>
 <p>They encapsulate methods and field definitions so that they can be reused by different classes/objects</p>
 <p>A single class can inherit from multiple traits by <code>mixing</code> them.</p>
 <p>While a single class can only extend one abstract class.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">A</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">A</span>
 <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">B</span>
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> A <span style="color:#66d9ef">with</span> B
 </code></pre></div><p>Traits can include both function definition and function implementation, but there must be at least one abstract function in the trait for it to be considered as such.</p>
 <p>Another useful note; wherever a trait is required, a subtype of the trait can be used.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>  
  <span style="color:#66d9ef">def</span> getName<span style="color:#f92672">()</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
 <span style="color:#f92672">}</span>
 
@@ -162,7 +158,7 @@ Traits in Scala Traits in scala are similar to interfaces in java."/>
 <p>As mentioned earlier, sealed traits can only be extended by classes in the same source folder as the trait itself.</p>
 <p>This makes the code easier to read because we would have the trait as well as all the classes that extend it, in once file. As opposed to having to look for the subtypes across the project files.</p>
 <p>to make a trait sealed, we just need to add the keyword <code>sealed</code> before it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Database</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">def</span> insert<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">def</span> delete<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span>
@@ -186,14 +182,14 @@ Traits in Scala Traits in scala are similar to interfaces in java."/>
 
 </code></pre></div><p>Another important benifit of using sealed traits is <code>exhausiveness checking</code>. During pattern matching, the compiler can check and make sure that the cases cover all the basis and that no case is left unhandeled.</p>
 <p>Assume we were living in a world where only the following 3 shapes existed:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Shape</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Line</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Rectangle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
 
 </code></pre></div><p>if we were to do a pattern matching on a function that returns a shape while omitting one case:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Shape</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Circle</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Line</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Shape</span>
@@ -263,7 +259,7 @@ Traits in Scala Traits in scala are similar to interfaces in java."/>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -292,7 +288,7 @@ Traits in Scala Traits in scala are similar to interfaces in java."/>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

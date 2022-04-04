@@ -5,11 +5,7 @@
     <link>https://fares.codes/tags/sealed-traits/</link>
     <description>Recent content in Sealed Traits on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 31 Jul 2019 21:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/tags/sealed-traits/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 31 Jul 2019 21:00:00 +0000</lastBuildDate><atom:link href="https://fares.codes/tags/sealed-traits/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sealed Traits in Scala</title>
       <link>https://fares.codes/posts/sealed-traits-in-scala/</link>

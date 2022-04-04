@@ -5,10 +5,15 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 31 Oct 2021 12:20:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 04 Apr 2022 20:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>scala</title>
+      <link>https://fares.codes/tags/scala/</link>
+      <pubDate>Mon, 04 Apr 2022 20:20:00 +0200</pubDate>
+      
+      <guid>https://fares.codes/tags/scala/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Datalake</title>
@@ -70,15 +75,6 @@
       <pubDate>Sun, 28 Feb 2021 19:20:00 +0200</pubDate>
       
       <guid>https://fares.codes/tags/property-based-testing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Sun, 28 Feb 2021 19:20:00 +0200</pubDate>
-      
-      <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
     </item>
     

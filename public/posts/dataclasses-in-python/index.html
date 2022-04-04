@@ -28,7 +28,7 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="DataClasses in Python">
 <meta itemprop="description" content="This is one of those cool features you&rsquo;d probably wished you&rsquo;d have known about a while back. Unless I&rsquo;m the only person to not have known this from the start 🙊
 DataClasses is a module that was introduced in python 3.7 and described in PEP 557. This module simplifies the creation of new classes by defining boilerplate code for you.
-Dataclasses are classes designed to store data objects (think case classes in Scala).">
-<meta itemprop="datePublished" content="2020-07-11T19:15:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-07-11T19:15:00&#43;02:00" />
+Dataclasses are classes designed to store data objects (think case classes in Scala)."><meta itemprop="datePublished" content="2020-07-11T19:15:00+02:00" />
+<meta itemprop="dateModified" content="2020-07-11T19:15:00+02:00" />
 <meta itemprop="wordCount" content="1446">
-
-
-
 <meta itemprop="keywords" content="python,dataclasses," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DataClasses in Python"/>
 <meta name="twitter:description" content="This is one of those cool features you&rsquo;d probably wished you&rsquo;d have known about a while back. Unless I&rsquo;m the only person to not have known this from the start 🙊
@@ -134,7 +130,7 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
 <h2 id="the-init">The Init</h2>
 <p>Classes in python define an <code>__init__</code> method. This method is the constructor of the class. It is called when an instance of that class is to be created.</p>
 <p>Here&rsquo;s an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
   <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
     self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
     self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
@@ -144,7 +140,7 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
 <p>But all this is a bit verbose and it gets quite repetitive&hellip;</p>
 <h3 id="init-using-dataclass">Init Using DataClass</h3>
 <p>DataClass handles all this for us. Here is the same example using DataClass:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
 
 <span style="color:#a6e22e">@dataclass</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
@@ -157,12 +153,12 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
 <h2 id="the-repr">The repr</h2>
 <p>Lets forget about dataclass for a moment and go back to our initial Person class. What happens if we create an instance of Person and print it?</p>
 <p>example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
-<span style="color:#66d9ef">print</span>(p)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
+print(p)
 </code></pre></div><p>The output would be:</p>
 <p><code>&lt;__main__.Person object at 0x109c7a2b0&gt;</code> Clearly neither useful nor readable&hellip;</p>
 <p>To output something useful, we&rsquo;d need to define a <code>__repr__</code> method for that class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
   <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
     self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
@@ -171,17 +167,17 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
     self<span style="color:#f92672">.</span>currently_reading <span style="color:#f92672">=</span> currently_reading
 
   <span style="color:#66d9ef">def</span> __repr__(self):
-    <span style="color:#66d9ef">return</span> (f<span style="color:#e6db74">&#34;Person(name = {self.name}, age = {self.age},&#34;</span><span style="color:#f92672">+</span>
-      f<span style="color:#e6db74">&#34;hobbies = {self.hobbies}, currently_reading = {self.currently_reading})&#34;</span>)
+    <span style="color:#66d9ef">return</span> (<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Person(name = </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">, age = </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>age<span style="color:#e6db74">}</span><span style="color:#e6db74">,&#34;</span><span style="color:#f92672">+</span>
+      <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;hobbies = </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>hobbies<span style="color:#e6db74">}</span><span style="color:#e6db74">, currently_reading = </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>currently_reading<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
 
 p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
-<span style="color:#66d9ef">print</span>(p)
+print(p)
 
 <span style="color:#75715e">## Person(name = Fares, age = 24, hobbies = [&#39;Skiing&#39;, &#39;Reading&#39;],</span>
 <span style="color:#75715e">#    currently_reading = The Divine Comedy)</span>
 </code></pre></div><h3 id="repr-using-dataclass">Repr Using DataClass</h3>
 <p>This is even more tedious and boring&hellip; Buuut with dataclasses it comes out of the box by simply adding the decorator:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#a6e22e">@dataclass</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
   name: str
@@ -190,12 +186,12 @@ p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;
   currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
 
 p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
-<span style="color:#66d9ef">print</span>(p)
+print(p)
 <span style="color:#75715e">## Person(name=&#39;Fares&#39;, age=24, hobbies=[&#39;Skiing&#39;, &#39;Reading&#39;],</span>
 <span style="color:#75715e">#    currently_reading=&#39;The Divine Comedy&#39;)</span>
 </code></pre></div><h2 id="eq-lt-and-other-ordering-stuff">eq, lt And Other Ordering Stuff</h2>
 <p>But it&rsquo;s not all&hellip; What if we wanted to compare two instances of the class Person? Normally we&rsquo;d have to define a function: <code>__eq__</code> like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
   <span style="color:#66d9ef">def</span> __eq__(self, value):
     <span style="color:#66d9ef">return</span> (
         (self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age, self<span style="color:#f92672">.</span>hobbies, self<span style="color:#f92672">.</span>currently_reading) <span style="color:#f92672">==</span>
@@ -205,7 +201,7 @@ p  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;
 old  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">23</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
 current  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>])
 
-<span style="color:#66d9ef">print</span>(old <span style="color:#f92672">==</span> current)
+print(old <span style="color:#f92672">==</span> current)
 <span style="color:#75715e">## False</span>
 </code></pre></div><h3 id="eq-using-dataclass">Eq Using DataClass</h3>
 <p>But again with DataClass this is already done for us so no need to create the eq function.</p>
@@ -213,12 +209,12 @@ current  <span style="color:#f92672">=</span> Person(<span style="color:#e6db74"
 <h3 id="what-about-lt-gt-and-other-ordering-stuff">What about lt, gt and Other Ordering Stuff</h3>
 <p>Those are not defined by default for us but they can be!</p>
 <p>Simply pass <code>order = True</code> to the decorator like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(order <span style="color:#f92672">=</span> True)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(order <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
     <span style="color:#f92672">...</span>
 </code></pre></div><h2 id="dataclass-decorator-as-a-callable">DataClass Decorator as a Callable</h2>
 <p>We&rsquo;ve seen that by default we have an <code>init</code> and a <code>repr</code> and well as an <code>eq</code> but no <code>le</code> or <code>lt</code> etc&hellip; What are out options? Here is the dataclass decorator with the full list of default arguments:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(init<span style="color:#f92672">=</span>True, repr<span style="color:#f92672">=</span>True, eq<span style="color:#f92672">=</span>True, order<span style="color:#f92672">=</span>False, unsafe_hash<span style="color:#f92672">=</span>False, frozen<span style="color:#f92672">=</span>False)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>(init<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, repr<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, eq<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, order<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, unsafe_hash<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, frozen<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
 </code></pre></div><ul>
 <li>
 <p><code>init</code>: defines the <code>__init__()</code> method</p>
@@ -245,11 +241,11 @@ If the class defines one of the order function while order is set to True, a <co
 <h2 id="post-init">Post Init</h2>
 <p>Sometimes in the init function, we&rsquo;d like to make some extra computation. For example, assume that in our Person class, the moment where we instantiate it, we&rsquo;d like to retrieve the extra details we have on that person from our database&hellip;</p>
 <p>Normally we&rsquo;d have to do something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> __init__(self):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> __init__(self):
     <span style="color:#f92672">...</span>,
     self<span style="color:#f92672">.</span>extra_details <span style="color:#f92672">=</span> _get_extra_details(self<span style="color:#f92672">.</span>person_id)
 </code></pre></div><p>But with dataclasses this possibility disappears. It&rsquo;s been replaced by a <code>__post_init__()</code> function. Post Init is a special function that allows extra processing after the init function has been called.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
 
 <span style="color:#a6e22e">@dataclass</span>
@@ -274,12 +270,12 @@ If the class defines one of the order function while order is set to True, a <co
 <li>metadata: A mapping with information about the field. Can also be None.</li>
 </ul>
 <p>Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
 
 <span style="color:#a6e22e">@dataclass</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
   name: str
-  age: int <span style="color:#f92672">=</span> field(repr<span style="color:#f92672">=</span> False) <span style="color:#75715e">## For people sensitive about their age 🤷‍♂</span>
+  age: int <span style="color:#f92672">=</span> field(repr<span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>) <span style="color:#75715e">## For people sensitive about their age 🤷‍♂</span>
   hobbies: List[str]
   currently_reading: str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>
 </code></pre></div><h2 id="using-slot-instead-of-dict-access">Using Slot Instead Of Dict Access</h2>
@@ -287,7 +283,7 @@ If the class defines one of the order function while order is set to True, a <co
 <p>Although slots is an entire topic on its own, ill try to recap it here as quickly/simply as I can.</p>
 <p>The attributes of a dataclass are stored in a dictionary and can be accessed through <code>__dict__</code>. This dict does not have any fixed number of attributes and we can add attributes dynamically.</p>
 <p>Slots on the other hand has a static structure and prohibits the adding of attributes after the creation of the instance.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
     __slots__ <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#e6db74">&#34;hobbies&#34;</span>, <span style="color:#e6db74">&#34;currently_reading&#34;</span>)
     name: str
@@ -298,10 +294,10 @@ If the class defines one of the order function while order is set to True, a <co
 p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>], <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>)
 
 p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Data Engineer&#34;</span>
-<span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>profession)
+print(p<span style="color:#f92672">.</span>profession)
 <span style="color:#75715e">## AttributeError: &#39;Person&#39; object has no attribute &#39;profession&#39;</span>
 </code></pre></div><p>And if we were not using slots:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
     <span style="color:#66d9ef">def</span> __init__(self, name, age, hobbies, currently_reading <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;The Divine Comedy&#39;</span>):
         self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
         self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
@@ -311,12 +307,12 @@ p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</s
 p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>, [<span style="color:#e6db74">&#34;Skiing&#34;</span>, <span style="color:#e6db74">&#34;Reading&#34;</span>], <span style="color:#e6db74">&#34;The Divine Comedy&#34;</span>)
 
 p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Data Engineer&#34;</span>
-<span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>profession) <span style="color:#75715e">## Data Engineer</span>
+print(p<span style="color:#f92672">.</span>profession) <span style="color:#75715e">## Data Engineer</span>
 </code></pre></div><p>So we can see that with <code>__slots__</code> we can no longer create attributes dynamically but the access becomes faster and uses less memory.</p>
 <h2 id="inheritance">Inheritance</h2>
 <p>Dataclasses can be inherited like normal classes in Python.</p>
 <p>Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@dataclass</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Developer</span>(Person):
     salary: float
 </code></pre></div><p>Developer will have all the attributes of the class <code>Person</code> in addition to a salary attribute.</p>
@@ -380,7 +376,7 @@ p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</s
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -409,7 +405,7 @@ p<span style="color:#f92672">.</span>profession <span style="color:#f92672">=</s
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

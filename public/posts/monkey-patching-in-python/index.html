@@ -27,7 +27,7 @@ For some additional clarifications, the concept is something I recently learned 
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -39,13 +39,9 @@ For some additional clarifications, the concept is something I recently learned 
 <link rel="shortcut icon" href="https://fares.codes/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Monkey Patching in Python">
 <meta itemprop="description" content="Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.
-For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown.">
-<meta itemprop="datePublished" content="2020-09-21T06:20:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-09-21T06:20:00&#43;02:00" />
+For some additional clarifications, the concept is something I recently learned from someone I work with and the examples closely resemble his own&hellip; The reason I&rsquo;m recopying them can be summarized in the following french quote: &ldquo;Le savant reste ignorant de ce qu’il a appris tant qu’il ne l’a pas mis en pratique&rdquo; - Unknown."><meta itemprop="datePublished" content="2020-09-21T06:20:00+02:00" />
+<meta itemprop="dateModified" content="2020-09-21T06:20:00+02:00" />
 <meta itemprop="wordCount" content="664">
-
-
-
 <meta itemprop="keywords" content="python,Monkey Patching," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Monkey Patching in Python"/>
 <meta name="twitter:description" content="Asides from giving you the ability to say the words &ldquo;Monkey Patch&rdquo; out loud in your office, monkey patching can be a useful tool when working with external libraries. It can also be the reason why all the developers who will work on the product after you will come loath you&hellip; More on that in a bit.
@@ -129,22 +125,22 @@ For some additional clarifications, the concept is something I recently learned 
 <p>Monkey patching is Python&rsquo;s ability to dynamically apply a modification (at runtime) to a class or even a module.</p>
 <p>What does that mean and how is it useful?</p>
 <p>Let us look at a simple example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+        print(<span style="color:#e6db74">&#34;Meow&#34;</span>)
 
 
 Cat()<span style="color:#f92672">.</span>say_hi()   <span style="color:#75715e">## Meow</span>
 </code></pre></div><p>The above code behaves as expected&hellip; But what if we wanted to change the behavior of the class <code>Cat</code> by modifying the greeting function?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+        print(<span style="color:#e6db74">&#34;Meow&#34;</span>)
 
 Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Meow</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>(self):
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Woof&#34;</span>)
+    print(<span style="color:#e6db74">&#34;Woof&#34;</span>)
 
 Cat<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
 Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#75715e">## Woof</span>
@@ -159,15 +155,15 @@ Cat()<span style="color:#f92672">.</span>say_hi()          <span style="color:#7
 <li>Instance level monkey patch:</li>
 </ul>
 <p>In instance level patching, only the instance will behave differently, the rest of the instances will remain the same.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cat</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hi</span>(self):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Meow&#34;</span>)
+        print(<span style="color:#e6db74">&#34;Meow&#34;</span>)
 
 cat1 <span style="color:#f92672">=</span> Cat()
 cat1<span style="color:#f92672">.</span>say_hi()               <span style="color:#75715e"># Meow</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Modified Meow&#34;</span>)
+    print(<span style="color:#e6db74">&#34;Modified Meow&#34;</span>)
 
 cat1<span style="color:#f92672">.</span>say_hi <span style="color:#f92672">=</span> say_hello
 
@@ -188,7 +184,7 @@ cat2<span style="color:#f92672">.</span>say_hi()               <span style="colo
 <p>Monkey Patching could also be very handy when it comes to testing. Where for example we might bypass a connection to some database etc&hellip;</p>
 <h2 id="if-you-must-remember-three-things">If You Must Remember Three Things</h2>
 <ol>
-<li>Monkey Patching is modifying a variable or a functions&rsquo; behavior at runtime.</li>
+<li>Monkey Patching is modifying a variable or a functions' behavior at runtime.</li>
 <li>We can either monkey patch an instance or the entire Class and all its instances.</li>
 <li>It is an evil hack that if used without caution can lead to confusion and additional bugs.</li>
 </ol>
@@ -246,7 +242,7 @@ cat2<span style="color:#f92672">.</span>say_hi()               <span style="colo
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -275,7 +271,7 @@ cat2<span style="color:#f92672">.</span>say_hi()               <span style="colo
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

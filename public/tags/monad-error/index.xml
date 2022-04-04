@@ -5,11 +5,7 @@
     <link>https://fares.codes/tags/monad-error/</link>
     <description>Recent content in Monad Error on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 25 Sep 2020 06:20:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/tags/monad-error/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 25 Sep 2020 06:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/tags/monad-error/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cats MonadError</title>
       <link>https://fares.codes/posts/cats-monaderror/</link>

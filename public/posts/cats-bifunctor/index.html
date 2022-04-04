@@ -29,7 +29,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 <meta itemprop="description" content="The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
 In cats and in some cases scala, types like Either, Validated, Option&hellip; are right biased. which means that when we call .map on them, the function applied in the map is only applied on the case of a right.
 Here are some examples:
-val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either.">
-<meta itemprop="datePublished" content="2020-02-09T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-09T10:00:00&#43;00:00" />
+val either: Either[String, Int] = Right(2) val result: Either[String, Int] = either."><meta itemprop="datePublished" content="2020-02-09T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-09T10:00:00+00:00" />
 <meta itemprop="wordCount" content="625">
-
-
-
 <meta itemprop="keywords" content="scala,cats,bimap," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cats Bifunctor"/>
 <meta name="twitter:description" content="The following will be a short and rather simple article about a useful function I recently learned about: bimap by cats.
@@ -132,7 +128,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
                 <p>The following will be a short and rather simple article about a useful function I recently learned about: <code>bimap</code> by cats.</p>
 <p>In cats and in some cases scala, types like Either, Validated, Option&hellip; are right biased. which means that when we call <code>.map</code> on them, the function applied in the map is only applied on the case of a right.</p>
 <p>Here are some examples:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> either<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">)</span>
 <span style="color:#66d9ef">val</span> result<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> either<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>int <span style="color:#66d9ef">=&gt;</span> int <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">)</span>
 
@@ -141,13 +137,13 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 <span style="color:#75715e">// a map on a None returns a None.
 </span><span style="color:#75715e"></span>
 </code></pre></div><p>But what if we only wanted to apply a function on the left side? conveniently, cats offers us a <code>.leftMap</code> function. This does not apply in the case of an option.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> either<span style="color:#f92672">.</span>leftMap<span style="color:#f92672">(</span>str <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Error: &#34;</span> <span style="color:#f92672">+</span> str<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> result <span style="color:#66d9ef">=</span> either<span style="color:#f92672">.</span>leftMap<span style="color:#f92672">(</span>str <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Error: &#34;</span> <span style="color:#f92672">+</span> str<span style="color:#f92672">)</span>
 </code></pre></div><p>In some cases, we find ourselves wanting to apply different functions in the case where the return is a right and when its a left. In that case we can use <code>bimap</code>.</p>
 <p>bimap is defined by a <code>Bifunctor</code> and from the cats definition:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Bifunctor takes two type parameters instead of one, and is a functor in both of these parameters. It defines a function bimap, which allows for mapping over both arguments at the same time. Its signature is as follows:
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> bimap<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span>, <span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">](</span>fab<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span><span style="color:#f92672">])(</span>f<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> C<span style="color:#f92672">,</span> g<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span> <span style="color:#f92672">=&gt;</span> D<span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Bifunctor takes two type parameters instead of one, and is a functor in both of these parameters. It defines a function bimap, which allows for mapping over both arguments at the same time. Its signature is as follows:
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> bimap<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span>, <span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">](</span>fab<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span><span style="color:#f92672">])(</span>f<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> C<span style="color:#f92672">,</span> g<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span> <span style="color:#f92672">=&gt;</span> D<span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">F</span><span style="color:#f92672">[</span><span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">]</span>
 </code></pre></div><p>here&rsquo;s an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">import</span> cats.syntax.either._
 
   <span style="color:#66d9ef">val</span> either<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
@@ -158,7 +154,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 
 </code></pre></div><p>In the case where the value <code>either</code> is of type Right then <code>function2</code> will be applied. In the case its a Left, <code>function1</code> would be applied.</p>
 <p>Here is the implementation of <code>bimap</code> on an either:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">def</span> bimap<span style="color:#f92672">[</span><span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">](</span>fa<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> C<span style="color:#f92672">,</span> fb<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">B</span> <span style="color:#f92672">=&gt;</span> D<span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">C</span>, <span style="color:#66d9ef">D</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> eab <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Left</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span>  <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Left</span><span style="color:#f92672">(</span>fa<span style="color:#f92672">(</span>a<span style="color:#f92672">))</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>b<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>fb<span style="color:#f92672">(</span>b<span style="color:#f92672">))</span>
@@ -167,7 +163,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 </code></pre></div><p>In case this behavior is a bit familiar its because scala offers a very similar function: <code>fold</code></p>
 <p>Similarly to <code>bimap</code>, fold takes 2 functions and applies them on the left and the right.</p>
 <p>Here is the scala doc along with the function definition:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#75715e">/** Applies `fa` if this is a `Left` or `fb` if this is a `Right`.
 </span><span style="color:#75715e">   *
 </span><span style="color:#75715e">   *  @example {{{
@@ -192,7 +188,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 <p>But in the case of <code>fold</code>, the return type will depend on the functions passed to the fold. In the same time, both functions will have to have the same return type (<code>C in the scala doc</code>)</p>
 <p>So to summarize the main differences between a bimap and a fold:</p>
 <ol>
-<li><code>bimap</code> returns an Either while <code>fold</code>'s return type depends on the functions passed to it.</li>
+<li><code>bimap</code> returns an Either while <code>fold</code>&rsquo;s return type depends on the functions passed to it.</li>
 <li>The functions passed to the bimap can have different return types. while the functions passed to the fold needs to have the same return type.</li>
 </ol>
 
@@ -249,7 +245,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -278,7 +274,7 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

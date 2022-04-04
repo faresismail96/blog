@@ -29,7 +29,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 <meta itemprop="description" content="From my previous articles, you&rsquo;ve seen me create ADTs in two different ways:
 sealed abstract class Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } or
 sealed trait Animal object Animal { final case object Dog extends Animal final case object Cat extends Animal } This article will outline the difference between those two implementations.
-Sealed Trait If a behavior is to be re-used, traits are very handy since they can be mixed in.">
-<meta itemprop="datePublished" content="2020-05-03T20:00:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-05-03T20:00:00&#43;02:00" />
+Sealed Trait If a behavior is to be re-used, traits are very handy since they can be mixed in."><meta itemprop="datePublished" content="2020-05-03T20:00:00+02:00" />
+<meta itemprop="dateModified" content="2020-05-03T20:00:00+02:00" />
 <meta itemprop="wordCount" content="355">
-
-
-
 <meta itemprop="keywords" content="scala,trait,abstract class,ADT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Scala Sealed Trait vs Sealed Abstract Class"/>
 <meta name="twitter:description" content="From my previous articles, you&rsquo;ve seen me create ADTs in two different ways:
@@ -130,7 +126,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 
             <div class="post-content">
                 <p>From my previous articles, you&rsquo;ve seen me create ADTs in two different ways:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
 
@@ -138,7 +134,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Cat</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Animal</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>or</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Animal</span>
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
 
@@ -150,11 +146,11 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 <p>If a behavior is to be re-used, traits are very handy since they can be mixed in. We can also mix in multiple traits, as opposed to abstract classes where we can only extend one.</p>
 <p>A disadvantage for traits (and a huge advantage for abstract classes) is that traits can&rsquo;t take constructor arguments.</p>
 <p>example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">// Will not compile
 </span></code></pre></div><p>In other words, if our base behavior takes constructor arguments, use an abstract class.</p>
 <p>Its worth also nothing that in traits we can do the following</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">{</span>
     <span style="color:#66d9ef">def</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Which ultimately is the same thing&hellip; except its a def so can be implemented as a <code>val</code> or a <code>def</code> ==&gt; more flexible</p>
@@ -162,7 +158,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 <p>The primary advantage of abstract classes over traits is that they have a direct mapping to a structure in java, as opposed to trait which do not.</p>
 <p>So if you intend on calling your code will be accessed in java, think about defining abstract classes.</p>
 <p>Another worthy note, mentioned above for traits:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
 </code></pre></div><p>name is a <code>val</code>. So it wouldnt be possible for a case class to implement name as a def (which could have been possible with a trait) ==&gt; Less flexible.</p>
 <h2 id="if-you-must-remember-2-things">If you must remember 2 things</h2>
 <p>A class can only extend one abstract class, as opposed to traits where we can mix in multiple traits</p>
@@ -223,7 +219,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -252,7 +248,7 @@ Sealed Trait If a behavior is to be re-used, traits are very handy since they ca
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

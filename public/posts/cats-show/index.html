@@ -29,7 +29,7 @@ Backing up, Here is the signature of show:
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ Backing up, Here is the signature of show:
 <meta itemprop="description" content="You can tell I&rsquo;m not looking to write something serious by the topic I&rsquo;ve chosen 😛
 The first time I read about Show I instantly said to my self &ldquo;its just a glorified toString&rdquo;. I still struggle to see the difference&hellip; Okay not really but they are pretty similar.
 Backing up, Here is the signature of show:
-/** creates an instance of [[Show]] using the provided function */ def show[A](f: A =&gt; String): Show[A] = new Show[A] { def show(a: A): String = f(a) } So it takes a A as a type parameter and a function that takes an A and transforms it to a String.">
-<meta itemprop="datePublished" content="2020-03-20T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-20T10:00:00&#43;00:00" />
+/** creates an instance of [[Show]] using the provided function */ def show[A](f: A =&gt; String): Show[A] = new Show[A] { def show(a: A): String = f(a) } So it takes a A as a type parameter and a function that takes an A and transforms it to a String."><meta itemprop="datePublished" content="2020-03-20T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-20T10:00:00+00:00" />
 <meta itemprop="wordCount" content="266">
-
-
-
 <meta itemprop="keywords" content="cats,show,toString," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cats Show"/>
 <meta name="twitter:description" content="You can tell I&rsquo;m not looking to write something serious by the topic I&rsquo;ve chosen 😛
@@ -132,21 +128,21 @@ Backing up, Here is the signature of show:
                 <p>You can tell I&rsquo;m not looking to write something serious by the topic I&rsquo;ve chosen 😛</p>
 <p>The first time I read about <code>Show</code> I instantly said to my self &ldquo;its just a glorified toString&rdquo;. I still struggle to see the difference&hellip; Okay not really but they are pretty similar.</p>
 <p>Backing up, Here is the signature of show:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#75715e">/** creates an instance of [[Show]] using the provided function */</span>
   <span style="color:#66d9ef">def</span> show<span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">](</span>f<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Show</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Show</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">def</span> show<span style="color:#f92672">(</span>a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">A</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">=</span> f<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span>
   <span style="color:#f92672">}</span>
 
 </code></pre></div><p>So it takes a <code>A</code> as a type parameter and a function that takes an <code>A</code> and transforms it to a <code>String</code>. Kind of like a toString&hellip; but the difference is that show takes a type parameter while toString is defined on <code>Any</code> meaning everything has a toString and as bizarre as this might look, it actually works:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#f92672">{}).</span>toString <span style="color:#75715e">// Would return  $anon$1@8641b7d ???
 </span><span style="color:#75715e"></span>
 </code></pre></div><p>While this would not work for show.</p>
 <p>Show also safeguards against anyone randomly overriding the toString somewhere else and affecting your code.</p>
 <h2 id="example-of-using-show">Example of using Show</h2>
 <p>Assume we have our ADT:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Product</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Serializable</span>
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
@@ -161,7 +157,7 @@ Backing up, Here is the signature of show:
 <span style="color:#f92672">}</span>
 
 </code></pre></div><p>We defined an implicit val of type <code>Show[Animal]</code> in our ADT, allowing us to call the following from anywhere else in the code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> d<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Animal</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Dog</span>
   d<span style="color:#f92672">.</span>show <span style="color:#75715e">// Would return &#34;The following is a Dog&#34;
 </span><span style="color:#75715e"></span>
@@ -219,7 +215,7 @@ Backing up, Here is the signature of show:
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -248,7 +244,7 @@ Backing up, Here is the signature of show:
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

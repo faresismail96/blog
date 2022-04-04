@@ -28,7 +28,7 @@ So a Person can either be an Adult with a field of work or a Child with a favori
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ So a Person can either be an Adult with a field of work or a Child with a favori
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Smart Constructors in Scala">
 <meta itemprop="description" content="Assume we have the following ADT:
 sealed trait Person { def name: String def age: Int } object Person { final case class Adult(name: String, age: Int, fieldOfWork: String) extends Person final case class Child(name: String,age: Int, favAnimal: String) extends Person } Probably a very naive way to see humanity but for our example, it&rsquo;ll do.
-So a Person can either be an Adult with a field of work or a Child with a favorite animal.">
-<meta itemprop="datePublished" content="2020-05-03T10:00:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-05-03T10:00:00&#43;02:00" />
+So a Person can either be an Adult with a field of work or a Child with a favorite animal."><meta itemprop="datePublished" content="2020-05-03T10:00:00+02:00" />
+<meta itemprop="dateModified" content="2020-05-03T10:00:00+02:00" />
 <meta itemprop="wordCount" content="325">
-
-
-
 <meta itemprop="keywords" content="scala,constructor,smart constructor,validation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Smart Constructors in Scala"/>
 <meta name="twitter:description" content="Assume we have the following ADT:
@@ -127,7 +123,7 @@ So a Person can either be an Adult with a field of work or a Child with a favori
 
             <div class="post-content">
                 <p>Assume we have the following ADT:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">def</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
   <span style="color:#66d9ef">def</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span>
@@ -145,14 +141,14 @@ So a Person can either be an Adult with a field of work or a Child with a favori
 <p>So a Person can either be an <code>Adult</code> with a field of work or a <code>Child</code> with a favorite animal.</p>
 <p>And logically, the line of demarcation between and adult and a child is 18 years old.</p>
 <p>The problem with our implementation is that nothing stops us from doing the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> kid <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adult</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Daniel&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">12</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;President&#34;</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> kid <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adult</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Daniel&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">12</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;President&#34;</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">//kid: Adult = Adult(Daniel,12,President)
 </span></code></pre></div><p>Not exactly what we want&hellip;</p>
 <p>And yes, we could add a validation later on in our code to enforce certain laws but it&rsquo;ll just be extra boiler plate.</p>
 <p>Another very valid solution is the use of <code>Refined Types</code>. But in case you do not/ cannot add that dependency to your project, you can still get away with using <code>Smart Constructors</code></p>
 <h2 id="smart-constructor">Smart Constructor</h2>
 <p>For our class <code>Adult</code> a smart constructor will look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Adult</span> <span style="color:#66d9ef">private</span> <span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> fieldOfWork<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Adult</span> <span style="color:#66d9ef">private</span> <span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> fieldOfWork<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Person</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Adult</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">def</span> apply<span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> fieldOfWork<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Adult</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
@@ -163,7 +159,7 @@ So a Person can either be an Adult with a field of work or a Child with a favori
 <p><code>new Adult(&quot;Daniel&quot;, 12, &quot;prez&quot;)</code> from somewhere outside the companion object.
 Second thing, we defined our own apply method that returns an <code>Option[Adult]</code> that is either Some if the input is valid or None otherwise.</p>
 <p>Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> kid <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adult</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Daniel&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">12</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;prez&#34;</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> kid <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adult</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Daniel&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">12</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;prez&#34;</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">// None
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> adult <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Adult</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Data Engineer&#34;</span><span style="color:#f92672">)</span>
 <span style="color:#75715e">//Some(Adult(Fares,23,Data Engineer))
@@ -222,7 +218,7 @@ Second thing, we defined our own apply method that returns an <code>Option[Adult
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -251,7 +247,7 @@ Second thing, we defined our own apply method that returns an <code>Option[Adult
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

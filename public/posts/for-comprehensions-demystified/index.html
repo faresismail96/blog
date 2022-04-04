@@ -29,7 +29,7 @@ def computeA(a: Int): Either[Throwable, Int] = ?" />
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ def computeA(a: Int): Either[Throwable, Int] = ?" />
 <meta itemprop="description" content="A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
 At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&rsquo;ll realise it&rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.
  Lets look at the below couple functions:
-def computeA(a: Int): Either[Throwable, Int] = ?">
-<meta itemprop="datePublished" content="2019-07-29T21:37:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-07-29T21:37:00&#43;00:00" />
+def computeA(a: Int): Either[Throwable, Int] = ?"><meta itemprop="datePublished" content="2019-07-29T21:37:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-29T21:37:00+00:00" />
 <meta itemprop="wordCount" content="453">
-
-
-
 <meta itemprop="keywords" content="For Comprehension,Scala," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="For Comprehensions Demystified"/>
 <meta name="twitter:description" content="A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
@@ -133,7 +129,7 @@ def computeA(a: Int): Either[Throwable, Int] = ?"/>
 <p>At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&rsquo;ll realise it&rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.</p>
 <hr>
 <p>Lets look at the below couple functions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">def</span> computeA<span style="color:#f92672">(</span>a<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
 <span style="color:#66d9ef">def</span> computeB<span style="color:#f92672">(</span>b<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
 <span style="color:#66d9ef">def</span> computeC<span style="color:#f92672">(</span>c<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Throwable</span>, <span style="color:#66d9ef">String</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
@@ -143,7 +139,7 @@ def computeA(a: Int): Either[Throwable, Int] = ?"/>
 <p>One way to deal with this would be to check the return value of each function, make sure it is a <code>Right(_)</code> else throw an error or something (<code>fold</code>? <code>getOrElse</code>? pattern matching?)&hellip;</p>
 <p>But this quickly becomes cumbersome and annoying. it also makes the logic somewhat harder to follow.</p>
 <p>So here comes For Comprehensions to the rescue.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
     a <span style="color:#66d9ef">&lt;-</span> computeA<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
     b <span style="color:#66d9ef">&lt;-</span> computeB<span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">)</span>
@@ -152,13 +148,13 @@ def computeA(a: Int): Either[Throwable, Int] = ?"/>
 
 </code></pre></div><p>so what does this mean exactly? when in doubt, use Intellij&rsquo;s desugar option.</p>
 <p>the above code desugarized (is that a word?) is equivalent to the following code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">computeA<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span>a <span style="color:#66d9ef">=&gt;</span>computeB<span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span>b <span style="color:#66d9ef">=&gt;</span>computeC<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hi&#34;</span><span style="color:#f92672">).</span>map<span style="color:#f92672">(</span>c <span style="color:#66d9ef">=&gt;</span>computeD<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> c<span style="color:#f92672">))))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">computeA<span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span>a <span style="color:#66d9ef">=&gt;</span>computeB<span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">).</span>flatMap<span style="color:#f92672">(</span>b <span style="color:#66d9ef">=&gt;</span>computeC<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hi&#34;</span><span style="color:#f92672">).</span>map<span style="color:#f92672">(</span>c <span style="color:#66d9ef">=&gt;</span>computeD<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> c<span style="color:#f92672">))))</span>
 </code></pre></div><p>Of the two, I&rsquo;m sure we&rsquo;d all prefer reading / writing the first format&hellip; It is more concise, readable and hence less prone to errors.</p>
 <hr>
 <p>Here is a good article on For Comprehensions in Scala official docs: <a href="https://docs.scala-lang.org/tutorials/FAQ/yield.html" title="Translating for-comprehensions">Translating for-comprehensions</a></p>
 <p>it basically says that for without the yield translates into a chain of foreach.</p>
 <p>for with yield translates into a chain of flatMap followed by a map.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>x <span style="color:#66d9ef">&lt;-</span> c1<span style="color:#f92672">;</span> y <span style="color:#66d9ef">&lt;-</span> c2<span style="color:#f92672">;</span> z <span style="color:#66d9ef">&lt;-</span> c3<span style="color:#f92672">)</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{...}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>x <span style="color:#66d9ef">&lt;-</span> c1<span style="color:#f92672">;</span> y <span style="color:#66d9ef">&lt;-</span> c2<span style="color:#f92672">;</span> z <span style="color:#66d9ef">&lt;-</span> c3<span style="color:#f92672">)</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">{...}</span>
 <span style="color:#75715e">//translates to
 </span><span style="color:#75715e"></span>c1<span style="color:#f92672">.</span>flatMap<span style="color:#f92672">(</span>x <span style="color:#66d9ef">=&gt;</span> c2<span style="color:#f92672">.</span>flatMap<span style="color:#f92672">(</span>y <span style="color:#66d9ef">=&gt;</span> c3<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>z <span style="color:#66d9ef">=&gt;</span> <span style="color:#f92672">{...})))</span>
 </code></pre></div><p>Using for with an if condition translates into a <code>.wihFilter</code> and as a fallback of <code>filter</code> if the method <code>wihFilter</code> is not available.</p>
@@ -221,7 +217,7 @@ def computeA(a: Int): Either[Throwable, Int] = ?"/>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -250,7 +246,7 @@ def computeA(a: Int): Either[Throwable, Int] = ?"/>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 
