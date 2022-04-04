@@ -27,7 +27,7 @@ I will begin my explanation of Validated by explaining something else entirely&a
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -39,13 +39,9 @@ I will begin my explanation of Validated by explaining something else entirely&a
 <link rel="shortcut icon" href="https://fares.codes/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Validated(Nel) for Validation">
 <meta itemprop="description" content="Week two of being stuck at home due to the Corona-virus confinement. I&rsquo;m writing this article because I desperately need to feel like I&rsquo;ve accomplished ONE productive thing this weekend. On a side note, I&rsquo;ve recently taken up cooking and managed to completely botch a recipe that was considered kids friendly&hellip; So yea those are my life updates&hellip;
-I will begin my explanation of Validated by explaining something else entirely&hellip;">
-<meta itemprop="datePublished" content="2020-03-30T01:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-30T01:00:00&#43;00:00" />
+I will begin my explanation of Validated by explaining something else entirely&hellip;"><meta itemprop="datePublished" content="2020-03-30T01:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-30T01:00:00+00:00" />
 <meta itemprop="wordCount" content="811">
-
-
-
 <meta itemprop="keywords" content="cats,validated,validatedNel,validation," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Validated(Nel) for Validation"/>
 <meta name="twitter:description" content="Week two of being stuck at home due to the Corona-virus confinement. I&rsquo;m writing this article because I desperately need to feel like I&rsquo;ve accomplished ONE productive thing this weekend. On a side note, I&rsquo;ve recently taken up cooking and managed to completely botch a recipe that was considered kids friendly&hellip; So yea those are my life updates&hellip;
@@ -130,7 +126,7 @@ On a side note, I&rsquo;ve recently taken up cooking and managed to completely b
 <p><code>Either[A,B]</code> is pretty simple to understand. As its name and signature suggest: its Either a value of type A or its a value of type B.
 Either also allows us to chain computations.</p>
 <p>Assume we wanted to validate that the values for a type <code>Person</code> are indeed valid, our model would be something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">import</span> cats.Show
 <span style="color:#66d9ef">import</span> com.validatedPost.PersonError._
 
@@ -169,7 +165,7 @@ Either also allows us to chain computations.</p>
 <span style="color:#f92672">}</span>
 
 </code></pre></div><p>And we&rsquo;d be able to chain all three validations with the helpful <code>For Comprehensions</code> or simple <code>maps + flatMaps</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">import</span> cats.syntax.either._
   <span style="color:#66d9ef">import</span> com.validatedPost.PersonError._
 
@@ -187,7 +183,7 @@ Either also allows us to chain computations.</p>
   println<span style="color:#f92672">(</span>res<span style="color:#f92672">.</span>show<span style="color:#f92672">)</span>
 
 </code></pre></div><p>This will output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 Right(
 First Name: Fares
 Last Name: Ismail
@@ -195,11 +191,11 @@ Age: 23
 )
 
 </code></pre></div><p>But what if the person instance had a few errors?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> person2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> person2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">)</span>
   println<span style="color:#f92672">(</span>validatePerson<span style="color:#f92672">(</span>person2<span style="color:#f92672">).</span>show<span style="color:#f92672">)</span> <span style="color:#75715e">// Left(There was an issue with the given last name)
 </span><span style="color:#75715e"></span>
 </code></pre></div><p>Ok&hellip; so far so good. But what if there were multiple errors?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> person3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span>
   println<span style="color:#f92672">(</span>validatePerson<span style="color:#f92672">(</span>person3<span style="color:#f92672">).</span>show<span style="color:#f92672">)</span> <span style="color:#75715e">//Left(There was an issue with the given first name)
 </span><span style="color:#75715e"></span>
@@ -210,7 +206,7 @@ Age: 23
 <p>While either is fail fast, <code>Validated</code> will allow us to accumulate the errors on the left side. We&rsquo;ve touched on this briefly in previous articles (including <code>Cats Ior</code> which accumulated warnings), but lets go over it again with <code>Validated</code></p>
 <p>For that, well need to change our validation functions to return a <code>Validated</code></p>
 <p>Validate has the following signature:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Validated</span><span style="color:#f92672">[</span><span style="color:#66d9ef">+E</span>, <span style="color:#66d9ef">+A</span><span style="color:#f92672">]</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">Product</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Serializable</span> <span style="color:#f92672">{</span>
   <span style="color:#75715e">// Implementation elided
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
@@ -222,7 +218,7 @@ Age: 23
 <p>The <code>NonEmptyList</code> is used to accumulate the possible errors since we can have more than one.</p>
 <p>Conveniently, we have a type alias called <code>ValidatedNel[A,B]</code> that is short for <code>Validated[NoneEmptyList[A], B]</code></p>
 <p>Person will look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">import</span> cats.Show
 <span style="color:#66d9ef">import</span> cats.data.<span style="color:#f92672">{</span><span style="color:#a6e22e">Validated</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">ValidatedNel</span><span style="color:#f92672">}</span>
 <span style="color:#66d9ef">import</span> cats.syntax.validated._
@@ -247,7 +243,7 @@ Age: 23
 <span style="color:#f92672">}</span>
 
 </code></pre></div><p>and our function calls:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> person3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span>
 
   <span style="color:#66d9ef">import</span> cats.data.NonEmptyList._
@@ -318,7 +314,7 @@ Age: 23
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -347,7 +343,7 @@ Age: 23
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

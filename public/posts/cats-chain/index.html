@@ -27,7 +27,7 @@ Appending to a List requires iterating over the entire collection (linear time).
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -39,13 +39,9 @@ Appending to a List requires iterating over the entire collection (linear time).
 <link rel="shortcut icon" href="https://fares.codes/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Cats Chain">
 <meta itemprop="description" content="In previous articles, I&rsquo;ve talked about accumulating errors with Validated, and for that we said that we needed a Semigroup on the left side that will be used to accumulate the errors (We used a NonEmptyList[A] as an example). Today well talk about Chain and NonEmptyChain[A] and how it&rsquo;s different from a List.
-Appending to a List requires iterating over the entire collection (linear time). So using ValidatedNel[A,B] will make us incur a heavy performance penalty specially if we traverse it.">
-<meta itemprop="datePublished" content="2020-04-03T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-04-03T10:00:00&#43;00:00" />
+Appending to a List requires iterating over the entire collection (linear time). So using ValidatedNel[A,B] will make us incur a heavy performance penalty specially if we traverse it."><meta itemprop="datePublished" content="2020-04-03T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-04-03T10:00:00+00:00" />
 <meta itemprop="wordCount" content="309">
-
-
-
 <meta itemprop="keywords" content="scala,cats,chain," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cats Chain"/>
 <meta name="twitter:description" content="In previous articles, I&rsquo;ve talked about accumulating errors with Validated, and for that we said that we needed a Semigroup on the left side that will be used to accumulate the errors (We used a NonEmptyList[A] as an example). Today well talk about Chain and NonEmptyChain[A] and how it&rsquo;s different from a List.
@@ -128,12 +124,12 @@ Appending to a List requires iterating over the entire collection (linear time).
 <p>In comes <code>Chain</code>. Chain is very similar to List, but supports O(1) time append and prepend. This makes it a much better fit to use with <code>Validated</code>, <code>Ior</code> or <code>Writer</code> (article on this pretty soon).</p>
 <p>Cats also offers type aliases like <code>ValidatedNec</code> or <code>IorNec</code> as well as helper functions like <code>groupByNec</code> or <code>Validated.invalidNec</code>.</p>
 <p>Here are some benchmarks from the typelevel cats documentation <a href="https://typelevel.org/cats/datatypes/chain.html">https://typelevel.org/cats/datatypes/chain.html</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[info] Benchmark                                  Mode  Cnt   Score   Error  Units
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[info] Benchmark                                  Mode  Cnt   Score   Error  Units
 [info] CollectionMonoidBench.accumulateChain     thrpt   20  51.911 ± 7.453  ops/s
 [info] CollectionMonoidBench.accumulateList      thrpt   20   6.973 ± 0.781  ops/s
 [info] CollectionMonoidBench.accumulateVector    thrpt   20   6.304 ± 0.129  ops/s
 </code></pre></div><p>and some function calls:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[info] Benchmark                           Mode  Cnt          Score         Error  Units
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[info] Benchmark                           Mode  Cnt          Score         Error  Units
 [info] ChainBench.foldLeftLargeChain      thrpt   20        117.267 ±       1.815  ops/s
 [info] ChainBench.foldLeftLargeList       thrpt   20        135.954 ±       3.340  ops/s
 [info] ChainBench.foldLeftLargeVector     thrpt   20         61.613 ±       1.326  ops/s
@@ -144,7 +140,7 @@ Appending to a List requires iterating over the entire collection (linear time).
 </code></pre></div><h2 id="nonemptychain">NonEmptyChain</h2>
 <p>Similarly to <code>NonEmptyList</code> NonEmptyChain has a semigroup but not a monoid (obviously 😛).</p>
 <p>Cats doc shows a couple examples on how to create them or transform NonEmptyList into a NonEmptyChain:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">import</span> cats.data._
 <span style="color:#75715e">// import cats.data._
 </span><span style="color:#75715e"></span>
@@ -214,7 +210,7 @@ Appending to a List requires iterating over the entire collection (linear time).
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -243,7 +239,7 @@ Appending to a List requires iterating over the entire collection (linear time).
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

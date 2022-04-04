@@ -27,7 +27,7 @@ When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Su
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -39,13 +39,9 @@ When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Su
 <link rel="shortcut icon" href="https://fares.codes/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="ADTs: Sum Types and Product Types">
 <meta itemprop="description" content="It has been a while since I haven&rsquo;t posted a new article, and in an attempt to break the cycle I&rsquo;m starting off with something pretty simple.
-When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both.">
-<meta itemprop="datePublished" content="2021-02-14T12:20:00&#43;02:00" />
-<meta itemprop="dateModified" content="2021-02-14T12:20:00&#43;02:00" />
+When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum type and Product type. Now I have a bad habit of confusing the two so in this article I&rsquo;ll attempt to make things clearer and I will hopefully never find myself re-re-researching both."><meta itemprop="datePublished" content="2021-02-14T12:20:00+02:00" />
+<meta itemprop="dateModified" content="2021-02-14T12:20:00+02:00" />
 <meta itemprop="wordCount" content="669">
-
-
-
 <meta itemprop="keywords" content="adt,sum type,product type,scala," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ADTs: Sum Types and Product Types"/>
 <meta name="twitter:description" content="It has been a while since I haven&rsquo;t posted a new article, and in an attempt to break the cycle I&rsquo;m starting off with something pretty simple.
@@ -131,9 +127,9 @@ When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum ty
 <h2 id="product-types">Product Types</h2>
 <p>Product types are created by combining two or more types together with the <code>AND</code> operator. Here are a couple examples:</p>
 <p>Street addresses are comprised of a street number and a street name.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StreetAddress</span><span style="color:#f92672">(</span>streetNumber<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> streetName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StreetAddress</span><span style="color:#f92672">(</span>streetNumber<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> streetName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
 </code></pre></div><p>A book consists of a title, and author and an ISBN.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
 </code></pre></div><h2 id="sum-types">Sum Types</h2>
 <p>A sum type is a type that combines other types using the <code>OR</code> operator. Here are a couple examples:</p>
 <ul>
@@ -148,21 +144,21 @@ When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum ty
 </li>
 </ul>
 <p>In our PostalAddress class, we represented a fullName as a String. But what if we wanted to push this further?</p>
-<p>A fullName can be comprised of a firstName and a lastName, but a persons&rsquo; name can also include a middleName</p>
+<p>A fullName can be comprised of a firstName and a lastName, but a persons' name can also include a middleName</p>
 <p>So here&rsquo;s one way of modeling this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span>
   firstName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
   middleName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">],</span> 
   lastName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span>
 <span style="color:#f92672">)</span>
 </code></pre></div><p>And I guess thats okay&hellip; But we&rsquo;ll have to add <code>None</code> everywhere a middle name does not exist and when it does, we&rsquo;ll have to wrap it in a <code>Some</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> stephen <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Stephen&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">None</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Chbosky&#34;</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> stephen <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Stephen&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">None</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Chbosky&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> sagan <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">FullName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Carl&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Edward&#34;</span><span style="color:#f92672">),</span> <span style="color:#e6db74">&#34;Sagan&#34;</span><span style="color:#f92672">)</span>
 </code></pre></div><p>But what about people with a singe name such as : <code>Aristotle</code>, <code>Charlemagne</code>, <code>Fibonacci</code> etc&hellip;</p>
 <p>Should we make the firstName optional? can those really be considered their last names? or should be put some cases aside as special cases to be handled separately? If so wouldn&rsquo;t we end up in a situation where we have so many exceptions of different kind that it becomes unmanageable?</p>
 <p>If I&rsquo;m asking these questions its because they best demonstrate where Sum Types really shine!</p>
 <p>A FullName can be modeled as a first and last name OR a first, middle and last name OR a single name etc&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">FullName</span>
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">FullName</span> <span style="color:#f92672">{</span>
@@ -187,7 +183,7 @@ When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum ty
 
 </code></pre></div><p>I&rsquo;m definitely not the best at coming up with class names, but this point aside&hellip; All three instances are of the same type: <code>FullName</code> which is a Sum Type that can either be one of the three defined above.</p>
 <p>We&rsquo;re not restricted to Either Sum or Product Types. Instead we can use both together to better model our domain. Here&rsquo;s our Book type better represented using the FullName Sum Type:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">(</span>title<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> author<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FullName</span><span style="color:#f92672">,</span> isbn<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Long</span><span style="color:#f92672">)</span>
 </code></pre></div><p>The last one is known as a Hybrid type or a <code>Sum of Products</code> type.</p>
 <h2 id="if-you-must-remember-two-things">If you must remember two things</h2>
 <ul>
@@ -248,7 +244,7 @@ When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum ty
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -277,7 +273,7 @@ When listening to people talk of ADTs, you&rsquo;ll often hear the words: Sum ty
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

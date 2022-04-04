@@ -5,11 +5,7 @@
     <link>https://fares.codes/tags/schema-on-read/</link>
     <description>Recent content in Schema on Read on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 31 Oct 2021 12:20:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://fares.codes/tags/schema-on-read/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 31 Oct 2021 12:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/tags/schema-on-read/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Schema on Read v.s Schema on Write</title>
       <link>https://fares.codes/posts/schema-on-read-v.s-schema-on-write/</link>

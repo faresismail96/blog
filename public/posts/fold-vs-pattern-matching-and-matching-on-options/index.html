@@ -28,7 +28,7 @@ value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this ex
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this ex
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Fold vs Pattern Matching and Matching on Options">
 <meta itemprop="description" content="The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s
  Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
-value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, we patten match on the Option value.">
-<meta itemprop="datePublished" content="2019-09-01T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-09-01T10:00:00&#43;00:00" />
+value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, we patten match on the Option value."><meta itemprop="datePublished" content="2019-09-01T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-09-01T10:00:00+00:00" />
 <meta itemprop="wordCount" content="485">
-
-
-
 <meta itemprop="keywords" content="scala,pattern matching,fold," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Fold vs Pattern Matching and Matching on Options"/>
 <meta name="twitter:description" content="The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s
@@ -129,21 +125,21 @@ value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, w
                 <p>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna <a href="https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s">https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;t=1s</a></p>
 <hr>
 <p>Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> foo<span style="color:#f92672">(</span>a<span style="color:#f92672">)</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span> <span style="color:#66d9ef">=&gt;</span> bar
 <span style="color:#f92672">}</span>
 </code></pre></div><p>In this example, we patten match on the Option value. if it is defined, we call the function foo on the value inside the Some, otherwise we call bar.</p>
 <p>and this is technically correct, however: the scala doc states that:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The most idiomatic way to use an Option instance is to treat it as a collection or monad and use map,flatMap, filter, or foreach
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The most idiomatic way to use an Option instance is to treat it as a collection or monad and use map,flatMap, filter, or foreach
 </code></pre></div><p>and that:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">A less-idiomatic way to use Option values is via pattern matching:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">A less-idiomatic way to use Option values is via pattern matching:
 </code></pre></div><p>with this in mind; the above can be re-written as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span> value<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>foo<span style="color:#f92672">).</span>getOrElse<span style="color:#f92672">(</span>bar<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> res <span style="color:#66d9ef">=</span> value<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>foo<span style="color:#f92672">).</span>getOrElse<span style="color:#f92672">(</span>bar<span style="color:#f92672">)</span>
 </code></pre></div><p>another, more readable way would be using the <code>fold</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>fold<span style="color:#f92672">(</span>bar<span style="color:#f92672">)(</span>foo<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>fold<span style="color:#f92672">(</span>bar<span style="color:#f92672">)(</span>foo<span style="color:#f92672">)</span>
 </code></pre></div><p><code>fold</code> has the following definition and impl:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#75715e">/** Returns the result of applying $f to this $option&#39;s
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#75715e">/** Returns the result of applying $f to this $option&#39;s
 </span><span style="color:#75715e">   *  value if the $option is nonempty.  Otherwise, evaluates
 </span><span style="color:#75715e">   *  expression `ifEmpty`.
 </span><span style="color:#75715e">   *
@@ -158,39 +154,39 @@ value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, w
 <h2 id="is-there-an-even-better-way-to-do-things">Is there an even better way to do things</h2>
 <p>I wont go into the details, but <code>Marconi Lanna</code> does in his video or his article <a href="https://www.originate.com/thinking/stories/idiomatic-scala-your-options-do-not-match/">https://www.originate.com/thinking/stories/idiomatic-scala-your-options-do-not-match/</a>, but here are a few examples of code that can be better written. The below examples are taken/inspired by the video of <code>Marconi Lanna</code>.</p>
 <p>This is a silly example and uncommon, but:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>something<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span><span style="color:#f92672">){</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>something<span style="color:#f92672">==</span><span style="color:#66d9ef">true</span><span style="color:#f92672">){</span>
  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 <span style="color:#f92672">}</span>
 <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>which can easily be re-written as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">return</span> something
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">return</span> something
 </code></pre></div><h3 id="pattern-matching-on-boolean">Pattern Matching on boolean</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">condition <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">condition <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Okay&#34;</span>
     <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#e6db74">&#34;Not Okay&#34;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>can be re-written as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>condition<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;Okay&#34;</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;Not Okay&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>condition<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;Okay&#34;</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;Not Okay&#34;</span>
 </code></pre></div><h3 id="checking-if-an-option-is-defined">Checking if an Option is Defined</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">)</span>    <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">true</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span>       <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">false</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>can simply be re-written as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>isDefined
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>isDefined
 <span style="color:#75715e">//or its alias .nonEmpty (as of scala 2.10)
 </span></code></pre></div><p>To check the inverse, you can use: <code>.isEmpty</code></p>
 <h3 id="filtering-values">Filtering Values</h3>
 <p>What is we wanted to filter on an option?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">// given predicate p
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">// given predicate p
 </span><span style="color:#75715e"></span>value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span><span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>p<span style="color:#f92672">(</span>a<span style="color:#f92672">))</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">None</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">None</span>   <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">None</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>can be simplified by calling:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>filter<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">value<span style="color:#f92672">.</span>filter<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span>
 <span style="color:#75715e">// Note, Find also works in the same manner.
 </span></code></pre></div>
             </div>
@@ -246,7 +242,7 @@ value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, w
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -275,7 +271,7 @@ value match { case Some(a) =&gt; foo(a) case None =&gt; bar } In this example, w
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

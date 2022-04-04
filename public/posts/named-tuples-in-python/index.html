@@ -9,7 +9,7 @@
 <meta name="description"
     content="This cool little feature has been out since Python 2.6 but I&amp;rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]} is {res[1]} years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age." />
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]}is {res[1]}years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://fares.codes/posts/named-tuples-in-python/" />
@@ -28,7 +28,7 @@ def _get_person_from_db(user_id): person_name = ... ## Something person_age = ..
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,18 +41,14 @@ def _get_person_from_db(user_id): person_name = ... ## Something person_age = ..
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Named Tuples In Python">
 <meta itemprop="description" content="This cool little feature has been out since Python 2.6 but I&rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&#34;&#34;&#34;Person {res[0]} is {res[1]} years old!&#34;&#34;&#34;) Above, the function returns a tuple consisting of a name and the persons age.">
-<meta itemprop="datePublished" content="2020-07-12T09:15:00&#43;02:00" />
-<meta itemprop="dateModified" content="2020-07-12T09:15:00&#43;02:00" />
-<meta itemprop="wordCount" content="588">
-
-
-
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&#34;&#34;&#34;Person {res[0]}is {res[1]}years old!&#34;&#34;&#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list."><meta itemprop="datePublished" content="2020-07-12T09:15:00+02:00" />
+<meta itemprop="dateModified" content="2020-07-12T09:15:00+02:00" />
+<meta itemprop="wordCount" content="582">
 <meta itemprop="keywords" content="python,named tuples," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Named Tuples In Python"/>
 <meta name="twitter:description" content="This cool little feature has been out since Python 2.6 but I&rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&#34;&#34;&#34;Person {res[0]} is {res[1]} years old!&#34;&#34;&#34;) Above, the function returns a tuple consisting of a name and the persons age."/>
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&#34;&#34;&#34;Person {res[0]}is {res[1]}years old!&#34;&#34;&#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list."/>
 
 
 
@@ -128,7 +124,7 @@ def _get_person_from_db(user_id): person_name = ... ## Something person_age = ..
             <div class="post-content">
                 <p>This cool little feature has been out since Python 2.6 but I&rsquo;m only discovering this now 🤦‍♂</p>
 <p>Before we begin, let us take a quick look at tuples in python and how they work:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>(user_id):
 
     person_name <span style="color:#f92672">=</span> <span style="color:#f92672">...</span> <span style="color:#75715e">## Something</span>
@@ -138,34 +134,34 @@ def _get_person_from_db(user_id): person_name = ... ## Something person_age = ..
 
 res <span style="color:#f92672">=</span> _get_person_from_db(<span style="color:#ae81ff">0</span>)
 
-<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;&#34;&#34;Person {res[0]} is {res[1]} years old!&#34;&#34;&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;Person </span><span style="color:#e6db74">{</span>res[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> is </span><span style="color:#e6db74">{</span>res[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> years old!&#34;&#34;&#34;</span>)
 
 </code></pre></div><p>Above, the function returns a tuple consisting of a name and the persons age. This result is stored in <code>res</code> and we access it like a list.</p>
 <p>Another syntax would be to unapply the returned value into two other values:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(name, age) <span style="color:#f92672">=</span> _get_person_from_db(<span style="color:#ae81ff">0</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(name, age) <span style="color:#f92672">=</span> _get_person_from_db(<span style="color:#ae81ff">0</span>)
 
-<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;&#34;&#34;Person {name} is {age} years old!&#34;&#34;&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;Person </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74"> is </span><span style="color:#e6db74">{</span>age<span style="color:#e6db74">}</span><span style="color:#e6db74"> years old!&#34;&#34;&#34;</span>)
 </code></pre></div><p>But this can lead to some errors where while tuples consisting of multiple values, we might forget one or two making the returned values sometimes incoherent and potentially causing bugs.</p>
 <p>In such cases, <code>NamedTuples</code> can improve readability of the code by explicitly defining names to each tuple value.</p>
 <p>NamedTuples is part of the Collections module and was introduced in Python 2.6</p>
 <p>Here is a quick example on how it works:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
     Person <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#34;Person&#34;</span>, [<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>])
     p <span style="color:#f92672">=</span> Person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>)
     <span style="color:#66d9ef">return</span> p
 
 person <span style="color:#f92672">=</span> _get_person_from_db()
-<span style="color:#66d9ef">print</span>(person<span style="color:#f92672">.</span>name) <span style="color:#75715e"># Fares</span>
-<span style="color:#66d9ef">print</span>(person<span style="color:#f92672">.</span>age) <span style="color:#75715e"># 24</span>
+print(person<span style="color:#f92672">.</span>name) <span style="color:#75715e"># Fares</span>
+print(person<span style="color:#f92672">.</span>age) <span style="color:#75715e"># 24</span>
 </code></pre></div><p>Essentially namedtuples add the possibility to access fields by name instead of by index and therefore create a more readable and self documenting code.</p>
 <p>Additionally, namedtuple defines a default <code>repr</code> function for us where the fields are shown next to field name. For the previous example, the result would look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Tuples:</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Tuples:</span>
 (<span style="color:#e6db74">&#39;Fares&#39;</span>, <span style="color:#ae81ff">24</span>)
 
 <span style="color:#75715e"># NamedTuples:</span>
 Person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Fares&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>)
 </code></pre></div><p>Clearly using namedtuples is a lot more readable. But it gets better, where you can use a tuple, you can also use a namedtuple. NamedTuples are also accessible by index so this might spare you the need to refactor your existing code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
 
     Person <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#34;Person&#34;</span>, [<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>])
     p <span style="color:#f92672">=</span> Person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>)
@@ -173,10 +169,10 @@ Person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;
 
 person <span style="color:#f92672">=</span> _get_person_from_db()
 
-<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;&#34;&#34;Person {person[0]} is {person[1]} years old!&#34;&#34;&#34;</span>)
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;Person </span><span style="color:#e6db74">{</span>person[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> is </span><span style="color:#e6db74">{</span>person[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> years old!&#34;&#34;&#34;</span>)
 <span style="color:#75715e"># Person Fares is 24 years old!</span>
 </code></pre></div><p>What if while instantiating the namedtuple, we passed it the wrong keyword argument?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
 
     Person <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#34;Person&#34;</span>, [<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>])
     p <span style="color:#f92672">=</span> Person(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Fares&#34;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>, unknown_keyword<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
@@ -184,7 +180,7 @@ person <span style="color:#f92672">=</span> _get_person_from_db()
 <span style="color:#75715e">## TypeError: __new__() got an unexpected keyword argument &#39;unknown_keyword&#39;</span>
 </code></pre></div><p>So we are restricted to the field_names we define when creating the namedtuple.</p>
 <p>Another interesting thing to know: Instead of passing field names as a list of strings, we could pass a space separated string of field names and it&rsquo;ll break it up into separate field names:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
 
     Person <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#34;Person&#34;</span>, <span style="color:#e6db74">&#34;name age&#34;</span>)
     p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>)
@@ -192,10 +188,10 @@ person <span style="color:#f92672">=</span> _get_person_from_db()
 
 person <span style="color:#f92672">=</span> _get_person_from_db()
 
-<span style="color:#66d9ef">print</span>(person)
+print(person)
 <span style="color:#75715e"># Person(name=&#39;Fares&#39;, age=24)</span>
 </code></pre></div><p>We can also pass a dictionary as field_names:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_person_from_db</span>():
 
     Person <span style="color:#f92672">=</span> namedtuple(<span style="color:#e6db74">&#34;Person&#34;</span>, {<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Emily&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: <span style="color:#ae81ff">24</span>})
     p <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#34;Fares&#34;</span>, <span style="color:#ae81ff">24</span>)
@@ -203,19 +199,19 @@ person <span style="color:#f92672">=</span> _get_person_from_db()
 
 person <span style="color:#f92672">=</span> _get_person_from_db()
 
-<span style="color:#66d9ef">print</span>(person)
+print(person)
 </code></pre></div><p>It only takes the dict keys and ignores the values.</p>
 <p>In addition, NamedTuples can easily be converted to dictionaries through the <code>._asdict()</code> function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(person<span style="color:#f92672">.</span>_asdict())
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(person<span style="color:#f92672">.</span>_asdict())
 <span style="color:#75715e"># OrderedDict([(&#39;name&#39;, &#39;Fares&#39;), (&#39;age&#39;, 24)])</span>
 </code></pre></div><p>We can access all the fields with <code>._fields</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(person<span style="color:#f92672">.</span>_fields)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(person<span style="color:#f92672">.</span>_fields)
 <span style="color:#75715e"># (&#39;name&#39;, &#39;age&#39;) : Tuple with fields in it</span>
 </code></pre></div><p>We can replace a field value with <code>._replace(...)</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(person<span style="color:#f92672">.</span>_replace(age <span style="color:#f92672">=</span> <span style="color:#ae81ff">23</span>))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(person<span style="color:#f92672">.</span>_replace(age <span style="color:#f92672">=</span> <span style="color:#ae81ff">23</span>))
 <span style="color:#75715e"># Person(name=&#39;Fares&#39;, age=23)</span>
 </code></pre></div><p><strong>Note</strong>: The replace is not capable of changing the actual tuple object. Instead it returns a new instance with the updated value. to benefit from this, we need to assign the result to another value:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">person<span style="color:#f92672">.</span>_replace(age<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">person<span style="color:#f92672">.</span>_replace(age<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span>)
 <span style="color:#75715e"># Person(name=&#39;Fares&#39;, age=24)</span>
 
 person <span style="color:#f92672">=</span> person<span style="color:#f92672">.</span>_replace(age<span style="color:#f92672">=</span><span style="color:#ae81ff">23</span>)
@@ -236,7 +232,7 @@ person <span style="color:#f92672">=</span> person<span style="color:#f92672">.<
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fares.codes/tags/python">python</a></span><span class="tag"><a href="https://fares.codes/tags/named-tuples">named tuples</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>588 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>582 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-07-12 09:15 &#43;0200</p>
         </div>
@@ -279,7 +275,7 @@ person <span style="color:#f92672">=</span> person<span style="color:#f92672">.<
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -308,7 +304,7 @@ person <span style="color:#f92672">=</span> person<span style="color:#f92672">.<
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

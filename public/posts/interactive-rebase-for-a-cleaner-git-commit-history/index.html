@@ -28,7 +28,7 @@ No matter how hard we try to keep our commit messages clean and clear, we often 
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ No matter how hard we try to keep our commit messages clean and clear, we often 
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Interactive Rebase for a Cleaner Git Commit History">
 <meta itemprop="description" content="Any article you read online about maintaining a clean project will mention a version control system (usually git) and will then talk about maintaining a clean commit history through atomic commits, meaningful commit messages and so on.
 This article wont go into all the techniques above, instead Im going to focus on a single technique that I have recently learned: Interactive Rebase.
-No matter how hard we try to keep our commit messages clean and clear, we often end up with something looking like this:">
-<meta itemprop="datePublished" content="2019-09-03T20:55:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-09-03T20:55:00&#43;00:00" />
+No matter how hard we try to keep our commit messages clean and clear, we often end up with something looking like this:"><meta itemprop="datePublished" content="2019-09-03T20:55:00+00:00" />
+<meta itemprop="dateModified" content="2019-09-03T20:55:00+00:00" />
 <meta itemprop="wordCount" content="1065">
-
-
-
 <meta itemprop="keywords" content="git,rebase,fixup," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Interactive Rebase for a Cleaner Git Commit History"/>
 <meta name="twitter:description" content="Any article you read online about maintaining a clean project will mention a version control system (usually git) and will then talk about maintaining a clean commit history through atomic commits, meaningful commit messages and so on.
@@ -129,7 +125,7 @@ No matter how hard we try to keep our commit messages clean and clear, we often 
                 <p>Any article you read online about maintaining a clean project will mention a version control system (usually git) and will then talk about maintaining a clean commit history through atomic commits, meaningful commit messages and so on.</p>
 <p>This article wont go into all the techniques above, instead Im going to focus on a single technique that I have recently learned: <code>Interactive Rebase</code>.</p>
 <p>No matter how hard we try to keep our commit messages clean and clear, we often end up with something looking like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit 89b4001bd1176243c6c338e18cf0039f2e1556a9 (HEAD -&gt; master)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit 89b4001bd1176243c6c338e18cf0039f2e1556a9 (HEAD -&gt; master)
 Author: Fares Ismail
 Date:   Mon Sep 2 22:32:18 2019 +0200
 
@@ -178,7 +174,7 @@ Well the 2nd, 3rd and 4th commits are practically the same thing and could have 
 <p>So here comes the interactive rebase to the rescue. More specifically, the Fixup.</p>
 <p><code>ﬁ rebase -i HEAD~6</code> to interactively rebase the last 6 commits.</p>
 <p>This will generally open up your git editor, by default its vim.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 537dd48 Added Man function
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 537dd48 Added Man function
 pick 5946d2e Fixed typo in Main Function
 pick efe7e3f Fixed Main Function
 pick 8416c11 Added Unit Tests
@@ -224,7 +220,7 @@ pick 89b4001 How About Now?
 <p>Reword is my chance to tell the world that I actually do know how to write <code>Main</code> (If you haven&rsquo;t caught it by now, check my first commit&hellip; it says Man :/)</p>
 <p>Simply erase the pick prior to the first commit and replace it with <code>r</code> or <code>reword</code>.
 press :x and a new page will show up:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
 Added Man function
 
 # Please enter the commit message for your changes. Lines starting
@@ -233,7 +229,7 @@ Added Man function
 
 </code></pre></div><h3 id="fixup">Fixup</h3>
 <p>Alright, so on to more interesting stuff, as mentioned before some of my commits can be combined into one all while dropping the useless commit messages. This is exactly what fixup does. it re-writes the commits to the closest previous commit.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 33ff399 Added Main function
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 33ff399 Added Main function
 pick da9cc20 Fixed typo in Main Function
 pick 5db3c38 Fixed Main Function
 pick 1092c6e Added Unit Tests
@@ -241,7 +237,7 @@ f 0206a22 Hope My tests Pass now...
 f 6728363 How About Now???
 </code></pre></div><p>The following will re-write the last two commits onto the last previous one (<code>Added Unit Tests</code>)
 The result ends up looking like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit 6fc9e00fe20ff2c487cb14cfb20ad758cec7e771 (HEAD -&gt; master)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit 6fc9e00fe20ff2c487cb14cfb20ad758cec7e771 (HEAD -&gt; master)
 Author: Fares Ismail
 Date:   Mon Sep 2 22:31:25 2019 +0200
 
@@ -275,12 +271,12 @@ Date:   Mon Sep 2 22:21:41 2019 +0200
 Note that when pushing this to the remote branch, you might need to use <code>--force-with-lease</code> or <code>--force</code> since the local commit history no longer matches the remote version</p>
 <h3 id="squash">Squash</h3>
 <p>Squash is a bit similar to fixup only that it doesn&rsquo;t discard the commit messages, instead it melds them together.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 33ff399 Added Main function
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pick 33ff399 Added Main function
 s da9cc20 Fixed typo in Main Function
 s 5db3c38 Fixed Main Function
 pick 6fc9e00 Added Unit Tests
 </code></pre></div><p>executing this will pop the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># This is a combination of 3 commits.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># This is a combination of 3 commits.
 # This is the 1st commit message:
 
 Added Main function
@@ -295,7 +291,7 @@ Fixed Main Function
 
 </code></pre></div><p>This allows us to make a modification to each commit message.</p>
 <p>applying the above will yield the following commit history:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit b9d8ce4bd94bdec74b81782e5d684a5207287a03 (HEAD -&gt; master)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">commit b9d8ce4bd94bdec74b81782e5d684a5207287a03 (HEAD -&gt; master)
 Author: Fares Ismail
 Date:   Mon Sep 2 22:31:25 2019 +0200
 
@@ -371,7 +367,7 @@ Date:   Mon Sep 2 22:21:41 2019 +0200
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -400,7 +396,7 @@ Date:   Mon Sep 2 22:21:41 2019 +0200
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

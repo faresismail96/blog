@@ -29,7 +29,7 @@ Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Sca
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Sca
 <meta itemprop="description" content="Taking a little break from Scala to review some interesting features of spark streaming.
 This article has been updated to reflect recently gained knowledge with spark streaming both in theory and practice.
 An important note: This article is about backpressure and dynamic allocation in spark streaming and not normal batch jobs.
-Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload.">
-<meta itemprop="datePublished" content="2019-08-10T09:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-08-10T09:00:00&#43;00:00" />
+Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Scaling is a feature that lets spark dynamically adjust the number of executors to match the workload."><meta itemprop="datePublished" content="2019-08-10T09:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-08-10T09:00:00+00:00" />
 <meta itemprop="wordCount" content="1163">
-
-
-
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Dynamic Scaling and Backpressure"/>
 <meta name="twitter:description" content="Taking a little break from Scala to review some interesting features of spark streaming.
@@ -150,7 +146,7 @@ Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Sca
 <p><code>spark.streaming.dynamicAllocation.scalingUpRatio</code> and <code>spark.streaming.dynamicAllocation.scalingDownRatio</code></p>
 <pre><code>The two configs specify when we would scale up or down the
 number of executors based on processing time and interval time.
-    
+
 Default values are set to 0.9 and 0.3
 </code></pre>
 </li>
@@ -235,20 +231,20 @@ by a streaming application.
   of executors we can scale up to... but it is not.
   The maximum number of executors we can reach is the `spark.cores.max` 
   divided by the `spark.executor.core` setting.
-    
+
   This configuration, is the number of executors spark streaming 
   will request from the cluster manager (mesos, yarn...)
   which is why we can see the following in the logs:
-            
+
           &quot;Capping the total amount of executors to X&quot;
           &quot;Requested total X executors&quot;
-    
+
   But dont take my word for it... let us quickly check the spark 
   source code for verification:
 </code></pre>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">/** Request the specified number of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#75715e">/** Request the specified number of
 </span><span style="color:#75715e">executors over the currently active one */</span>
 <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">def</span> requestExecutors<span style="color:#f92672">(</span>numNewExecutors<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Unit</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
        require<span style="color:#f92672">(</span>numNewExecutors <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span>
@@ -261,7 +257,7 @@ by a streaming application.
        client<span style="color:#f92672">.</span>requestTotalExecutors<span style="color:#f92672">(</span>targetTotalExecutors<span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">Map</span><span style="color:#f92672">.</span>empty<span style="color:#f92672">)</span>
        logInfo<span style="color:#f92672">(</span><span style="color:#e6db74">s&#34;Requested total </span><span style="color:#e6db74">$targetTotalExecutors</span><span style="color:#e6db74"> executors&#34;</span><span style="color:#f92672">)</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> <span style="color:#a6e22e">MAX_EXECUTORS_KEY</span> <span style="color:#66d9ef">=</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> <span style="color:#a6e22e">MAX_EXECUTORS_KEY</span> <span style="color:#66d9ef">=</span>
  <span style="color:#e6db74">&#34;spark.streaming.dynamicAllocation.maxExecutors&#34;</span>
 
 <span style="color:#75715e">// AND
@@ -279,7 +275,7 @@ the targetTotalExecutors to request is the maximum number between: the minNumExe
 newNumExecutors is the max between one and the rounded ratio.
 ratio is defined as</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> ratio <span style="color:#66d9ef">=</span> averageBatchProcTime<span style="color:#f92672">.</span>toDouble <span style="color:#f92672">/</span> batchDurationMs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> ratio <span style="color:#66d9ef">=</span> averageBatchProcTime<span style="color:#f92672">.</span>toDouble <span style="color:#f92672">/</span> batchDurationMs
 </code></pre></div><p>I get things might have gotten a bit confusing&hellip; but let us go back to what is important, configuring our cluster.</p>
 <p>in order to do so, we need to know based on what will our cluster scale up or scale down.</p>
 <p>there are two things to know:</p>
@@ -305,54 +301,54 @@ from the spark structured streaming official doc:</p>
 <table>
 <thead>
 <tr>
-<th align="left">Case</th>
-<th align="center">Processing Time</th>
-<th align="left">Batch Time</th>
-<th align="center">Ratio</th>
+<th style="text-align:left">Case</th>
+<th style="text-align:center">Processing Time</th>
+<th style="text-align:left">Batch Time</th>
+<th style="text-align:center">Ratio</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">1</td>
-<td align="center">2s</td>
-<td align="left">60s</td>
-<td align="center">0.033</td>
+<td style="text-align:left">1</td>
+<td style="text-align:center">2s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">0.033</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="center">10s</td>
-<td align="left">60s</td>
-<td align="center">0.166</td>
+<td style="text-align:left">2</td>
+<td style="text-align:center">10s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">0.166</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="center">20s</td>
-<td align="left">60s</td>
-<td align="center">0.333</td>
+<td style="text-align:left">3</td>
+<td style="text-align:center">20s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">0.333</td>
 </tr>
 <tr>
-<td align="left">4</td>
-<td align="center">30s</td>
-<td align="left">60s</td>
-<td align="center">0.5</td>
+<td style="text-align:left">4</td>
+<td style="text-align:center">30s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">0.5</td>
 </tr>
 <tr>
-<td align="left">5</td>
-<td align="center">45s</td>
-<td align="left">60s</td>
-<td align="center">0.75</td>
+<td style="text-align:left">5</td>
+<td style="text-align:center">45s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">0.75</td>
 </tr>
 <tr>
-<td align="left">6</td>
-<td align="center">60s</td>
-<td align="left">60s</td>
-<td align="center">1</td>
+<td style="text-align:left">6</td>
+<td style="text-align:center">60s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="left">7</td>
-<td align="center">80s</td>
-<td align="left">60s</td>
-<td align="center">1.33</td>
+<td style="text-align:left">7</td>
+<td style="text-align:center">80s</td>
+<td style="text-align:left">60s</td>
+<td style="text-align:center">1.33</td>
 </tr>
 </tbody>
 </table>
@@ -443,7 +439,7 @@ additional resources are needed.
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -472,7 +468,7 @@ additional resources are needed.
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

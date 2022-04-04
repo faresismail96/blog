@@ -28,7 +28,7 @@ PureConfig allows us to quickly and easily load configurations from config files
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ PureConfig allows us to quickly and easily load configurations from config files
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="PureConfig From A to F">
 <meta itemprop="description" content="If you&rsquo;re saying to yourself: &ldquo;Surely theres a typo here&hellip; Its normally From A to Z&rdquo;, yes&hellip; but since I have much left to learn in pureconfig, well stop at F 😉
 Sometimes I write useless articles (cond or cats show) and in other times, I write something slightly more interesting and useful 😃
-PureConfig allows us to quickly and easily load configurations from config files in a type safe and boiler plate free manner.">
-<meta itemprop="datePublished" content="2020-04-13T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-04-13T10:00:00&#43;00:00" />
+PureConfig allows us to quickly and easily load configurations from config files in a type safe and boiler plate free manner."><meta itemprop="datePublished" content="2020-04-13T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-04-13T10:00:00+00:00" />
 <meta itemprop="wordCount" content="1413">
-
-
-
 <meta itemprop="keywords" content="scala,pureconfig," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PureConfig From A to F"/>
 <meta name="twitter:description" content="If you&rsquo;re saying to yourself: &ldquo;Surely theres a typo here&hellip; Its normally From A to Z&rdquo;, yes&hellip; but since I have much left to learn in pureconfig, well stop at F 😉
@@ -131,19 +127,19 @@ PureConfig allows us to quickly and easily load configurations from config files
 <p>PureConfig allows us to quickly and easily load configurations from config files in a type safe and boiler plate free manner.</p>
 <h2 id="how-does-it-work">How Does It Work</h2>
 <p>For this simple demo, ill be using the following version of pureconfig:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#e6db74">&#34;com.github.pureconfig&#34;</span> <span style="color:#f92672">%%</span> <span style="color:#e6db74">&#34;pureconfig&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;0.12.3&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#e6db74">&#34;com.github.pureconfig&#34;</span> <span style="color:#f92672">%%</span> <span style="color:#e6db74">&#34;pureconfig&#34;</span> <span style="color:#f92672">%</span> <span style="color:#e6db74">&#34;0.12.3&#34;</span>
 </code></pre></div><p>This is for the time being the latest version.</p>
 <p>On to our loading of configurations:</p>
 <p>create a <code>reference.conf</code> or an <code>application.conf</code> and store in it your config files.</p>
 <p>For example:</p>
-<pre><code class="language-conf" data-lang="conf">person {
+<pre tabindex="0"><code class="language-conf" data-lang="conf">person {
   name: &quot;Fares&quot;
   age: 23
   field-of-work: &quot;DataEngineer&quot;
   hobbies: [&quot;Biking&quot;, &quot;Hiking&quot;]
 }
 </code></pre><p>and to load the above?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig._
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig._
 <span style="color:#66d9ef">import</span> pureconfig.generic.auto._
 
 <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
@@ -154,24 +150,24 @@ PureConfig allows us to quickly and easily load configurations from config files
 
 println<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span>
 </code></pre></div><p>would output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(Fares,23,DataEngineer,List(Biking, Hiking))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(Fares,23,DataEngineer,List(Biking, Hiking))
 </code></pre></div><p>Awesome and simple 😛</p>
 <p>One note, even if IntelliJ says that <code>import pureconfig.generic.auto._</code> is an unused import, its actually used. Its just that IntelliJ is bad at dealing with <code>Macros</code>.</p>
 <h3 id="but-lets-make-it-better">But Lets Make It Better</h3>
 <p><code>fieldOfWork</code> doesn&rsquo;t have to be a <code>String</code>. We could instead represent it in an ADT:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FieldOfWork</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FieldOfWork</span>
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">FieldOfWork</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">DataEngineer</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">FieldOfWork</span>
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Business</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">FieldOfWork</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span>
                         age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span>
                         fieldOfWork<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">,</span>
                         hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
 <span style="color:#66d9ef">val</span> person <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>default<span style="color:#f92672">.</span>at<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;person&#34;</span><span style="color:#f92672">).</span>loadOrThrow<span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span><span style="color:#f92672">]</span>
 println<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span>
 </code></pre></div><p>with the following config file:</p>
-<pre><code class="language-conf" data-lang="conf">person {
+<pre tabindex="0"><code class="language-conf" data-lang="conf">person {
   name: &quot;Fares&quot;
   age: 23
   field-of-work {
@@ -180,17 +176,17 @@ println<span style="color:#f92672">(</span>person<span style="color:#f92672">)</
   hobbies: [&quot;Biking&quot;, &quot;Hiking&quot;]
 }
 </code></pre><p>would yield:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(Fares,23,DataEngineer,List(Biking, Hiking))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(Fares,23,DataEngineer,List(Biking, Hiking))
 </code></pre></div><p>We had to specify the type of &ldquo;field-of-work&rdquo; in the additional fields. Because by default, pureconfig will not know.
 As specified in the documentation: <a href="https://pureconfig.github.io/docs/overriding-behavior-for-sealed-families.html">Sealed Families</a></p>
 <p>But there is a way to change this default behavior, and thats by defining an implicit <code>EnumCoproductHint[FieldOfWork]</code>.</p>
 <p>Note that as of version 0.11, this is deprecated and instead we have are asked to use the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig.generic.semiauto._
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig.generic.semiauto._
 
 <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> fieldOfWorkConvert<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
     deriveEnumerationReader<span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">]</span>
 </code></pre></div><p>we could then write the conf in the following manner:</p>
-<pre><code class="language-conf" data-lang="conf">person {
+<pre tabindex="0"><code class="language-conf" data-lang="conf">person {
   name: &quot;Fares&quot;
   age: 23
   field-of-work: data-engineer
@@ -209,7 +205,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 <p>For info <code>Alternating Caps</code> is not supported out of the box in pureconfig (I wonder why&hellip; 🙄)</p>
 <h2 id="going-back">Going Back</h2>
 <p>If we wanted to change the default representation, we could do it in the implicit:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> fieldOfWorkConvert<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> fieldOfWorkConvert<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
     deriveEnumerationReader<span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">](</span>
       <span style="color:#a6e22e">ConfigFieldMapping</span><span style="color:#f92672">(</span><span style="color:#a6e22e">PascalCase</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">PascalCase</span><span style="color:#f92672">))</span>
 </code></pre></div><p>First param to <code>ConfigFieldMapping</code>, is the naming convention used by the case class, second is how the representation in the conf file.</p>
@@ -225,19 +221,19 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 <li>Missing Keys (Ok if optional, otherwise return key not found)</li>
 </ol>
 <h3 id="mapping-fieldnames-to-case-classes">Mapping FieldNames to Case Classes</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> productHint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigFieldMapping</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> productHint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigFieldMapping</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">def</span> apply<span style="color:#f92672">(</span>fieldName<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> fieldName<span style="color:#f92672">.</span>toUpperCase
 <span style="color:#f92672">})</span>
 </code></pre></div><p>Would allow us to load conf where all the keys in the config file are in uppercase.</p>
 <h3 id="default-values">Default Values</h3>
 <p>To no longer use the default values defined in the case classes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> hint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span>useDefaultArgs <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> hint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span>useDefaultArgs <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
 </code></pre></div><h3 id="unknown-keys">Unknown Keys</h3>
 <p>To no longer ignore unknown keys:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> hint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span>allowUnknownKeys <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> hint <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ProductHint</span><span style="color:#f92672">[</span><span style="color:#66d9ef">SampleConf</span><span style="color:#f92672">](</span>allowUnknownKeys <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
 </code></pre></div><h3 id="missing-keys">Missing Keys</h3>
 <p>If for some reason, we would like pureconfig to handle missing keys, we would have to extends ReadsMissingKeys and define a default behavior and return a config reader.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> maybeIntReader <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">ReadsMissingKeys</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> maybeIntReader <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">ReadsMissingKeys</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">def</span> from<span style="color:#f92672">(</span>cur<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigCursor</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cur<span style="color:#f92672">.</span>isUndefined<span style="color:#f92672">)</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#ae81ff">42</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">].</span>from<span style="color:#f92672">(</span>cur<span style="color:#f92672">)</span>
 <span style="color:#f92672">}</span>
@@ -258,14 +254,14 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 </ol>
 <h3 id="modifying-an-existing-configreader">Modifying an Existing ConfigReader</h3>
 <p>Assume we have a MyInt that takes an int Value, we can modify the existing ConfigReader[Int] to work on MyInt class.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">].</span>map<span style="color:#f92672">(</span>n <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyInt</span><span style="color:#f92672">(</span>n<span style="color:#f92672">))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">].</span>map<span style="color:#f92672">(</span>n <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyInt</span><span style="color:#f92672">(</span>n<span style="color:#f92672">))</span>
 </code></pre></div><h3 id="using-a-factorymethod">Using a FactoryMethod</h3>
 <p>If we were to use a factory method for the same example above:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">.</span>fromString<span style="color:#f92672">[</span><span style="color:#66d9ef">MyInt</span><span style="color:#f92672">](</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">.</span>fromString<span style="color:#f92672">[</span><span style="color:#66d9ef">MyInt</span><span style="color:#f92672">](</span>
   <span style="color:#a6e22e">ConvertHelpers</span><span style="color:#f92672">.</span>catchReadError<span style="color:#f92672">(</span>s <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyInt</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span>toInt<span style="color:#f92672">)))</span>
 </code></pre></div><h3 id="implementing-configreader-from-scratch">Implementing ConfigReader from Scratch</h3>
 <p>To implement a config reader from scratch we would need to define a from function that takes in the <code>ConfigCursor</code> and returns an Either of <code>T</code> or a list of errors:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">MyInt</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> myIntReader <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">MyInt</span><span style="color:#f92672">]</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">def</span> from<span style="color:#f92672">(</span>cur<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigCursor</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> cur<span style="color:#f92672">.</span>asString<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>s <span style="color:#66d9ef">=&gt;</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyInt</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span>toInt<span style="color:#f92672">))</span>
 <span style="color:#f92672">}</span>
 
@@ -277,7 +273,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 <h3 id="emap">emap</h3>
 <p>Allows us to validate the input and provide detailed errors in the case of failure.</p>
 <p>From the official doc:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig.error._
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">import</span> pureconfig.error._
 
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Port</span><span style="color:#f92672">(</span>number<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PortConf</span><span style="color:#f92672">(</span>port<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Port</span><span style="color:#f92672">)</span>
@@ -287,7 +283,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
   <span style="color:#66d9ef">case</span> n <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">65536</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#a6e22e">Port</span><span style="color:#f92672">(</span>n<span style="color:#f92672">))</span>
   <span style="color:#66d9ef">case</span> n <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Left</span><span style="color:#f92672">(</span><span style="color:#a6e22e">CannotConvert</span><span style="color:#f92672">(</span>n<span style="color:#f92672">.</span>toString<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Port&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Invalid port number&#34;</span><span style="color:#f92672">))</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{ port = 8080 }&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">PortConf</span><span style="color:#f92672">]</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{ port = 8080 }&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">PortConf</span><span style="color:#f92672">]</span>
 <span style="color:#75715e">// res1: ConfigReader.Result[PortConf] = Right(PortConf(Port(8080)))
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{ port = -1 }&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">PortConf</span><span style="color:#f92672">]</span>
 <span style="color:#75715e">// res2: ConfigReader.Result[PortConf] = Left(
@@ -302,11 +298,11 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 </span><span style="color:#75715e">// )
 </span></code></pre></div><h3 id="orelse">orElse</h3>
 <p>orElse can be used to provide multiple ways to load a config</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> csvIntListReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">].</span>map<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>split<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">).</span>map<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>toInt<span style="color:#f92672">).</span>toList<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> csvIntListReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">].</span>map<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>split<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">).</span>map<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>toInt<span style="color:#f92672">).</span>toList<span style="color:#f92672">)</span>
 <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> intListReader <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">]].</span>orElse<span style="color:#f92672">(</span>csvIntListReader<span style="color:#f92672">)</span>
 
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IntListConf</span><span style="color:#f92672">(</span>list<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Int</span><span style="color:#f92672">])</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;&#34;{ list = [1,2,3] }&#34;&#34;&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">IntListConf</span><span style="color:#f92672">]</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;&#34;{ list = [1,2,3] }&#34;&#34;&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">IntListConf</span><span style="color:#f92672">]</span>
 <span style="color:#75715e">// res3: ConfigReader.Result[IntListConf] = Right(IntListConf(List(1, 2, 3)))
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">ConfigSource</span><span style="color:#f92672">.</span>string<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;&#34;{ list = &#34;4,5,6&#34; }&#34;&#34;&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">[</span><span style="color:#66d9ef">IntListConf</span><span style="color:#f92672">]</span>
 <span style="color:#75715e">// res4: ConfigReader.Result[IntListConf] = Right(IntListConf(List(4, 5, 6)))
@@ -316,7 +312,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 <p>Config Cursor is a wrapper of the class <code>ConfigValue</code> by Typesafe Config. The added value of using <code>ConfigCursor</code> is that most errors are handled automatically and enriched with information regarding the location of the error.</p>
 <p>Let us turn our <code>Person</code> case class into a class and try to write our own ConfigReader[Person].</p>
 <p>The result would look something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> pureconfig._
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> pureconfig._
   <span style="color:#66d9ef">import</span> pureconfig.generic.auto._
   <span style="color:#66d9ef">import</span> cats.syntax.either._ <span style="color:#75715e">// Because Im working with scala 2.11 (not yet right biased)
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">val</span> fieldOfWorkConvert<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ConfigReader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">FieldOfWork</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span>
@@ -352,7 +348,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
   println<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span>
 
 </code></pre></div><p>with the following config file:</p>
-<pre><code class="language-conf" data-lang="conf">person2 {
+<pre tabindex="0"><code class="language-conf" data-lang="conf">person2 {
   name: &quot;Fares&quot;
   age: 23
   field-of-work: DataEngineer
@@ -421,7 +417,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -450,7 +446,7 @@ As specified in the documentation: <a href="https://pureconfig.github.io/docs/ov
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

@@ -29,7 +29,7 @@ case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -43,13 +43,9 @@ case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to
 <meta itemprop="description" content="Unapply in Scala is the inverse of the apply&hellip; (queue no shit comments :p)
 So what does it do exactly? given a class Person:
 case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to decompose the class person into a set of attributes:
- name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.">
-<meta itemprop="datePublished" content="2019-08-02T10:10:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-08-02T10:10:00&#43;00:00" />
+ name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve."><meta itemprop="datePublished" content="2019-08-02T10:10:00+00:00" />
+<meta itemprop="dateModified" content="2019-08-02T10:10:00+00:00" />
 <meta itemprop="wordCount" content="436">
-
-
-
 <meta itemprop="keywords" content="Unapply,Scala," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Un-Apply in Scala"/>
 <meta name="twitter:description" content="Unapply in Scala is the inverse of the apply&hellip; (queue no shit comments :p)
@@ -131,7 +127,7 @@ case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to
             <div class="post-content">
                 <p>Unapply in Scala is the inverse of the apply&hellip; (queue no shit comments :p)</p>
 <p>So what does it do exactly? given a class Person:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
 </code></pre></div><p>If we wanted to decompose the class person into a set of attributes:</p>
 <ul>
 <li>name: String</li>
@@ -139,7 +135,7 @@ case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to
 <li>hobbies: List[String]</li>
 </ul>
 <p>We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> hobbies<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
 
 <span style="color:#66d9ef">object</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
   
@@ -151,7 +147,7 @@ case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to
 That means that after the unapply, we would have to extract the Tuple from the option and call <code>result._1</code> and so on to retrieve each individual value.</p>
 <p>clearly this is cumbersome and annoying to deal with. And clearly there is a better way :p</p>
 <p>But for fun, let us check what this might look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fares&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hiking&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Biking&#34;</span><span style="color:#f92672">))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fares&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hiking&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Biking&#34;</span><span style="color:#f92672">))</span>
 
   <span style="color:#66d9ef">var</span> result<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span>, <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">.</span>unapply<span style="color:#f92672">(</span>fares<span style="color:#f92672">)</span>
 
@@ -164,11 +160,11 @@ That means that after the unapply, we would have to extract the Tuple from the o
 <h2 id="unapply-and-case-classes">Unapply and case classes</h2>
 <p>case classes automatically define both methods apply and unapply for us. this also allows us to easily do pattern matching on instances of case classes.</p>
 <p>As we saw in previous examples, unapply can automatically be called on any case class and we pass to it the instance of the case class whose values we would like to unapply.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> result<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span>, <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">.</span>unapply<span style="color:#f92672">(</span>fares<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">val</span> result<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span>, <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">.</span>unapply<span style="color:#f92672">(</span>fares<span style="color:#f92672">)</span>
 </code></pre></div><hr>
 <h2 id="unapply-in-pattern-matching">Unapply in Pattern Matching</h2>
 <p>Pattern matching automatically calls the unapply method, in order to check if the values inside match a specific case.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  fares <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  fares <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span>
       <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">22</span><span style="color:#f92672">)</span> println<span style="color:#f92672">(</span>name<span style="color:#f92672">)</span> <span style="color:#66d9ef">else</span> println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Not Fares&#34;</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Ummm&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">// Should not happen
@@ -176,7 +172,7 @@ That means that after the unapply, we would have to extract the Tuple from the o
 </code></pre></div><hr>
 <h2 id="unapply-simplified">Unapply Simplified</h2>
 <p>Going back to out Person case class and fares instance.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>faresName<span style="color:#f92672">,</span> faresAge<span style="color:#f92672">,</span> faresHobbies<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> fares
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>faresName<span style="color:#f92672">,</span> faresAge<span style="color:#f92672">,</span> faresHobbies<span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> fares
 
   println<span style="color:#f92672">(</span>faresName<span style="color:#f92672">)</span>
   println<span style="color:#f92672">(</span>faresAge<span style="color:#f92672">)</span>
@@ -243,7 +239,7 @@ That means that after the unapply, we would have to extract the Tuple from the o
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -272,7 +268,7 @@ That means that after the unapply, we would have to extract the Tuple from the o
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

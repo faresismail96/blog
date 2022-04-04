@@ -28,7 +28,7 @@ Now we add a function that checks if two bank accounts belong to the same client
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ Now we add a function that checks if two bank accounts belong to the same client
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Value Classes in Scala">
 <meta itemprop="description" content="Before we look into value classes, lets start by why we might need them in the first place.
 case class Client(id: Int, name: String) case class BankAccount(id: Int, clientId: Int, amount: Double) val account1 = BankAccount(1,1,100) val account2 = BankAccount(2,1,200) val account3 = BankAccount(1,2,1000) val client1 = Client(1,&#34;Danny&#34;) val client2 = Client(2, &#34;Emily&#34;) In this example, we have three bank accounts, two belonging to Danny and one to Emily.
-Now we add a function that checks if two bank accounts belong to the same client:">
-<meta itemprop="datePublished" content="2019-10-04T20:55:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-10-04T20:55:00&#43;00:00" />
+Now we add a function that checks if two bank accounts belong to the same client:"><meta itemprop="datePublished" content="2019-10-04T20:55:00+00:00" />
+<meta itemprop="dateModified" content="2019-10-04T20:55:00+00:00" />
 <meta itemprop="wordCount" content="640">
-
-
-
 <meta itemprop="keywords" content="scala,value-class," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Value Classes in Scala"/>
 <meta name="twitter:description" content="Before we look into value classes, lets start by why we might need them in the first place.
@@ -127,7 +123,7 @@ Now we add a function that checks if two bank accounts belong to the same client
 
             <div class="post-content">
                 <p>Before we look into value classes, lets start by why we might need them in the first place.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> amount<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Double</span><span style="color:#f92672">)</span>
 
 <span style="color:#66d9ef">val</span> account1 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">BankAccount</span><span style="color:#f92672">(</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span><span style="color:#ae81ff">100</span><span style="color:#f92672">)</span>
@@ -138,14 +134,14 @@ Now we add a function that checks if two bank accounts belong to the same client
 <span style="color:#66d9ef">val</span> client2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Emily&#34;</span><span style="color:#f92672">)</span>
 </code></pre></div><p>In this example, we have three bank accounts, two belonging to Danny and one to Emily.</p>
 <p>Now we add a function that checks if two bank accounts belong to the same client:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> isSameOwner<span style="color:#f92672">(</span>bankAccountId1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> bankAccountId2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> isSameOwner<span style="color:#f92672">(</span>bankAccountId1<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> bankAccountId2<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> <span style="color:#f92672">???</span>
 </code></pre></div><p>Now if we were to call the function with these parameters, the code will compile normally:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> client1<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> client1<span style="color:#f92672">.</span>id<span style="color:#f92672">)</span>
 <span style="color:#75715e">//or even
 </span><span style="color:#75715e"></span>isSameOwner<span style="color:#f92672">(</span>account1<span style="color:#f92672">.</span>id<span style="color:#f92672">,</span> account2<span style="color:#f92672">.</span>clientId<span style="color:#f92672">)</span>
 </code></pre></div><p>The reason this compiles is obvious, the function <code>isSameOwner</code> takes Int for parameters.</p>
 <p>One possible solution would be to use tiny types in scala:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AccountId</span><span style="color:#f92672">(</span>id<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span>
 
 <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Client</span><span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ClientId</span><span style="color:#f92672">,</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span>
@@ -166,19 +162,19 @@ Now we add a function that checks if two bank accounts belong to the same client
 </li>
 </ol>
 <p>lets look at a very simple example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> userId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
 
 </code></pre></div><p>As we can see in this example, value classes contain one simple underlying data type and extend AnyVal.</p>
 <p>Now lets look at the byte code generated by our example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fares</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fares</span><span style="color:#f92672">();</span>
 </code></pre></div><p>This practically means that at compile time we can use the class User, but are runtime, the value class is replaced by its underlying value of type int.</p>
 <p>So How is this useful?</p>
 <p>instead of writing the following lines:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> getAccountInfo<span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> getAccountInfo<span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
 </code></pre></div><p>and then running the risk of calling the function with accountId as the first param instead of the second (code would still compile)</p>
 <p>We could use the refined types and transform it into something that is type-safe:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientId</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
   <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AccountId</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span>
 
   <span style="color:#66d9ef">def</span> getAccountInfo<span style="color:#f92672">(</span>clientId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">ClientId</span><span style="color:#f92672">,</span> accountId<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">AccountId</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">???</span>
@@ -194,7 +190,7 @@ Now we add a function that checks if two bank accounts belong to the same client
 </ul>
 <p>The third case is rather simple, so lets look into the first two:</p>
 <h3 id="when-a-value-class-is-treated-as-another-type">when a value class is treated as another type</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Any</span>
 
   <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span><span style="color:#f92672">(</span><span style="color:#66d9ef">val</span> name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AnyVal</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">Person</span>
@@ -207,7 +203,7 @@ Now we add a function that checks if two bank accounts belong to the same client
 
 </code></pre></div><p>Because we are calling a function that takes a Person and we are then passing it a Student that extends Person, the value class will be instantiated.</p>
 <h3 id="when-a-value-class-is-assigned-to-an-array">when a value class is assigned to an array</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> classroom <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Array</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Student</span><span style="color:#f92672">](</span>student1<span style="color:#f92672">)</span>
 
 </code></pre></div><p>In that case, the array <code>classroom</code>, will actually contain the instances of <code>Student</code> and not just the underlying datatype <code>String</code></p>
@@ -267,7 +263,7 @@ Now we add a function that checks if two bank accounts belong to the same client
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -296,7 +292,7 @@ Now we add a function that checks if two bank accounts belong to the same client
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

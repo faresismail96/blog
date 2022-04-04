@@ -28,7 +28,7 @@ Its important to note that I do not have an in-depth knowledge of the inner work
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ Its important to note that I do not have an in-depth knowledge of the inner work
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Kafka HealthChecks">
 <meta itemprop="description" content="Ive been recently asked to write healthchecks for long running services that depend on kafka.
 This article will not go into the need for healthchecks nor a &ldquo;let it crash&rdquo; design. Instead I&rsquo;ll delve into the struggle I had to actually write those healthchecks and more specifically checking the status of our kafka brokers.
-Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks.">
-<meta itemprop="datePublished" content="2020-03-19T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-19T10:00:00&#43;00:00" />
+Its important to note that I do not have an in-depth knowledge of the inner workings of kafka, and this might have probably contributed to the difficulty I found implementing said healthchecks."><meta itemprop="datePublished" content="2020-03-19T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-19T10:00:00+00:00" />
 <meta itemprop="wordCount" content="719">
-
-
-
 <meta itemprop="keywords" content="kafka,healthcheck," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Kafka HealthChecks"/>
 <meta name="twitter:description" content="Ive been recently asked to write healthchecks for long running services that depend on kafka.
@@ -145,7 +141,7 @@ Its important to note that I do not have an in-depth knowledge of the inner work
 <h2 id="checking-the-health-of-brokers">Checking the &ldquo;Health&rdquo; of brokers</h2>
 <p>The first implementation of a healthcheck consisted of checking zookeeper for brokerIds (since brokers register with zookeeper). And making sure that all the brokers are indeed registered with zookeeper.</p>
 <p>The idea came from the scaladoc in <code>KafkaHealthcheck</code>. Which mentions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#75715e">/**
 </span><span style="color:#75715e"> * This class registers the broker in zookeeper to allow
 </span><span style="color:#75715e"> * other brokers and consumers to detect failures. It uses an ephemeral znode with the path:
@@ -235,7 +231,7 @@ Part 5: Sketching a New System</li>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -264,7 +260,7 @@ Part 5: Sketching a New System</li>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

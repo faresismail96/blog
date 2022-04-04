@@ -28,7 +28,7 @@ But with some time and a small exercise, the idea is getting clearer in my head.
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ But with some time and a small exercise, the idea is getting clearer in my head.
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Stack Safe Mutual Recursion with Eval">
 <meta itemprop="description" content="The first time I heard someone say: &ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&rdquo; I figured I&rsquo;d found the ONE thing I wouldn&rsquo;t be able to write about, on the count of how complex it sounded.
 To start with, mutual recursion is not a topic I&rsquo;m comfortable with, let alone Stack Safety&hellip;
-But with some time and a small exercise, the idea is getting clearer in my head.">
-<meta itemprop="datePublished" content="2020-01-15T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-01-15T10:00:00&#43;00:00" />
+But with some time and a small exercise, the idea is getting clearer in my head."><meta itemprop="datePublished" content="2020-01-15T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-01-15T10:00:00+00:00" />
 <meta itemprop="wordCount" content="1683">
-
-
-
 <meta itemprop="keywords" content="stack safe,eval,cats,mutual recursion," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Stack Safe Mutual Recursion with Eval"/>
 <meta name="twitter:description" content="The first time I heard someone say: &ldquo;Stack Safe Mutual Recursion using cats Eval DataType and Trampolining&rdquo; I figured I&rsquo;d found the ONE thing I wouldn&rsquo;t be able to write about, on the count of how complex it sounded.
@@ -146,7 +142,7 @@ But with some time and a small exercise, the idea is getting clearer in my head.
 <h3 id="eval-now">Eval Now</h3>
 <p>Eval.now is an eager computation of the value. and its value is memoized.</p>
 <p>From the cats documentation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> eager <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>now <span style="color:#f92672">{</span>
   println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
@@ -160,7 +156,7 @@ eager<span style="color:#f92672">.</span>value
 <p>Eval.later is a lazy evaluation. The value is only evaluated once we call <code>.value</code> on the Later type.
 Keep in mind that the result of the Later is memoized, so it is lazily evaluated but only evaluated once. (Think of lazy val)</p>
 <p>From the cats documentation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> lazyEval <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>later <span style="color:#f92672">{</span>
   println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
@@ -177,7 +173,7 @@ lazyEval<span style="color:#f92672">.</span>value
 </code></pre></div><h3 id="eval-always">Eval Always</h3>
 <p>Eval.always is the equivalent of a def in scala. In other words, it is lazy and its value is not memoized.</p>
 <p>From the cats documentation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">val</span> always <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>always <span style="color:#f92672">{</span>
   println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Running expensive calculation...&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
@@ -230,7 +226,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 <p>Assume that for some unknown and obscene reason, we were asked to traverse a Json Object and increment all the Integers by 1 and transform all the strings to: &ldquo;String: &quot; + the actual String content.</p>
 <p>I know its weird but humor me 🤡</p>
 <p>Our Domain would look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">JObject</span>
 <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">JValue</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JObject</span>
 <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JValue</span>
@@ -241,7 +237,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>fields<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)])</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">JObject</span>
 
 </code></pre></div><p>One easy way to achieve the requirement is to do a simple recursion over the initial JObject value</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">def</span> transform<span style="color:#f92672">(</span>value<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
     value <span style="color:#66d9ef">match</span> <span style="color:#f92672">{</span>
       <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">JArray</span><span style="color:#f92672">(</span>elems<span style="color:#f92672">.</span>map<span style="color:#f92672">(</span>v <span style="color:#66d9ef">=&gt;</span> transform<span style="color:#f92672">(</span>v<span style="color:#f92672">)))</span>
@@ -262,7 +258,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 <p>The more proper way of doing this is using Eval.</p>
 <p>From what we&rsquo;ve discussed earlier, the Eval.now should be used when we have reached a expected value.</p>
 <p>for the rest we will continue going one level deeper searching for the JValues</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">def</span> updateJObject<span style="color:#f92672">(</span>jo<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">def</span> iterate<span style="color:#f92672">(</span>elems<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">])</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Eval</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Seq</span><span style="color:#f92672">[</span><span style="color:#66d9ef">JObject</span><span style="color:#f92672">]]</span> <span style="color:#66d9ef">=</span> <span style="color:#f92672">{</span>
       <span style="color:#a6e22e">Eval</span><span style="color:#f92672">.</span>always<span style="color:#f92672">(</span>elems<span style="color:#f92672">).</span>flatMap <span style="color:#f92672">{</span>
@@ -306,7 +302,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 <p>And this was how <code>Eval</code> can be used to achieve stack safe mutual recursion.</p>
 <h2 id="to-test-this-out">To Test This Out</h2>
 <p>Run the below example to test the functions above:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> identity<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">JObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JStruct</span><span style="color:#f92672">(</span>
     <span style="color:#a6e22e">List</span><span style="color:#f92672">[(</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">JObject</span><span style="color:#f92672">)](</span>
       <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Name&#34;</span><span style="color:#f92672">,</span> <span style="color:#a6e22e">JString</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">)),</span>
@@ -325,38 +321,38 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 <table>
 <thead>
 <tr>
-<th align="center">Benchmark</th>
-<th align="center">Mode</th>
-<th align="center">Cnt</th>
-<th align="center">Score</th>
-<th align="center">Error</th>
-<th align="center">Units</th>
+<th style="text-align:center">Benchmark</th>
+<th style="text-align:center">Mode</th>
+<th style="text-align:center">Cnt</th>
+<th style="text-align:center">Score</th>
+<th style="text-align:center">Error</th>
+<th style="text-align:center">Units</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">TrampolineBench.eval</td>
-<td align="center">thrpt</td>
-<td align="center">3</td>
-<td align="center">23049.351</td>
-<td align="center">± 3891.576</td>
-<td align="center">ops/s</td>
+<td style="text-align:center">TrampolineBench.eval</td>
+<td style="text-align:center">thrpt</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">23049.351</td>
+<td style="text-align:center">± 3891.576</td>
+<td style="text-align:center">ops/s</td>
 </tr>
 <tr>
-<td align="center">TrampolineBench.stdlib</td>
-<td align="center">thrpt</td>
-<td align="center">3</td>
-<td align="center">11827.608</td>
-<td align="center">± 1919.654</td>
-<td align="center">ops/s</td>
+<td style="text-align:center">TrampolineBench.stdlib</td>
+<td style="text-align:center">thrpt</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">11827.608</td>
+<td style="text-align:center">± 1919.654</td>
+<td style="text-align:center">ops/s</td>
 </tr>
 <tr>
-<td align="center">TrampolineBench.trampoline</td>
-<td align="center">thrpt</td>
-<td align="center">3</td>
-<td align="center">5743.017</td>
-<td align="center">±  197.309</td>
-<td align="center">ops/s</td>
+<td style="text-align:center">TrampolineBench.trampoline</td>
+<td style="text-align:center">thrpt</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5743.017</td>
+<td style="text-align:center">±  197.309</td>
+<td style="text-align:center">ops/s</td>
 </tr>
 </tbody>
 </table>
@@ -415,7 +411,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -444,7 +440,7 @@ In other cases, we&rsquo;d have to go one level deeper and repeat.</p>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

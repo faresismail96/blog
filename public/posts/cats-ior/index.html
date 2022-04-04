@@ -28,7 +28,7 @@ You probably see where this is going, IOR is a cats datatype that stands for Inc
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,13 +41,9 @@ You probably see where this is going, IOR is a cats datatype that stands for Inc
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Cats Ior">
 <meta itemprop="description" content="If you&rsquo;ve gotten this far reading my blog, you&rsquo;re probably very familiar with Either. Of course Im also assuming someone is reading this blog in the first place 😛
 Anyway, Either[A,B] allows us to return either an A or a B depending on some conditions&hellip; In other words, its a XOR (exclusive or) A value can either be A or it can be B but it cannot be both.
-You probably see where this is going, IOR is a cats datatype that stands for Inclusive Or.">
-<meta itemprop="datePublished" content="2020-03-21T10:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-21T10:00:00&#43;00:00" />
+You probably see where this is going, IOR is a cats datatype that stands for Inclusive Or."><meta itemprop="datePublished" content="2020-03-21T10:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-21T10:00:00+00:00" />
 <meta itemprop="wordCount" content="614">
-
-
-
 <meta itemprop="keywords" content="cats,ior," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cats Ior"/>
 <meta name="twitter:description" content="If you&rsquo;ve gotten this far reading my blog, you&rsquo;re probably very familiar with Either. Of course Im also assuming someone is reading this blog in the first place 😛
@@ -133,7 +129,7 @@ You probably see where this is going, IOR is a cats datatype that stands for Inc
 <p>Ior is often used when we want to handle errors and correct values as well as correct values but wth a warning.</p>
 <h2 id="examples">Examples</h2>
 <p>Here is an example using IOR:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">import</span> cats.data.Ior
 
   <span style="color:#66d9ef">val</span> right<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Ior</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Ior</span><span style="color:#f92672">.</span>right<span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">](</span><span style="color:#ae81ff">3</span><span style="color:#f92672">)</span>
@@ -141,7 +137,7 @@ You probably see where this is going, IOR is a cats datatype that stands for Inc
   <span style="color:#66d9ef">val</span> both<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Ior</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Ior</span><span style="color:#f92672">.</span>both<span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Int</span><span style="color:#f92672">](</span><span style="color:#e6db74">&#34;Warning&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span>
 
 </code></pre></div><p>Of course things can be made to look nicer when using the cats syntax:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">import</span> cats.syntax.ior._
 
   <span style="color:#66d9ef">val</span> x<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Ior</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span>, <span style="color:#66d9ef">Nothing</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#e6db74">&#34;NOPE&#34;</span><span style="color:#f92672">.</span>leftIor
@@ -153,7 +149,7 @@ You probably see where this is going, IOR is a cats datatype that stands for Inc
 <h3 id="how-does-it-work">How does it work</h3>
 <p>Ior will accumulate warnings on the left side but will short circuit the computations as soon as it encounters a left only value.
 Lets look at an example for a clearer image.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">import</span> cats.data.Ior
   <span style="color:#66d9ef">import</span> cats.syntax.ior._
   <span style="color:#66d9ef">import</span> cats.data.<span style="color:#f92672">{</span><span style="color:#a6e22e">NonEmptyList</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Nel</span><span style="color:#f92672">}</span>
@@ -183,7 +179,7 @@ Lets look at an example for a clearer image.</p>
 
 </code></pre></div><p>which would allow us to create a valid <code>User</code>:</p>
 <p><strong>Note:</strong> If you&rsquo;re confused by mapN and the various imports, it&rsquo;ll be explained in another post along with validated and validatedN.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.syntax.apply._
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.syntax.apply._
 
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserName</span><span style="color:#f92672">,</span> pass<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">UserPassword</span><span style="color:#f92672">)</span>
 
@@ -193,7 +189,7 @@ Lets look at an example for a clearer image.</p>
 
   <span style="color:#75715e">// user1 ==&gt; Right(User(UserName(fares),UserPassword(qwertyazerty)))
 </span></code></pre></div><p>But what if the username and password contained non blocking errors?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> username2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">UserName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;admin&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> pass2 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">UserPassword</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pass&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> user2 <span style="color:#66d9ef">=</span> <span style="color:#f92672">(</span>username2<span style="color:#f92672">.</span>validateUserName<span style="color:#f92672">,</span> pass2<span style="color:#f92672">.</span>validatePassword<span style="color:#f92672">).</span>mapN<span style="color:#f92672">(</span><span style="color:#a6e22e">User</span><span style="color:#f92672">)</span>
@@ -202,7 +198,7 @@ Lets look at an example for a clearer image.</p>
 </span><span style="color:#75715e"></span>
 </code></pre></div><p>This is what we meant by accumulating warnings or nonblocking errors.</p>
 <p>But what if we encountered a blocking error?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">val</span> username3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">UserName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> pass3 <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">UserPassword</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
   <span style="color:#66d9ef">val</span> user3 <span style="color:#66d9ef">=</span> <span style="color:#f92672">(</span>username3<span style="color:#f92672">.</span>validateUserName<span style="color:#f92672">,</span> pass3<span style="color:#f92672">.</span>validatePassword<span style="color:#f92672">).</span>mapN<span style="color:#f92672">(</span><span style="color:#a6e22e">User</span><span style="color:#f92672">)</span>
@@ -214,7 +210,7 @@ Lets look at an example for a clearer image.</p>
 <p>Ior Can be converted to an <code>Either</code> a <code>Validate</code> or even an <code>Option</code>.</p>
 <p>Keep in mind however that when doing so, the <code>Both</code> will drop its left side and only keep the right value and transform it to a <code>Some</code> or a <code>Right</code> ect&hellip;</p>
 <p>Here are the transformation codes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">def</span> toEither<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Either</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> fold<span style="color:#f92672">(</span><span style="color:#a6e22e">Left</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">),</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">),</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">,</span> b<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Right</span><span style="color:#f92672">(</span>b<span style="color:#f92672">))</span>
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">def</span> toValidated<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Validated</span><span style="color:#f92672">[</span><span style="color:#66d9ef">A</span>, <span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> fold<span style="color:#f92672">(</span><span style="color:#a6e22e">Invalid</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">),</span> <span style="color:#a6e22e">Valid</span><span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">),</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">,</span> b<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Valid</span><span style="color:#f92672">(</span>b<span style="color:#f92672">))</span>
   <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">def</span> toOption<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Option</span><span style="color:#f92672">[</span><span style="color:#66d9ef">B</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> fold<span style="color:#f92672">(</span><span style="color:#66d9ef">_</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">None</span><span style="color:#f92672">,</span> b <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>b<span style="color:#f92672">),</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">_</span><span style="color:#f92672">,</span> b<span style="color:#f92672">)</span> <span style="color:#66d9ef">=&gt;</span> <span style="color:#a6e22e">Some</span><span style="color:#f92672">(</span>b<span style="color:#f92672">))</span>
@@ -273,7 +269,7 @@ Lets look at an example for a clearer image.</p>
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -302,7 +298,7 @@ Lets look at an example for a clearer image.</p>
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 

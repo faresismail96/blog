@@ -9,7 +9,7 @@
 <meta name="description"
     content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;." />
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://fares.codes/posts/reader-monads-and-dependency-injection/" />
@@ -28,7 +28,7 @@ I&amp;rsquo;ve also decided to put more effort into my examples and have them an
 
 
 
-<link rel="stylesheet" href="https://fares.codes/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+<link rel="stylesheet" href="https://fares.codes/main.min.df65e87f4a16914bcb18769f8af6c2a2ef31a9d228e9577267fc5784e67c13f4.css">
 
 
 
@@ -41,18 +41,14 @@ I&amp;rsquo;ve also decided to put more effort into my examples and have them an
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Reader Monads and Dependency Injection">
 <meta itemprop="description" content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;.">
-<meta itemprop="datePublished" content="2020-11-29T20:37:00&#43;01:00" />
-<meta itemprop="dateModified" content="2020-11-29T20:37:00&#43;01:00" />
+I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;."><meta itemprop="datePublished" content="2020-11-29T20:37:00+01:00" />
+<meta itemprop="dateModified" content="2020-11-29T20:37:00+01:00" />
 <meta itemprop="wordCount" content="951">
-
-
-
 <meta itemprop="keywords" content="scala,cats,reader,monad," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Reader Monads and Dependency Injection"/>
 <meta name="twitter:description" content="After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;."/>
+I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;."/>
 
 
 
@@ -128,15 +124,15 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
             <div class="post-content">
                 <p>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.</p>
 <p>As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.</p>
-<p>I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&rsquo; examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;.</p>
+<p>I&rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles' examples, I&rsquo;ll attempt to answer a common life question: &ldquo;Can I become friends with x person&rdquo;.</p>
 <p>For this, we&rsquo;ll simplify our &ldquo;Person&rdquo; and consider that a <code>Person</code> is only a name, age and recommendedBooks.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> recommendedBooks<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">case</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>name<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">String</span><span style="color:#f92672">,</span> age<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Int</span><span style="color:#f92672">,</span> recommendedBooks<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span><span style="color:#f92672">[</span><span style="color:#66d9ef">String</span><span style="color:#f92672">])</span>
 </code></pre></div><p>But I&rsquo;m jumping the gun. Let&rsquo;s go back to reader Monads:</p>
 <h2 id="what-is-it">What is it</h2>
 <p>The reader monad allows us to sequence some operation that depend on the same external input (also called configuration).</p>
 <h3 id="creating-readers">Creating Readers</h3>
 <p>To create a reader, we can use the apply method and pass to it a function that takes our external configuration/input and returns something:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.data.Reader
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">import</span> cats.data.Reader
   <span style="color:#66d9ef">import</span> cats.implicits._
 
   <span style="color:#66d9ef">val</span> canBeFriend<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Boolean</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">_</span><span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
@@ -146,13 +142,13 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
 <p>You might also notice that reader is implemented as a <code>Kleisli</code> but well talk about that later. (You can also check out my article on Kleisli)</p>
 <h2 id="why-are-they-better-than-a-raw-function">Why are they better than a raw function</h2>
 <p>A valid question could be: Why are they useful? What is the difference between doing this and a simple raw function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> canBeFriends<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> person<span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#66d9ef">def</span> canBeFriends<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span> person<span style="color:#f92672">.</span>recommendedBooks contains <span style="color:#e6db74">&#34;Le Petit Prince&#34;</span>
 </code></pre></div><p>Put like that, there isn&rsquo;t and a raw function is simpler to use/read.</p>
 <p>But is &ldquo;Le Petit Prince&rdquo; the only criteria for being friends with someone? After all it is the second most translated book in the world after the bible&hellip; So maybe filter some more people out?</p>
 <p>In an attempt to simplify the modeling of whether or not two people click together, we will assume that I can click with any person who is above 21 years old, below 30 years old aaaand who would recommend the book: Le Petit Prince. (I&rsquo;m not that picky when it comes to friends).</p>
 <p>We will also test this theory with 3 different people: myself, some random idiot who loves twilight and Eric an ok but slightly old person.</p>
 <p>Our code might look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
     <span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span>
     <span style="color:#ae81ff">24</span><span style="color:#f92672">,</span>
     <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -178,7 +174,7 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
   <span style="color:#66d9ef">def</span> canWeBeFriends<span style="color:#f92672">(</span>person<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Person</span><span style="color:#f92672">)</span><span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Boolean</span> <span style="color:#f92672">=</span>
     isOldEnough<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> isYoungEnough<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> okTasteInBooks<span style="color:#f92672">(</span>person<span style="color:#f92672">)</span>
 </code></pre></div><p>aaand the fun part:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
   <span style="color:#75715e">// (Fares,24,true)
 </span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> someIdiot<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">))</span>
   <span style="color:#75715e">// (Random Human,16,false) ==&gt; Shocker!
@@ -191,7 +187,7 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
 </ul>
 <h3 id="how-can-we-do-better-with-reader">How can we do better with reader</h3>
 <p>If we were to write the same code but this time using <code>Readers</code> it&rsquo;ll look something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> fares <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>
     <span style="color:#e6db74">&#34;Fares&#34;</span><span style="color:#f92672">,</span>
     <span style="color:#ae81ff">24</span><span style="color:#f92672">,</span>
     <span style="color:#a6e22e">List</span><span style="color:#f92672">(</span>
@@ -212,13 +208,13 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
   <span style="color:#66d9ef">val</span> okTasteInBooksReader<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Reader</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#a6e22e">Reader</span><span style="color:#f92672">(</span>okTasteInBooks<span style="color:#f92672">)</span>
 </code></pre></div><p>In the above code, we&rsquo;ve defined our <code>Person</code>s instances and our <code>Reader[Person, Boolean]</code>. One for each validation we would like to have.</p>
 <p>Then we can sequence the operations in a for comprehension:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> canWeBeFriends<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Kleisli</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Id</span>, <span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  <span style="color:#66d9ef">val</span> canWeBeFriends<span style="color:#66d9ef">:</span> <span style="color:#66d9ef">Kleisli</span><span style="color:#f92672">[</span><span style="color:#66d9ef">Id</span>, <span style="color:#66d9ef">Person</span>, <span style="color:#66d9ef">Boolean</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">=</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">{</span>
     okTaste     <span style="color:#66d9ef">&lt;-</span> okTasteInBooksReader
     youngEnough <span style="color:#66d9ef">&lt;-</span> isYoungEnoughReader
     oldEnough   <span style="color:#66d9ef">&lt;-</span> isOldEnoughReader
   <span style="color:#f92672">}</span> <span style="color:#66d9ef">yield</span> okTaste <span style="color:#f92672">&amp;&amp;</span> youngEnough <span style="color:#f92672">&amp;&amp;</span> oldEnough
 </code></pre></div><p>aaand again the fun part:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">  println<span style="color:#f92672">(</span>fares<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> fares<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>fares<span style="color:#f92672">))</span>
   <span style="color:#75715e">// (Fares,24,true)
 </span><span style="color:#75715e"></span>  println<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">.</span>name<span style="color:#f92672">,</span> someIdiot<span style="color:#f92672">.</span>age<span style="color:#f92672">,</span> canWeBeFriends<span style="color:#f92672">.</span>run<span style="color:#f92672">(</span>someIdiot<span style="color:#f92672">))</span>
   <span style="color:#75715e">// (Random Human,16,false) ==&gt; Shocker!
@@ -283,7 +279,7 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2021</span>
+            <span>&copy; 2022</span>
             
                 <span><a href="https://fares.codes/">Fares Ismail</a></span>
             
@@ -312,7 +308,7 @@ I&rsquo;ve also decided to put more effort into my examples and have them answer
 
 
 
-<script type="text/javascript" src="https://fares.codes/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+<script type="text/javascript" src="https://fares.codes/bundle.min.766584e6ea536f54faf86b018d73f719fc520199a6c4d32cbd959eb87634c11b380ac646d80d67304313aac0f5f05e6715221bd99a619bbc905365b55f78147f.js" integrity="sha512-dmWE5upTb1T6&#43;GsBjXP3GfxSAZmmxNMsvZWeuHY0wRs4CsZG2A1nMEMTqsD18F5nFSIb2Zphm7yQU2W1X3gUfw=="></script>
 
 
 
