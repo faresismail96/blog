@@ -17,7 +17,7 @@ Either follow a schema on read approach or a schema on write approach.
 Schema on Write This is typically used with relational databases.
 With this approach, the schema is defined and created before the data is inserted into a db.
 It usually follows the below steps:
- Create the schema (create tables) Load the data Query the data and extract insight  The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
+Create the schema (create tables) Load the data Query the data and extract insight The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
     </item>
     
   </channel>

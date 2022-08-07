@@ -15,10 +15,10 @@
       <description>Once again, I will put a 5 hour flight into good use to detail an interesting/odd behavior encountered with spark while dealing with nulls.
 Any basic spark tutorial will tell you that there are a couple ways to create dataframes.
 Some of which are:
-  Transforming existing dataframes.
-  Reading a file.
-  Parallelizing over a collection.
-  The first two will not be in the scope of this article.</description>
+Transforming existing dataframes.
+Reading a file.
+Parallelizing over a collection.
+The first two will not be in the scope of this article. Instead I will focus on an odd behavior encountered while creating a dataframe.</description>
     </item>
     
     <item>

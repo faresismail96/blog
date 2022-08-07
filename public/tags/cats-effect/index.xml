@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cats-effect on Learning Publicly</title>
+    <link>https://fares.codes/tags/cats-effect/</link>
+    <description>Recent content in cats-effect on Learning Publicly</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 07 Aug 2022 21:00:00 +0100</lastBuildDate><atom:link href="https://fares.codes/tags/cats-effect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cats Effect Part One: Effects</title>
+      <link>https://fares.codes/posts/cats-effect-part-one-effects/</link>
+      <pubDate>Sun, 07 Aug 2022 21:00:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-effect-part-one-effects/</guid>
+      <description>Cats Effect Series For some time now, I&amp;rsquo;ve been meaning to learn about cats effect. My plan is to follow the Essential Effects by Adam Rosien You can find a copy of the book here: https://essentialeffects.dev/ Though at the time of writing, the book is still in draft version.
+I will be summarizing my understanding of each chapter in blog posts (chapter by chapter). I will also be solving and posting some of their exercises.</description>
+    </item>
+    
+  </channel>
+</rss>

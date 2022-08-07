@@ -14,7 +14,7 @@
       <guid>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</guid>
       <description>Taking a small break from scala to look into Airflow.
 Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
-Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
+Table of Content Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
     </item>
     
   </channel>

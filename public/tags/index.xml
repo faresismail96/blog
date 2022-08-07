@@ -5,11 +5,29 @@
     <link>https://fares.codes/tags/</link>
     <description>Recent content in Tags on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Apr 2022 20:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Aug 2022 21:00:00 +0100</lastBuildDate><atom:link href="https://fares.codes/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cats</title>
+      <link>https://fares.codes/tags/cats/</link>
+      <pubDate>Sun, 07 Aug 2022 21:00:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/tags/cats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cats-effect</title>
+      <link>https://fares.codes/tags/cats-effect/</link>
+      <pubDate>Sun, 07 Aug 2022 21:00:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/tags/cats-effect/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>scala</title>
       <link>https://fares.codes/tags/scala/</link>
-      <pubDate>Mon, 04 Apr 2022 20:20:00 +0200</pubDate>
+      <pubDate>Sun, 07 Aug 2022 21:00:00 +0100</pubDate>
       
       <guid>https://fares.codes/tags/scala/</guid>
       <description></description>
@@ -129,15 +147,6 @@
       <pubDate>Sun, 14 Feb 2021 12:20:00 +0200</pubDate>
       
       <guid>https://fares.codes/tags/sum-type/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cats</title>
-      <link>https://fares.codes/tags/cats/</link>
-      <pubDate>Sun, 29 Nov 2020 20:37:00 +0100</pubDate>
-      
-      <guid>https://fares.codes/tags/cats/</guid>
       <description></description>
     </item>
     

@@ -5,7 +5,17 @@
     <link>https://fares.codes/</link>
     <description>Recent content on Learning Publicly</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Apr 2022 20:20:00 +0200</lastBuildDate><atom:link href="https://fares.codes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Aug 2022 21:00:00 +0100</lastBuildDate><atom:link href="https://fares.codes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cats Effect Part One: Effects</title>
+      <link>https://fares.codes/posts/cats-effect-part-one-effects/</link>
+      <pubDate>Sun, 07 Aug 2022 21:00:00 +0100</pubDate>
+      
+      <guid>https://fares.codes/posts/cats-effect-part-one-effects/</guid>
+      <description>Cats Effect Series For some time now, I&amp;rsquo;ve been meaning to learn about cats effect. My plan is to follow the Essential Effects by Adam Rosien You can find a copy of the book here: https://essentialeffects.dev/ Though at the time of writing, the book is still in draft version.
+I will be summarizing my understanding of each chapter in blog posts (chapter by chapter). I will also be solving and posting some of their exercises.</description>
+    </item>
+    
     <item>
       <title>Single Abstract Method</title>
       <link>https://fares.codes/posts/single-abstract-method/</link>
@@ -29,7 +39,7 @@ Either follow a schema on read approach or a schema on write approach.
 Schema on Write This is typically used with relational databases.
 With this approach, the schema is defined and created before the data is inserted into a db.
 It usually follows the below steps:
- Create the schema (create tables) Load the data Query the data and extract insight  The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
+Create the schema (create tables) Load the data Query the data and extract insight The advantage of this approach is that reading the data (querying) becomes much faster since the schema is already known.</description>
     </item>
     
     <item>
@@ -71,7 +81,7 @@ When listening to people talk of ADTs, you&amp;rsquo;ll often hear the words: Su
       <guid>https://fares.codes/posts/reader-monads-and-dependency-injection/</guid>
       <description>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
     </item>
     
     <item>
@@ -135,7 +145,7 @@ The Keyword-Only argument feature was not so recently introduced in PEP 3102. Bu
       <guid>https://fares.codes/posts/named-tuples-in-python/</guid>
       <description>This cool little feature has been out since Python 2.6 but I&amp;rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]}is {res[1]}years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list.</description>
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]} is {res[1]} years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age.</description>
     </item>
     
     <item>
@@ -157,7 +167,7 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
       <guid>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</guid>
       <description>Taking a small break from scala to look into Airflow.
 Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
-Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
+Table of Content Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
     </item>
     
     <item>
@@ -305,10 +315,10 @@ val either: Either[String, Int] = Right(2) val result: Either[String, Int] = eit
       <description>Once again, I will put a 5 hour flight into good use to detail an interesting/odd behavior encountered with spark while dealing with nulls.
 Any basic spark tutorial will tell you that there are a couple ways to create dataframes.
 Some of which are:
-  Transforming existing dataframes.
-  Reading a file.
-  Parallelizing over a collection.
-  The first two will not be in the scope of this article.</description>
+Transforming existing dataframes.
+Reading a file.
+Parallelizing over a collection.
+The first two will not be in the scope of this article. Instead I will focus on an odd behavior encountered while creating a dataframe.</description>
     </item>
     
     <item>
@@ -386,7 +396,7 @@ No matter how hard we try to keep our commit messages clean and clear, we often 
       
       <guid>https://fares.codes/posts/fold-vs-pattern-matching-and-matching-on-options/</guid>
       <description>The following article is a summary of the Lambda Conf 2015 talk: Idiomatic Scala Your Options Do Not Match by Marconi Lanna https://www.youtube.com/watch?v=ol2AB5UN1IA&amp;amp;t=1s
- Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
+Often when dealing with Options, we have a case where we want to check if a value is defined and if it is, apply a specific treatment on the value inside the option. So we end up with a code that looks something like this:
 value match { case Some(a) =&amp;gt; foo(a) case None =&amp;gt; bar } In this example, we patten match on the Option value.</description>
     </item>
     
@@ -419,7 +429,7 @@ Dynamic Allocation in Spark Streaming Dynamic Allocation also called Elastic Sca
       
       <guid>https://fares.codes/posts/semigroupk-and-combinek/</guid>
       <description>Before we get into SemigroupKand combineK let us first quickly recap what a semigroup is.
- Semigroup A Semigroup for a given type A has a single operation that takes two values of type A and returns a single value of the same type. This operation needs to be associative. We will call this operation combine for simplicity.
+Semigroup A Semigroup for a given type A has a single operation that takes two values of type A and returns a single value of the same type. This operation needs to be associative. We will call this operation combine for simplicity.
 from algebra.Semigroup we have:
 /** * A semigroup is any set `A` with an associative operation (`combine`).</description>
     </item>
@@ -445,7 +455,7 @@ def collect[B](pf: PartialFunction[A, B]): CC[B] Also from the scaladoc:
       <description>Unapply in Scala is the inverse of the apply&amp;hellip; (queue no shit comments :p)
 So what does it do exactly? given a class Person:
 case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to decompose the class person into a set of attributes:
- name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
+name: String age: Int hobbies: List[String] We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
     </item>
     
     <item>
@@ -468,8 +478,8 @@ Traits in Scala Traits in scala are similar to interfaces in java.</description>
       <guid>https://fares.codes/posts/for-comprehensions-demystified/</guid>
       <description>A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
 At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&amp;rsquo;ll realise it&amp;rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.
- Lets look at the below couple functions:
-def computeA(a: Int): Either[Throwable, Int] = ?</description>
+Lets look at the below couple functions:
+def computeA(a: Int): Either[Throwable, Int] = ??? def computeB(b: Int): Either[Throwable, Int] = ?</description>
     </item>
     
     <item>

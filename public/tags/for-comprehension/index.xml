@@ -14,8 +14,8 @@
       <guid>https://fares.codes/posts/for-comprehensions-demystified/</guid>
       <description>A For Comprehension is a syntactic sugar for using a composition of map, flatMap and filter.
 At first glance it might look complicated and difficult to comprehend. But once you get the hang of it, you&amp;rsquo;ll realise it&amp;rsquo;s a cool card to have up your sleeve, one that will surely make your code much more readable.
- Lets look at the below couple functions:
-def computeA(a: Int): Either[Throwable, Int] = ?</description>
+Lets look at the below couple functions:
+def computeA(a: Int): Either[Throwable, Int] = ??? def computeB(b: Int): Either[Throwable, Int] = ?</description>
     </item>
     
   </channel>
