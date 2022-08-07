@@ -58,7 +58,7 @@ The Keyword-Only argument feature was not so recently introduced in PEP 3102. Bu
       <guid>https://fares.codes/posts/named-tuples-in-python/</guid>
       <description>This cool little feature has been out since Python 2.6 but I&amp;rsquo;m only discovering this now 🤦‍♂
 Before we begin, let us take a quick look at tuples in python and how they work:
-def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]}is {res[1]}years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age. This result is stored in res and we access it like a list.</description>
+def _get_person_from_db(user_id): person_name = ... ## Something person_age = ... ## Something return (person_name, person_age) res = _get_person_from_db(0) print(f&amp;#34;&amp;#34;&amp;#34;Person {res[0]} is {res[1]} years old!&amp;#34;&amp;#34;&amp;#34;) Above, the function returns a tuple consisting of a name and the persons age.</description>
     </item>
     
     <item>
@@ -80,7 +80,7 @@ Dataclasses are classes designed to store data objects (think case classes in Sc
       <guid>https://fares.codes/posts/everything-you-probably-need-to-know-about-airflow/</guid>
       <description>Taking a small break from scala to look into Airflow.
 Also, I&amp;rsquo;m making a habit of writing those things during flights and trains 🤷‍♂️&amp;hellip; Probably the only thing keeping me from starting a travel blog.
-Table of Content  Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things   Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
+Table of Content Intro to Airflow Task Dependencies The Dag File Intervals BackFilling Best Practice For Airflow Tasks Templating Passing Arguments to Python Operator Triggering WorkFlows Triggering Rules XCOM Sensors Random TILs If You Must Remember 3 Things Intro to Airflow Airflow is a platform to programmatically author, schedule and monitor workflows.</description>
     </item>
     
     <item>

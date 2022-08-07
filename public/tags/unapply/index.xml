@@ -15,7 +15,7 @@
       <description>Unapply in Scala is the inverse of the apply&amp;hellip; (queue no shit comments :p)
 So what does it do exactly? given a class Person:
 case class Person(name: String, age: Int, hobbies: List[String]) If we wanted to decompose the class person into a set of attributes:
- name: String age: Int hobbies: List[String]  We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
+name: String age: Int hobbies: List[String] We would use the unapply. the return type of the unapply is an Option of a tuple with the values inside the tuple representing the values we seek to retrieve.</description>
     </item>
     
   </channel>

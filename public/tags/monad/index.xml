@@ -14,7 +14,7 @@
       <guid>https://fares.codes/posts/reader-monads-and-dependency-injection/</guid>
       <description>After writing an article about the Writer Monad, it only seems fair that I write another one about the Reader Monad.
 As with the Writer article, my main support will be the Scala with Cats Underscore Book freely available online.
-I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&#39; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
+I&amp;rsquo;ve also decided to put more effort into my examples and have them answer a real life problem. So in this articles&amp;rsquo; examples, I&amp;rsquo;ll attempt to answer a common life question: &amp;ldquo;Can I become friends with x person&amp;rdquo;.</description>
     </item>
     
     <item>
